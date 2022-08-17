@@ -1,0 +1,8 @@
+.hero {
+  @apply flex
+  h-[80vh]
+  w-full
+  bg-[color:#21222c];
+
+  clip-path: url(#hero-clip-path);
+}

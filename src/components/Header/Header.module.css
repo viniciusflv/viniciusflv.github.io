@@ -1,0 +1,14 @@
+.header {
+  @apply flex
+  h-[10vh]
+  w-full
+  bg-[color:#21222c];
+
+  .nav {
+    @apply flex
+    gap-8
+    container
+    mx-auto
+    p-8;
+  }
+}

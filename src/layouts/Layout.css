@@ -1,0 +1,18 @@
+* {
+  /* outline: 0.01px solid red; */
+}
+
+.body {
+  :is(p, a, h1, h2, h3) {
+    @apply dark:text-white;
+  }
+
+  @apply flex w-full
+  min-h-screen
+  bg-white
+  dark:bg-[color:#282a36];
+
+  .section {
+    @apply flex flex-col w-full;
+  }
+}

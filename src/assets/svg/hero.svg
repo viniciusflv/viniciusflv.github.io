@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  width="1"
+  height="1"
+  viewBox="0 0 1 1"
+  version="1.1"
+  id="svg5"
+  sodipodi:docname="hero.svg"
+  inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg"
+>
+  <defs id="defs9" />
+  <sodipodi:namedview
+    id="namedview7"
+    pagecolor="#ffffff"
+    bordercolor="#000000"
+    borderopacity="1"
+    inkscape:pageshadow="0"
+    inkscape:pageopacity="0"
+    inkscape:pagecheckerboard="0"
+    showgrid="false"
+    inkscape:zoom="256"
+    inkscape:cx="0.25390625"
+    inkscape:cy="0.70507812"
+    inkscape:window-width="1920"
+    inkscape:window-height="1016"
+    inkscape:window-x="0"
+    inkscape:window-y="0"
+    inkscape:window-maximized="1"
+    inkscape:current-layer="svg5"
+  />
+  <clipPath id="myClip">
+    <path
+      d="M 1,-0.1 V 0.86891213 L 0.49999811,1 0,0.86891213 V -0.1 Z"
+      id="path2"
+      sodipodi:nodetypes="cccccc"
+      style="stroke-width: 1.05215"
+    />
+  </clipPath>
+</svg>

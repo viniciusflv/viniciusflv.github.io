@@ -1,0 +1,23 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Blog'
+---
+
+import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
+
+# Blog
+
+```ts
+const x: string = 'a';
+```
+
+<Mermaid
+  config={{}}
+  chart={`
+    graph TD
+      A[Client] -->|tcp_123| B
+      B(Load Balancer)
+      B -->|tcp_456| C[Server1]
+      B -->|tcp_456| D[Server2]
+  `}
+/>
