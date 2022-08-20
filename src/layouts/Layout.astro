@@ -5,6 +5,7 @@ import { Header } from '../components/Header';
 
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
+const classes = frontmatter?.classes || '';
 ---
 
 <html>
@@ -15,7 +16,7 @@ const title = frontmatter?.title || 'Title';
   </head>
 
   <body class="body">
-    <section class="section">
+    <section class:list={['section', classes]}>
       <Header />
       <slot />
     </section>

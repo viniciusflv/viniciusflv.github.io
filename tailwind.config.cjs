@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -26,5 +28,14 @@ module.exports = {
       minHeight: ({ theme }) => theme('height'),
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities }) {
+      matchUtilities({
+        'grid-area': (gridArea) => ({ gridArea }),
+        'grid-areas': (gridAreas) => ({
+          gridTemplateAreas: gridAreas.replaceAll(',', ' '),
+        }),
+      });
+    }),
+  ],
 };

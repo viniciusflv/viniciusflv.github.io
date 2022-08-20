@@ -10,8 +10,6 @@ const chart = Astro.props.chart;
     el.innerHTML = el.getAttribute('data-mermaid') ?? '';
     el.removeAttribute('data-mermaid');
   });
-  // @ts-ignore
-  mermaid.initialize({ startOnLoad: true });
 </script>
 
 <div class="mermaid" data-mermaid={chart}></div>

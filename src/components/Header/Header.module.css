@@ -1,5 +1,5 @@
 .header {
-  @apply flex
+  @apply grid-area-[HEADER] flex
   h-[10vh]
   w-full
   bg-[color:#21222c];
