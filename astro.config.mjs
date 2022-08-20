@@ -6,8 +6,6 @@ import compress from 'astro-compress';
 import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
 
-import mermaid from 'mdx-mermaid';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://stargazers.club',
@@ -15,13 +13,10 @@ export default defineConfig({
     shikiConfig: {
       theme: 'dracula',
     },
-    remarkPlugins: [mermaid],
   },
   integrations: [
     react(),
-    mdx({
-      remarkPlugins: [mermaid],
-    }),
+    mdx({}),
     tailwind(),
     sitemap(),
     robotsTxt(),

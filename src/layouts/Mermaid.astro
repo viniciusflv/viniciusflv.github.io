@@ -1,8 +1,17 @@
+---
+import './Mermaid.css';
+
+const chart = Astro.props.chart;
+---
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script>
+  Array.from(document.querySelectorAll('.mermaid')).map((el) => {
+    el.innerHTML = el.getAttribute('data-mermaid') ?? '';
+    el.removeAttribute('data-mermaid');
+  });
+  // @ts-ignore
   mermaid.initialize({ startOnLoad: true });
 </script>
 
-<div class="mermaid">
-  <slot />
-</div>
+<div class="mermaid" data-mermaid={chart}></div>

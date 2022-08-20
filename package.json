@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "prd": "npm run build && npm run preview",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -48,8 +49,6 @@
     "svj": "^2.2.3"
   },
   "dependencies": {
-    "@svjson/react": "^0.0.3",
-    "mdx-mermaid": "^2.0.0-rc1",
-    "mermaid": "^9.1.5"
+    "@svjson/react": "^0.0.3"
   }
 }

@@ -1,0 +1,30 @@
+.mermaid {
+  & foreignObject {
+    @apply dark:!text-dark-purple;
+  }
+
+  & .label-container {
+    @apply !fill-dark-darkest
+    stroke-dark-darkest;
+  }
+
+  & .edgeLabel {
+    @apply dark:!text-dark-comment
+    dark:!bg-dark-darkest;
+
+    & rect {
+      @apply !opacity-100
+      !fill-dark-darkest
+      !stroke-dark-darkest
+      !stroke-4;
+    }
+  }
+
+  & .arrowheadPath {
+    @apply dark:!fill-dark-comment;
+  }
+
+  & .edgePath path {
+    @apply dark:!stroke-dark-comment;
+  }
+}
