@@ -2,7 +2,18 @@
   @apply flex
   h-[80vh]
   w-full
-  bg-[color:#21222c];
+  dark:bg-dark-darkest;
 
   clip-path: url(#hero-clip-path);
+
+  @keyframes grow {
+    from {
+      height: 100vh;
+    }
+  }
+
+  animation-name: grow;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
 }

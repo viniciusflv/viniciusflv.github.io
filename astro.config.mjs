@@ -1,8 +1,10 @@
 import mdx from '@astrojs/mdx';
+import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import compress from 'astro-compress';
+import fonts from 'astro-fonts-next';
 import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
 
@@ -16,10 +18,16 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    mdx({}),
+    mdx(),
     tailwind(),
     sitemap(),
     robotsTxt(),
+    partytown(),
+    fonts({
+      url: [
+        'https://fonts.googleapis.com/css2?family=RocknRoll+One:wght@400;700&display=swap',
+      ],
+    }),
     compress({
       js: true,
       css: true,

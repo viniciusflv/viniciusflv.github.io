@@ -1,8 +1,9 @@
 .header {
-  @apply grid-area-[HEADER] flex
+  @apply grid-area-[HEADER]
+  flex
   h-[10vh]
   w-full
-  bg-[color:#21222c];
+  dark:bg-dark-darkest;
 
   .nav {
     @apply flex

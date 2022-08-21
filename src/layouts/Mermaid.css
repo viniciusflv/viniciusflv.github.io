@@ -4,8 +4,8 @@
   }
 
   & .label-container {
-    @apply !fill-dark-darkest
-    stroke-dark-darkest;
+    @apply dark:!fill-dark-darkest
+    dark:stroke-dark-darkest;
   }
 
   & .edgeLabel {
@@ -13,10 +13,10 @@
     dark:!bg-dark-darkest;
 
     & rect {
-      @apply !opacity-100
-      !fill-dark-darkest
-      !stroke-dark-darkest
-      !stroke-4;
+      @apply dark:!opacity-100
+      dark:!fill-dark-darkest
+      dark:!stroke-dark-darkest
+      dark:!stroke-4;
     }
   }
 

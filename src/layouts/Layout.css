@@ -3,9 +3,7 @@
 }
 
 .body {
-  :is(p, a, h1, h2, h3) {
-    @apply dark:text-white;
-  }
+  @apply font-paragraph dark:text-white;
 
   @apply flex w-full
   min-h-screen
@@ -13,6 +11,8 @@
   dark:bg-[color:#282a36];
 
   .section {
-    @apply grid w-full;
+    @apply grid
+    grid-rows-[auto,auto,1fr]
+    w-full;
   }
 }

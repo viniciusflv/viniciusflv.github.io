@@ -1,6 +1,8 @@
 ---
 import Layout from './Layout.astro';
 
+import styles from './Blog.module.css';
+
 import { List, ListItem } from '../components/List';
 
 const headings =
@@ -9,10 +11,10 @@ const headings =
 ---
 
 <Layout {...Astro.props}>
-  <main class="grid-area-[MAIN] container mx-auto">
+  <main class={styles.main}>
     <slot />
   </main>
-  <aside class="grid-area-[ASIDE]">
+  <aside class={styles.aside}>
     <nav>
       <List>
         {

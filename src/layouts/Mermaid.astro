@@ -4,7 +4,8 @@ import './Mermaid.css';
 const chart = Astro.props.chart;
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+></script>
 <script>
   Array.from(document.querySelectorAll('.mermaid')).map((el) => {
     el.innerHTML = el.getAttribute('data-mermaid') ?? '';

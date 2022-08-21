@@ -6,9 +6,12 @@ import { Header } from '../components/Header';
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
+const pages = await Astro.glob('../pages/**/*.mdx');
+const frontmatters = pages.map(({ frontmatter, file }) => frontmatter);
+console.log(frontmatters);
 ---
 
-<html>
+<html class="dark">
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
