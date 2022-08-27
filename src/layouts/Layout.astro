@@ -8,10 +8,9 @@ const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
 const pages = await Astro.glob('../pages/**/*.mdx');
 const frontmatters = pages.map(({ frontmatter, file }) => frontmatter);
-console.log(frontmatters);
 ---
 
-<html class="dark">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>

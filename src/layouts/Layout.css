@@ -14,5 +14,18 @@
     @apply grid
     grid-rows-[auto,auto,1fr]
     w-full;
+
+    h1 {
+      @apply text-3xl
+      lg:text-5xl;
+    }
+
+    h2 {
+      @apply lg:text-2xl opacity-80;
+    }
+
+    h3 {
+      @apply lg:text-2xl;
+    }
   }
 }

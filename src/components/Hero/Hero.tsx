@@ -2,6 +2,8 @@ import { Svg } from '@svjson/react';
 
 import styles from './Hero.module.css';
 
+import { glasses } from '../../assets/svg';
+
 export const Hero = ({ children, clip }: any) => {
   return (
     <div className={styles.hero}>
@@ -11,8 +13,9 @@ export const Hero = ({ children, clip }: any) => {
         src={clip}
         clipPathId="hero-clip-path"
       />
-      <div className="container flex flex-col mx-auto p-8 pb-32 gap-16">
-        {children}
+      <div className={styles.content}>
+        <header className={styles.header}>{children}</header>
+        <Svg alt="glasses" src={glasses} isCurrentColor />
       </div>
     </div>
   );

@@ -2,9 +2,27 @@
   @apply flex
   h-[80vh]
   w-full
+  bg-gray-200
   dark:bg-dark-darkest;
 
   clip-path: url(#hero-clip-path);
+
+  .content {
+    @apply container
+    grid
+    md:grid-cols-2
+    items-center
+    mx-auto
+    p-8
+    pb-32
+    gap-16;
+  }
+
+  .header {
+    @apply flex
+    flex-col
+    gap-8;
+  }
 
   @keyframes grow {
     from {

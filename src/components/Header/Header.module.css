@@ -3,6 +3,7 @@
   flex
   h-[10vh]
   w-full
+  bg-gray-200
   dark:bg-dark-darkest;
 
   .nav {
@@ -11,5 +12,27 @@
     container
     mx-auto
     p-8;
+
+    .internal {
+      @apply flex
+      justify-center
+      grow
+      gap-8;
+    }
+
+    .external {
+      @apply flex
+      gap-8;
+    }
+
+    .link {
+      @apply outline-none cursor-pointer
+      active:text-inherit
+      focus:text-dark-purple
+      hover:text-dark-purple
+      transition-colors
+      delay-75
+      ease-in-out;
+    }
   }
 }

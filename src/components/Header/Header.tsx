@@ -2,30 +2,42 @@ import { Svg } from '@svjson/react';
 
 import styles from './Header.module.css';
 
-import { glasses } from '../../assets/svg';
+import { github, glasses, linkedin } from '../../assets/svg';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <a href="/">
-          <Svg
-            className="
-            cursor-pointer
-            active:text-inherit
-            hover:text-dark-purple
-            transition-colors
-            delay-75
-            ease-in-out
-            "
-            alt=""
-            src={glasses}
-            height="30px"
-          />
+        <a className={styles.link} href="/">
+          <Svg alt="logo" src={glasses} height="30px" />
         </a>
-        <a href="/">Home</a>
-        <a href="/blog">Blog</a>
-        <a href="/about">About</a>
+        <div className={styles.internal}>
+          <a className={styles.link} href="/">
+            Home
+          </a>
+          <a className={styles.link} href="/blog">
+            Blog
+          </a>
+          <a className={styles.link} href="/about">
+            About
+          </a>
+        </div>
+        <div className={styles.external}>
+          <a
+            className={styles.link}
+            target="__blank"
+            href="https://github.com/viniciusflv/"
+          >
+            <Svg alt="github" src={github} height="30px" />
+          </a>
+          <a
+            className={styles.link}
+            target="__blank"
+            href="https://www.linkedin.com/in/viniciusflv/"
+          >
+            <Svg alt="linkedin" src={linkedin} height="30px" />
+          </a>
+        </div>
       </nav>
     </header>
   );

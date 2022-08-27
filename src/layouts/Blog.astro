@@ -13,18 +13,18 @@ const headings =
 <Layout {...Astro.props}>
   <main class={styles.main}>
     <slot />
+    <aside class={styles.aside}>
+      <nav>
+        <List>
+          {
+            headings.map(({ depth, slug, text }) => (
+              <ListItem key={slug} depth={depth}>
+                <a href={`#${slug}`}>{text}</a>
+              </ListItem>
+            ))
+          }
+        </List>
+      </nav>
+    </aside>
   </main>
-  <aside class={styles.aside}>
-    <nav>
-      <List>
-        {
-          headings.map(({ depth, slug, text }) => (
-            <ListItem key={slug} depth={depth}>
-              <a href={`#${slug}`}>{text}</a>
-            </ListItem>
-          ))
-        }
-      </List>
-    </nav>
-  </aside>
 </Layout>
