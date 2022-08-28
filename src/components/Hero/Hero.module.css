@@ -1,5 +1,5 @@
 .hero {
-  @apply flex
+  @apply flex relative
   h-[80vh]
   w-full
   bg-gray-200

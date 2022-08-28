@@ -51,6 +51,8 @@
     "svj": "^2.2.3"
   },
   "dependencies": {
-    "@svjson/react": "^0.0.3"
+    "@svjson/react": "^0.0.3",
+    "@types/open-graph-scraper": "^4.8.1",
+    "open-graph-scraper": "^4.11.1"
   }
 }

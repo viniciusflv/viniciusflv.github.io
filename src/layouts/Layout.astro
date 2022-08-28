@@ -1,23 +1,48 @@
 ---
+import ogScraper from 'open-graph-scraper';
+
 import './Layout.css';
 
 import { Header } from '../components/Header';
+
+// import { OpenGraph } from '../components/OpenGraph';
 
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
 const pages = await Astro.glob('../pages/**/*.mdx');
 const frontmatters = pages.map(({ frontmatter, file }) => frontmatter);
+const { result } = await ogScraper({
+  url: 'https://github.com/viniciusflv/',
+});
+console.log(result);
 ---
 
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta content={title} property="og:title" />
+    <meta content={'meta?.description'} name="description" />
+    <meta content={'meta?.description'} itemprop="description" />
+    <meta content={'meta?.description'} property="og:description" />
+    <meta content={'meta?.keywords'} name="keywords" />
+    <meta content={'meta?.author'} name="author" />
+    <meta content={'meta?.siteName'} itemprop="name" />
+    <meta content={'meta?.siteName'} property="og:site_name" />
+    <meta content={result?.ogUrl} property="og:url" />
+    <meta content={result?.ogImage?.url} itemprop="image" />
+    <!-- <meta content={meta?.siteUrl + meta?.image.path} property="og:image" />
+    <meta content={meta?.image.type} property="og:image:type" />
+    <meta content={meta?.image.size} property="og:image:width" />
+    <meta content={meta?.image.size} property="og:image:height" /> -->
+    <meta content={result?.ogLocale} property="og:locale" />
+    <meta content="website" property="og:type" />
   </head>
 
   <body class="body">
+    <!-- <OpenGraph client:load="react" /> -->
     <section class:list={['section', classes]}>
       <Header />
       <slot />

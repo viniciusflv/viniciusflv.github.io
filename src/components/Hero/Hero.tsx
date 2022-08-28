@@ -2,7 +2,7 @@ import { Svg } from '@svjson/react';
 
 import styles from './Hero.module.css';
 
-import { glasses } from '../../assets/svg';
+import { meRicknmorty } from '../../assets/svg';
 
 export const Hero = ({ children, clip }: any) => {
   return (
@@ -15,7 +15,11 @@ export const Hero = ({ children, clip }: any) => {
       />
       <div className={styles.content}>
         <header className={styles.header}>{children}</header>
-        <Svg alt="glasses" src={glasses} isCurrentColor />
+        <Svg
+          className="relative lg:mb-[-50vh]"
+          alt="Me as a Rick and Morty Character"
+          src={meRicknmorty}
+        />
       </div>
     </div>
   );

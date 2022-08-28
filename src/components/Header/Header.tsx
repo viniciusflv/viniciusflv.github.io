@@ -9,7 +9,7 @@ export const Header = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <a className={styles.link} href="/">
-          <Svg alt="logo" src={glasses} height="30px" />
+          <Svg alt="logo" src={glasses} width="75px" height="30px" />
         </a>
         <div className={styles.internal}>
           <a className={styles.link} href="/">
@@ -28,14 +28,14 @@ export const Header = () => {
             target="__blank"
             href="https://github.com/viniciusflv/"
           >
-            <Svg alt="github" src={github} height="30px" />
+            <Svg alt="github" src={github} width="30px" height="30px" />
           </a>
           <a
             className={styles.link}
             target="__blank"
             href="https://www.linkedin.com/in/viniciusflv/"
           >
-            <Svg alt="linkedin" src={linkedin} height="30px" />
+            <Svg alt="linkedin" src={linkedin} width="30px" height="30px" />
           </a>
         </div>
       </nav>
