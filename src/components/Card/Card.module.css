@@ -1,0 +1,12 @@
+.card {
+  @apply min-w-96  
+  p-8
+  rounded
+  shadow-2xl
+  dark:bg-dark-darkest;
+
+  transition-property: box-shadow;
+  transition-duration: 1s;
+
+  @apply hover:shadow-md active:shadow-md;
+}

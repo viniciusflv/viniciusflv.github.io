@@ -1,5 +1,6 @@
 ---
 import ogScraper from 'open-graph-scraper';
+import path from 'path';
 
 import './Layout.css';
 
@@ -10,12 +11,11 @@ import { Header } from '../components/Header';
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
-const pages = await Astro.glob('../pages/**/*.mdx');
-const frontmatters = pages.map(({ frontmatter, file }) => frontmatter);
-const { result } = await ogScraper({
-  url: 'https://github.com/viniciusflv/',
-});
-console.log(result);
+
+// const { result } = await ogScraper({
+//   url: 'https://github.com/viniciusflv/',
+// });
+// console.log(result);
 ---
 
 <html>
@@ -31,13 +31,13 @@ console.log(result);
     <meta content={'meta?.author'} name="author" />
     <meta content={'meta?.siteName'} itemprop="name" />
     <meta content={'meta?.siteName'} property="og:site_name" />
-    <meta content={result?.ogUrl} property="og:url" />
-    <meta content={result?.ogImage?.url} itemprop="image" />
+    <!-- <meta content={result?.ogUrl} property="og:url" />
+    <meta content={result?.ogImage?.url} itemprop="image" /> -->
     <!-- <meta content={meta?.siteUrl + meta?.image.path} property="og:image" />
     <meta content={meta?.image.type} property="og:image:type" />
     <meta content={meta?.image.size} property="og:image:width" />
     <meta content={meta?.image.size} property="og:image:height" /> -->
-    <meta content={result?.ogLocale} property="og:locale" />
+    <!-- <meta content={result?.ogLocale} property="og:locale" /> -->
     <meta content="website" property="og:type" />
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>

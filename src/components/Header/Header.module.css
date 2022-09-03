@@ -26,6 +26,7 @@
     }
 
     .link {
+      @apply tracking-widest;
       @apply outline-none cursor-pointer
       active:text-inherit
       focus:text-dark-purple

@@ -1,30 +1,57 @@
 ---
 import Layout from './Layout.astro';
 
+import fs from 'fs';
+
 import styles from './Blog.module.css';
 
+import { Card } from '../components/Card';
 import { List, ListItem } from '../components/List';
+
+const posts = await Astro.glob('../pages/blog/**/*.mdx');
+
+console.log(Astro.props);
 
 const headings =
   (Astro?.props?.headings as { depth: number; slug: string; text: string }[]) ??
   [];
+
+const stats = fs.statSync(Astro?.props?.content.file);
+const dateFormatter = new Intl.DateTimeFormat('pt-BR');
+const modified = dateFormatter.format(stats.mtime);
+
+const isRoot = Astro.props.content.url === '/blog';
 ---
 
 <Layout {...Astro.props}>
   <main class={styles.main}>
-    <slot />
-    <aside class={styles.aside}>
-      <nav>
-        <List>
-          {
-            headings.map(({ depth, slug, text }) => (
-              <ListItem key={slug} depth={depth}>
-                <a href={`#${slug}`}>{text}</a>
-              </ListItem>
-            ))
-          }
-        </List>
-      </nav>
-    </aside>
+    <article class={styles.article}>
+      {!isRoot ? <header>{modified}</header> : null}
+      <slot />
+      {
+        isRoot ? (
+          <div class="flex flex-wrap gap-8">
+            {posts.map(({ frontmatter, url }) => (
+              <Card url={url} {...frontmatter} />
+            ))}
+          </div>
+        ) : null
+      }
+    </article>
+    {
+      !isRoot && headings.length ? (
+        <aside class={styles.aside}>
+          <nav>
+            <List>
+              {headings.map(({ depth, slug, text }) => (
+                <ListItem key={slug} depth={depth}>
+                  <a href={`#${slug}`}>{text}</a>
+                </ListItem>
+              ))}
+            </List>
+          </nav>
+        </aside>
+      ) : null
+    }
   </main>
 </Layout>
