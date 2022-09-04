@@ -23,6 +23,7 @@ export const Header = ({ lang }: any) => {
           </a>
         </div>
         <div className={styles.external}>
+          <button title={lang}>{lang?.toUpperCase()}</button>
           <a
             className={styles.link}
             target="__blank"

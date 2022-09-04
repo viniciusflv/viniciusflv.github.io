@@ -11,6 +11,7 @@ const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
 const lang = getLanguageFromURL(Astro.url.pathname);
+const knownLanguages = ['en', 'pt-br'];
 
 // const { result } = await ogScraper({
 //   url: 'https://github.com/viniciusflv/',
@@ -44,7 +45,7 @@ const lang = getLanguageFromURL(Astro.url.pathname);
 
   <body class="body">
     <section class:list={['section', classes]}>
-      <Header lang={lang} />
+      <Header lang={lang} knownLanguages={knownLanguages} />
       <slot />
     </section>
   </body>
