@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 
 import { github, glasses, linkedin } from '../../assets/svg';
 
-export const Header = () => {
+export const Header = ({ lang }: any) => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -12,13 +12,13 @@ export const Header = () => {
           <Svg alt="logo" src={glasses} width="75px" height="30px" />
         </a>
         <div className={styles.internal}>
-          <a className={styles.link} href="/">
+          <a className={styles.link} href={`/${lang}`}>
             Home
           </a>
-          <a className={styles.link} href="/blog">
+          <a className={styles.link} href={`/${lang}/posts`}>
             Blog
           </a>
-          <a className={styles.link} href="/about">
+          <a className={styles.link} href={`/${lang}/about`}>
             About
           </a>
         </div>

@@ -5,12 +5,12 @@ import path from 'path';
 import './Layout.css';
 
 import { Header } from '../components/Header';
-
-// import { OpenGraph } from '../components/OpenGraph';
+import { getLanguageFromURL } from '../util';
 
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || 'Title';
 const classes = frontmatter?.classes || '';
+const lang = getLanguageFromURL(Astro.url.pathname);
 
 // const { result } = await ogScraper({
 //   url: 'https://github.com/viniciusflv/',
@@ -18,7 +18,7 @@ const classes = frontmatter?.classes || '';
 // console.log(result);
 ---
 
-<html>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,9 +43,8 @@ const classes = frontmatter?.classes || '';
   </head>
 
   <body class="body">
-    <!-- <OpenGraph client:load="react" /> -->
     <section class:list={['section', classes]}>
-      <Header />
+      <Header lang={lang} />
       <slot />
     </section>
   </body>

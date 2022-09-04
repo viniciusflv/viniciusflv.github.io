@@ -13,3 +13,10 @@
   grow
   gap-8;
 }
+
+.aside {
+  @apply px-8
+  border-l-2
+  border-gray-400
+  dark:border-dark-darkest;
+}

@@ -1,6 +1,5 @@
 .card {
-  @apply min-w-96  
-  p-8
+  @apply p-8
   rounded
   shadow-2xl
   dark:bg-dark-darkest;
