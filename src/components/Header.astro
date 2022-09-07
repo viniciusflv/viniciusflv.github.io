@@ -1,0 +1,95 @@
+---
+import { Svg } from '@svjson/react';
+
+import { github, glasses, linkedin } from '../assets/svg';
+
+const { lang, knownLanguages } = Astro.props;
+---
+
+<script>
+  const toggleLangBtn = document.getElementById('toggle-lang');
+  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
+  const knownLanguages =
+    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
+
+  toggleLangBtn?.addEventListener('click', () => {
+    window.location.pathname = window.location.pathname.replace(
+      lang,
+      knownLanguages.find((l) => l !== lang) || lang,
+    );
+  });
+</script>
+
+<header class="header">
+  <nav class="nav">
+    <a class="link" href="/">
+      <Svg alt="logo" src={glasses} width="75px" height="30px" />
+    </a>
+    <div class="internal">
+      <a class="link" href={`/${lang}`}>Home</a>
+      <a class="link" href={`/${lang}/posts`}>Blog</a>
+      <a class="link" href={`/${lang}/about`}>About</a>
+    </div>
+    <div class="external">
+      <button
+        id="toggle-lang"
+        data-lang={lang}
+        data-languages={knownLanguages}
+        title={lang}
+        >{lang?.toUpperCase()}
+      </button>
+      <a class="link" target="_blank" href="https://github.com/viniciusflv/">
+        <Svg alt="github" src={github} width="30px" height="30px" />
+      </a>
+      <a
+        class="link"
+        target="_blank"
+        href="https://www.linkedin.com/in/viniciusflv/"
+      >
+        <Svg alt="linkedin" src={linkedin} width="30px" height="30px" />
+      </a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header {
+    @apply grid-area-[HEADER]
+    flex
+    h-[10vh]
+    w-full
+    bg-gray-200
+    dark:bg-dark-darkest;
+
+    .nav {
+      @apply flex
+      gap-8
+      container
+      mx-auto
+      p-8;
+
+      .internal {
+        @apply flex
+        justify-center
+        grow
+        gap-8;
+      }
+
+      .external {
+        @apply flex
+        gap-8;
+      }
+
+      .link {
+        @apply tracking-widest;
+        @apply outline-none cursor-pointer
+        active:text-inherit
+        focus:text-dark-purple
+        hover:text-dark-purple
+        transition-colors
+        delay-75
+        ease-in-out;
+      }
+    }
+  }
+</style>

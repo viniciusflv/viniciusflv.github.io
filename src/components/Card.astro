@@ -1,0 +1,28 @@
+---
+const { title, description, url } = Astro.props;
+---
+
+<a title={title} href={url}>
+  <section class="card">
+    <header>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </header>
+  </section>
+</a>
+
+<style>
+  .card {
+    @apply p-8
+    rounded
+    shadow-2xl
+    border
+    border-gray-200
+    dark:bg-dark-darkest;
+
+    transition-property: box-shadow;
+    transition-duration: 1s;
+
+    @apply hover:shadow-md active:shadow-md;
+  }
+</style>

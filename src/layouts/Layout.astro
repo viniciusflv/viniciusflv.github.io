@@ -1,10 +1,9 @@
 ---
+import Header from '../components/Header.astro';
+
 import ogScraper from 'open-graph-scraper';
 import path from 'path';
 
-import './Layout.css';
-
-import { Header } from '../components/Header';
 import { getLanguageFromURL } from '../util';
 
 const { frontmatter } = Astro.props;
@@ -48,5 +47,60 @@ const knownLanguages = ['en', 'pt-br'];
       <Header lang={lang} knownLanguages={knownLanguages} />
       <slot />
     </section>
+    <style is:global>
+      * {
+        /* outline: 0.01px solid red; */
+        @media (prefers-reduce-motion: reduce) {
+          animation-duration: 0ms !important;
+        }
+      }
+
+      .body {
+        @apply font-paragraph dark:text-white;
+
+        @apply flex w-full
+        min-h-screen
+        bg-white
+        dark:bg-[color:#282a36];
+
+        .section {
+          @apply flex
+          flex-col
+          w-full;
+
+          h1 {
+            @apply text-3xl
+            lg:text-5xl;
+          }
+
+          h2 {
+            @apply lg:text-2xl opacity-80;
+          }
+
+          h3 {
+            @apply lg:text-2xl;
+          }
+
+          .shiki.dracula {
+            @apply rounded shadow-2xl !bg-transparent;
+
+            .language-id {
+              @apply p-2 px-8 rounded-t bg-dark-darkest bg-opacity-50;
+            }
+
+            .code-container {
+              @apply p-8 rounded-b bg-dark-darkest;
+            }
+
+            .language-id,
+            .code-container {
+              @media (prefers-color-scheme: light) {
+                @apply invert;
+              }
+            }
+          }
+        }
+      }
+    </style>
   </body>
 </html>

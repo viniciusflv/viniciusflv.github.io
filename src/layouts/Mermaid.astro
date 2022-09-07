@@ -1,9 +1,41 @@
 ---
-import './Mermaid.css';
-
 const chart = Astro.props.chart;
 ---
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
 ></script>
+
 <div class="mermaid">{chart}</div>
+
+<style>
+  .mermaid {
+    & foreignObject {
+      @apply dark:!text-dark-purple;
+    }
+
+    & .label-container {
+      @apply dark:!fill-dark-darkest
+    dark:stroke-dark-darkest;
+    }
+
+    & .edgeLabel {
+      @apply dark:!text-dark-comment
+      dark:!bg-dark-darkest;
+
+      & rect {
+        @apply dark:!opacity-100
+        dark:!fill-dark-darkest
+        dark:!stroke-dark-darkest
+        dark:!stroke-4;
+      }
+    }
+
+    & .arrowheadPath {
+      @apply dark:!fill-dark-comment;
+    }
+
+    & .edgePath path {
+      @apply dark:!stroke-dark-comment;
+    }
+  }
+</style>

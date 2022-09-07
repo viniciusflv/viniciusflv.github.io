@@ -1,9 +1,7 @@
 ---
+import Card from '../components/Card.astro';
 import Layout from './Layout.astro';
 
-import styles from './Blog.module.css';
-
-import { Card } from '../components/Card';
 import { getLanguageFromURL } from '../util';
 
 const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
@@ -11,18 +9,38 @@ const lang = getLanguageFromURL(Astro.url.pathname);
 ---
 
 <Layout {...Astro.props}>
-  <main class={styles.main}>
-    <article class={styles.article}>
+  <main class="main">
+    <article class="article">
       <slot />
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {
           posts
             .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
-            .map(({ frontmatter, url }) => (
-              <Card lang={lang} url={url} {...frontmatter} />
-            ))
+            .map(({ frontmatter, url }) =>
+              frontmatter.title ? (
+                <Card lang={lang} url={url} {...frontmatter} />
+              ) : null,
+            )
         }
       </div>
     </article>
   </main>
 </Layout>
+
+<style>
+  .main {
+    @apply flex
+    gap-8
+    container
+    mx-auto
+    p-8
+    py-16;
+  }
+
+  .article {
+    @apply flex
+    flex-col
+    grow
+    gap-8;
+  }
+</style>

@@ -3,8 +3,6 @@ import Layout from './Layout.astro';
 
 import fs from 'fs';
 
-import styles from './Post.module.css';
-
 import { List, ListItem } from '../components/List';
 import { getLanguageFromURL } from '../util';
 
@@ -18,14 +16,14 @@ const modified = dateFormatter.format(stats.mtime);
 ---
 
 <Layout {...Astro.props}>
-  <main class={styles.main}>
-    <article class={styles.article}>
+  <main class="main">
+    <article class="article">
       <header>{modified}</header>
       <slot />
     </article>
     {
       headings.length ? (
-        <aside class={styles.aside}>
+        <aside class="aside">
           <nav>
             <List>
               {headings.map(({ depth, slug, text }) => (
@@ -40,3 +38,28 @@ const modified = dateFormatter.format(stats.mtime);
     }
   </main>
 </Layout>
+
+<style>
+  .main {
+    @apply flex
+    gap-8
+    container
+    mx-auto
+    p-8
+    py-16;
+  }
+
+  .article {
+    @apply flex
+    flex-col
+    grow
+    gap-8;
+  }
+
+  .aside {
+    @apply px-8
+    border-l-2
+    border-gray-400
+    dark:border-dark-darkest;
+  }
+</style>
