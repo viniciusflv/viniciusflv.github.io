@@ -1,8 +1,6 @@
 ---
 import { Svg } from '@svjson/react';
 
-import { meRicknmorty } from '../assets/svg';
-
 const { clip } = Astro.props;
 ---
 
@@ -10,21 +8,16 @@ const { clip } = Astro.props;
   <Svg className="absolute" alt="clip" src={clip} clipPathId="hero-clip-path" />
   <div class="content">
     <header class="header"><slot /></header>
-    <Svg
-      className="relative lg:mb-[-50vh]"
-      alt="Me as a Rick and Morty Character"
-      src={meRicknmorty}
-    />
+    <slot name="image" />
   </div>
 </div>
 
 <style>
   .hero {
     @apply flex relative
-    h-[80vh]
     w-full
     bg-gray-200
-    dark:bg-dark-darkest;
+    dark:bg-dark-background;
 
     clip-path: url(#hero-clip-path);
 
@@ -35,6 +28,7 @@ const { clip } = Astro.props;
       items-center
       mx-auto
       p-8
+      pt-16
       pb-32
       gap-16;
     }
@@ -44,16 +38,5 @@ const { clip } = Astro.props;
       flex-col
       gap-8;
     }
-
-    @keyframes grow {
-      from {
-        height: 100vh;
-      }
-    }
-
-    animation-name: grow;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in;
   }
 </style>

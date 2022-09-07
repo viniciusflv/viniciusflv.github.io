@@ -22,27 +22,34 @@ const { lang, knownLanguages } = Astro.props;
 
 <header class="header">
   <nav class="nav">
-    <a class="link" href="/">
+    <a class="action" href="/">
       <Svg alt="logo" src={glasses} width="75px" height="30px" />
     </a>
     <div class="internal">
-      <a class="link" href={`/${lang}`}>Home</a>
-      <a class="link" href={`/${lang}/posts`}>Blog</a>
-      <a class="link" href={`/${lang}/about`}>About</a>
+      <a class="action" href={`/${lang}`}>
+        {lang === 'en' ? 'Home' : 'Início'}
+      </a>
+      <a class="action" href={`/${lang}/posts`}>
+        {lang === 'en' ? 'Posts' : 'Postagens'}
+      </a>
+      <a class="action" href={`/${lang}/about`}>
+        {lang === 'en' ? 'About' : 'Sobre'}
+      </a>
     </div>
     <div class="external">
       <button
         id="toggle-lang"
+        class="action"
         data-lang={lang}
         data-languages={knownLanguages}
         title={lang}
         >{lang?.toUpperCase()}
       </button>
-      <a class="link" target="_blank" href="https://github.com/viniciusflv/">
+      <a class="action" target="_blank" href="https://github.com/viniciusflv/">
         <Svg alt="github" src={github} width="30px" height="30px" />
       </a>
       <a
-        class="link"
+        class="action"
         target="_blank"
         href="https://www.linkedin.com/in/viniciusflv/"
       >
@@ -59,7 +66,7 @@ const { lang, knownLanguages } = Astro.props;
     h-[10vh]
     w-full
     bg-gray-200
-    dark:bg-dark-darkest;
+    dark:bg-dark-background;
 
     .nav {
       @apply flex
@@ -80,12 +87,12 @@ const { lang, knownLanguages } = Astro.props;
         gap-8;
       }
 
-      .link {
+      .action {
         @apply tracking-widest;
         @apply outline-none cursor-pointer
         active:text-inherit
-        focus:text-dark-purple
-        hover:text-dark-purple
+        focus:text-dark-comment
+        hover:text-dark-comment
         transition-colors
         delay-75
         ease-in-out;

@@ -24,13 +24,13 @@ const knownLanguages = ['en', 'pt-br'];
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta content={title} property="og:title" />
-    <meta content={'meta?.description'} name="description" />
+    <!-- <meta content={'meta?.description'} name="description" />
     <meta content={'meta?.description'} itemprop="description" />
     <meta content={'meta?.description'} property="og:description" />
     <meta content={'meta?.keywords'} name="keywords" />
     <meta content={'meta?.author'} name="author" />
     <meta content={'meta?.siteName'} itemprop="name" />
-    <meta content={'meta?.siteName'} property="og:site_name" />
+    <meta content={'meta?.siteName'} property="og:site_name" /> -->
     <!-- <meta content={result?.ogUrl} property="og:url" />
     <meta content={result?.ogImage?.url} itemprop="image" /> -->
     <!-- <meta content={meta?.siteUrl + meta?.image.path} property="og:image" />
@@ -38,7 +38,7 @@ const knownLanguages = ['en', 'pt-br'];
     <meta content={meta?.image.size} property="og:image:width" />
     <meta content={meta?.image.size} property="og:image:height" /> -->
     <!-- <meta content={result?.ogLocale} property="og:locale" /> -->
-    <meta content="website" property="og:type" />
+    <!-- <meta content="website" property="og:type" /> -->
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
 
@@ -56,12 +56,12 @@ const knownLanguages = ['en', 'pt-br'];
       }
 
       .body {
-        @apply font-paragraph dark:text-white;
+        @apply font-paragraph text-gray-800 dark:text-gray-100;
 
         @apply flex w-full
         min-h-screen
         bg-white
-        dark:bg-[color:#282a36];
+        dark:bg-dark-darkest;
 
         .section {
           @apply flex

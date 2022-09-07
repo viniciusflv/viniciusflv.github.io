@@ -4,23 +4,37 @@ import Layout from './Layout.astro';
 
 import { getLanguageFromURL } from '../util';
 
-const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
 const lang = getLanguageFromURL(Astro.url.pathname);
+const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
+const articles = posts
+  .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
+  .filter(({ frontmatter }) => frontmatter.category)
+  .reduce<Record<string, any[]>>((acc, article) => {
+    const key = article.frontmatter.category;
+    const category = acc[key] || [];
+    return { ...acc, [key]: [...category, article] };
+  }, {});
 ---
 
 <Layout {...Astro.props}>
+  <slot />
   <main class="main">
     <article class="article">
-      <slot />
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="flex flex-col gap-8">
         {
-          posts
-            .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
-            .map(({ frontmatter, url }) =>
-              frontmatter.title ? (
-                <Card lang={lang} url={url} {...frontmatter} />
-              ) : null,
-            )
+          Object.keys(articles).map((key) => {
+            console.log(articles[key]);
+            return (
+              <div class="flex flex-col gap-8">
+                <h2>{key}</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {articles[key].map(({ url, frontmatter }) => (
+                    <Card lang={lang} url={url} {...frontmatter} />
+                  ))}
+                </div>
+              </div>
+            );
+          })
         }
       </div>
     </article>

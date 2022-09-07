@@ -2,10 +2,10 @@
 const { title, description, url } = Astro.props;
 ---
 
-<a title={title} href={url}>
-  <section class="card">
+<a class="card outline-none" title={title} href={url}>
+  <section>
     <header>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <p>{description}</p>
     </header>
   </section>
@@ -18,11 +18,20 @@ const { title, description, url } = Astro.props;
     shadow-2xl
     border
     border-gray-200
+    dark:border-dark-currentLine
     dark:bg-dark-darkest;
 
-    transition-property: box-shadow;
-    transition-duration: 1s;
+    transition-property: box-shadow color;
+    transition-duration: 500ms;
 
-    @apply hover:shadow-md active:shadow-md;
+    @apply hover:shadow-md
+    focus:shadow-md
+    hover:text-dark-comment
+    focus:text-dark-comment
+    hover:border-dark-comment
+    focus:border-dark-comment;
+    p {
+      @apply text-gray-400;
+    }
   }
 </style>

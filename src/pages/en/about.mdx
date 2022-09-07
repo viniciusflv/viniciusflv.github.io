@@ -5,13 +5,23 @@ title: 'About'
 
 import Hero from '../../components/Hero.astro';
 
+import { Svg } from '@svjson/react';
+
 import { hero } from '../../assets/svg';
+import { meRicknmorty } from '../../assets/svg';
 
 <Hero clip={hero}>
 
 # Hi, I'm Vinícius Victorino, I'm a Frontend Architect.
 
 ## I make the life of developers less complicated, by making decisions and introducing patterns.
+
+<Svg
+  slot="image"
+  className="relative lg:mb-[-50vh]"
+  alt="Me as a Rick and Morty Character"
+  src={meRicknmorty}
+/>
 
 </Hero>
 
