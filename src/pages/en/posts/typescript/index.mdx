@@ -1,8 +1,18 @@
 ---
-layout: '../../../../layouts/Post.astro'
-category: Typescript
+layout: '../../../../layouts/Blog.astro'
+category: TypeScript
 title: TypeScript
 description: Hello World
 ---
 
-# ts
+import Hero from '../../../../components/Hero.astro';
+
+import { hero } from '../../../../assets/svg';
+
+<Hero slot="hero" clip={hero}>
+
+# Posts
+
+## Articles about Typescript
+
+</Hero>

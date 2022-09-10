@@ -1,8 +1,18 @@
 ---
-layout: '../../../../layouts/Post.astro'
+layout: '../../../../layouts/Blog.astro'
 category: React
 title: React
 description: Hello World
 ---
 
-# React
+import Hero from '../../../../components/Hero.astro';
+
+import { hero } from '../../../../assets/svg';
+
+<Hero slot="hero" clip={hero}>
+
+# Posts
+
+## Articles about React
+
+</Hero>

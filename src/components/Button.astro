@@ -1,0 +1,27 @@
+---
+import { getLanguageFromURL } from '../util';
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+const { href } = Astro.props;
+---
+
+<a class="button" href={`/${lang}/${href}`}>
+  <slot />
+</a>
+
+<style>
+  .button {
+    @apply flex
+    justify-center
+    first-of-type:bg-dark-comment
+    first-of-type:text-white
+    last-of-type:border-dark-comment
+    last-of-type:text-dark-comment
+    last-of-type:border
+    rounded-full
+    p-4
+    w-full
+    max-w-64
+    cursor-pointer;
+  }
+</style>

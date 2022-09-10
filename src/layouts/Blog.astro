@@ -4,13 +4,17 @@ import Layout from './Layout.astro';
 
 import { getLanguageFromURL } from '../util';
 
+const { category } = Astro.props.frontmatter;
 const lang = getLanguageFromURL(Astro.url.pathname);
 const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
 const articles = posts
   .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
-  .filter(({ frontmatter }) => frontmatter.category)
+  .filter(({ frontmatter }) => frontmatter.categories)
+  .filter(({ frontmatter }) =>
+    category ? frontmatter.categories === category : frontmatter.categories,
+  )
   .reduce<Record<string, any[]>>((acc, article) => {
-    const key = article.frontmatter.category;
+    const key = article.frontmatter.categories;
     const category = acc[key] || [];
     return { ...acc, [key]: [...category, article] };
   }, {});
@@ -23,7 +27,6 @@ const articles = posts
       <div class="flex flex-col gap-8">
         {
           Object.keys(articles).map((key) => {
-            console.log(articles[key]);
             return (
               <div class="flex flex-col gap-8">
                 <h2>{key}</h2>
