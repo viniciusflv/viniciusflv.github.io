@@ -7,7 +7,7 @@ import path from 'path';
 import { getLanguageFromURL } from '../util';
 
 const { frontmatter } = Astro.props;
-const title = frontmatter?.title || 'Title';
+const title = frontmatter?.title || 'Vinícius Victorino';
 const classes = frontmatter?.classes || '';
 const lang = getLanguageFromURL(Astro.url.pathname);
 const knownLanguages = ['en', 'pt-br'];

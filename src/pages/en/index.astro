@@ -8,11 +8,11 @@ import fs from 'fs';
 import { hero } from '../../assets/svg';
 
 const files = (await Astro.glob('./posts/**/*.mdx')).filter(
-  ({ frontmatter }) => frontmatter.category,
+  ({ frontmatter }) => frontmatter.categories,
 );
 
 const categories = files.map(({ frontmatter, url }) => ({
-  label: frontmatter.category,
+  label: frontmatter.categories,
   value: url,
 }));
 
@@ -44,7 +44,7 @@ const posts = files.sort((a, b) => {
           <div>
             <h4>{frontmatter.title}</h4>
             <p class="text-gray-400">{frontmatter.description}</p>
-            <a href={url} class="text-dark-comment">
+            <a href={url} class="text-dark-comment underline">
               Read More
             </a>
           </div>

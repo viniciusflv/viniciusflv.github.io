@@ -18,7 +18,7 @@ const modified = dateFormatter.format(stats.mtime);
 <Layout {...Astro.props}>
   <main class="main">
     <article class="article">
-      <header>{modified}</header>
+      <header class="text-dark-comment">{modified}</header>
       <slot />
     </article>
     {
