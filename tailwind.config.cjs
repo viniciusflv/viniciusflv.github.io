@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         code: 'Fira Code',
-        paragraph: 'RocknRoll One',
+        paragraph: ['RocknRoll One', 'sans-serif'],
       },
       colors: {
         dark: {

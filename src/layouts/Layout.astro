@@ -82,19 +82,32 @@ const knownLanguages = ['en', 'pt-br'];
           }
 
           .shiki.dracula {
-            @apply rounded shadow-2xl !bg-transparent;
+            @apply rounded
+            shadow-2xl
+            border
+            border-gray-200
+            dark:border-dark-currentLine;
 
             .language-id {
-              @apply p-2 px-8 rounded-t bg-dark-darkest bg-opacity-50;
+              @apply p-2
+              px-8
+              rounded-t
+              bg-opacity-50
+              text-dark-green;
+
+              @apply border-b
+              border-dark-green;
             }
 
             .code-container {
-              @apply p-8 rounded-b bg-dark-darkest;
+              @apply p-8 rounded-b;
             }
 
-            .language-id,
-            .code-container {
-              @media (prefers-color-scheme: light) {
+            @media (prefers-color-scheme: light) {
+              @apply !bg-white;
+
+              & .language-id,
+              .code-container {
                 @apply invert;
               }
             }

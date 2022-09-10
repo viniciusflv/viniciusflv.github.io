@@ -13,10 +13,15 @@ const { href } = Astro.props;
   .button {
     @apply flex
     justify-center
-    first-of-type:bg-dark-comment
+    outline-none
+    first-of-type:bg-dark-currentLine
     first-of-type:text-white
     last-of-type:border-dark-comment
     last-of-type:text-dark-comment
+    hover:bg-dark-comment
+    hover:text-white
+    focus:bg-dark-comment
+    focus:text-white
     last-of-type:border
     rounded-full
     p-4

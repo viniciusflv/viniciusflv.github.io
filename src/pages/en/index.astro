@@ -26,13 +26,15 @@ const posts = files.sort((a, b) => {
 
 <Layout title="Home">
   <Hero clip={hero}>
-    <h1>Welcome to my personal page!</h1>
+    <h1>Welcome to my personal website!</h1>
     <h2>
       Here I talk about my experiences and technologies, that I'm passionate
       about.
     </h2>
-    <Button href="about">About Me</Button>
-    <Button href="posts">My Posts</Button>
+    <div class="flex flex-wrap gap-4 w-full">
+      <Button href="posts">My Posts</Button>
+      <Button href="about">About Me</Button>
+    </div>
   </Hero>
   <div class="flex container p-8 mx-auto">
     <main class="flex flex-col grow gap-8">
