@@ -1,6 +1,7 @@
 ---
 layout: '../../../layouts/Blog.astro'
 title: Posts
+description: Articles about programming
 ---
 
 import Hero from '../../../components/Hero.astro';
@@ -9,8 +10,8 @@ import { hero } from '../../../assets/svg';
 
 <Hero slot="hero" clip={hero}>
 
-# Posts
+# {frontmatter.title}
 
-## Articles about programming
+## {frontmatter.description}
 
 </Hero>

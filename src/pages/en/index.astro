@@ -22,14 +22,26 @@ const posts = files.sort((a, b) => {
 
   return statsB.mtime.getTime() - statsA.mtime.getTime();
 });
+
+const meta = {
+  title: 'Welcome to my personal website!',
+  keywords: 'programming,front-end,javascript,typescript,react,technologies',
+  description: `
+    Here I talk about my experiences and technologies,
+    that I'm passionate about.
+  `,
+};
 ---
 
-<Layout title="Home">
+<Layout
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+>
   <Hero clip={hero}>
-    <h1>Welcome to my personal website!</h1>
+    <h1>{meta.title}</h1>
     <h2>
-      Here I talk about my experiences and technologies, that I'm passionate
-      about.
+      {meta.description}
     </h2>
     <div class="flex flex-wrap gap-4 w-full">
       <Button href="posts">My Posts</Button>

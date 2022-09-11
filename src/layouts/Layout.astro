@@ -1,49 +1,91 @@
 ---
 import Header from '../components/Header.astro';
 
-import ogScraper from 'open-graph-scraper';
-import path from 'path';
-
+// import ogScraper from 'open-graph-scraper';
 import { getLanguageFromURL } from '../util';
 
-const { frontmatter } = Astro.props;
-const title = frontmatter?.title || 'Vinícius Victorino';
-const classes = frontmatter?.classes || '';
 const lang = getLanguageFromURL(Astro.url.pathname);
-const knownLanguages = ['en', 'pt-br'];
+const knownLanguages = ['en', 'pt-BR'];
 
-// const { result } = await ogScraper({
-//   url: 'https://github.com/viniciusflv/',
-// });
-// console.log(result);
+const { frontmatter } = Astro.props;
+
+const props = {
+  ...Astro.props,
+  ...frontmatter,
+};
+
+const meta = {
+  author: 'Vinícius Victorino',
+  twitter: '@viniciusflv1',
+  title: [props?.title, 'Vinícius Victorino'].join(' | '),
+  description: props?.description || 'My personal website',
+  siteName: 'Vinícius Victorino',
+  canonical: 'https://',
+  keywords:
+    props?.keywords ||
+    [
+      'programming',
+      'front-end',
+      'javascript',
+      'typescript',
+      'react',
+      'technologies',
+    ].join(','),
+};
+
+// const a = await Promise.all([
+//   ogScraper({
+//     url: 'https://github.com/viniciusflv/',
+//   }),
+//   ogScraper({
+//     url: 'https://www.linkedin.com/in/viniciusflv/',
+//   }),
+// ]);
+
+// ogScraper({
+//   url: 'https://twitter.com/viniciusflv1/',
+// })
+//   .then(({ result }) => console.log(result))
+//   .catch(console.error);
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta content={title} property="og:title" />
-    <!-- <meta content={'meta?.description'} name="description" />
-    <meta content={'meta?.description'} itemprop="description" />
-    <meta content={'meta?.description'} property="og:description" />
-    <meta content={'meta?.keywords'} name="keywords" />
-    <meta content={'meta?.author'} name="author" />
-    <meta content={'meta?.siteName'} itemprop="name" />
-    <meta content={'meta?.siteName'} property="og:site_name" /> -->
-    <!-- <meta content={result?.ogUrl} property="og:url" />
-    <meta content={result?.ogImage?.url} itemprop="image" /> -->
-    <!-- <meta content={meta?.siteUrl + meta?.image.path} property="og:image" />
-    <meta content={meta?.image.type} property="og:image:type" />
-    <meta content={meta?.image.size} property="og:image:width" />
-    <meta content={meta?.image.size} property="og:image:height" /> -->
-    <!-- <meta content={result?.ogLocale} property="og:locale" /> -->
-    <!-- <meta content="website" property="og:type" /> -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta content={lang} property="og:locale" />
+    <meta content={meta?.siteName} property="og:site_name" />
+    <meta content={meta.keywords} name="keywords" />
+    <!-- title -->
+    <title>{meta.title}</title>
+    <meta content={meta.title} property="og:title" />
+    <meta content={meta.title} name="twitter:title" />
+    <!-- description -->
+    <meta content={meta.description} name="description" />
+    <meta content={meta.description} property="og:description" />
+    <meta content={meta.description} name="twitter:description" />
+    <!-- author -->
+    <meta content={meta.author} name="author" />
+    <meta content={meta.author} name="twitter:alt" />
+    <meta content={meta.twitter} name="twitter:creator" />
+    <meta content={meta.twitter} name="twitter:site" />
+    <!-- image -->
+    <!-- <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta content="" property="og:image:alt" />
+    <meta content={''} property="og:image" />
+    <meta content={''} property="og:image:type" />
+    <meta content={'1280'} property="og:image:width" />
+    <meta content={'675'} property="og:image:height" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="" name="twitter:image" /> -->
+    <!-- site -->
+    <meta content="website" property="og:type" />
+    <!-- <meta content={meta.canonical} property="og:url" />
+    <link href={meta.canonical} rel="canonical" /> -->
   </head>
 
   <body class="body">
-    <section class:list={['section', classes]}>
+    <section class:list={['section']}>
       <Header lang={lang} knownLanguages={knownLanguages} />
       <slot />
     </section>
