@@ -4,7 +4,7 @@ export const ListItem = ({ depth, children }: any) => {
   for (const _ of Array(depth)) {
     node = (
       <ul>
-        <li className="pl-4">{node}</li>
+        <li className="pl-4 truncate">{node}</li>
       </ul>
     );
   }

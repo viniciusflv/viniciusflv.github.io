@@ -92,6 +92,24 @@ const formatAlternateHref = (hreflang: string) =>
             @apply lg:text-2xl;
           }
 
+          strong {
+            @apply text-black dark:text-dark-green;
+          }
+
+          p {
+            @apply text-gray-600 dark:text-gray-300;
+          }
+
+          article a {
+            @apply underline
+            text-blue-400
+            dark:text-dark-cyan;
+          }
+
+          hr {
+            @apply border-dark-comment;
+          }
+
           .shiki.dracula {
             @apply rounded
             shadow-2xl

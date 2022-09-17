@@ -18,17 +18,22 @@ const modified = dateFormatter.format(stats.mtime);
 <Layout {...Astro.props}>
   <main class="main">
     <article class="article">
-      <header class="text-dark-comment">{modified}</header>
+      <header>
+        <p class="text-dark-comment">{modified}</p>
+        <strong>Vinícius Victorino</strong>
+      </header>
       <slot />
     </article>
     {
       headings.length ? (
         <aside class="aside">
-          <nav>
+          <nav class="nav">
             <List>
               {headings.map(({ depth, slug, text }) => (
                 <ListItem key={slug} depth={depth}>
-                  <a href={`#${slug}`}>{text}</a>
+                  <a title={text} class="action" href={`#${slug}`}>
+                    {text}
+                  </a>
                 </ListItem>
               ))}
             </List>
@@ -57,9 +62,23 @@ const modified = dateFormatter.format(stats.mtime);
   }
 
   .aside {
-    @apply px-8
-    border-l-2
-    border-gray-400
-    dark:border-dark-currentLine;
+    @apply hidden md:block max-w-72;
+
+    .nav {
+      @apply px-8
+      border-l-2
+      border-gray-400
+      dark:border-dark-currentLine;
+
+      .action {
+        @apply outline-none cursor-pointer
+        active:text-inherit
+        focus:text-dark-comment
+        hover:text-dark-comment
+        transition-colors
+        delay-75
+        ease-in-out;
+      }
+    }
   }
 </style>

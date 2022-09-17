@@ -1,0 +1,18 @@
+---
+layout: '../../../../layouts/Blog.astro'
+category: Other
+title: Other
+description: Other Articles
+---
+
+import Hero from '../../../../components/Hero.astro';
+
+import { hero } from '../../../../assets/svg';
+
+<Hero slot="hero" clip={hero}>
+
+# {frontmatter.title}
+
+## {frontmatter.description}
+
+</Hero>
