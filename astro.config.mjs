@@ -10,7 +10,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://stargazers.club',
+  site: 'https://localhost:3000',
   markdown: {
     shikiConfig: {
       theme: 'dracula',
