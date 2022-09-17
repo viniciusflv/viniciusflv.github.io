@@ -1,0 +1,79 @@
+---
+const { frontmatter } = Astro.props;
+
+const props = {
+  ...Astro.props,
+  ...frontmatter,
+};
+
+const meta = {
+  type: props.type || 'website',
+  author: 'Vinícius Victorino',
+  twitter: '@viniciusflv1',
+  title: [props?.title, 'Vinícius Victorino'].join(' | '),
+  description: props?.description || 'My personal website',
+  siteName: 'Vinícius Victorino',
+  canonical: Astro.url.href,
+  themeColor: {
+    dark: '#282a36',
+    light: 'rgb(229 231 235)',
+  },
+  image: {
+    width: '1280',
+    height: '675',
+    type: 'image/png',
+    alt: 'Vinícius Victorino',
+    src: new URL('/og-image', Astro.site),
+  },
+  keywords:
+    props?.keywords ||
+    [
+      'programming',
+      'front-end',
+      'javascript',
+      'typescript',
+      'react',
+      'technologies',
+    ].join(','),
+};
+---
+
+<!-- site -->
+<link href={meta.canonical} rel="canonical" />
+<meta content={meta.canonical} property="og:url" />
+<meta content={meta.siteName} property="og:site_name" />
+<meta
+  content={meta.themeColor.dark}
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+/>
+<meta
+  content={meta.themeColor.light}
+  name="theme-color"
+  media="(prefers-color-scheme: light)"
+/>
+<meta content={meta.keywords} name="keywords" />
+<meta content={meta.type} property="og:type" />
+<!-- title -->
+<title>{meta.title}</title>
+<meta content={meta.title} property="og:title" />
+<meta content={meta.title} name="twitter:title" />
+<!-- description -->
+<meta content={meta.description} name="description" />
+<meta content={meta.description} property="og:description" />
+<meta content={meta.description} name="twitter:description" />
+<!-- author -->
+<meta content={meta.author} name="author" />
+<meta content={meta.author} name="twitter:alt" />
+<meta content={meta.twitter} name="twitter:creator" />
+<meta content={meta.twitter} name="twitter:site" />
+<!-- image -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+<meta content={meta.image.alt} property="og:image:alt" />
+<meta content={meta.image.src} property="og:image" />
+<meta content={meta.image.type} property="og:image:type" />
+<meta content={meta.image.width} property="og:image:width" />
+<meta content={meta.image.height} property="og:image:height" />
+<meta content={meta.image.src} name="twitter:image" />
+<meta content={meta.image.alt} name="twitter:image:alt" />
+<meta content="summary_large_image" name="twitter:card" />

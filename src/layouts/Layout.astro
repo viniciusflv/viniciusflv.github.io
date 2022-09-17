@@ -1,60 +1,23 @@
 ---
 import Header from '../components/Header.astro';
+import SEO from './SEO.astro';
 
-// import ogScraper from 'open-graph-scraper';
 import { getLanguageFromURL } from '../util';
 
-const lang = getLanguageFromURL(Astro.url.pathname);
-const knownLanguages = ['en', 'pt-BR'];
-
-const { frontmatter } = Astro.props;
-
-const props = {
-  ...Astro.props,
-  ...frontmatter,
-};
-
-const meta = {
-  author: 'Vinícius Victorino',
-  twitter: '@viniciusflv1',
-  themeColor: '#282a36',
-  title: [props?.title, 'Vinícius Victorino'].join(' | '),
-  description: props?.description || 'My personal website',
-  siteName: 'Vinícius Victorino',
-  canonical: new URL('/', Astro.site),
-  image: {
-    width: '1280',
-    height: '675',
-    type: 'image/png',
-    alt: 'Vinícius Victorino',
-    src: new URL('/og-image', Astro.site),
-  },
-  keywords:
-    props?.keywords ||
-    [
-      'programming',
-      'front-end',
-      'javascript',
-      'typescript',
-      'react',
-      'technologies',
-    ].join(','),
-};
-
-// const a = await Promise.all([
-//   ogScraper({
-//     url: 'https://github.com/viniciusflv/',
-//   }),
-//   ogScraper({
-//     url: 'https://www.linkedin.com/in/viniciusflv/',
-//   }),
-// ]);
-
+// import ogScraper from 'open-graph-scraper';
 // ogScraper({
 //   url: 'https://twitter.com/viniciusflv1/',
 // })
 //   .then(({ result }) => console.log(result))
 //   .catch(console.error);
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+const knownLanguages = ['en', 'pt-BR'];
+const formatAlternateHref = (hreflang: string) =>
+  new URL(
+    Astro.url.pathname.replace(/^\/(.*)\//g, `/${hreflang}/`),
+    Astro.site,
+  );
 ---
 
 <html lang={lang}>
@@ -64,36 +27,18 @@ const meta = {
       content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"
       name="viewport"
     />
+    <!-- lang -->
     <meta content={lang} property="og:locale" />
-    <meta content={meta?.siteName} property="og:site_name" />
-    <meta content={meta.keywords} name="keywords" />
-    <meta content={meta.themeColor} name="theme-color" />
-    <!-- title -->
-    <title>{meta.title}</title>
-    <meta content={meta.title} property="og:title" />
-    <meta content={meta.title} name="twitter:title" />
-    <!-- description -->
-    <meta content={meta.description} name="description" />
-    <meta content={meta.description} property="og:description" />
-    <meta content={meta.description} name="twitter:description" />
-    <!-- author -->
-    <meta content={meta.author} name="author" />
-    <meta content={meta.author} name="twitter:alt" />
-    <meta content={meta.twitter} name="twitter:creator" />
-    <meta content={meta.twitter} name="twitter:site" />
-    <!-- image -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta content={meta.image.alt} property="og:image:alt" />
-    <meta content={meta.image.src} property="og:image" />
-    <meta content={meta.image.type} property="og:image:type" />
-    <meta content={meta.image.width} property="og:image:width" />
-    <meta content={meta.image.height} property="og:image:height" />
-    <meta content={meta.image.src} name="twitter:image" />
-    <meta content="summary_large_image" name="twitter:card" />
-    <!-- site -->
-    <meta content="website" property="og:type" />
-    <meta content={meta.canonical} property="og:url" />
-    <link href={meta.canonical} rel="canonical" />
+    {
+      knownLanguages.map((hreflang) => (
+        <link
+          rel="alternate"
+          href={formatAlternateHref(hreflang)}
+          hreflang={hreflang}
+        />
+      ))
+    }
+    <SEO {...Astro.props} />
   </head>
 
   <body class="body">
@@ -106,6 +51,18 @@ const meta = {
         /* outline: 0.01px solid red; */
         @media (prefers-reduce-motion: reduce) {
           animation-duration: 0ms !important;
+        }
+
+        @media (orientation: landscape) {
+          ::-webkit-scrollbar {
+            @apply dark:w-3;
+          }
+          ::-webkit-scrollbar-track {
+            @apply dark:bg-black;
+          }
+          ::-webkit-scrollbar-thumb {
+            @apply rounded-full dark:bg-dark-green;
+          }
         }
       }
 
@@ -154,7 +111,18 @@ const meta = {
             }
 
             .code-container {
-              @apply p-8 rounded-b;
+              @apply p-8
+              overflow-auto;
+
+              &::-webkit-scrollbar {
+                @apply w-3;
+              }
+              &::-webkit-scrollbar-track {
+                @apply bg-black;
+              }
+              &::-webkit-scrollbar-thumb {
+                @apply rounded-full bg-dark-green;
+              }
             }
 
             @media (prefers-color-scheme: light) {
