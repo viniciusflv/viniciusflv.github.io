@@ -1,0 +1,50 @@
+---
+layout: '../../layouts/Layout.astro'
+title: Sobre
+keywords: vinícius,victorino,programmer,react
+description: Eu faço a vida dos desenvolvedores menos complicada, através de decisões bem pensadas e introduzindo bons padrões.
+---
+
+import Hero from '../../components/Hero.astro';
+
+import { Svg } from '@svjson/react';
+
+import { hero } from '../../assets/svg';
+import { meRicknmorty } from '../../assets/svg';
+
+<Hero clip={hero}>
+
+# Olá mundo, eu sou Vinícius Victorino, um Arquiteto Frontend
+
+## Eu faço a vida dos desenvolvedores menos complicada, através de decisões bem pensadas e introduzindo bons padrões.
+
+<Svg
+  slot="image"
+  className="relative mb-[-70%]"
+  alt="Eu como um personagem de Rick and Morty"
+  src={meRicknmorty}
+/>
+
+</Hero>
+
+<div className="container flex flex-col gap-16 p-8 py-32 mx-auto">
+
+### Visão geral profissional
+
+```json
+{
+  "firstName": "Vinícius",
+  "lastName": "Victorino",
+  "nationality": "Brazilian",
+  "xp": [
+    { "company": "Indra", "outsourced": "BrasilSeg", "job": "Solutions Architect" },
+    { "company": "Sinqia", "outsourced": "Agibank", "job": "Front-end Squad Leader" }
+    { "company": "Sinqia", "outsourced": "Agibank", "job": "Front-end Developer" }
+    { "company": "Finchain", "job": "Junior Front-end Developer" }
+    { "company": "Finchain", "job": "Development Intern" }
+    { "company": "Banco do Brasil", "job": "Management Intern" }
+  ]
+}
+```
+
+</div>

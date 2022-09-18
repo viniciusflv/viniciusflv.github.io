@@ -1,7 +1,9 @@
 ---
 import Card from '../components/Card.astro';
+import Hero from '../components/Hero.astro';
 import Layout from './Layout.astro';
 
+import { hero } from '../assets/svg';
 import { getLanguageFromURL } from '../util';
 
 const { category } = Astro.props.frontmatter;
@@ -21,7 +23,10 @@ const articles = posts
 ---
 
 <Layout {...Astro.props}>
-  <slot />
+  <Hero clip={hero}>
+    <h1>{Astro.props.frontmatter.title}</h1>
+    <h2>{Astro.props.frontmatter.description}</h2>
+  </Hero>
   <main class="main">
     <div class="article">
       <div class="flex flex-col gap-8">
