@@ -13,13 +13,14 @@ const lang = getLanguageFromURL(Astro.url.pathname);
 const stats = fs.statSync(Astro?.props?.content.file);
 const dateFormatter = new Intl.DateTimeFormat(lang);
 const modified = dateFormatter.format(stats.mtime);
+const created = dateFormatter.format(stats.birthtime);
 ---
 
 <Layout {...Astro.props}>
   <main class="main">
     <article class="article">
       <header>
-        <p class="text-dark-comment">{modified}</p>
+        <p class="text-dark-comment">{created} - {modified}</p>
         <strong>Vinícius Victorino</strong>
       </header>
       <slot />
@@ -62,10 +63,14 @@ const modified = dateFormatter.format(stats.mtime);
   }
 
   .aside {
-    @apply hidden md:block max-w-72;
+    @apply relative
+    hidden md:block
+    max-w-64;
 
     .nav {
-      @apply px-8
+      @apply sticky
+      top-4
+      pl-8
       border-l-2
       border-gray-400
       dark:border-dark-currentLine;

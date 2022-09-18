@@ -23,7 +23,7 @@ const articles = posts
 <Layout {...Astro.props}>
   <slot />
   <main class="main">
-    <article class="article">
+    <div class="article">
       <div class="flex flex-col gap-8">
         {
           Object.keys(articles).map((key) => {
@@ -40,7 +40,7 @@ const articles = posts
           })
         }
       </div>
-    </article>
+    </div>
   </main>
 </Layout>
 

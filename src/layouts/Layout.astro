@@ -51,7 +51,10 @@ const formatAlternateHref = (hreflang: string) =>
         /* outline: 0.01px solid red; */
         @media (prefers-reduce-motion: reduce) {
           animation-duration: 0ms !important;
+          scroll-behavior: initial;
         }
+
+        scroll-behavior: smooth;
 
         @media (orientation: landscape) {
           ::-webkit-scrollbar {
@@ -81,7 +84,11 @@ const formatAlternateHref = (hreflang: string) =>
 
           h1 {
             @apply text-3xl
-            lg:text-5xl;
+            lg:text-5xl
+            font-bold
+            tracking-wider;
+
+            @apply bg-gradient-to-r to-black;
           }
 
           h2 {
@@ -89,7 +96,7 @@ const formatAlternateHref = (hreflang: string) =>
           }
 
           h3 {
-            @apply lg:text-2xl;
+            @apply lg:text-2xl font-bold;
           }
 
           strong {
@@ -100,10 +107,21 @@ const formatAlternateHref = (hreflang: string) =>
             @apply text-gray-600 dark:text-gray-300;
           }
 
-          article a {
-            @apply underline
-            text-blue-400
-            dark:text-dark-cyan;
+          article {
+            a {
+              @apply underline
+              text-blue-400
+              dark:text-dark-cyan;
+            }
+
+            blockquote {
+              @apply italic
+              p-4
+              border-l-4
+              border-l-dark-green
+              bg-black
+              bg-opacity-10;
+            }
           }
 
           hr {

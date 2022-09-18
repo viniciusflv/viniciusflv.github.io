@@ -1,7 +1,7 @@
 ---
 import { Svg } from '@svjson/react';
 
-import { github, glasses, linkedin } from '../assets/svg';
+import { github, glasses, linkedin, twitterLogo } from '../assets/svg';
 
 const { lang, knownLanguages } = Astro.props;
 ---
@@ -54,6 +54,19 @@ const { lang, knownLanguages } = Astro.props;
         href="https://www.linkedin.com/in/viniciusflv/"
       >
         <Svg alt="linkedin" src={linkedin} width="30px" height="30px" />
+      </a>
+      <a
+        class="action"
+        target="_blank"
+        href="https://twitter.com/viniciusflv1/"
+      >
+        <Svg
+          alt="twitter"
+          src={twitterLogo}
+          isCurrentColor
+          width="30px"
+          height="30px"
+        />
       </a>
     </div>
   </nav>

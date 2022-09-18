@@ -7,21 +7,23 @@ import fs from 'fs';
 
 import { hero } from '../../assets/svg';
 
-const files = (await Astro.glob('./posts/**/*.mdx')).filter(
-  ({ frontmatter }) => frontmatter.categories,
-);
+const files = await Astro.glob('./posts/**/*.mdx');
 
-const categories = files.map(({ frontmatter, url }) => ({
-  label: frontmatter.categories,
-  value: url,
-}));
+const categories = files
+  .filter(({ frontmatter }) => frontmatter.category)
+  .map(({ frontmatter, url }) => ({
+    label: frontmatter.category,
+    value: url,
+  }));
 
-const posts = files.sort((a, b) => {
-  const statsA = fs.statSync(a.file);
-  const statsB = fs.statSync(b.file);
+const posts = files
+  .filter(({ frontmatter }) => frontmatter.categories)
+  .sort((a, b) => {
+    const statsA = fs.statSync(a.file);
+    const statsB = fs.statSync(b.file);
 
-  return statsB.mtime.getTime() - statsA.mtime.getTime();
-});
+    return statsB.mtime.getTime() - statsA.mtime.getTime();
+  });
 
 const meta = {
   title: 'Welcome to my personal website!',
@@ -53,13 +55,20 @@ const meta = {
       <h3 class="text-dark-comment">Last Published Posts</h3>
       {
         posts.map(({ frontmatter, url }) => (
-          <div>
-            <h4>{frontmatter.title}</h4>
-            <p class="text-gray-400">{frontmatter.description}</p>
-            <a href={url} class="text-dark-comment underline">
-              Read More
-            </a>
-          </div>
+          <section class="flex flex-col gap-2 max-w-96">
+            <header>
+              <strong>{frontmatter.title}</strong>
+              <p>{frontmatter.description}</p>
+            </header>
+            <main>
+              <p class="text-xs !text-gray-400">{frontmatter.summary}</p>
+            </main>
+            <footer>
+              <a href={url} class="text-dark-comment underline">
+                Read More
+              </a>
+            </footer>
+          </section>
         ))
       }
     </main>
@@ -70,6 +79,7 @@ const meta = {
           categories.map(({ label, value }) => (
             <a
               href={value}
+              title={label}
               class="
                 flex
                 justify-center
