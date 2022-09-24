@@ -1,5 +1,5 @@
 ---
-const { frontmatter } = Astro.props;
+const { frontmatter, lang } = Astro.props;
 
 const props = {
   ...Astro.props,
@@ -23,7 +23,7 @@ const meta = {
     height: '675',
     type: 'image/png',
     alt: 'Vinícius Victorino',
-    src: new URL('/og-image', Astro.site),
+    src: new URL(`${lang}/og-image.png`, Astro.site),
   },
   keywords:
     props?.keywords ||

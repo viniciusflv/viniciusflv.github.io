@@ -38,7 +38,7 @@ const formatAlternateHref = (hreflang: string) =>
         />
       ))
     }
-    <SEO {...Astro.props} />
+    <SEO lang={lang} {...Astro.props} />
   </head>
 
   <body class="body">
