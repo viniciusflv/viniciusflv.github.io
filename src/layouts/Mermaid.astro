@@ -7,35 +7,23 @@ const chart = Astro.props.chart;
 
 <div class="mermaid">{chart}</div>
 
-<style>
+<style is:global>
   .mermaid {
-    & foreignObject {
-      @apply dark:!text-dark-purple;
+    .edgePaths * {
+      @apply dark:!stroke-dark-green;
     }
 
-    & .label-container {
-      @apply dark:!fill-dark-darkest
-    dark:stroke-dark-darkest;
+    marker {
+      @apply dark:!fill-dark-green;
     }
 
-    & .edgeLabel {
-      @apply dark:!text-dark-comment
-      dark:!bg-dark-darkest;
-
-      & rect {
-        @apply dark:!opacity-100
-        dark:!fill-dark-darkest
-        dark:!stroke-dark-darkest
-        dark:!stroke-4;
-      }
+    .node * {
+      @apply dark:!fill-dark-background
+      dark:!stroke-dark-currentLine;
     }
 
-    & .arrowheadPath {
-      @apply dark:!fill-dark-comment;
-    }
-
-    & .edgePath path {
-      @apply dark:!stroke-dark-comment;
+    * {
+      @apply dark:!text-dark-cyan;
     }
   }
 </style>
