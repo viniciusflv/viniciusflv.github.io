@@ -1,0 +1,36 @@
+---
+const { title, description, summary, url } = Astro.props;
+---
+
+<section class="post-preview">
+  <header>
+    <strong>{title}</strong>
+    <p>{description}</p>
+  </header>
+  <main>
+    <p class="summary">{summary}</p>
+  </main>
+  <footer>
+    <a href={url} class="link">Read More</a>
+  </footer>
+</section>
+
+<style>
+  .post-preview {
+    @apply flex flex-col gap-2 max-w-96;
+
+    .summary {
+      @apply text-xs !text-gray-400;
+    }
+
+    .link {
+      @apply flex
+      justify-start
+      items-center
+      gap-2
+      underline
+      text-blue-400
+      dark:text-dark-cyan;
+    }
+  }
+</style>

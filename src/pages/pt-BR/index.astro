@@ -1,6 +1,8 @@
 ---
 import Button from '../../components/Button.astro';
 import Hero from '../../components/Hero.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import Tag from '../../components/Tag.astro';
 import Layout from '../../layouts/Layout.astro';
 
 import fs from 'fs';
@@ -49,46 +51,19 @@ const meta = {
   </Hero>
   <div class="flex container p-8 mx-auto">
     <main class="flex flex-col grow gap-8">
-      <h3 class="text-dark-comment">Posts publicados recentemente</h3>
+      <h3>Posts publicados recentemente</h3>
       {
         posts.map(({ frontmatter, url }) => (
-          <section class="flex flex-col gap-2 max-w-96">
-            <header>
-              <strong>{frontmatter.title}</strong>
-              <p>{frontmatter.description}</p>
-            </header>
-            <main>
-              <p class="text-xs !text-gray-400">{frontmatter.summary}</p>
-            </main>
-            <footer>
-              <a href={url} class="text-dark-comment underline">
-                Leia mais
-              </a>
-            </footer>
-          </section>
+          <PostPreview {...frontmatter} url={url} />
         ))
       }
     </main>
     <aside class="flex flex-col gap-8">
-      <h3 class="text-dark-comment">Por categoria</h3>
+      <h3>Por categoria</h3>
       <div class="flex items-start self-start flex-wrap gap-4 w-52 text-xs">
         {
           categories.map(({ label, value }) => (
-            <a
-              href={value}
-              title={label}
-              class="
-                flex
-                justify-center
-                rounded-full
-                py-2
-                px-4
-                text-white
-                bg-dark-comment
-              "
-            >
-              {label}
-            </a>
+            <Tag value={value} label={label} />
           ))
         }
       </div>

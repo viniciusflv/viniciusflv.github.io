@@ -1,24 +1,12 @@
 ---
+import ToggleLang from './ToggleLang.astro';
+
 import { Svg } from '@svjson/react';
 
 import { github, glasses, linkedin, twitterLogo } from '../assets/svg';
 
 const { lang, knownLanguages } = Astro.props;
 ---
-
-<script>
-  const toggleLangBtn = document.getElementById('toggle-lang');
-  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
-  const knownLanguages =
-    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
-
-  toggleLangBtn?.addEventListener('click', () => {
-    window.location.pathname = window.location.pathname.replace(
-      lang,
-      knownLanguages.find((l) => l !== lang) || lang,
-    );
-  });
-</script>
 
 <header class="header">
   <nav class="nav">
@@ -37,14 +25,7 @@ const { lang, knownLanguages } = Astro.props;
       </a>
     </div>
     <div class="external">
-      <button
-        id="toggle-lang"
-        class="action"
-        data-lang={lang}
-        data-languages={knownLanguages}
-        title={lang}
-        >{lang?.toUpperCase()}
-      </button>
+      <ToggleLang lang={lang} knownLanguages={knownLanguages} />
       <a class="action" target="_blank" href="https://github.com/viniciusflv/">
         <Svg alt="github" src={github} width="30px" height="30px" />
       </a>
