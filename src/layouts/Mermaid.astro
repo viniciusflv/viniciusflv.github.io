@@ -15,7 +15,7 @@ const chart = Astro.props.chart;
 
 {
   Astro.slots.default ? (
-    <div class="grid grid-cols-2 gap-8 items-start">
+    <div class="grid xl:grid-cols-2 gap-8 items-start">
       <slot />
       <div data-mermaid={chart} />
     </div>
@@ -30,8 +30,16 @@ const chart = Astro.props.chart;
       @apply dark:!stroke-dark-green;
     }
 
-    marker {
+    .edgeLabel {
+      @apply dark:!bg-dark-background;
+    }
+
+    .marker {
       @apply dark:!fill-dark-green;
+
+      &.cross {
+        @apply !stroke-dark-green;
+      }
     }
 
     .node * {

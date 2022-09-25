@@ -14,9 +14,9 @@ import Mermaid from '../../../../layouts/Mermaid.astro';
 
 ---
 
-### Diagrams
+### Flowchart
 
-#### Flowchart
+#### Node shapes
 
 ##### Simple node
 
@@ -178,7 +178,7 @@ flowchart LR
 
 </Mermaid>
 
-##### Right parallelogram
+##### Right parallelogram node
 
 <Mermaid
   chart={`
@@ -194,7 +194,7 @@ flowchart LR
 
 </Mermaid>
 
-##### Left parallelogram
+##### Left parallelogram node
 
 <Mermaid
   chart={`
@@ -210,7 +210,7 @@ flowchart LR
 
 </Mermaid>
 
-##### Down trapezoid
+##### Down trapezoid node
 
 <Mermaid
   chart={`
@@ -226,7 +226,7 @@ flowchart LR
 
 </Mermaid>
 
-##### Up trapezoid
+##### Up trapezoid node
 
 <Mermaid
   chart={`
@@ -242,7 +242,7 @@ flowchart LR
 
 </Mermaid>
 
-##### Double circular
+##### Double circular node
 
 <Mermaid
   chart={`
@@ -258,22 +258,178 @@ flowchart LR
 
 </Mermaid>
 
-#### Sequence
+#### Node Connections
 
-#### Class
+##### Link Types
 
-#### State
+###### Solid link
 
-#### Entity Relationship
+<Mermaid
+  chart={`
+    flowchart LR
+      A --- B
+  `}
+>
 
-#### User Journey
+```mermaid
+flowchart LR
+  A --- B
+```
 
-#### Gantt
+</Mermaid>
 
-#### Pie chart
+###### Dotted link
 
-#### Requirement
+<Mermaid
+  chart={`
+    flowchart LR
+      A -.- B
+  `}
+>
 
-#### Gitgraph
+```mermaid
+flowchart LR
+  A -.- B
+```
 
-#### C4
+</Mermaid>
+
+###### Thick link
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A === B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A === B
+```
+
+</Mermaid>
+
+##### With description
+
+###### Pipe syntax
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A --->|description| B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A --->|description| B
+```
+
+</Mermaid>
+
+###### Between syntax
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A --->|description| B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A --description-> B
+```
+
+</Mermaid>
+
+##### Arrow heads
+
+###### Default arrow
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A --> B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A --> B
+```
+
+</Mermaid>
+
+###### Start arrow
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A --o B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A --o B
+```
+
+</Mermaid>
+
+###### Close arrow
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A --x B
+  `}
+>
+
+```mermaid
+flowchart LR
+  A --x B
+```
+
+</Mermaid>
+
+###### Multi directional arrows
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A <--> B
+      C o--o D
+      E x--x F
+  `}
+>
+
+```mermaid
+flowchart LR
+  A <--> B
+  C o--o D
+  E x--x F
+```
+
+</Mermaid>
+
+### Sequence
+
+### Class
+
+### State
+
+### Entity Relationship
+
+### User Journey
+
+### Gantt
+
+### Pie chart
+
+### Requirement
+
+### Gitgraph
+
+### C4
