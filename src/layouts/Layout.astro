@@ -99,11 +99,19 @@ const formatAlternateHref = (hreflang: string) =>
           }
 
           h2 {
-            @apply lg:text-2xl opacity-80;
+            @apply text-2xl opacity-80;
           }
 
           h3 {
-            @apply lg:text-2xl font-bold;
+            @apply text-2xl font-bold;
+          }
+
+          h4 {
+            @apply text-xl font-bold;
+          }
+
+          h5 {
+            @apply font-bold;
           }
 
           strong {
@@ -116,7 +124,7 @@ const formatAlternateHref = (hreflang: string) =>
 
           article {
             h1 {
-              @apply w-max;
+              @apply w-max leading-snug;
             }
 
             ul {

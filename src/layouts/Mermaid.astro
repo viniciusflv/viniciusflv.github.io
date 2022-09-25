@@ -5,7 +5,24 @@ const chart = Astro.props.chart;
 <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
 ></script>
 
-<div class="mermaid">{chart}</div>
+<script>
+  const nodes = document.querySelectorAll('[data-mermaid]');
+  Array.from(nodes).forEach((node) => {
+    node.innerHTML = node.getAttribute('data-mermaid') || '';
+    node.className = 'mermaid';
+  });
+</script>
+
+{
+  Astro.slots.default ? (
+    <div class="grid grid-cols-2 gap-8 items-start">
+      <slot />
+      <div data-mermaid={chart} />
+    </div>
+  ) : (
+    <div data-mermaid={chart} />
+  )
+}
 
 <style is:global>
   .mermaid {

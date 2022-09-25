@@ -1,14 +1,14 @@
 ---
 layout: '../../../../layouts/Post.astro'
 categories: JavaScript
-title: Mermaid-JS
+title: How to create diagrams and charts in Markdown?
 description: Mermaid lets you create diagrams and visualizations using text and code.
 summary: It is a JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.
 ---
 
 import Mermaid from '../../../../layouts/Mermaid.astro';
 
-# Mermaid-JS
+# How to create diagrams <br /> and charts in Markdown?
 
 ## Mermaid lets you create diagrams and visualizations using text and code.
 
@@ -18,12 +18,245 @@ import Mermaid from '../../../../layouts/Mermaid.astro';
 
 #### Flowchart
 
+##### Simple node
+
 <Mermaid
   chart={`
-  flowchart LR
-    A --> B
-`}
-/>
+    flowchart LR
+      node
+  `}
+>
+
+```mermaid
+flowchart LR
+  node
+```
+
+</Mermaid>
+
+##### Square node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      square[square node]
+  `}
+>
+
+```mermaid
+flowchart LR
+  square[square node]
+```
+
+</Mermaid>
+
+##### Round node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      round(round node)
+  `}
+>
+
+```mermaid
+flowchart LR
+  round(round node)
+```
+
+</Mermaid>
+
+##### Pill node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      stadium([pill node])
+  `}
+>
+
+```mermaid
+flowchart LR
+  stadium([pill node])
+```
+
+</Mermaid>
+
+##### Subroutine node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      subroutine[[subroutine node]]
+  `}
+>
+
+```mermaid
+flowchart LR
+  subroutine[[subroutine node]]
+```
+
+</Mermaid>
+
+##### Cylindrical node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      cylindrical[(cylindrical node)]
+  `}
+>
+
+```mermaid
+flowchart LR
+  cylindrical[(cylindrical node)]
+```
+
+</Mermaid>
+
+##### Circular node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      circular((circular node))
+  `}
+>
+
+```mermaid
+flowchart LR
+  circular((circular node))
+```
+
+</Mermaid>
+
+##### Asymmetric node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      asymmetric>asymmetric node]
+  `}
+>
+
+```mermaid
+flowchart LR
+  asymmetric>asymmetric node]
+```
+
+</Mermaid>
+
+##### Rhombus node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      rhombus{rhombus node}
+  `}
+>
+
+```mermaid
+flowchart LR
+  rhombus{rhombus node}
+```
+
+</Mermaid>
+
+##### Hexagon node
+
+<Mermaid
+  chart={`
+    flowchart LR
+      hexagon{{hexagon node}}
+  `}
+>
+
+```mermaid
+flowchart LR
+  hexagon{{hexagon node}}
+```
+
+</Mermaid>
+
+##### Right parallelogram
+
+<Mermaid
+  chart={`
+    flowchart LR
+      parallelogram_right[/right parallelogram node/]
+  `}
+>
+
+```mermaid
+flowchart LR
+  parallelogram_right[/right parallelogram node/]
+```
+
+</Mermaid>
+
+##### Left parallelogram
+
+<Mermaid
+  chart={`
+    flowchart LR
+      parallelogram_left[\\left parallelogram node\\]
+  `}
+>
+
+```mermaid
+flowchart LR
+  parallelogram_left[\left parallelogram node\]
+```
+
+</Mermaid>
+
+##### Down trapezoid
+
+<Mermaid
+  chart={`
+    flowchart LR
+      trapezoid_down[/down trapezoid node\\]
+  `}
+>
+
+```mermaid
+flowchart LR
+  trapezoid_down[/down trapezoid node\]
+```
+
+</Mermaid>
+
+##### Up trapezoid
+
+<Mermaid
+  chart={`
+    flowchart LR
+      trapezoid_up[\\up trapezoid node/]
+  `}
+>
+
+```mermaid
+flowchart LR
+  trapezoid_up[\up trapezoid node/]
+```
+
+</Mermaid>
+
+##### Double circular
+
+<Mermaid
+  chart={`
+    flowchart LR
+      double_circular(((double circular node)))
+  `}
+>
+
+```mermaid
+flowchart LR
+  double_circular(((double circular node)))
+```
+
+</Mermaid>
 
 #### Sequence
 
