@@ -42,8 +42,21 @@ const chart = Astro.props.chart;
       }
     }
 
+    .nodes a {
+      &:hover {
+        .node * {
+          @apply dark:!stroke-dark-cyan;
+        }
+      }
+    }
+
     .node * {
       @apply dark:!fill-dark-background
+      dark:!stroke-dark-currentLine;
+    }
+
+    .cluster * {
+      @apply dark:!fill-dark-darkest
       dark:!stroke-dark-currentLine;
     }
 

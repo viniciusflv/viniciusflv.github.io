@@ -414,6 +414,64 @@ flowchart LR
 
 </Mermaid>
 
+#### Subgraphs
+
+<Mermaid
+  chart={`
+    flowchart TB
+      subgraph one[Label]
+        A --> B
+      end
+      subgraph two
+        C --> D
+      end
+      one --> two
+  `}
+>
+
+```mermaid
+flowchart TB
+  subgraph one[Label]
+    A --> B
+  end
+  subgraph two
+    C --> D
+  end
+  one --> two
+```
+
+</Mermaid>
+
+#### Interactions
+
+<script>
+  {`var callback = function () {
+      alert('A callback was triggered');
+  };`}
+</script>
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A-->B
+      B-->C
+      C-->D
+      click A href "/en/posts/javascript/mermaid-js#how-to-create-diagrams--and-charts-in-markdown"
+      click B href "https://www.github.com"
+  `}
+>
+
+```mermaid
+flowchart LR
+  A-->B
+  B-->C
+  C-->D
+  click A href "http://localhost:3000"
+  click B href "https://www.github.com"
+```
+
+</Mermaid>
+
 ### Sequence
 
 ### Class
