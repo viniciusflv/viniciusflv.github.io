@@ -2,8 +2,7 @@
 const chart = Astro.props.chart;
 ---
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 
 <script>
   const nodes = document.querySelectorAll('[data-mermaid]');
@@ -34,23 +33,37 @@ const chart = Astro.props.chart;
       @apply dark:!bg-dark-background;
     }
 
-    .marker {
+    .marker,
+    marker * {
       @apply dark:!fill-dark-green;
 
       &.cross {
-        @apply !stroke-dark-green;
+        @apply dark:!stroke-dark-green;
+      }
+    }
+
+    #crosshead * {
+      @apply dark:!stroke-dark-green;
+    }
+
+    line {
+      @apply dark:!stroke-dark-green;
+
+      &[id^='actor'] {
+        @apply dark:!stroke-dark-cyan;
       }
     }
 
     .nodes a {
       &:hover {
         .node * {
-          @apply dark:!stroke-dark-cyan;
+          @apply dark:!stroke-dark-cyan !stroke-dark-red;
         }
       }
     }
 
-    .node * {
+    .node *,
+    .actor {
       @apply dark:!fill-dark-background
       dark:!stroke-dark-currentLine;
     }
@@ -58,6 +71,11 @@ const chart = Astro.props.chart;
     .cluster * {
       @apply dark:!fill-dark-darkest
       dark:!stroke-dark-currentLine;
+    }
+
+    .actor *,
+    .messageText {
+      @apply dark:!fill-dark-cyan;
     }
 
     * {

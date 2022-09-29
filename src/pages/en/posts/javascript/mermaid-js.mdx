@@ -474,6 +474,100 @@ flowchart LR
 
 ### Sequence
 
+#### Syntax
+
+##### Participants
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      participant Alice
+      participant Bob
+      Alice->>Bob: Hi Bob
+      Bob->>Alice: Hi Alice
+  `}
+>
+
+```mermaid
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>Bob: Hi Bob
+  Bob->>Alice: Hi Alice
+```
+
+</Mermaid>
+
+##### Actors
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      actor Alice
+      actor Bob
+      Alice->>Bob: Hi Bob
+      Bob->>Alice: Hi Alice
+  `}
+>
+
+```mermaid
+sequenceDiagram
+  actor Alice
+  actor Bob
+  Alice->>Bob: Hi Bob
+  Bob->>Alice: Hi Alice
+```
+
+</Mermaid>
+
+##### Aliases
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      participant A as Alice
+      participant J as John
+      A->>J: Hello John, how are you?
+      J->>A: Great!
+  `}
+>
+
+```mermaid
+sequenceDiagram
+  participant A as Alice
+  participant J as John
+  A->>J: Hello John, how are you?
+  J->>A: Great!
+```
+
+</Mermaid>
+
+##### Arrows
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      A->B: Solid line without arrow
+      A-->B: Dotted line without arrow
+      A->>B: Solid line with arrowhead
+      A-->>B: Dotted line with arrowhead
+      A-xB: Solid line with a cross at the end
+      A--xB: Dotted line with a cross at the end
+      A-)B: Solid line with an open arrow at the end (async)
+      A--)B: Dotted line with a open arrow at the end (async)
+  `}
+>
+
+```mermaid
+sequenceDiagram
+  participant A as Alice
+  participant J as John
+  A->>J: Hello John, how are you?
+  J->>A: Great!
+```
+
+</Mermaid>
+
 ### Class
 
 ### State
