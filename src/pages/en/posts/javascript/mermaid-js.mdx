@@ -542,7 +542,7 @@ sequenceDiagram
 
 </Mermaid>
 
-##### Arrows
+#### Arrows
 
 <Mermaid
   chart={`
@@ -560,10 +560,40 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-  participant A as Alice
-  participant J as John
-  A->>J: Hello John, how are you?
-  J->>A: Great!
+  A->B: Solid line without arrow
+  A-->B: Dotted line without arrow
+  A->>B: Solid line with arrowhead
+  A-->>B: Dotted line with arrowhead
+  A-xB: Solid line with a cross at the end
+  A--xB: Dotted line with a cross at the end
+  A-)B: Solid line with an open arrow at the end (async)
+  A--)B: Dotted line with a open arrow at the end (async)
+```
+
+</Mermaid>
+
+#### Activations
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      A->>B: activate B
+      activate B
+      B->>+A: + A
+      B->>-A: - B
+      A->>B: deactivate A
+      deactivate A
+  `}
+>
+
+```mermaid
+sequenceDiagram
+  A->>B: B
+  activate B
+  B->>+A: B
+  B->>-A: B
+  A->>B: B
+  deactivate A
 ```
 
 </Mermaid>
