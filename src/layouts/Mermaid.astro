@@ -54,11 +54,16 @@ const chart = Astro.props.chart;
       }
     }
 
-    .nodes a {
-      &:hover {
-        .node * {
-          @apply dark:!stroke-dark-cyan !stroke-dark-red;
+    .nodes {
+      a {
+        &:hover {
+          .node * {
+            @apply dark:!stroke-dark-cyan !stroke-dark-red;
+          }
         }
+      }
+      circle {
+        @apply dark:!stroke-dark-orange;
       }
     }
 
@@ -68,7 +73,8 @@ const chart = Astro.props.chart;
       dark:!stroke-dark-currentLine;
     }
 
-    .cluster * {
+    .cluster *,
+    .statediagram-cluster * {
       @apply dark:!fill-dark-darkest
       dark:!stroke-dark-currentLine;
     }

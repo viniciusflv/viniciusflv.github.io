@@ -600,7 +600,292 @@ sequenceDiagram
 
 ### Class
 
+#### Syntax
+
+<Mermaid
+  chart={`
+    classDiagram
+      class BankAccount
+      BankAccount : string owner
+      BankAccount : number balance
+      BankAccount : deposit(amount)
+      BankAccount : withdrawal(amount)
+  `}
+>
+
+```mermaid
+classDiagram
+  class BankAccount
+  BankAccount : string owner
+  BankAccount : number balance
+  BankAccount : deposit(amount)
+  BankAccount : withdrawal(amount)
+```
+
+</Mermaid>
+
+#### Visibility
+
+<Mermaid
+  chart={`
+    classDiagram
+      class Visibility
+      Visibility: +string public
+      Visibility: -string private
+      Visibility: #string protected
+      Visibility: ~string internal
+      Visibility: string static$
+      Visibility: getStatic()$
+      Visibility: getAbstract()*
+  `}
+>
+
+```mermaid
+classDiagram
+  class Visibility
+  Visibility: +string public
+  Visibility: -string private
+  Visibility: #string protected
+  Visibility: ~string internal
+  Visibility: string static$
+  Visibility: getStatic()$
+  Visibility: getAbstract()*
+```
+
+</Mermaid>
+
+#### Relationships
+
+<Mermaid
+  chart={`
+    classDiagram
+      classA --|> classB : Inheritance
+      classC --* classD : Composition
+      classE --o classF : Aggregation
+      classG --> classH : Association
+      classI -- classJ : Link(Solid)
+      classK ..> classL : Dependency
+      classM ..|> classN : Realization
+      classO .. classP : Link(Dashed)
+  `}
+>
+
+```mermaid
+classDiagram
+  classA --|> classB : Inheritance
+  classC --* classD : Composition
+  classE --o classF : Aggregation
+  classG --> classH : Association
+  classI -- classJ : Link(Solid)
+  classK ..> classL : Dependency
+  classM ..|> classN : Realization
+  classO .. classP : Link(Dashed)
+```
+
+</Mermaid>
+
+#### Cardinality / Multiplicity on relations
+
+<Mermaid
+  chart={`
+    classDiagram
+      Customer "1" --> "*" Ticket
+      Student "1" --> "1..*" Course
+      Galaxy --> "many" Star : Contains
+  `}
+>
+
+```mermaid
+classDiagram
+  Customer "1" --> "*" Ticket
+  Student "1" --> "1..*" Course
+  Galaxy --> "many" Star : Contains
+```
+
+</Mermaid>
+
 ### State
+
+#### Syntax
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+    direction LR
+      [*] --> stateNode: transition
+      stateNode --> [*]
+  `}
+>
+
+```mermaid
+stateDiagram-v2
+direction LR
+  [*] --> stateNode: transition
+  stateNode --> [*]
+```
+
+</Mermaid>
+
+#### Composite
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+    direction LR
+      [*] --> mainState: transition
+      state mainState {
+        direction LR
+        [*] --> subState
+        state subState {
+          direction LR
+          [*] --> subSubState
+          subSubState --> [*]
+        }
+        subState --> [*]
+      }
+      mainState --> [*]
+  `}
+>
+
+```mermaid
+stateDiagram-v2
+direction LR
+  [*] --> mainState: transition
+  state mainState {
+    direction LR
+    [*] --> subState
+    state subState {
+      direction LR
+      [*] --> subSubState
+      subSubState --> [*]
+    }
+    subState --> [*]
+  }
+  mainState --> [*]
+```
+
+</Mermaid>
+
+#### Choice
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+      state choice <<choice>>
+      [*] --> condition
+      condition --> choice
+      choice --> false
+      choice --> true
+  `}
+>
+
+```mermaid
+stateDiagram-v2
+  state choice <<choice>>
+  [*] --> condition
+  condition --> choice
+  choice --> false
+  choice --> true
+```
+
+</Mermaid>
+
+#### Forks
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+      state fork <<fork>>
+      state join <<join>>
+      [*] --> fork
+      fork --> A
+      fork --> B
+      A --> join
+      B --> join
+      join --> [*]
+  `}
+>
+
+```mermaid
+stateDiagram-v2
+  state fork <<fork>>
+  state join <<join>>
+  [*] --> fork
+  fork --> A
+  fork --> B
+  A --> join
+  B --> join
+  join --> [*]
+```
+
+</Mermaid>
+
+#### Notes
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+      State1: The state with a note
+      note right of State1
+          Important information! You can write
+          notes.
+      end note
+      State1 --> State2
+      note left of State2 : This is the note to the left.
+  `}
+>
+
+```mermaid
+stateDiagram-v2
+  State1: The state with a note
+  note right of State1
+    Important information! You can write
+    notes.
+  end note
+  State1 --> State2
+  note left of State2 : This is the note to the left.
+```
+
+</Mermaid>
+
+#### Concurrency
+
+<Mermaid
+  chart={`
+    stateDiagram-v2
+    direction LR
+    [*] --> concurrency
+    state concurrency {
+      direction TB
+      [*] --> stateNode1: transition
+      stateNode1 --> [*]
+      --
+      direction TB
+      [*] --> stateNode2: transition
+      stateNode2 --> [*]
+    }
+    concurrency --> [*]
+`}
+
+>
+
+```mermaid
+stateDiagram-v2
+direction LR
+[*] --> concurrency
+state concurrency {
+  direction TB
+  [*] --> stateNode1: transition
+  stateNode1 --> [*]
+  --
+  direction TB
+  [*] --> stateNode2: transition
+  stateNode2 --> [*]
+}
+concurrency --> [*]
+```
+
+</Mermaid>
 
 ### Entity Relationship
 
