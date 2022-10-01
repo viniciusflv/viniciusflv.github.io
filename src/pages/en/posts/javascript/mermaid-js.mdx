@@ -1038,11 +1038,115 @@ journey
   `}
 />
 
-### Gantt
+### -Gantt
 
 ### Pie chart
 
+<Mermaid
+  chart={`
+    pie showData
+      title Key elements in Product X
+      "Calcium" : 42.96
+      "Potassium" : 50.05
+      "Magnesium" : 10.01
+      "Iron" :  5
+  `}
+>
+
+```mermaid
+pie showData
+  title Key elements in Product X
+  "Calcium" : 42.96
+  "Potassium" : 50.05
+  "Magnesium" : 10.01
+  "Iron" :  5
+```
+
+</Mermaid>
+
 ### Requirement
+
+#### Syntax
+
+<Mermaid
+  chart={`
+    requirementDiagram
+      requirement test_req {
+        id: 1
+        text: the test text.
+        risk: high
+        verifymethod: test
+      }
+      element test_entity {
+        type: simulation
+      }
+      test_entity - satisfies -> test_req
+  `}
+>
+
+```mermaid
+requirementDiagram
+  requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+  }
+  element test_entity {
+    type: simulation
+  }
+  test_entity - satisfies -> test_req
+```
+
+</Mermaid>
+
+#### Requirement
+
+<Mermaid
+  chart={`
+    requirementDiagram
+      requirement test_req {
+        id: 1
+        text: the test text.
+        risk: high
+        verifymethod: test
+      }
+  `}
+>
+
+```mermaid
+requirementDiagram
+  requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+  }
+```
+
+</Mermaid>
+
+Types:
+
+- requirement
+- functionalRequirement
+- interfaceRequirement
+- performanceRequirement
+- physicalRequirement
+- designConstraint
+
+Risk:
+
+- Low
+- Medium
+- High
+
+Verification Method:
+
+- Analysis
+- Inspection
+- Test
+- Demonstration
 
 ### Gitgraph
 

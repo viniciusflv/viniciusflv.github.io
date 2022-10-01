@@ -89,7 +89,9 @@ const chart = Astro.props.chart;
     .relationshipLabelBox,
     .attributeBoxEven,
     .attributeBoxOdd,
-    .task {
+    .task,
+    .reqBox,
+    .reqLabelBox {
       @apply dark:!fill-dark-background
       dark:!stroke-dark-currentLine;
     }
@@ -114,7 +116,9 @@ const chart = Astro.props.chart;
 
     text,
     .legend {
-      @apply dark:!fill-dark-cyan;
+      &:not(.slice) {
+        @apply dark:!fill-dark-cyan;
+      }
     }
 
     * {
