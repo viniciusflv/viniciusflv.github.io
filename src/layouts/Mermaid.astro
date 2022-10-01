@@ -35,18 +35,23 @@ const chart = Astro.props.chart;
 
     .marker,
     marker * {
-      @apply dark:!fill-dark-green;
-
-      &.cross {
-        @apply dark:!stroke-dark-green;
+      :not(#ZERO_OR_MORE_START, #ZERO_OR_MORE_END) {
+        @apply dark:!fill-dark-green;
       }
+
+      @apply dark:!stroke-dark-green;
+    }
+
+    circle {
+      @apply dark:!fill-dark-darkest;
     }
 
     #crosshead * {
       @apply dark:!stroke-dark-green;
     }
 
-    line {
+    line,
+    .relationshipLine {
       @apply dark:!stroke-dark-green;
 
       &[id^='actor'] {
@@ -62,13 +67,19 @@ const chart = Astro.props.chart;
           }
         }
       }
-      circle {
+      .state-start,
+      .state-end,
+      .fork-join {
         @apply dark:!stroke-dark-orange;
       }
     }
 
     .node *,
-    .actor {
+    .actor,
+    .entityBox,
+    .relationshipLabelBox,
+    .attributeBoxEven,
+    .attributeBoxOdd {
       @apply dark:!fill-dark-background
       dark:!stroke-dark-currentLine;
     }
@@ -80,7 +91,9 @@ const chart = Astro.props.chart;
     }
 
     .actor *,
-    .messageText {
+    .messageText,
+    .entityLabel,
+    .relationshipLabel {
       @apply dark:!fill-dark-cyan;
     }
 

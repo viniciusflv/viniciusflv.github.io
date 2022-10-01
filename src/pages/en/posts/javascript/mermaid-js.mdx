@@ -866,7 +866,6 @@ stateDiagram-v2
     }
     concurrency --> [*]
 `}
-
 >
 
 ```mermaid
@@ -888,6 +887,128 @@ concurrency --> [*]
 </Mermaid>
 
 ### Entity Relationship
+
+#### Syntax
+
+<Mermaid
+  chart={`
+    erDiagram
+      CAR ||--o{ NAMED-DRIVER : allows
+      PERSON ||--o{ NAMED-DRIVER : is
+  `}
+>
+
+```mermaid
+erDiagram
+  CAR ||--o{ NAMED-DRIVER : allows
+  PERSON ||--o{ NAMED-DRIVER : is
+```
+
+</Mermaid>
+
+#### Relationships
+
+##### One
+
+<Mermaid
+  chart={`
+    erDiagram
+      one ||--|| to-one : relationship
+  `}
+>
+
+```mermaid
+erDiagram
+  one ||--|| to-one : relationship
+```
+
+</Mermaid>
+
+##### Zero or one
+
+<Mermaid
+  chart={`
+    erDiagram
+      zero-one |o--o| to-zero-one : relationship
+  `}
+>
+
+```mermaid
+erDiagram
+  zero-one |o--o| to-zero-one : relationship
+```
+
+</Mermaid>
+
+##### Zero or more
+
+<Mermaid
+  chart={`
+    erDiagram
+      zero-more }o--o{ to-zero-more : relationship
+  `}
+>
+
+```mermaid
+erDiagram
+  zero-more }o--o{ to-zero-more : relationship
+```
+
+</Mermaid>
+
+##### One or more
+
+<Mermaid
+  chart={`
+    erDiagram
+      one-more }|--|{ to-one-more : relationship
+  `}
+>
+
+```mermaid
+erDiagram
+  one-more }|--|{ to-one-more : relationship
+```
+
+</Mermaid>
+
+#### Attributes
+
+<Mermaid
+  chart={`
+    erDiagram
+      CAR ||--o{ NAMED-DRIVER : allows
+      CAR {
+        string registrationNumber
+        string make
+        string model
+      }
+      PERSON ||--o{ NAMED-DRIVER : is
+      PERSON {
+        string firstName
+        string lastName
+        int age
+      }
+  `}
+>
+
+```mermaid
+erDiagram
+  CAR ||--o{ NAMED-DRIVER : allows
+  CAR {
+    string registrationNumber
+    string make
+    string model
+  }
+  PERSON ||--o{ NAMED-DRIVER : is
+  PERSON {
+    string firstName
+    string lastName
+    int age
+  }
+```
+
+</Mermaid>
 
 ### User Journey
 
