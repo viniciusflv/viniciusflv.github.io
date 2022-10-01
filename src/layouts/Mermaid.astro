@@ -42,8 +42,17 @@ const chart = Astro.props.chart;
       @apply dark:!stroke-dark-green;
     }
 
-    circle {
+    circle:not([class^='actor']) {
       @apply dark:!fill-dark-darkest;
+      @apply dark:!stroke-dark-cyan;
+
+      &.face {
+        @apply dark:!stroke-dark-cyan;
+      }
+    }
+
+    .mouth {
+      @apply dark:!stroke-dark-cyan;
     }
 
     #crosshead * {
@@ -79,13 +88,15 @@ const chart = Astro.props.chart;
     .entityBox,
     .relationshipLabelBox,
     .attributeBoxEven,
-    .attributeBoxOdd {
+    .attributeBoxOdd,
+    .task {
       @apply dark:!fill-dark-background
       dark:!stroke-dark-currentLine;
     }
 
     .cluster *,
-    .statediagram-cluster * {
+    .statediagram-cluster *,
+    .journey-section {
       @apply dark:!fill-dark-darkest
       dark:!stroke-dark-currentLine;
     }
@@ -99,6 +110,11 @@ const chart = Astro.props.chart;
 
     [class^='activation'] {
       @apply dark:!fill-dark-orange;
+    }
+
+    text,
+    .legend {
+      @apply dark:!fill-dark-cyan;
     }
 
     * {
