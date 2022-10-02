@@ -1150,4 +1150,70 @@ Verification Method:
 
 ### Gitgraph
 
+```mermaid
+%%{ init: { 'logLevel': 'debug', 'theme': 'dark' } }%%
+gitGraph
+  commit id: "initial commit"
+
+  branch hom
+  branch feat/button
+
+  checkout feat/button
+    commit id: "create button"
+    commit id: "finish button"
+
+  checkout hom
+    merge feat/button
+
+  checkout feat/button
+    commit id: "fix hover"
+
+  checkout hom
+    merge feat/button
+
+  checkout feat/button
+    commit id: "fix accessibility"
+
+  checkout hom
+    merge feat/button
+
+  checkout main
+    merge hom
+```
+
+<Mermaid
+  chart={`
+    %%{ init: { 'logLevel': 'debug', 'theme': 'dark' } }%%
+    gitGraph
+      commit id: "initial commit"
+
+      branch hom
+      branch feat/button
+
+      checkout feat/button
+        commit id: "create button"
+        commit id: "finish button"
+
+      checkout hom
+        merge feat/button
+
+      checkout feat/button
+        commit id: "fix hover"
+
+      checkout hom
+        merge feat/button
+
+      checkout feat/button
+        commit id: "fix accessibility"
+
+      checkout hom
+        merge feat/button
+
+      checkout main
+        merge hom
+
+`}
+
+> </Mermaid>
+
 ### C4

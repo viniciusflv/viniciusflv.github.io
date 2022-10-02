@@ -42,7 +42,7 @@ const chart = Astro.props.chart;
       @apply dark:!stroke-dark-green;
     }
 
-    circle:not([class^='actor']) {
+    circle:not([class^='actor']):not(.commit) {
       @apply dark:!fill-dark-darkest;
       @apply dark:!stroke-dark-cyan;
 
@@ -116,8 +116,12 @@ const chart = Astro.props.chart;
 
     text,
     .legend {
-      &:not(.slice) {
+      &:not(.slice):not(.commit-label) {
         @apply dark:!fill-dark-cyan;
+      }
+
+      .row {
+        @apply fill-white;
       }
     }
 

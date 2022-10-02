@@ -29,15 +29,17 @@ const created = dateFormatter.format(stats.birthtime);
       headings.length ? (
         <aside class="aside">
           <nav class="nav">
-            <List>
-              {headings.map(({ depth, slug, text }) => (
-                <ListItem key={slug} depth={depth}>
-                  <a title={text} class="action" href={`#${slug}`}>
-                    {text}
-                  </a>
-                </ListItem>
-              ))}
-            </List>
+            {
+              <List>
+                {headings.map(({ depth, slug, text }) => (
+                  <ListItem key={slug} depth={depth}>
+                    <a title={text} class="action" href={`#${slug}`}>
+                      {text}
+                    </a>
+                  </ListItem>
+                ))}
+              </List>
+            }
           </nav>
         </aside>
       ) : null
@@ -70,10 +72,12 @@ const created = dateFormatter.format(stats.birthtime);
     .nav {
       @apply sticky
       top-8
-      pl-4
+      px-4
       border-l-2
       border-gray-400
-      dark:border-dark-currentLine;
+      dark:border-dark-currentLine
+      overflow-y-auto
+      max-h-[80vh];
 
       .action {
         @apply outline-none cursor-pointer
