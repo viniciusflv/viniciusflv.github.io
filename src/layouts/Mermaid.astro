@@ -91,9 +91,26 @@ const chart = Astro.props.chart;
     .attributeBoxOdd,
     .task,
     .reqBox,
-    .reqLabelBox {
+    .reqLabelBox,
+    .commit-label-bkg {
       @apply dark:!fill-dark-background
-      dark:!stroke-dark-currentLine;
+      dark:!stroke-dark-currentLine !opacity-100;
+
+      &[class^='task crit'] {
+        @apply !fill-dark-red;
+      }
+
+      &[class^='task active'] {
+        @apply !fill-dark-cyan;
+      }
+
+      &[class^='task activeCrit'] {
+        @apply !fill-dark-orange;
+      }
+    }
+
+    .today {
+      @apply !stroke-dark-orange;
     }
 
     .cluster *,
@@ -114,7 +131,7 @@ const chart = Astro.props.chart;
       @apply dark:!fill-dark-orange;
     }
 
-    text,
+    text:not(.taskText),
     .legend {
       &:not(.slice):not(.commit-label) {
         @apply dark:!fill-dark-cyan;

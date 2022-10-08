@@ -1038,7 +1038,31 @@ journey
   `}
 />
 
-### -Gantt
+### Gantt
+
+#### Syntax
+
+```mermaid
+gantt
+  default :a, 2022-10-08, 1w
+  critical :crit, b, 2022-10-08, 1d
+  active :active, c, after b a, 1d
+  critical active :crit, active, ca, after c, 1d
+  milestone : milestone, m1, 17:49, 2min
+  milestone : milestone, m2, 18:14, 1d
+```
+
+<Mermaid
+  chart={`
+    gantt
+      default :a, 2022-10-08, 1w
+      critical :crit, b, 2022-10-08, 1d
+      active :active, c, after b a, 1d
+      critical active :crit, active, ca, after c, 1d
+      milestone : milestone, m1, 17:49, 2min
+      milestone : milestone, m2, 18:14, 1d
+  `}
+/>
 
 ### Pie chart
 
@@ -1215,5 +1239,3 @@ gitGraph
 `}
 
 > </Mermaid>
-
-### C4
