@@ -25,6 +25,8 @@ const chart = Astro.props.chart;
 
 <style is:global>
   .mermaid {
+    @apply overflow-y-auto;
+
     .edgePaths * {
       @apply dark:!stroke-dark-green;
     }
