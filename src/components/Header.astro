@@ -1,4 +1,5 @@
 ---
+import Drawer from './Drawer.astro';
 import ToggleLang from './ToggleLang.astro';
 
 import { Svg } from '@svjson/react';
@@ -50,6 +51,7 @@ const { lang, knownLanguages } = Astro.props;
         />
       </a>
     </div>
+    <Drawer lang={lang} knownLanguages={knownLanguages} />
   </nav>
 </header>
 
@@ -64,13 +66,14 @@ const { lang, knownLanguages } = Astro.props;
 
     .nav {
       @apply flex
+      justify-between
       gap-8
       container
       mx-auto
       p-8;
 
       .internal {
-        @apply flex
+        @apply hidden lg:flex
         justify-center
         items-center
         grow
@@ -78,13 +81,14 @@ const { lang, knownLanguages } = Astro.props;
       }
 
       .external {
-        @apply flex
+        @apply hidden lg:flex
         gap-8;
       }
 
       .action {
         @apply tracking-widest;
-        @apply outline-none cursor-pointer
+        @apply outline-none
+        cursor-pointer
         active:text-inherit
         focus:text-dark-comment
         hover:text-dark-comment

@@ -1,5 +1,8 @@
 ---
+import { getLanguageFromURL } from '../util';
+
 const { title, description, summary, url } = Astro.props;
+const lang = getLanguageFromURL(Astro.url.pathname);
 ---
 
 <section class="post-preview">
@@ -11,7 +14,9 @@ const { title, description, summary, url } = Astro.props;
     <p class="summary">{summary}</p>
   </main>
   <footer>
-    <a href={url} class="link">Read More</a>
+    <a href={url} class="link"
+      >{lang === 'pt-BR' ? 'Leia Mais' : 'Read More'}
+    </a>
   </footer>
 </section>
 
