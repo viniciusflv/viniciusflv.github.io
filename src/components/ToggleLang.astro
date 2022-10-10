@@ -3,21 +3,22 @@ const { lang, knownLanguages } = Astro.props;
 ---
 
 <script>
-  const toggleLangBtn = document.getElementById('toggle-lang');
-  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
-  const knownLanguages =
-    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
+  const toggleLangBtns = document.querySelectorAll('.toggle-lang');
+  Array.from(toggleLangBtns).map((toggleLangBtn) => {
+    const lang = toggleLangBtn?.getAttribute('data-lang') || '';
+    const knownLanguages =
+      toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
 
-  toggleLangBtn?.addEventListener('click', () => {
-    window.location.pathname = window.location.pathname.replace(
-      lang,
-      knownLanguages.find((l) => l !== lang) || lang,
-    );
+    toggleLangBtn?.addEventListener('click', () => {
+      window.location.pathname = window.location.pathname.replace(
+        lang,
+        knownLanguages.find((l) => l !== lang) || lang,
+      );
+    });
   });
 </script>
 
 <button
-  id="toggle-lang"
   class="toggle-lang"
   data-lang={lang}
   data-languages={knownLanguages}

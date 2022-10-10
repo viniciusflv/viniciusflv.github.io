@@ -3,7 +3,7 @@ import ToggleLang from './ToggleLang.astro';
 
 import { Svg } from '@svjson/react';
 
-import { github, glasses, linkedin, twitterLogo } from '../assets/svg';
+import { github, linkedin, twitterLogo } from '../assets/svg';
 
 const { lang, knownLanguages } = Astro.props;
 ---
@@ -33,6 +33,18 @@ const { lang, knownLanguages } = Astro.props;
 </button>
 <div class="drawer">
   <nav class="drawer-menu">
+    <div class="internal">
+      <a class="action" href={`/${lang}`}>
+        {lang === 'en' ? 'Home' : 'Início'}
+      </a>
+      <a class="action" href={`/${lang}/posts`}>
+        {lang === 'en' ? 'Posts' : 'Postagens'}
+      </a>
+      <a class="action" href={`/${lang}/about`}>
+        {lang === 'en' ? 'About' : 'Sobre'}
+      </a>
+    </div>
+    <hr />
     <div class="external">
       <ToggleLang lang={lang} knownLanguages={knownLanguages} />
       <a class="action" target="_blank" href="https://github.com/viniciusflv/">
@@ -57,17 +69,6 @@ const { lang, knownLanguages } = Astro.props;
           width="30px"
           height="30px"
         />
-      </a>
-    </div>
-    <div class="internal">
-      <a class="action" href={`/${lang}`}>
-        {lang === 'en' ? 'Home' : 'Início'}
-      </a>
-      <a class="action" href={`/${lang}/posts`}>
-        {lang === 'en' ? 'Posts' : 'Postagens'}
-      </a>
-      <a class="action" href={`/${lang}/about`}>
-        {lang === 'en' ? 'About' : 'Sobre'}
       </a>
     </div>
   </nav>
@@ -101,7 +102,7 @@ const { lang, knownLanguages } = Astro.props;
       }
 
       .internal {
-        @apply flex flex-col gap-4;
+        @apply flex flex-col flex-grow gap-4 text-xl text-right;
       }
     }
   }

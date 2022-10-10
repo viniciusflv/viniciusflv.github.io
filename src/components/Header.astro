@@ -11,7 +11,7 @@ const { lang, knownLanguages } = Astro.props;
 
 <header class="header">
   <nav class="nav">
-    <a class="action" href="/">
+    <a class="action" href={`/${lang}`}>
       <Svg alt="logo" src={glasses} width="75px" height="30px" />
     </a>
     <div class="internal">

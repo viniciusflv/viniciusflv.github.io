@@ -14,7 +14,7 @@ const chart = Astro.props.chart;
 
 {
   Astro.slots.default ? (
-    <div class="grid xl:grid-cols-2 gap-8 items-start">
+    <div class="mermaid-container">
       <slot />
       <div data-mermaid={chart} />
     </div>
@@ -24,8 +24,15 @@ const chart = Astro.props.chart;
 }
 
 <style is:global>
+  .mermaid-container {
+    @apply flex flex-wrap lg:flex-nowrap gap-4 w-full;
+    .shiki {
+      @apply w-full;
+    }
+  }
+
   .mermaid {
-    @apply overflow-y-auto;
+    @apply flex w-full overflow-y-auto;
 
     .edgePaths * {
       @apply dark:!stroke-dark-green;

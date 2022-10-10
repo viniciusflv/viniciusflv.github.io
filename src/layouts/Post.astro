@@ -50,6 +50,7 @@ const created = dateFormatter.format(stats.birthtime);
 <style>
   .main {
     @apply flex
+    w-full
     gap-8
     container
     mx-auto
@@ -61,12 +62,13 @@ const created = dateFormatter.format(stats.birthtime);
     @apply flex
     flex-col
     grow
-    gap-8;
+    gap-8
+    w-full;
   }
 
   .aside {
     @apply relative
-    hidden md:block
+    hidden lg:block
     max-w-64;
 
     .nav {
