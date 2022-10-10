@@ -1,14 +1,14 @@
 ---
-import Card from '../components/Card.astro';
-import Hero from '../components/Hero.astro';
-import Layout from './Layout.astro';
+import { hero } from '@/assets/svg';
+import Card from '@/components/Card.astro';
+import Hero from '@/components/Hero.astro';
+import { getLanguageFromURL } from '@/util';
 
-import { hero } from '../assets/svg';
-import { getLanguageFromURL } from '../util';
+import Layout from './Layout.astro';
 
 const { category } = Astro.props.frontmatter;
 const lang = getLanguageFromURL(Astro.url.pathname);
-const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
+const posts = await Astro.glob('@/pages/**/posts/**/*.mdx');
 const articles = posts
   .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
   .filter(({ frontmatter }) => frontmatter.categories)

@@ -1,10 +1,10 @@
 ---
-import Drawer from './Drawer.astro';
-import ToggleLang from './ToggleLang.astro';
-
 import { Svg } from '@svjson/react';
 
-import { github, glasses, linkedin, twitterLogo } from '../assets/svg';
+import { github, glasses, linkedin, twitterLogo } from '@/assets/svg';
+
+import Drawer from './Drawer.astro';
+import ToggleLang from './ToggleLang.astro';
 
 const { lang, knownLanguages } = Astro.props;
 ---

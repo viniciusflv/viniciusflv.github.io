@@ -7,6 +7,11 @@ import compress from 'astro-compress';
 import fonts from 'astro-fonts-next';
 import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
+import { dirname, resolve } from 'path';
+
+const __dirname = dirname(new URL('', import.meta.url).pathname);
+
+console.log(__dirname);
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +19,13 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       theme: 'dracula',
+    },
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, './src'),
+      },
     },
   },
   integrations: [

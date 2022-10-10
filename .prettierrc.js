@@ -12,11 +12,5 @@ module.exports = {
   importOrderSortSpecifiers: true,
   importOrderGroupNamespaceSpecifiers: true,
   importOrderCaseInsensitive: true,
-  importOrder: [
-    'astro',
-    '^react',
-    '<THIRD_PARTY_MODULES>',
-    '^[.]\\/',
-    '^..\\/',
-  ],
+  importOrder: ['^react', '<THIRD_PARTY_MODULES>', '^@\\/', '^..\\/', '^.\\/'],
 };

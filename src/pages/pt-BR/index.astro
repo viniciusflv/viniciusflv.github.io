@@ -1,13 +1,12 @@
 ---
-import Button from '../../components/Button.astro';
-import Hero from '../../components/Hero.astro';
-import PostPreview from '../../components/PostPreview.astro';
-import Tag from '../../components/Tag.astro';
-import Layout from '../../layouts/Layout.astro';
-
 import fs from 'fs';
 
-import { hero } from '../../assets/svg';
+import { hero } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import Hero from '@/components/Hero.astro';
+import PostPreview from '@/components/PostPreview.astro';
+import Tag from '@/components/Tag.astro';
+import Layout from '@/layouts/Layout.astro';
 
 const files = await Astro.glob('./posts/**/*.mdx');
 

@@ -1,5 +1,5 @@
 ---
-import { getLanguageFromURL } from '../util';
+import { getLanguageFromURL } from '@/util';
 
 const { title, description, summary, url } = Astro.props;
 const lang = getLanguageFromURL(Astro.url.pathname);

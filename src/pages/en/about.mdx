@@ -1,17 +1,16 @@
 ---
-layout: '../../layouts/Layout.astro'
+layout: '@/layouts/Layout.astro'
 title: About
 keywords: vinícius,victorino,programmer,react
 description: I make the life of developers less complicated, by making well thought decisions decisions and introducing patterns.
 ---
 
-import Hero from '../../components/Hero.astro';
-import Mermaid from '../../layouts/Mermaid.astro';
+import { hero } from '@/assets/svg';
+import { meRicknmorty } from '@/assets/svg';
+import Hero from '@/components/Hero.astro';
+import Mermaid from '@/layouts/Mermaid.astro';
 
 import { Svg } from '@svjson/react';
-
-import { hero } from '../../assets/svg';
-import { meRicknmorty } from '../../assets/svg';
 
 <Hero clip={hero}>
 

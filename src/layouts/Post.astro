@@ -1,10 +1,10 @@
 ---
-import Layout from './Layout.astro';
-
 import fs from 'fs';
 
-import { List, ListItem } from '../components/List';
-import { getLanguageFromURL } from '../util';
+import { List, ListItem } from '@/components/List';
+import { getLanguageFromURL } from '@/util';
+
+import Layout from './Layout.astro';
 
 const headings =
   (Astro?.props?.headings as { depth: number; slug: string; text: string }[]) ??
