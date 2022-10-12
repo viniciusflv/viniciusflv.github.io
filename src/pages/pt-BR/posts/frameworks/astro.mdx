@@ -6,6 +6,7 @@ description: Astro é um framework moderno, simples e poderoso, que provém uma 
 summary: Juntando tudo de mais moderno e popularizando o conceito de ilhas o Astro tem tudo para reavivar o espaço dos sites estáticos.
 ---
 
+import IslandsScheme from '@/components/IslandsScheme.astro';
 import Mermaid from '@/components/Mermaid.astro';
 
 # Astro o framework web para sites estáticos
@@ -20,10 +21,8 @@ import Mermaid from '@/components/Mermaid.astro';
 
 > Ilhas Astro (ou Ilhas de Componente) é um padrão de arquitetura web em que Astro é pioneiro. A ideia de “arquitetura em ilhas” foi criada em 2019 pela arquiteta frontend da Etsy, [Katie Sylor-Miller](https://twitter.com/ksylor 'Twitter da Katie Sylor-Miller') e expandido [nesta postagem](https://jasonformat.com/islands-architecture/ 'Postagem sobre Ilhas de componentes') pelo criador do Preact, [Jason Miller](https://twitter.com/_developit 'Twitter do Jason Miller').
 
-### Zero JS, por padrão
+As ilhas vem como uma solução para a execução da **hidratação parcial**. E ela corre basicamente definindo diretivas nos componentes para declará-los como interativos.
 
-### Pronto para a Edge
+Abaixo um exemplo modesto em que eu estou usando um componente **React** para trocar a cor do botão, todos são o mesmo componente, mas apenas um deles está sendo **hidratado**:
 
-### Customizável
-
-### UI agnóstica
+<IslandsScheme />

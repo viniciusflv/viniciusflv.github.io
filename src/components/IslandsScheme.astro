@@ -1,0 +1,49 @@
+---
+import { DemoButton } from './DemoButton';
+---
+
+<section class="islands-scheme">
+  <header><DemoButton /></header>
+  <aside><DemoButton /></aside>
+  <main><DemoButton client:only="react" /></main>
+  <footer><DemoButton /></footer>
+</section>
+
+<style>
+  .islands-scheme {
+    @apply grid
+    gap-4
+    grid-areas-['HEADER''ASIDE''MAIN''FOOTER']
+    md:grid-areas-['HEADER,HEADER''ASIDE,MAIN''FOOTER,FOOTER'];
+
+    * {
+      @apply outline
+      outline-gray-200
+      dark:outline-dark-currentLine
+      outline-[.1px]
+      min-h-32
+      flex
+      justify-center
+      items-center;
+    }
+
+    header {
+      @apply grid-area-[HEADER];
+    }
+
+    aside {
+      @apply grid-area-[ASIDE];
+    }
+
+    main {
+      @apply grid-area-[MAIN]
+      relative
+      outline-blue-500
+      dark:outline-dark-green;
+    }
+
+    footer {
+      @apply grid-area-[FOOTER];
+    }
+  }
+</style>
