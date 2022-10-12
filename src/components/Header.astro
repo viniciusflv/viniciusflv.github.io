@@ -26,7 +26,7 @@ const { lang, knownLanguages } = Astro.props;
       </a>
     </div>
     <div class="external">
-      <ToggleLang lang={lang} knownLanguages={knownLanguages} />
+      <ToggleLang {...Astro.props} />
       <a class="action" target="_blank" href="https://github.com/viniciusflv/">
         <Svg alt="github" src={github} width="30px" height="30px" />
       </a>
@@ -51,7 +51,7 @@ const { lang, knownLanguages } = Astro.props;
         />
       </a>
     </div>
-    <Drawer lang={lang} knownLanguages={knownLanguages} />
+    <Drawer {...Astro.props} />
   </nav>
 </header>
 

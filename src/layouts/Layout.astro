@@ -1,9 +1,9 @@
 ---
 import Header from '@/components/Header.astro';
 
-import SEO from './SEO.astro';
-
 import { getLanguageFromURL } from '../util';
+
+import SEO from './SEO.astro';
 
 // import ogScraper from 'open-graph-scraper';
 // ogScraper({
@@ -43,7 +43,7 @@ const formatAlternateHref = (hreflang: string) =>
 
   <body class="body">
     <section class:list={['section']}>
-      <Header lang={lang} knownLanguages={knownLanguages} />
+      <Header lang={lang} knownLanguages={knownLanguages} {...Astro.props} />
       <slot />
     </section>
     <style is:global>
@@ -83,7 +83,8 @@ const formatAlternateHref = (hreflang: string) =>
           w-full;
 
           h1 {
-            @apply text-3xl
+            @apply text-2xl
+            md:text-3xl
             lg:text-5xl
             font-bold
             tracking-wider
@@ -99,15 +100,15 @@ const formatAlternateHref = (hreflang: string) =>
           }
 
           h2 {
-            @apply text-2xl opacity-80;
+            @apply text-xl md:text-2xl opacity-80;
           }
 
           h3 {
-            @apply text-2xl font-bold;
+            @apply text-xl md:text-2xl font-bold;
           }
 
           h4 {
-            @apply text-xl font-bold;
+            @apply text-lg font-bold;
           }
 
           h5 {
@@ -119,7 +120,7 @@ const formatAlternateHref = (hreflang: string) =>
           }
 
           p {
-            @apply text-gray-600 dark:text-gray-300;
+            @apply text-sm text-gray-600 dark:text-gray-300;
           }
 
           article {

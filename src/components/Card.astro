@@ -4,8 +4,8 @@ const { title, description, url } = Astro.props;
 
 <a class="card outline-none" title={title} href={url}>
   <section>
-    <header>
-      <h3>{title}</h3>
+    <header class="header">
+      <h4>{title}</h4>
       <p>{description}</p>
     </header>
   </section>
@@ -30,6 +30,11 @@ const { title, description, url } = Astro.props;
     focus:text-dark-comment
     hover:border-dark-comment
     focus:border-dark-comment;
+
+    .header {
+      @apply flex flex-col gap-4;
+    }
+
     p {
       @apply text-gray-400;
     }

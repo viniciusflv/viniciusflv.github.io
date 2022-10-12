@@ -34,7 +34,7 @@ const articles = posts
           Object.keys(articles).map((key) => {
             return (
               <div class="flex flex-col gap-8">
-                <h2>{key}</h2>
+                <h3>{key}</h3>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                   {articles[key].map(({ url, frontmatter }) => (
                     <Card lang={lang} url={url} {...frontmatter} />
