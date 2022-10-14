@@ -103,3 +103,63 @@ Os layouts podem ser **reaproveitados** tanto dentro de outros componentes quant
 layout: './Layout.astro'
 ---
 ```
+
+#### Estilização
+
+Assim como **Svelte** e **Vue** o Astro permite a estilização, seja em escopo ou global, direto dentro dos componentes.
+
+```astro
+<button class="button">Button</button>
+<style>
+  .button {
+    cursor: pointer;
+  }
+</style>
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+</style>
+```
+
+#### Props
+
+Não seria um componente se não houvesse como **receber** e **exigir** props. Os componentes do Astro usam o atributo **props** da variável **Astro** para acessar os valores das props.
+
+```astro
+---
+export interface Props {
+  name: string;
+  msg?: string;
+}
+const { msg = 'Olá', name } = Astro.props;
+---
+
+<h2>{msg}, {name}!</h2>
+```
+
+### UI agnóstica
+
+Mas você do pode dizer **"eu não quero refazer todos os meus componentes"** e é ai que o Astro brilha. Ele te permite adicionar [integrações](https://astro.build/integrations/frameworks/ 'Integrações com o Astro') com múltiplas frameworks como:
+
+- React
+- Vue
+- Svelte
+- Solid
+- Preact
+- ...
+
+E graças a arquitetura de ilhas de componente você pode escolher se é um componente interativo ou não através das [diretivas de template](https://docs.astro.build/pt-br/reference/directives-reference/ 'Diretivas de template').
+
+```astro
+---
+import { DemoButton } from './DemoButton';
+---
+
+<section class="islands-scheme">
+  <header><DemoButton /></header>
+  <aside><DemoButton /></aside>
+  <main><DemoButton client:only="react" /></main>
+  <footer><DemoButton /></footer>
+</section>
+```
