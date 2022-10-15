@@ -1,0 +1,39 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+export type Props = {
+  headings: MarkdownHeading[];
+};
+const { headings } = Astro.props;
+---
+
+<ul class="list">
+  {
+    headings.map(({ depth, slug, text }) => (
+      <li class="list-item" style={`--list-item-depth:${depth - 1}rem`}>
+        <a class="action" href={`#${slug}`}>
+          {text}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .list {
+    .list-item {
+      @apply pl-[var(--list-item-depth)] truncate;
+      .action {
+        @apply outline-none
+        cursor-pointer
+        text-xs
+        active:text-inherit
+        focus:text-dark-comment
+        hover:text-dark-comment
+        transition-colors
+        delay-75
+        ease-in-out;
+      }
+    }
+  }
+</style>

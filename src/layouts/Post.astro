@@ -1,14 +1,17 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import fs from 'fs';
 
-import { List, ListItem } from '@/components/List';
+import AstroList from '@/components/List.astro';
 import { getLanguageFromURL } from '@/util';
 
 import Layout from './Layout.astro';
 
-const headings =
-  (Astro?.props?.headings as { depth: number; slug: string; text: string }[]) ??
-  [];
+export type Props = {
+  headings: MarkdownHeading[];
+};
+
+const headings = Astro?.props?.headings ?? [];
 const lang = getLanguageFromURL(Astro.url.pathname);
 const stats = fs.statSync(Astro?.props?.content.file);
 const dateFormatter = new Intl.DateTimeFormat(lang);
@@ -29,17 +32,7 @@ const created = dateFormatter.format(stats.birthtime);
       headings.length ? (
         <aside class="aside">
           <nav class="nav">
-            {
-              <List>
-                {headings.map(({ depth, slug, text }) => (
-                  <ListItem key={slug} depth={depth}>
-                    <a title={text} class="action" href={`#${slug}`}>
-                      {text}
-                    </a>
-                  </ListItem>
-                ))}
-              </List>
-            }
+            <AstroList headings={headings} />
           </nav>
         </aside>
       ) : null
@@ -80,16 +73,6 @@ const created = dateFormatter.format(stats.birthtime);
       dark:border-dark-currentLine
       overflow-y-auto
       max-h-[80vh];
-
-      .action {
-        @apply outline-none cursor-pointer
-        active:text-inherit
-        focus:text-dark-comment
-        hover:text-dark-comment
-        transition-colors
-        delay-75
-        ease-in-out;
-      }
     }
   }
 </style>
