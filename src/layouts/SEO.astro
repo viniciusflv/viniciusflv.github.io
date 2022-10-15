@@ -22,7 +22,7 @@ const meta = {
     width: '1280',
     height: '675',
     type: 'image/png',
-    alt: 'Vinícius Victorino',
+    alt: [props?.title, 'Vinícius Victorino'].join(' | '),
     src: new URL(`${lang}/og-image.png`, Astro.site),
   },
   keywords:

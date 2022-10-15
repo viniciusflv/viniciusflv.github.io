@@ -2,7 +2,11 @@
 const chart = Astro.props.chart;
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script
+  is:inline
+  type="text/partytown"
+  src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+></script>
 
 <script>
   const nodes = document.querySelectorAll('[data-mermaid]');

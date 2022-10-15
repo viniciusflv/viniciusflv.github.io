@@ -10,7 +10,6 @@ import { Svg } from '@svjson/react';
 import { hero } from '@/assets/svg';
 import { meRicknmorty } from '@/assets/svg';
 import Hero from '@/components/Hero.astro';
-import Mermaid from '@/components/Mermaid.astro';
 
 <Hero clip={hero}>
 
@@ -46,79 +45,5 @@ import Mermaid from '@/components/Mermaid.astro';
   ]
 }
 ```
-
-<Mermaid
-  chart={`
-    %%{ init: { 'logLevel': 'debug', 'theme': 'dark' } }%%
-    gitGraph
-      commit id: "initial commit"
-
-      branch management_intern
-      checkout management_intern
-        commit id: "Warehouse Control"
-        commit id: "Preparation of Spreadsheets"
-        commit id: "Organization of Files and Documents"
-        commit id: "Operation of Multimedia Equipment"
-        branch development_intern
-
-      checkout development_intern
-        commit id: "NodeJS"
-        commit id: "HTML, CSS, JavaScript"
-        commit id: "ReactJS"
-        commit id: "Styled-components"
-        commit id: "JQuery"
-        commit id: "Blockchain"
-        commit id: "Smart Contracts"
-        commit id: "Ethereum"
-        commit id: "Solidity"
-        commit id: "R3 Corda"
-        commit id: "Hyperledger Fabric"
-        branch junior_developer
-
-      checkout junior_developer
-        commit id: "Typescript"
-        commit id: "NextJS"
-        commit id: "Flutter"
-        commit id: "AWS Cognito"
-        commit id: "AWS Dynamo DB"
-        commit id: "AWS S3"
-        commit id: "AWS Serverless"
-        commit id: "AWS Simple Email Service"
-        commit id: "Redux/Redux Observables"
-        branch developer
-
-      checkout developer
-        commit id: "Gatsby"
-        commit id: "Contentful"
-        commit id: "NestJS"
-        commit id: "GraphQL"
-        commit id: "Cypress"
-        commit id: "Jest"
-        commit id: "XState"
-        commit id: "Emotion css"
-        commit id: "Tailwind css"
-        commit id: "CSS Modules"
-        commit id: "Storybook"
-        commit id: "Lerna"
-        commit id: "Jenkins"
-        commit id: "Jira"
-        commit id: "Confluence"
-        commit id: "Agile"
-        branch squad_leader
-
-      checkout squad_leader
-        commit id: "Roadmap definition"
-        commit id: "Refinement of epics/stories"
-        commit id: "Construction of Front-End architecture solutions"
-        commit id: "Kibana consultation"
-        branch solutions_architect
-
-      checkout solutions_architect
-        commit id: "Vite"
-        commit id: "Turborepo"
-
-`}
-
-> </Mermaid>
 
 </div>

@@ -1,0 +1,180 @@
+---
+layout: '@/layouts/Post.astro'
+categories: Frameworks
+title: Astro the web framework for static sites
+description: Astro is a modern framework, simple and powerful, that provides an excellent developer experience.
+summary: Compiling all latest technologies and popularizing the concept of islands Astro has everything to bring back the hype for static sites.
+---
+
+import IslandsScheme from '@/components/IslandsScheme.astro';
+import Mermaid from '@/components/Mermaid.astro';
+
+# Astro the web framework for static sites
+
+## Astro is a modern framework, simple and powerful, that provides an excellent developer experience.
+
+---
+
+### Introduction
+
+Astro is an open source framework created by [Fred Schott](https://twitter.com/FredKSchott 'Twitter do Fred Schott') and [Nate Moore](https://twitter.com/n_moore 'Twitter do Nate Moore'). Whose focus is to facilitate the creation of static sites, without compromising the development experience and reusing knowledge from other frameworks.
+
+> Astro renders your entire site to static HTML during the build. The result is a fully static website with all JavaScript removed from the final page. No monolithic JavaScript application required, just static HTML that loads as fast as possible in the browser regardless of how many UI components you used to generate it.
+> (Fred Schott and Nate Moore, 2021)
+
+### Component Islands
+
+It is a Frontend architecture that consists of **rendering html on the server (SSR)** and pre-defining **scopes (Islands)**, to **inject JavaScript**. This is interesting because today **hydration**, which is this process of making the HTML generated on the server interactive, is extremely **costly** and happens for the full page.
+
+> Astro Islands (aka Component Islands) are a pattern of web architecture pioneered by Astro. The idea of “islands architecture” was first coined by Etsy's frontend architect [Katie Sylor-Miller](https://twitter.com/ksylor 'Twitter da Katie Sylor-Miller') in 2019, n 2019, and expanded on in [this post](https://jasonformat.com/islands-architecture/ 'Postagem sobre Ilhas de componentes') by Preact creator [Jason Miller](https://twitter.com/_developit 'Twitter do Jason Miller').
+
+Islands come as a solution for performing **partial hydration**. And it basically runs by setting **directives** on the components to declare them as interactive.
+
+See below a modest example where I am using a **React** component to change the button color, they are all the same component, but only one of them is being **hydrated**:
+
+<IslandsScheme />
+
+### Syntax
+
+To achieve this result, as stated above, Astro uses [directives](https://docs.astro.build/en/reference/directives-reference/ 'Documentation of directives'), but this is not the only innovation proposed. Following the goal of static frameworks like [Gatsby](https://www.gatsbyjs.com/docs 'Gatsby Documentation'), it provides a way to enable **static site generation (SSG)** and makes this introducing a new syntax.
+
+Basically it's a combination of **html/mdx/vue/svelte** with a dash of PHP. Everything that happens between the triple slash **"---"** only happens at **build time**. This allows for a clear distinction between **client and server** by delegating, what in a SPA would run on the client, to the server.
+
+#### Running expressions
+
+```astro
+---
+import x from 'x';
+
+const y = x();
+---
+
+<div>
+  {y}
+</div>
+```
+
+#### Using the file system
+
+```astro
+---
+import { Post } from '../components/Post.astro';
+
+const posts = await Astro.glob('../pages/**/posts/**/*.mdx');
+---
+
+<div>
+  {posts.map((post) => <Post {...post} />)}
+</div>
+```
+
+#### Fetching a API
+
+```astro
+---
+const resposta = await fetch('https://cms/api/posts');
+const posts = await resposta.json();
+---
+
+<div>
+  {posts.map((post) => <Post {...post} />)}
+</div>
+```
+
+### Componentization
+
+#### Layouts
+
+In addition to the triple slash, Astro components allow the creation of **layouts with html**, which in React for example requires the use of libs such as [react-helmet](https://www.npmjs.com/package/react-helmet 'npm react helmet'):
+
+```astro
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"
+      name="viewport"
+    />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+Layouts can be **reused** both within other components and within Markdown files:
+
+```mdx
+---
+layout: './Layout.astro'
+---
+```
+
+#### Styling
+
+Like **Svelte** and **Vue**, Astro allows styling, from either scoped or global, direct into components.
+
+```astro
+<button class="button">Button</button>
+<style>
+  .button {
+    cursor: pointer;
+  }
+</style>
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+</style>
+```
+
+#### Props
+
+It wouldn't be a component if there were no way to **receive** and **require** props. Astro components use the **props** attribute of the **Astro** variable to access prop values.
+
+```astro
+---
+export interface Props {
+  name: string;
+  msg?: string;
+}
+const { msg = 'Olá', name } = Astro.props;
+---
+
+<h2>{msg}, {name}!</h2>
+```
+
+### UI agnostic
+
+But you can say **"I don't want to redo all my components"** and that's where Astro shines. It allows you to add [integrations](https://astro.build/integrations/frameworks/ 'Astro Integrations') with multiple frameworks like:
+
+- React
+- Vue
+- Svelte
+- Solid
+- Preact
+- ...
+
+And thanks to the component islands architecture, you can choose whether it is an interactive component or not via [template directives](https://docs.astro.build/en/reference/directives-reference/ 'Template directives ').
+
+```astro
+---
+import { DemoButton } from './DemoButton';
+---
+
+<section class="islands-scheme">
+  <header><DemoButton /></header>
+  <aside><DemoButton /></aside>
+  <main><DemoButton client:only="react" /></main>
+  <footer><DemoButton /></footer>
+</section>
+```
+
+### Development Experience
+
+This site was built using Astro, and it's amazing how simple it was to get started. It has a familiar config, built on top of that of **vitejs**, and it was for the most part, just looking for the integrations I wanted and componentizing.
+
+I only had difficulty with the setup of [mermaidjs](https://mermaid-js.github.io/mermaid/#/ 'Mermaid Documentation'), but because the syntax of Astro components is valid html I managed to make a functional solution, but it would be interesting to have this **support** with the markdown same as github/gitlab, maybe with a static generation of the svg.
+
+But the overall experience was excellent and the proposed solutions for file system management and execution speed made **Gatsby** look pretty dated and over engineered.
