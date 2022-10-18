@@ -24,8 +24,12 @@ const lang = getLanguageFromURL(Astro.url.pathname);
   .post-preview {
     @apply flex flex-col gap-2 max-w-96;
 
+    p {
+      @apply !text-sm;
+    }
+
     .summary {
-      @apply text-xs !text-gray-400;
+      @apply !text-gray-400;
     }
 
     .link {
