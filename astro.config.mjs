@@ -11,8 +11,6 @@ import { dirname, resolve } from 'path';
 
 const __dirname = dirname(new URL('', import.meta.url).pathname);
 
-console.log(__dirname);
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://viniciusflv.github.io',
