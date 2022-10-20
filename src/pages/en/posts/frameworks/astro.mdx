@@ -166,7 +166,7 @@ import { DemoButton } from './DemoButton';
 <section class="islands-scheme">
   <header><DemoButton /></header>
   <aside><DemoButton /></aside>
-  <main><DemoButton client:only="react" /></main>
+  <main><DemoButton client:idle /></main>
   <footer><DemoButton /></footer>
 </section>
 ```
@@ -176,5 +176,8 @@ import { DemoButton } from './DemoButton';
 This site was built using Astro, and it's amazing how simple it was to get started. It has a familiar config, built on top of that of **vitejs**, and it was for the most part, just looking for the integrations I wanted and componentizing.
 
 I only had difficulty with the setup of [mermaidjs](https://mermaid-js.github.io/mermaid/#/ 'Mermaid Documentation'), but because the syntax of Astro components is valid html I managed to make a functional solution, but it would be interesting to have this **support** with the markdown same as github/gitlab, maybe with a static generation of the svg.
+
+> Update I was able to achieve this using an Astro component with [mermaid-parse](https://github.com/yousifalraheem/mermaid-parse 'Github mermaid parse').<br />
+> (20/10/2022)
 
 But the overall experience was excellent and the proposed solutions for file system management and execution speed made **Gatsby** look pretty dated and over engineered.
