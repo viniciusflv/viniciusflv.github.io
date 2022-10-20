@@ -1,26 +1,23 @@
 ---
-const chart = Astro.props.chart;
+import mermaidParse from 'mermaid-parse';
+
+const { chart } = Astro.props;
+
+let htmlRes = chart;
+
+try {
+  htmlRes = await mermaidParse(chart, { extension: 'svg' });
+} catch (error) {}
 ---
-
-<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
-></script>
-
-<script>
-  const nodes = document.querySelectorAll('[data-mermaid]');
-  Array.from(nodes).forEach((node) => {
-    node.innerHTML = node.getAttribute('data-mermaid') || '';
-    node.className = 'mermaid';
-  });
-</script>
 
 {
   Astro.slots.default ? (
     <div class="mermaid-container">
       <slot />
-      <div data-mermaid={chart} />
+      <div class="mermaid" set:html={htmlRes} />
     </div>
   ) : (
-    <div data-mermaid={chart} />
+    <div class="mermaid" set:html={htmlRes} />
   )
 }
 

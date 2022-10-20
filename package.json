@@ -53,6 +53,7 @@
   "dependencies": {
     "@svjson/react": "^0.0.3",
     "@types/open-graph-scraper": "^4.8.1",
+    "mermaid-parse": "^2.1.0",
     "open-graph-scraper": "^4.11.1"
   }
 }
