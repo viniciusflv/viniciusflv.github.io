@@ -1,0 +1,81 @@
+---
+layout: '@/layouts/Post.astro'
+categories: SVG
+title: Como usar SVGs com React?
+description: SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
+summary:
+---
+
+# Como usar SVGs com React?
+
+## SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
+
+---
+
+### O que são SVGs?
+
+SVG (**Gráficos Vetoriais Escalonáveis**) é um formato de representação de imagens. Os formatos mais tradicionais como **png** e **jpg** fazem parte da classificação **bitmap**, que funciona mapeando e associando cada **pixel** a uma **cor**, isso faz com que ao realizar um zoom a imagem tenha perda qualidade.
+
+O SVG por outro lado, significa
+
+**Gráficos Vetoriais Escalonáveis**
+são um tipo de representação de imagens que, invés de usar um mapa de bits construindo a imagem por pixel, constrói por coordenadas.
+
+### Como carregar em aplicações React?
+
+Existem várias maneiras:
+
+- Você pode abrir o arquivo e copiar e colar as tags no HTML
+- Você pode carregar como imagem
+- Você pode usar um loader para converter para um componente
+- Ou você pode converter seu svg para JSON que um formato nativo do JavaScript, usando a CLI svj
+
+#### Prós e Contras
+
+Vamos analisar cada um desses métodos levando em consideração os seguintes pontos.
+
+1. Esforço unitário
+2. Escalabilidade
+3. Otimização
+4. Desempenho
+5. Tamanho
+
+##### Copiar o conteúdo do arquivo SVG
+
+1. Simples
+2. É um processo manual
+3. Exige conhecimento do desenvolvedor para fazer manualmente
+4. Bom desempenho
+5. Pode ser que seja grande dependendo do item 3
+
+##### Carregar como imagem
+
+1. Inexistente
+2. Tão escalável quanto qualquer imagem
+3. Exige conhecimento do desenvolvedor para fazer manualmente
+4. Desempenho comprometido por exigir o request do arquivo .svg
+5. Pode ser que seja grande dependendo do item 3
+
+##### Usar um loader de componente
+
+1. Inexistente
+2. Tão escalável quanto qualquer componente
+3. É otimizado pelo loader
+4. Desempenho comprometido pela quantidade de JavaScript
+5. Muito JavaScript pra algo não interativo
+
+##### Converter o SVG para JSON com a CLI
+
+1. Inexistente
+2. Tão escalável quanto qualquer JSON
+3. É otimizado pela CLI
+4. Excelente desempenho
+5. É Three Shakeable e potencialmente lazy loaded
+
+### Como usar a CLI e o adaptador para React
+
+Reserve uma pasta para seus SVGs e execute a CLI apontando para essa pasta.
+
+```shell
+svj -i src/assets/svg -d src/assets/svg -r
+```
