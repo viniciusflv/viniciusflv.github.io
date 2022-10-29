@@ -1,5 +1,6 @@
+import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
+// import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
@@ -13,7 +14,7 @@ const __dirname = dirname(new URL('', import.meta.url).pathname);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://puny-moose-rest-187-57-158-191.loca.lt', //'https://viniciusflv.github.io',
+  site: 'https://viniciusflv.github.io',
   markdown: {
     shikiConfig: {
       theme: 'dracula',
@@ -32,7 +33,10 @@ export default defineConfig({
     tailwind(),
     sitemap(),
     robotsTxt(),
-    partytown(),
+    // partytown(),
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp',
+    }),
     fonts({
       url: [
         'https://fonts.googleapis.com/css2?family=RocknRoll+One:wght@400;700&display=swap',

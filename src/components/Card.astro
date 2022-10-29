@@ -1,18 +1,28 @@
 ---
+import { getImage } from '@astrojs/image';
+import { Image } from '@astrojs/image/components';
+
 const { title, description, url, lang } = Astro.props;
+
+const { src: fallbackSrc } = await getImage({
+  src: `/${lang}/og-image.png`,
+  aspectRatio: '87:46',
+  width: 435,
+});
 ---
 
 <a class="card outline-none" title={title} href={url}>
   <section>
     <figure>
-      <picture>
-        <img
-          class="preview"
-          alt={title}
-          src={`${url}/og-image.png`}
-          onerror={`this.onerror=null;this.src='/${lang}/og-image.png'`}
-        />
-      </picture>
+      <Image
+        class="preview"
+        aspectRatio="87:46"
+        width={435}
+        format={'webp'}
+        alt={title}
+        src={`${url}/og-image.png`}
+        onerror={`this.onerror=null;this.src='${fallbackSrc}'`}
+      />
     </figure>
     <header class="header">
       <h4>{title}</h4>
