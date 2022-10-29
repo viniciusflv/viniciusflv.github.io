@@ -13,7 +13,7 @@ const __dirname = dirname(new URL('', import.meta.url).pathname);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://viniciusflv.github.io',
+  site: 'https://puny-moose-rest-187-57-158-191.loca.lt', //'https://viniciusflv.github.io',
   markdown: {
     shikiConfig: {
       theme: 'dracula',

@@ -12,6 +12,7 @@
     "svj": "svj -i src/assets/svg -d src/assets/svg -r",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "eslint --fix \"**/*.{ts,tsx,js,cjs,mjs}\"",
+    "og": "npx localtunnel --port 3000",
     "prepare": "husky install"
   },
   "lint-staged": {

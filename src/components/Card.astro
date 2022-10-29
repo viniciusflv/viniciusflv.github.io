@@ -1,9 +1,19 @@
 ---
-const { title, description, url } = Astro.props;
+const { title, description, url, lang } = Astro.props;
 ---
 
 <a class="card outline-none" title={title} href={url}>
   <section>
+    <figure>
+      <picture>
+        <img
+          class="preview"
+          alt={title}
+          src={`${url}/og-image.png`}
+          onerror={`this.onerror=null;this.src='/${lang}/og-image.png'`}
+        />
+      </picture>
+    </figure>
     <header class="header">
       <h4>{title}</h4>
       <p>{description}</p>
@@ -13,7 +23,7 @@ const { title, description, url } = Astro.props;
 
 <style>
   .card {
-    @apply p-8
+    @apply p-4
     rounded
     shadow-2xl
     border
@@ -31,8 +41,12 @@ const { title, description, url } = Astro.props;
     hover:border-dark-comment
     focus:border-dark-comment;
 
+    .preview {
+      @apply rounded;
+    }
+
     .header {
-      @apply flex flex-col gap-4;
+      @apply flex flex-col gap-4 py-4;
     }
 
     p {
