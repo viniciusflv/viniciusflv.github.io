@@ -23,7 +23,7 @@ const posts = files
     const statsA = fs.statSync(a.file);
     const statsB = fs.statSync(b.file);
 
-    return statsA.birthtime.getTime() - statsB.birthtime.getTime();
+    return statsB.birthtime.getTime() - statsA.birthtime.getTime();
   });
 
 const meta = {
