@@ -1,0 +1,222 @@
+---
+layout: '@/layouts/Post.astro'
+categories: JavaScript
+title: Como criar uma biblioteca JavaScript?
+description: Com o registro de software npm, você também pode contribuir para a comunidade open source.
+# summary:
+---
+
+import { Image } from '@astrojs/image/components';
+
+# Como criar uma biblioteca JavaScript?
+
+## Com o registro de software npm, você também pode contribuir para a comunidade open source.
+
+---
+
+### Crie uma conta no npm registry
+
+1. Acesse o [cadastro do npm](https://www.npmjs.com/signup 'cadastro do npm') e crie uma nova conta
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src="/@astroimage/assets/npm-login.png"
+  aspectRatio="5:8"
+  width={300}
+/>
+
+2. Depois de realizar o login va até o avatar e clique em **"Packages"**, como sua conta foi recentemente criada é esperado que não exista nenhum pacote
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src="/@astroimage/assets/npm-avatar.png"
+  aspectRatio="5:8"
+  width={300}
+/>
+
+3. Para criar um, clique no ícone de **"+"** ao lado de **"Organizations"**
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src="/@astroimage/assets/npm-add-org.png"
+  aspectRatio="5:5"
+  width={300}
+/>
+
+4. Em seguida escolha um **nome único** referente a sua organização ou conjunto de bibliotecas, o ideal é que seja pequeno, sem caracteres especiais e caixa baixa, já que vai ser o prefixo das suas libs (Ex: Se a organização for **myorg** e a biblioteca **mylib** ficaria assim **@myorg/mylib**).
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src="/@astroimage/assets/npm-org-name.png"
+  aspectRatio="6:7"
+  width={300}
+/>
+
+5. Ao clicar em **"Create"**, o npm vai validar se esse nome está disponível, e se tiver criará a organização
+
+### Criando o projeto
+
+Comece criando um arquivo package.json na raiz do projeto com o seguinte comando:
+
+```shell
+npm init -y
+```
+
+#### Configurando o monorepo
+
+Como a proposta é trabalhar com múltiplos pacotes, vamos começar instalando o **turborepo**, que é um gerenciador de monorepos:
+
+```shell
+npm i -D turborepo@latest
+```
+
+Após a instalação crie uma arquivo **turbo.json** com o seguinte conteúdo:
+
+```json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "bundle": {
+      "dependsOn": ["^bundle"],
+      "outputs": ["dist/**"]
+    }
+  }
+}
+```
+
+Agora crie uma pasta **/libs** no seu projeto. E em seguida atualize o **package.json** declarando no atributo workspaces essa pasta.
+
+```json
+{
+  ...
+  "workspaces": [
+    "libs/*"
+  ],
+  "scripts" : {
+    "bundle": "turbo run bundle"
+  }
+  ...
+}
+```
+
+### Criando uma biblioteca
+
+#### Configurando o package.json da biblioteca
+
+Crie uma pasta da biblioteca (Ex: libs/mylib) e dentro dela crie um arquivo package.json de acordo com as definições abaixo.
+
+Para que a lib seja corretamente publicada é necessário a adição de algumas informações de referência:
+
+- **name** - Nome da lib (iniciando com o nome da organização)
+- **version** - Versão da lib (Não alterar manualmente)
+- **description** - Descrição da função da lib
+- **private** - Se esse projeto é publicável ou não (Sempre true)
+- **licence** - Licença de uso
+- **main** - Nome do arquivo principal da lib
+- **types** - Nome do arquivo de tipos
+- **module** - Nome do arquivo de módulos ECMAScript
+- **files** - Array de arquivo a serem adicionados além dos descritos acima
+- **publishConfig** - Configurações de publicação (registry de publicação)
+- **repository** - Endereço do repositório de código
+- **keywords** - Palavras chave da lib
+
+```json
+{
+  "name": "@<org>/<name>",
+  "version": "0.0.0",
+  "description": "<description>",
+  "private": false,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "files": ["dist/"],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<http-url>.git"
+  },
+  "keywords": ["<keywords>"]
+}
+```
+
+### Configurando o controle de versão
+
+Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o **changeset**. Então execute o seguinte comando na raiz do projeto:
+
+```shell
+npm install @changesets/cli && npx changeset init
+```
+
+Esse comando irá instalar a CLI e criar a pasta **.changeset/** que servirá como configuração e centralização de arquivos de mudanças declaradas a serem aplicadas.
+
+A seguir no packages.json da raiz do projeto adicione os seguintes comandos:
+
+```json
+{
+  ...
+  "scripts" : {
+    "bundle": "turbo run bundle",
+    "change": "changeset",
+    "promote": "changeset version",
+    "publish": "changeset publish",
+  }
+  ...
+}
+```
+
+#### Change
+
+Usa a pasta criada pelo `npx changeset init` para declarar uma nova versão, mas não atualizando a versão, apenas cria uma arquivo markdown com o que for descrito. Esses arquivos são gerados com nomes aleatórios para que possam ser megiados por diferentes pessoas.
+
+- Primeiro ele pede para selecionar as bibliotecas que serão atualizadas:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src="/@astroimage/assets/changeset-change.png"
+    aspectRatio="4:2"
+    width={400}
+  />
+  <br />
+
+- Em seguida ele pede para definir se a mudança é major ou minor e seleciona patch automaticamente caso alguma não entre nessas categorias:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src="/@astroimage/assets/changeset-change-scope.png"
+    aspectRatio="12:2"
+    width={400}
+  />
+  <br />
+
+- O ultimo passo é adicionar a descrição da mudança:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src="/@astroimage/assets/changeset-change-summary.png"
+    aspectRatio="20:4"
+    width={400}
+  />
+  <br />
+
+#### Promote
