@@ -3,7 +3,7 @@ layout: '@/layouts/Post.astro'
 categories: JavaScript
 title: Como criar uma biblioteca JavaScript?
 description: Com o registro de software npm, você também pode contribuir para a comunidade open source.
-summary: Usando tsup, turborepo e changesets nunca foi tão fácil criar sua própria biblioteca
+summary: Usando tsup, turborepo e changesets, nunca foi tão fácil criar sua própria biblioteca
 ---
 
 import { Image } from '@astrojs/image/components';
@@ -179,7 +179,7 @@ O **turborepo** possivelmente irá adicionar essas libs no **/node_modules** da 
 }
 ```
 
-Esse comando será referenciado pelo **`turbo run bundle`** definido na raiz e no turbo.json, assim sempre que exista um comando igual nas bibliotecas, ele **também será executado** em paralelo.
+Esse comando será referenciado pelo **`turbo run bundle`** definido no package.json raiz e no turbo.json, assim sempre que exista um comando igual nas bibliotecas, ele **também será executado** em paralelo.
 
 Por fim crie um arquivo na biblioteca chamado **tsup.config.ts** e coloque o seguinte conteúdo:
 
@@ -207,15 +207,15 @@ npm run bundle
 
 ### Configurando o controle de versão para a publicação
 
-Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o **changeset**. Então execute o seguinte comando na raiz do projeto:
+Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o [changeset](https://github.com/changesets/changesets 'github do changeset'). Então execute o seguinte comando na raiz do projeto:
 
 ```shell
 npm install @changesets/cli && npx changeset init
 ```
 
-Esse comando irá instalar a CLI e criar a pasta **.changeset/** que servirá como configuração e centralização de arquivos de mudanças declaradas a serem aplicadas.
+Esse comando irá instalar a CLI e criar a pasta **.changeset/**, que servirá como configuração e centralização de arquivos de mudanças declaradas a serem aplicadas.
 
-A seguir no packages.json da raiz do projeto adicione os seguintes comandos:
+A seguir no package.json da raiz do projeto adicione os seguintes comandos:
 
 ```json
 {
@@ -316,3 +316,5 @@ Assim que estiver autenticado, se certifique que o código está compilado e, ex
 ```shell
 npm run publish
 ```
+
+E é isso, tudo pronto!!!
