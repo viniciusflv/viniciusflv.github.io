@@ -46,6 +46,9 @@ Baixa a imagem caso não encontre
 Valida o hash da imagem
 Executa o container
 
+Container é uma imagem com uma camada temporária de leitura e escrita
+É leve pois é um processo e a imagem é reutilizada mudando só a camada de escrita
+
 # Comandos
 
 Executa imagem
@@ -148,4 +151,22 @@ Remove o container forçadamente
 
 ```shell
 docker rm [id ou nome] --force
+```
+
+Lista imagens
+
+```shell
+docker images
+```
+
+Inspeciona a imagem
+
+```shell
+docker inspect [id ou nome]
+```
+
+Mostra as camadas da imagem
+
+```shell
+docker history [id ou nome]
 ```
