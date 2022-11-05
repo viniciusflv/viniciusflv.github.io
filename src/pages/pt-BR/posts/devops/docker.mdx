@@ -1,0 +1,151 @@
+# Namespaces garante o isolamento em relação ao SO original
+
+- PID - Isolamento de processos
+- NET - Isolamento de interfaces de rede
+- IPC - isolamento de comunicação entre processos e memória compartilhada
+- MNT - Isolamento do Sistema de Arquivos / ponto de montagem
+- UTS - Isolamento do kernel (simula outro host)
+
+# Cgroups define como consumo será feito
+
+# Instalando o docker no linux
+
+```shell
+sudo apt update
+```
+
+```shell
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+```shell
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+
+```shell
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+```shell
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+
+```shell
+sudo usermod -aG docker $USER
+```
+
+Procura a imagem localmente
+Baixa a imagem caso não encontre
+Valida o hash da imagem
+Executa o container
+
+# Comandos
+
+Executa imagem
+
+```shell
+docker run [imagem]
+```
+
+Executa imagem expondo uma porta
+
+```shell
+docker run -d -P [imagem]
+```
+
+Executa imagem expondo uma porta definida
+
+```shell
+docker run -d -p [porta de fora]:[porta do container] [imagem]
+```
+
+Baixa imagem
+
+```shell
+docker pull
+```
+
+Imagens em execução
+
+```shell
+docker ps
+```
+
+ou
+
+```shell
+docker container ls
+```
+
+Todas as imagens que foram executadas
+
+```shell
+docker ps -a
+```
+
+ou
+
+```shell
+docker container ls -a
+```
+
+Para a execução
+
+```shell
+docker stop [id ou nome]
+```
+
+Para a execução instantaneamente
+
+```shell
+docker stop -t=0 [id ou nome]
+```
+
+Inicia a execução
+
+```shell
+docker start [id ou nome]
+```
+
+Modo interativo
+
+```shell
+docker [comando] -it [id] [comando]
+```
+
+Modo desanexado (roda em background)
+
+```shell
+docker [comando] -d [id] [comando]
+```
+
+Pause a execução
+
+```shell
+docker pause [id ou nome]
+```
+
+Reinicia a execução
+
+```shell
+docker unpause [id ou nome]
+```
+
+Remove o container
+
+```shell
+docker rm [id ou nome]
+```
+
+Remove o container forçadamente
+
+```shell
+docker rm [id ou nome] --force
+```
