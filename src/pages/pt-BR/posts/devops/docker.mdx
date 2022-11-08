@@ -49,6 +49,24 @@ Executa o container
 Container é uma imagem com uma camada temporária de leitura e escrita
 É leve pois é um processo e a imagem é reutilizada mudando só a camada de escrita
 
+# Como subir uma imagem no docker hub?
+
+Crie sua conta
+
+use o comando abaixo para logar
+
+```shell
+docker login -u [username]
+```
+
+crie uma imagem com [username]/[imagename]
+
+execute o comando
+
+```shell
+docker push [username]/[imagename]:[version]
+```
+
 # Comandos
 
 Executa imagem
@@ -169,4 +187,22 @@ Mostra as camadas da imagem
 
 ```shell
 docker history [id ou nome]
+```
+
+Constrói a imagem a partir de um Dockerfile
+
+```shell
+docker build -t alura/node:1.0 .
+```
+
+Deleta todos os containers
+
+```shell
+ docker container rm -f $(docker container list -q)
+```
+
+Deleta todos os containers menos os em execução
+
+```shell
+ docker container prune
 ```
