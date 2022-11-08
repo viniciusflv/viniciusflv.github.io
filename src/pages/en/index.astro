@@ -1,6 +1,4 @@
 ---
-import fs from 'fs';
-
 import { hero } from '@/assets/svg';
 import Button from '@/components/Button.astro';
 import Hero from '@/components/Hero.astro';
@@ -20,10 +18,10 @@ const categories = files
 const posts = files
   .filter(({ frontmatter }) => frontmatter.categories)
   .sort((a, b) => {
-    const statsA = fs.statSync(a.file);
-    const statsB = fs.statSync(b.file);
+    const dateA = new Date(a.frontmatter.date).setHours(24);
+    const dateB = new Date(b.frontmatter.date).setHours(24);
 
-    return statsB.birthtime.getTime() - statsA.birthtime.getTime();
+    return dateB - dateA;
   });
 
 const meta = {
