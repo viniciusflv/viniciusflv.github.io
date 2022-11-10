@@ -1,6 +1,5 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import fs from 'fs';
 
 import AstroList from '@/components/List.astro';
 import { getLanguageFromURL } from '@/util';
@@ -11,19 +10,18 @@ export type Props = {
   headings: MarkdownHeading[];
 };
 
+const date = new Date(Astro.props.frontmatter.date).setHours(24);
 const headings = Astro?.props?.headings ?? [];
 const lang = getLanguageFromURL(Astro.url.pathname);
-const stats = fs.statSync(Astro?.props?.content.file);
 const dateFormatter = new Intl.DateTimeFormat(lang);
-const modified = dateFormatter.format(stats.mtime);
-const created = dateFormatter.format(stats.birthtime);
+const created = dateFormatter.format(date);
 ---
 
 <Layout {...Astro.props} type="article">
   <main class="main">
     <article class="article">
       <header>
-        <p class="text-dark-comment">{created} - {modified}</p>
+        <p class="text-dark-comment">{created}</p>
         <strong>Vinícius Victorino</strong>
       </header>
       <slot />
