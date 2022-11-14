@@ -67,6 +67,91 @@ execute o comando
 docker push [username]/[imagename]:[version]
 ```
 
+# Tipos de persistência
+
+## Bind mounts
+
+Gerenciados pelo file system
+
+```shell
+docker run -it -v /volume-dk:/app ubuntu
+```
+
+```shell
+docker run -it --mount type=bind,source=/home/viniciusflv/Documents/codes/app-exemplo/volume-dk,target=/app ubuntu
+```
+
+## Volumes
+
+Gerenciados pelo docker
+
+```shell
+docker volume create [name]
+```
+
+```shell
+docker run -it -v meu-volume:/app ubuntu
+```
+
+```shell
+docker run -it --mount source=meu-volume,target=/app ubuntu
+```
+
+## tmpfs
+
+Não é escrito na camada de leitura e escrita
+
+```shell
+docker run -it --tmpfs=/app ubuntu
+```
+
+```shell
+docker run -it --mount type=tmpfs,destination=/app ubuntu
+```
+
+# Comunicação através de redes
+
+Lista redes
+
+```shell
+docker network ls
+```
+
+## Bridge
+
+Cria um canal de redes
+
+Cria redes
+
+```shell
+docker network create --driver bridge [netname]
+```
+
+Nomes de redes
+
+```shell
+docker run -it --name [name] --network [netname] [image] [cmd]
+```
+
+## None
+
+Remove a interface de red
+
+## Host
+
+Remove o isolamento da rede do container e sistema
+
+# Docker compose
+
+É um ferramenta de coordenação containers, não confunda com orquestração
+
+## Instalando
+
+```shell
+sudo apt update
+sudo apt install docker-compose-plugin
+```
+
 # Comandos
 
 Executa imagem
