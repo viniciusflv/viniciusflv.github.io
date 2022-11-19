@@ -1,4 +1,85 @@
-# Namespaces garante o isolamento em relação ao SO original
+---
+layout: '@/layouts/Post.astro'
+categories: Docker
+date: 2022-11-19
+title: Docker
+description: docker
+summary: docker
+---
+
+import Mermaid from '@/components/Mermaid.astro';
+
+# Docker: "funciona na minha máquina"
+
+## Containers um dos maiores responsáveis por como servimos as aplicações hoje
+
+---
+
+## O que é o Docker?
+
+Docker é um conjunto de soluções **PaaS (Plataforma Como Um Serviço)**, de código aberto, para servir aplicações através da construção, deploy e gerência de **containers**.
+
+## O que é um container?
+
+Segundo o site oficial do Docker:
+
+> Containers são **unidades padrão de software**, que permitem aos desenvolvedores **isolar** sua aplicação do ambiente onde será **executada**, resolvendo a dor de cabeça do **"funciona na minha máquina"**.
+
+<Mermaid
+  chart={`
+    flowchart TB
+      subgraph Docker
+        subgraph app1
+          javadk[java]
+        end
+        subgraph app2
+          nodejsdk[nodejs]
+          pythondk[python]
+        end
+        engine[Motor de Containers]
+        os[Sistema Operacional]
+      end
+      
+      subgraph VM[Máquina virtual]
+        subgraph app3
+          java
+          guest-app3[Guest OS]
+        end
+        subgraph app4
+          nodejs
+          python
+          guest-app4[Guest OS]
+        end
+        subgraph vmm[Hypervisor]
+          vm-app3[Máquina virtual app3]
+          vm-app4[Máquina virtual app4]
+        end
+        subgraph hos[Sistema Operacional Host]
+        end
+      end
+
+      subgraph infra[Infraestrutura]
+        servidores
+      end
+
+      app1 --> engine
+      app2 --> engine
+      engine --> os --> infra
+
+      app3 --> vmm
+      app4 --> vmm
+
+      vmm --> hos --> infra
+
+`}
+
+>
+
+</Mermaid>
+
+---
+
+### Namespaces garante o isolamento em relação ao SO original
 
 - PID - Isolamento de processos
 - NET - Isolamento de interfaces de rede
@@ -6,9 +87,9 @@
 - MNT - Isolamento do Sistema de Arquivos / ponto de montagem
 - UTS - Isolamento do kernel (simula outro host)
 
-# Cgroups define como consumo será feito
+### Cgroups define como consumo será feito
 
-# Instalando o docker no linux
+### Instalando o docker no linux
 
 ```shell
 sudo apt update
@@ -49,7 +130,7 @@ Executa o container
 Container é uma imagem com uma camada temporária de leitura e escrita
 É leve pois é um processo e a imagem é reutilizada mudando só a camada de escrita
 
-# Como subir uma imagem no docker hub?
+### Como subir uma imagem no docker hub?
 
 Crie sua conta
 
@@ -67,9 +148,9 @@ execute o comando
 docker push [username]/[imagename]:[version]
 ```
 
-# Tipos de persistência
+### Tipos de persistência
 
-## Bind mounts
+###### Bind mounts
 
 Gerenciados pelo file system
 
@@ -81,7 +162,7 @@ docker run -it -v /volume-dk:/app ubuntu
 docker run -it --mount type=bind,source=/home/viniciusflv/Documents/codes/app-exemplo/volume-dk,target=/app ubuntu
 ```
 
-## Volumes
+###### Volumes
 
 Gerenciados pelo docker
 
@@ -97,7 +178,7 @@ docker run -it -v meu-volume:/app ubuntu
 docker run -it --mount source=meu-volume,target=/app ubuntu
 ```
 
-## tmpfs
+###### tmpfs
 
 Não é escrito na camada de leitura e escrita
 
@@ -109,7 +190,7 @@ docker run -it --tmpfs=/app ubuntu
 docker run -it --mount type=tmpfs,destination=/app ubuntu
 ```
 
-# Comunicação através de redes
+### Comunicação através de redes
 
 Lista redes
 
@@ -117,7 +198,7 @@ Lista redes
 docker network ls
 ```
 
-## Bridge
+###### Bridge
 
 Cria um canal de redes
 
@@ -133,26 +214,26 @@ Nomes de redes
 docker run -it --name [name] --network [netname] [image] [cmd]
 ```
 
-## None
+###### None
 
 Remove a interface de red
 
-## Host
+###### Host
 
 Remove o isolamento da rede do container e sistema
 
-# Docker compose
+### Docker compose
 
 É um ferramenta de coordenação containers, não confunda com orquestração
 
-## Instalando
+###### Instalando
 
 ```shell
 sudo apt update
 sudo apt install docker-compose-plugin
 ```
 
-# Comandos
+### Comandos
 
 Executa imagem
 
