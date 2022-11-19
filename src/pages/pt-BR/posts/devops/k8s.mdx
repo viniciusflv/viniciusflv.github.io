@@ -1,0 +1,37 @@
+Escalabilidade vertical = mais poder computational
+Escalabilidade horizontal = mais máquinas
+Cluster = uma ou mais maquinas processando em paralelo
+
+Kubernetes é um orquestrador de containers dentro de um cluster, ou seja, é delegado a ele onde será executado o container, garantindo sua disponibilidade e escalabilidade
+
+# Resources
+
+- pod - Encapsulamento de um container
+- rs - Replica set
+- deploy
+- vol
+- hpa - Horizontal pod autoscaling
+- pv - Persistent Volume
+- ing
+- pvc
+- svc - Service
+- sc
+- ds
+- quota
+
+# Máquinas num cluster
+
+- Master
+  - Gerência do cluster
+  - Manter e atualizar estado
+  - Receber e executar comandos
+  - Control Plane
+    - api - Receber e executar comandos
+    - c-m (Controller Manager) - Manter e atualizar estado
+    - sched (Scheduler) - Determina onde o pod será executado
+    - etcd - Banco de dados chave e valor
+- Node
+  - Execução das aplicações
+  - Nodes
+    - kubelet - Execução das aplicações
+    - k-proxy - Comunicação dentre os nodes
