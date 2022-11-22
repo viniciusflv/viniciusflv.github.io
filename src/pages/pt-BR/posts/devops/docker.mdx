@@ -1,12 +1,15 @@
 ---
 layout: '@/layouts/Post.astro'
 categories: Docker
-date: 2022-11-19
+date: 2022-11-22
 title: 'Docker: "funciona na minha máquina"'
 description: Containers um dos maiores responsáveis por como servimos as aplicações hoje
 summary: Containers são unidades padrão de software, que permitem aos desenvolvedores isolar sua aplicação do ambiente onde será executada, resolvendo a dor de cabeça do "funciona na minha máquina"
 ---
 
+import { Image } from '@astrojs/image/components';
+
+import dockerHubSignup from '@/assets/docker-hub-signup.png';
 import Mermaid from '@/components/Mermaid.astro';
 
 # Docker: "funciona na minha máquina"
@@ -107,86 +110,23 @@ O container funciona através da combinação de **namespaces**, que é uma func
 - **net_prio** - Provém um interface que permite a um administrador configurar dinamicamente a prioridade de um tráfico rede
 - **resource_counter** - Deve facilitar o gerenciamento de recursos pelos controladores, provendo ferramentas em comum para contabilização
 
-### Docker na prática
+### Container **vs** Imagem
 
-#### Instalando o docker no linux
+Container é uma imagem com uma camada temporária de **leitura e escrita**. Isso permite que a mesma imagem seja reutilizada, alterando somente a camada e leitura e escrita, o que torna o processo do container ainda mais leve.
 
-##### Atualizando programas
-
-```shell
-sudo apt update
-```
-
-##### Instalando dependências
-
-```shell
-sudo apt install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-```
-
-##### Fazendo o download
-
-```shell
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-
-##### Adicionando a chave de assinatura
-
-```shell
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-##### Instalando o Docker CE
-
-```shell
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-```
-
-##### Dando permissão de execução da CLI para o usuário
-
-```shell
-sudo usermod -aG docker $USER
-```
-
----
-
----
-
-Procura a imagem localmente
-Baixa a imagem caso não encontre
-Valida o hash da imagem
-Executa o container
-
-Container é uma imagem com uma camada temporária de leitura e escrita
-É leve pois é um processo e a imagem é reutilizada mudando só a camada de escrita
-
-### Como subir uma imagem no docker hub?
-
-Crie sua conta
-
-use o comando abaixo para logar
-
-```shell
-docker login -u [username]
-```
-
-crie uma imagem com [username]/[imagename]
-
-execute o comando
-
-```shell
-docker push [username]/[imagename]:[version]
-```
+<Mermaid
+  chart={`
+    flowchart TB
+      subgraph Container
+        rw[Camada de Leitura e Escrita]
+        Imagem
+      end
+  `}
+/>
 
 ### Tipos de persistência
 
-###### Bind mounts
+#### Bind mounts
 
 Gerenciados pelo file system
 
@@ -198,7 +138,7 @@ docker run -it -v /volume-dk:/app ubuntu
 docker run -it --mount type=bind,source=/home/viniciusflv/Documents/codes/app-exemplo/volume-dk,target=/app ubuntu
 ```
 
-###### Volumes
+#### Volumes
 
 Gerenciados pelo docker
 
@@ -214,7 +154,7 @@ docker run -it -v meu-volume:/app ubuntu
 docker run -it --mount source=meu-volume,target=/app ubuntu
 ```
 
-###### tmpfs
+#### tmpfs
 
 Não é escrito na camada de leitura e escrita
 
@@ -234,7 +174,7 @@ Lista redes
 docker network ls
 ```
 
-###### Bridge
+#### Bridge
 
 Cria um canal de redes
 
@@ -250,161 +190,309 @@ Nomes de redes
 docker run -it --name [name] --network [netname] [image] [cmd]
 ```
 
-###### None
+#### None
 
-Remove a interface de red
+Remove a interface de rede
 
-###### Host
+#### Host
 
 Remove o isolamento da rede do container e sistema
 
-### Docker compose
+### Instalando o docker no linux
 
-É um ferramenta de coordenação containers, não confunda com orquestração
-
-###### Instalando
+#### Atualizando programas
 
 ```shell
 sudo apt update
-sudo apt install docker-compose-plugin
 ```
 
-### Comandos
-
-Executa imagem
+#### Instalando dependências
 
 ```shell
-docker run [imagem]
+sudo apt install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
 ```
 
-Executa imagem expondo uma porta
+#### Fazendo o download
 
 ```shell
-docker run -d -P [imagem]
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
-Executa imagem expondo uma porta definida
+#### Adicionando a chave de assinatura
 
 ```shell
-docker run -d -p [porta de fora]:[porta do container] [imagem]
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-Baixa imagem
+#### Instalando o Docker CE
 
 ```shell
-docker pull
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-Imagens em execução
+#### Dando permissão de execução da CLI para o usuário
 
 ```shell
-docker ps
+sudo usermod -aG docker $USER
 ```
 
-ou
+### Executando uma imagem
+
+Para executar uma imagem podemos acessar o [Docker Hub](https://hub.docker.com/ 'Docker Hub'), que é um repositório de imagens de código aberto publicadas, e procurar uma imagem. Vou começar escolhendo a imagem oficial do [Ubuntu](https://hub.docker.com/_/ubuntu 'Imagem Ubuntu').
 
 ```shell
-docker container ls
+docker run ubuntu
 ```
 
-Todas as imagens que foram executadas
+Sempre que executar uma imagem o seguinte fluxo irá acontecer:
+
+<Mermaid
+  chart={`
+    flowchart LR
+      local{Tem imagem local?}
+      exe[Executa a imagem]
+      local -->|não| download[Baixa imagem] --> hash[Valida o hash] --> exe
+      local -->|sim| exe
+  `}
+/>
+
+Como foi a primeira execução você vai notar que os seguintes logs aparecerão no seu terminal:
 
 ```shell
-docker ps -a
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+e96e057aae67: Already exists
+Digest: sha256:4b1d0c4a2d2aaf63b37111f34eb9fa89fa1bf53dd6e4ca954d47caebca4005c2
+Status: Downloaded newer image for ubuntu:latest
 ```
 
-ou
+Também vai notar que nada acontece, mesmo rodando o comando outra vez. Isso é porque o padrão do docker é **encerar a execução** do container caso não tenha **nenhum processo** rodando.
+
+Podemos executar um comando da imagem declarando ele na frente do id da imagem:
 
 ```shell
-docker container ls -a
+docker run ubuntu echo Olá mundo
 ```
 
-Para a execução
+### Listando imagens e containers em execução
 
-```shell
-docker stop [id ou nome]
-```
-
-Para a execução instantaneamente
-
-```shell
-docker stop -t=0 [id ou nome]
-```
-
-Inicia a execução
-
-```shell
-docker start [id ou nome]
-```
-
-Modo interativo
-
-```shell
-docker [comando] -it [id] [comando]
-```
-
-Modo desanexado (roda em background)
-
-```shell
-docker [comando] -d [id] [comando]
-```
-
-Pause a execução
-
-```shell
-docker pause [id ou nome]
-```
-
-Reinicia a execução
-
-```shell
-docker unpause [id ou nome]
-```
-
-Remove o container
-
-```shell
-docker rm [id ou nome]
-```
-
-Remove o container forçadamente
-
-```shell
-docker rm [id ou nome] --force
-```
-
-Lista imagens
+Agora que já fizemos o download da nossa primeira imagem podemos listá-las com o comando:
 
 ```shell
 docker images
 ```
 
-Inspeciona a imagem
+Para listar os containers em execução vamos primeiro executar o bash em modo interativo:
 
 ```shell
-docker inspect [id ou nome]
+docker run -it ubuntu bash
 ```
 
-Mostra as camadas da imagem
+E em outro terminal e execute o comando:
 
 ```shell
-docker history [id ou nome]
+docker ps
 ```
 
-Constrói a imagem a partir de um Dockerfile
+### Deletando images e containers
+
+#### Deleta um container
 
 ```shell
-docker build -t alura/node:1.0 .
+ docker container rm -f [container]
 ```
 
-Deleta todos os containers
+#### Deleta todos os containers
 
 ```shell
  docker container rm -f $(docker container list -q)
 ```
 
-Deleta todos os containers menos os em execução
+#### Deleta uma imagem
 
 ```shell
- docker container prune
+ docker image rm -f [image]
+```
+
+### Construindo uma imagem
+
+Para construir uma imagem é necessária a criação de um arquivo **Dockerfile**.
+Nesse arquivo será declarado uma série de instruções que irão configurar a imagem.
+
+#### FROM
+
+Todo Dockerfile deve ser precedido pela instrução **FROM** seguido do id da imagem pai. Ela serve de base para podermos construir nossa camada customizada da imagem.
+
+```docker
+FROM ubuntu
+```
+
+#### RUN
+
+Podemos rodar comandos dentro da imagem através da instrução **RUN**. O resultado desses comandos serão atribuídos a imagem de maneira sequencial.
+
+```docker
+RUN echo Hello World
+```
+
+#### LABEL
+
+Adicionam metadados a uma imagem.
+
+```docker
+LABEL multi.label1="value1" \
+      multi.label2="value2" \
+      other="value3"
+```
+
+#### CMD
+
+O propósito principal da instrução **CMD** é prover argumentos padrões para a execução de um **ENTRYPOINT**.
+
+```docker
+CMD ["cd", "./app"]
+```
+
+#### EXPOSE
+
+Expõe uma porta de execução de uma aplicação.
+
+```docker
+EXPOSE 3000
+```
+
+#### ENV
+
+Declara uma variável de ambiente.
+
+```docker
+ENV PORT=3000
+```
+
+#### ARG
+
+Define variáveis que usuários podem passar em build-time com o comando `docker build` através da flag `--build-arg <varname>=<value>`.
+
+```docker
+ENV PORT=3000
+```
+
+#### ADD
+
+Copia arquivos **remotos** ou **compactados** e adiciona ao sistema de arquivos da imagem.
+
+```docker
+ADD hom* /mydir/
+```
+
+#### COPY
+
+Copia arquivos **locais** e adiciona ao sistema de arquivos da imagem.
+
+```docker
+COPY hom* /mydir/
+```
+
+#### VOLUME
+
+Cria um **ponto de montagem** de disco, com um nome especifico, e marca ele como montado externamente para outros volumes ou containers.
+
+```docker
+VOLUME ["/data"]
+```
+
+#### USER
+
+Instrução que cria um nome de usuário (ou UID), e opcionalmente o grupo do usuário (ou GID), para ser usado como padrão do restante do estágio atual.
+
+```docker
+USER node
+```
+
+#### WORKDIR
+
+Instrução que declara o **diretório de trabalho** para as instruções **RUN**, **CMD**, **ENTRYPOINT**, **COPY** e **ADD**.
+
+```docker
+WORKDIR /path/to/workdir
+```
+
+#### ENTRYPOINT
+
+Define o comando de entrada do container executável.
+
+```docker
+ENTRYPOINT ["npm", "run", "dev"]
+```
+
+#### ONBUILD
+
+Instruções a serem executadas quando a imagem é usada de base para outro build.
+
+```docker
+ONBUILD ADD . /app/src
+ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+```
+
+#### STOPSIGNAL
+
+Altera o sinal de parada padrão do docker.
+
+```docker
+STOPSIGNAL signal
+```
+
+#### HEALTHCHECK
+
+Instrução que diz ao docker como testar se o container ainda está funcional.
+
+```docker
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+#### SHELL
+
+Instrução permite alterar o shell padrão usado para rodar os comandos.
+
+```docker
+SHELL ["powershell", "-command"]
+```
+
+### Subindo uma imagem no docker hub?
+
+1. Crie sua conta no [Docker Hub](https://hub.docker.com/signup 'Cadastro Docker Hub')
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src={dockerHubSignup.src}
+  aspectRatio="5:7"
+  width={400}
+/>
+
+2. Use o comando abaixo para logar
+
+```shell
+docker login -u [username]
+```
+
+3. Crie uma imagem com o nome concatenando o username e o nome da imagem separados por "/" **[username]**/**[imagename]**
+
+```shell
+docker build username/imagename:1.0.0
+```
+
+4. Execute o comando
+
+```shell
+docker push username/imagename:1.0.0
 ```
