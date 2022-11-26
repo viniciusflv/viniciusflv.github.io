@@ -164,21 +164,22 @@ const formatAlternateHref = (hreflang: string) =>
           }
 
           .shiki.dracula {
-            @apply max-w-full rounded
+            @apply relative max-w-full rounded
             shadow-2xl
             border
             border-gray-200
             dark:border-dark-currentLine;
 
             .language-id {
-              @apply p-2
-              px-8
-              rounded-t
-              bg-opacity-50
-              text-dark-green;
-
-              @apply border-b
-              border-dark-green;
+              @apply absolute
+              left-8
+              top-[-1rem]
+              px-1
+              rounded
+              text-dark-darkest
+              font-bold
+              bg-dark-green
+              shadow-xl;
             }
 
             .code-container {
