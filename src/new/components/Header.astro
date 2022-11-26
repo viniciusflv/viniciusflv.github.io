@@ -1,0 +1,107 @@
+---
+import { Svg } from '@svjson/react';
+
+import {
+  github,
+  home,
+  linkedin,
+  mastodon,
+  person,
+  twitterLogo,
+  write,
+} from '@/assets/svg';
+
+const { lang } = Astro.props;
+console.log(lang);
+---
+
+<header class="header">
+  <nav class="header__nav">
+    <a title="home" href="/">
+      <Svg alt="home" src={home} isCurrentColor width="30px" />
+    </a>
+    <a title="posts" href="posts">
+      <Svg alt="posts" src={write} isCurrentColor width="30px" />
+    </a>
+    <a title="person" href="person">
+      <Svg alt="person" src={person} isCurrentColor width="30px" />
+    </a>
+    <div class="bg-current border border-gray-300 h-full"></div>
+    pt-br
+    <div class="bg-current border border-gray-300 h-full"></div>
+    <a title="github" target="_blank" href="https://github.com/viniciusflv/">
+      <Svg alt="github" src={github} isCurrentColor width="30px" />
+    </a>
+    <a
+      title="linkedin"
+      target="_blank"
+      href="https://www.linkedin.com/in/viniciusflv/"
+    >
+      <Svg alt="linkedin" src={linkedin} isCurrentColor width="30px" />
+    </a>
+    <a title="twitter" target="_blank" href="https://twitter.com/viniciusflv1/">
+      <Svg alt="twitter" src={twitterLogo} isCurrentColor width="30px" />
+    </a>
+    <a title="mastodon" target="_blank" href="https://mas.to/@viniciusflv/">
+      <Svg alt="mastodon" src={mastodon} isCurrentColor width="30px" />
+    </a>
+  </nav>
+</header>
+
+<style>
+  html.enabled {
+    .header {
+      @apply flex
+      justify-center
+      fixed
+      bottom-4
+      w-full;
+
+      .header__nav {
+        @apply flex
+        items-center
+        gap-6
+        p-4
+        px-8
+        shadow-2xl
+        rounded-lg
+        text-gray-400
+        border
+        border-gray-300
+        bg-white;
+
+        a {
+          @apply relative
+          outline-none
+          transition-all
+          delay-75
+          duration-75
+          ease-in-out;
+
+          &:before {
+            content: '';
+            @apply absolute
+            top-[-10px]
+            w-0
+            h-1
+            rounded
+            bg-gray-500
+            transition-all
+            delay-75
+            duration-75
+            ease-in-out;
+          }
+
+          &:hover,
+          &:focus {
+            @apply translate-y-1
+            text-dark-comment;
+            &:before {
+              @apply w-7;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
