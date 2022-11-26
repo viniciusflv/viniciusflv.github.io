@@ -1,10 +1,10 @@
 ---
 layout: '@/layouts/Post.astro'
 categories: Docker
-date: 2022-11-22
+date: 2022-11-26
 title: 'Docker: "funciona na minha máquina"'
 description: Containers um dos maiores responsáveis por como servimos as aplicações hoje
-summary: Containers são unidades padrão de software, que permitem aos desenvolvedores isolar sua aplicação do ambiente onde será executada, resolvendo a dor de cabeça do "funciona na minha máquina"
+summary: Containers são unidades padrão de software, que empacotam códigos e todas as suas dependências, para que a aplicação rode de maneira rápida e confiável de um ambiente para outro.
 ---
 
 import { Image } from '@astrojs/image/components';
@@ -26,7 +26,7 @@ Docker é um conjunto de soluções **PaaS (Plataforma Como Um Serviço)**, de c
 
 #### Segundo o site oficial do Docker
 
-> Containers são **unidades padrão de software**, que permitem aos desenvolvedores **isolar** sua aplicação do ambiente onde será **executada**, resolvendo a dor de cabeça do **"funciona na minha máquina"**.
+> Containers são **unidades padrão de software**, que empacotam **códigos** e todas as suas **dependências**, para que a aplicação rode de maneira rápida e confiável de um ambiente para outro.
 
 Vamos entender essa definição. Eles são unidades padrão de software, porque sua execução é isolada do sistema operacional, isso permite que ela funcione **sem interferências** de outros programas, o que a torna mais **estável e reprodutível**.
 
@@ -243,21 +243,21 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker $USER
 ```
 
-### Executando uma imagem
+### Executando um container
 
-Para executar uma imagem podemos acessar o [Docker Hub](https://hub.docker.com/ 'Docker Hub'), que é um repositório de imagens de código aberto publicadas, e procurar uma imagem. Vou começar escolhendo a imagem oficial do [Ubuntu](https://hub.docker.com/_/ubuntu 'Imagem Ubuntu').
+Para executar um container podemos acessar o [Docker Hub](https://hub.docker.com/ 'Docker Hub'), que é um repositório de imagens de código aberto publicadas, e procurar uma imagem. Vou começar escolhendo a imagem oficial do [Ubuntu](https://hub.docker.com/_/ubuntu 'Imagem Ubuntu').
 
 ```shell
 docker run ubuntu
 ```
 
-Sempre que executar uma imagem o seguinte fluxo irá acontecer:
+Sempre que executar um container o seguinte fluxo irá acontecer:
 
 <Mermaid
   chart={`
     flowchart LR
       local{Tem imagem local?}
-      exe[Executa a imagem]
+      exe[Executa o container]
       local -->|não| download[Baixa imagem] --> hash[Valida o hash] --> exe
       local -->|sim| exe
   `}
@@ -275,7 +275,7 @@ Status: Downloaded newer image for ubuntu:latest
 
 Também vai notar que nada acontece, mesmo rodando o comando outra vez. Isso é porque o padrão do docker é **encerar a execução** do container caso não tenha **nenhum processo** rodando.
 
-Podemos executar um comando da imagem declarando ele na frente do id da imagem:
+Podemos executar um comando do container declarando ele na frente do id da imagem:
 
 ```shell
 docker run ubuntu echo Olá mundo
@@ -295,13 +295,13 @@ Para listar os containers em execução vamos primeiro executar o bash em modo i
 docker run -it ubuntu bash
 ```
 
-E em outro terminal e execute o comando:
+E em outro terminal execute o comando:
 
 ```shell
 docker ps
 ```
 
-### Deletando images e containers
+### Deletando imagens e containers
 
 #### Deleta um container
 
@@ -491,7 +491,7 @@ docker login -u [username]
 docker build username/imagename:1.0.0
 ```
 
-4. Execute o comando
+4. Execute o comando de publicação
 
 ```shell
 docker push username/imagename:1.0.0
