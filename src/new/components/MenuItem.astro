@@ -1,12 +1,19 @@
 ---
 import { Svg } from '@svjson/react';
 
-const { label, icon, isCurrentColor, ...props } = Astro.props;
+const {
+  as: Tag = 'a',
+  label,
+  icon,
+  isCurrentColor,
+  className,
+  ...props
+} = Astro.props;
 ---
 
-<a class="menu__item" title={label} {...props}>
+<Tag class:list={['menu__item', className]} title={label} {...props}>
   <Svg alt={label} src={icon} isCurrentColor={isCurrentColor} width="30px" />
-</a>
+</Tag>
 
 <style is:global>
   .enabled {

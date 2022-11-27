@@ -1,6 +1,4 @@
 ---
-import { Svg } from '@svjson/react';
-
 import {
   br,
   github,
@@ -13,9 +11,10 @@ import {
 } from '@/assets/svg';
 
 import MenuItem from './MenuItem.astro';
+import ToggleTheme from './ToggleTheme.astro';
 
 const { lang } = Astro.props;
-console.log(lang);
+console.log({ lang });
 ---
 
 <header class="header">
@@ -24,7 +23,8 @@ console.log(lang);
     <MenuItem label="Posts" href="/posts" icon={write} isCurrentColor />
     <MenuItem label="About" href="/about" icon={person} isCurrentColor />
     <div class="divider"></div>
-    <MenuItem label="pt-BR" href="/" icon={br} />
+    <MenuItem as="button" label="pt-BR" icon={br} />
+    <ToggleTheme />
     <div class="divider"></div>
     <MenuItem
       label="Github"
@@ -61,7 +61,8 @@ console.log(lang);
   .enabled {
     .header {
       @apply flex
-      justify-center
+      justify-end
+      sm:justify-center
       fixed
       bottom-4
       w-full;
@@ -81,6 +82,8 @@ console.log(lang);
       .header__nav {
         @apply flex
         items-center
+        flex-col
+        sm:flex-row
         gap-6
         p-4
         px-8
@@ -96,7 +99,8 @@ console.log(lang);
         .divider {
           @apply bg-current
           border
-          h-full
+          w-full
+          sm:h-full
           border-gray-300
           dark:bg-dark-currentLine;
         }

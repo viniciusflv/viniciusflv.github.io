@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,9 +25,24 @@
             @apply flex
             flex-col
             w-full
+            pb-32
             bg-gray-100
             dark:bg-dark-darkest;
           }
+        }
+      }
+
+      * {
+        @apply scroll-smooth
+        transition-colors
+        duration-75;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0ms !important;
+          transition-duration: 0ms !important;
+          scroll-behavior: initial;
         }
       }
     </style>

@@ -1,0 +1,63 @@
+---
+import { moon, sun } from '@/assets/svg';
+
+import MenuItem from './MenuItem.astro';
+---
+
+<script>
+  const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
+
+  function toggleTheme(theme: string) {
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  }
+
+  toggleTheme(initialTheme);
+
+  const toggleThemeBtns = document.querySelectorAll('.theme__toggle');
+
+  Array.from(toggleThemeBtns).map((toggleThemeBtn) => {
+    toggleThemeBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      toggleTheme(isDark ? 'light' : 'dark');
+    });
+  });
+</script>
+
+<MenuItem
+  className="theme__toggle theme__toggle--dark"
+  as="button"
+  label="Dark"
+  icon={moon}
+  isCurrentColor
+/>
+<MenuItem
+  className="theme__toggle theme__toggle--light"
+  as="button"
+  label="Light"
+  icon={sun}
+  isCurrentColor
+/>
+
+<style is:global>
+  .enabled {
+    .theme__toggle {
+      display: none;
+    }
+  }
+
+  .dark .theme__toggle--dark {
+    display: flex;
+  }
+
+  .light .theme__toggle--light {
+    display: flex;
+  }
+</style>
