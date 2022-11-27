@@ -12,47 +12,53 @@ import {
   write,
 } from '@/assets/svg';
 
+import MenuItem from './MenuItem.astro';
+
 const { lang } = Astro.props;
 console.log(lang);
 ---
 
 <header class="header">
   <nav class="header__nav">
-    <a title="home" href="/">
-      <Svg alt="home" src={home} isCurrentColor width="30px" />
-    </a>
-    <a title="posts" href="posts">
-      <Svg alt="posts" src={write} isCurrentColor width="30px" />
-    </a>
-    <a title="about" href="about">
-      <Svg alt="about" src={person} isCurrentColor width="30px" />
-    </a>
-    <div class="bg-current border border-gray-300 h-full"></div>
-    <button title="pt-BR">
-      <Svg alt="about" src={br} width="30px" />
-    </button>
-    <div class="bg-current border border-gray-300 h-full"></div>
-    <a title="github" target="_blank" href="https://github.com/viniciusflv/">
-      <Svg alt="github" src={github} isCurrentColor width="30px" />
-    </a>
-    <a
-      title="linkedin"
+    <MenuItem label="Home" href="/" icon={home} isCurrentColor />
+    <MenuItem label="Posts" href="/posts" icon={write} isCurrentColor />
+    <MenuItem label="About" href="/about" icon={person} isCurrentColor />
+    <div class="divider"></div>
+    <MenuItem label="pt-BR" href="/" icon={br} />
+    <div class="divider"></div>
+    <MenuItem
+      label="Github"
+      target="_blank"
+      href="https://github.com/viniciusflv/"
+      icon={github}
+      isCurrentColor
+    />
+    <MenuItem
+      label="Linkedin"
       target="_blank"
       href="https://www.linkedin.com/in/viniciusflv/"
-    >
-      <Svg alt="linkedin" src={linkedin} isCurrentColor width="30px" />
-    </a>
-    <a title="twitter" target="_blank" href="https://twitter.com/viniciusflv1/">
-      <Svg alt="twitter" src={twitterLogo} isCurrentColor width="30px" />
-    </a>
-    <a title="mastodon" target="_blank" href="https://mas.to/@viniciusflv/">
-      <Svg alt="mastodon" src={mastodon} isCurrentColor width="30px" />
-    </a>
+      icon={linkedin}
+      isCurrentColor
+    />
+    <MenuItem
+      label="Twitter"
+      target="_blank"
+      href="https://twitter.com/viniciusflv1/"
+      icon={twitterLogo}
+      isCurrentColor
+    />
+    <MenuItem
+      label="Mastodon"
+      target="_blank"
+      href="https://mas.to/@viniciusflv/"
+      icon={mastodon}
+      isCurrentColor
+    />
   </nav>
 </header>
 
-<style>
-  html.enabled {
+<style is:global>
+  .enabled {
     .header {
       @apply flex
       justify-center
@@ -83,45 +89,16 @@ console.log(lang);
         text-gray-400
         border
         border-gray-300
-        bg-white;
+        dark:border-dark-currentLine
+        bg-white
+        dark:bg-dark-background;
 
-        a,
-        button {
-          @apply relative
-          flex
-          flex-col
-          gap-1
-          items-center
-          outline-none
-          transition-all
-          delay-75
-          duration-75
-          ease-in-out;
-
-          &:after {
-            content: attr(title);
-            @apply absolute
-            -bottom-5
-            opacity-0
-            rounded
-            text-xs
-            whitespace-nowrap
-            font-bold
-            transition-all
-            delay-75
-            duration-75
-            ease-in-out;
-          }
-
-          &:hover,
-          &:focus,
-          &:focus-within {
-            @apply -translate-y-2
-            text-dark-comment;
-            &:after {
-              @apply opacity-100;
-            }
-          }
+        .divider {
+          @apply bg-current
+          border
+          h-full
+          border-gray-300
+          dark:bg-dark-currentLine;
         }
       }
     }

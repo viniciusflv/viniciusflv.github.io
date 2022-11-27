@@ -1,38 +1,52 @@
 <section class="hero">
-  <h1>Welcome to my personal website!</h1>
-  <h2>
-    Here I talk about my experiences and technologies, that I'm passionate
-    about.
-  </h2>
-  <a href="">link</a>
+  <div class="hero__content">
+    <header class="hero__header">
+      <h1>Welcome to my personal website!</h1>
+      <h2>
+        Here I talk about my experiences and technologies, that I'm passionate
+        about.
+      </h2>
+      <a href="">link</a>
+    </header>
+  </div>
 </section>
 
-<style>
-  html.enabled {
+<style is:global>
+  .enabled {
     .hero {
-      @apply container
-      mx-auto
-      mb-32
+      @apply mb-32
       p-8
-      rounded-lg
+      py-32
       shadow-2xl
       text-gray-400
-      border
-      border-gray-300
-      bg-white;
+      bg-white
+      dark:bg-dark-background;
 
-      h1 {
-        @apply text-2xl
-        md:text-3xl
-        lg:text-5xl
-        font-bold
-        tracking-wider;
+      .hero__content {
+        @apply container
+        mx-auto
+        grid
+        md:grid-cols-2;
 
-        @apply text-transparent
-        bg-clip-text
-        bg-gradient-to-r
-        from-dark-comment
-        to-dark-purple;
+        .hero__header {
+          @apply flex
+          flex-col
+          gap-8;
+
+          h1 {
+            @apply text-2xl
+            md:text-3xl
+            lg:text-5xl
+            font-bold
+            tracking-wider;
+
+            @apply text-transparent
+            bg-clip-text
+            bg-gradient-to-r
+            from-dark-comment
+            to-dark-purple;
+          }
+        }
       }
     }
   }

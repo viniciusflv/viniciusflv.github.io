@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" class="enabled">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
-    <slot />
-    <style>
+  <body class="enabled">
+    <section class="page">
+      <slot />
+    </section>
+    <style is:global>
+      .dark .enabled {
+        color-scheme: dark;
+      }
       html,
       body {
-        width: 100%;
-        height: 100vh;
-        display: flex;
+        &.enabled {
+          width: 100%;
+          height: 100vh;
+          display: flex;
+
+          .page {
+            @apply flex
+            flex-col
+            w-full
+            bg-gray-100
+            dark:bg-dark-darkest;
+          }
+        }
       }
     </style>
   </body>
