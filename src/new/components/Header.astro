@@ -2,6 +2,7 @@
 import { Svg } from '@svjson/react';
 
 import {
+  br,
   github,
   home,
   linkedin,
@@ -23,11 +24,13 @@ console.log(lang);
     <a title="posts" href="posts">
       <Svg alt="posts" src={write} isCurrentColor width="30px" />
     </a>
-    <a title="person" href="person">
-      <Svg alt="person" src={person} isCurrentColor width="30px" />
+    <a title="about" href="about">
+      <Svg alt="about" src={person} isCurrentColor width="30px" />
     </a>
     <div class="bg-current border border-gray-300 h-full"></div>
-    pt-br
+    <button title="pt-BR">
+      <Svg alt="about" src={br} width="30px" />
+    </button>
     <div class="bg-current border border-gray-300 h-full"></div>
     <a title="github" target="_blank" href="https://github.com/viniciusflv/">
       <Svg alt="github" src={github} isCurrentColor width="30px" />
@@ -57,6 +60,18 @@ console.log(lang);
       bottom-4
       w-full;
 
+      @keyframes popup {
+        0% {
+          @apply -bottom-full;
+        }
+
+        50% {
+          @apply bottom-10;
+        }
+      }
+
+      animation: popup 500ms 1;
+
       .header__nav {
         @apply flex
         items-center
@@ -70,22 +85,28 @@ console.log(lang);
         border-gray-300
         bg-white;
 
-        a {
+        a,
+        button {
           @apply relative
+          flex
+          flex-col
+          gap-1
+          items-center
           outline-none
           transition-all
           delay-75
           duration-75
           ease-in-out;
 
-          &:before {
-            content: '';
+          &:after {
+            content: attr(title);
             @apply absolute
-            top-[-10px]
-            w-0
-            h-1
+            -bottom-5
+            opacity-0
             rounded
-            bg-gray-500
+            text-xs
+            whitespace-nowrap
+            font-bold
             transition-all
             delay-75
             duration-75
@@ -93,11 +114,12 @@ console.log(lang);
           }
 
           &:hover,
-          &:focus {
-            @apply translate-y-1
+          &:focus,
+          &:focus-within {
+            @apply -translate-y-2
             text-dark-comment;
-            &:before {
-              @apply w-7;
+            &:after {
+              @apply opacity-100;
             }
           }
         }

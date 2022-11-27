@@ -1,4 +1,5 @@
 export * from './twitterLogo';
+export * from './br';
 export * from './github';
 export * from './glasses';
 export * from './hero';
@@ -9,4 +10,5 @@ export * from './meRicknmortyFace';
 export * from './meRicknmorty';
 export * from './person';
 export * from './smile';
+export * from './usa';
 export * from './write';
