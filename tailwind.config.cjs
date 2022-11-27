@@ -1,4 +1,6 @@
 const plugin = require('tailwindcss/plugin');
+const flattenColorPalette =
+  require('tailwindcss/lib/util/flattenColorPalette').default;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -34,13 +36,42 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function ({ matchUtilities }) {
-      matchUtilities({
-        'grid-area': (gridArea) => ({ gridArea }),
-        'grid-areas': (gridAreas) => ({
-          gridTemplateAreas: gridAreas.replaceAll(',', ' '),
-        }),
-      });
+    plugin(function ({ matchUtilities, theme, e }) {
+      matchUtilities(
+        {
+          glow: (value) => ({
+            border: `1px solid ${value}`,
+            filter: `drop-shadow(0 0 0.3rem ${value})`,
+          }),
+          'glow-t': (value) => ({
+            borderTop: `1px solid ${value}`,
+            filter: `drop-shadow(0 0 0.3rem ${value})`,
+          }),
+          'glow-b': (value) => ({
+            borderBottom: `1px solid ${value}`,
+            filter: `drop-shadow(0 0 0.3rem ${value})`,
+          }),
+          'glow-l': (value) => ({
+            borderLeft: `1px solid ${value}`,
+            filter: `drop-shadow(0 0 0.3rem ${value})`,
+          }),
+          'glow-r': (value) => ({
+            borderRight: `1px solid ${value}`,
+            filter: `drop-shadow(0 0 0.3rem ${value})`,
+          }),
+        },
+        {
+          values: flattenColorPalette(theme('colors')),
+          type: ['color'],
+          respectPrefix: true,
+        },
+      ),
+        matchUtilities({
+          'grid-area': (gridArea) => ({ gridArea }),
+          'grid-areas': (gridAreas) => ({
+            gridTemplateAreas: gridAreas.replaceAll(',', ' '),
+          }),
+        });
     }),
   ],
 };

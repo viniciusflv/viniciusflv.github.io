@@ -1,3 +1,7 @@
+---
+import Header from '../components/Header.astro';
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +12,7 @@
   </head>
   <body class="enabled">
     <section class="page">
+      <Header />
       <slot />
     </section>
     <style is:global>
@@ -26,7 +31,6 @@
             flex-col
             w-full
             pb-32
-            bg-gray-100
             dark:bg-dark-darkest;
           }
         }
