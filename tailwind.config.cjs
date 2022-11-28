@@ -67,6 +67,9 @@ module.exports = {
         },
       ),
         matchUtilities({
+          'grid-cols-auto-fit': (value) => ({
+            gridTemplateColumns: `repeat(auto-fit,${value})`,
+          }),
           'grid-area': (gridArea) => ({ gridArea }),
           'grid-areas': (gridAreas) => ({
             gridTemplateAreas: gridAreas.replaceAll(',', ' '),

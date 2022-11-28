@@ -5,9 +5,17 @@ import MenuItem from './MenuItem.astro';
 ---
 
 <script>
-  const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  const initialTheme = (() => {
+    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      theme = localStorage.getItem('theme') ?? '';
+    }
+
+    return theme;
+  })();
 
   function toggleTheme(theme: string) {
     if (theme === 'light') {
@@ -17,6 +25,8 @@ import MenuItem from './MenuItem.astro';
       document.documentElement.classList.remove('light');
       document.documentElement.classList.add('dark');
     }
+
+    window.localStorage.setItem('theme', theme);
   }
 
   toggleTheme(initialTheme);
