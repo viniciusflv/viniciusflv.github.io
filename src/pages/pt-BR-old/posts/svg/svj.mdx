@@ -1,0 +1,106 @@
+---
+layout: '@/layouts/Post.astro'
+categories: SVG
+date: 2022-10-22
+title: Como usar SVGs com React?
+description: SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
+summary: SVG (Gráficos Vetoriais Escalonáveis) é um formato de representação de imagens, que usa coordenadas vetoriais para desenhar a imagem
+---
+
+# Como usar SVGs com React?
+
+## SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
+
+---
+
+### O que são SVGs?
+
+SVG (**Gráficos Vetoriais Escalonáveis**) é um formato de representação de imagens, que usa coordenadas vetoriais para desenhar a imagem. Os formatos mais tradicionais como **png** e **jpg** fazem parte da classificação **bitmap**, que funciona mapeando e associando cada **pixel** a uma **cor**, isso faz com que ao realizar um **zoom** a imagem tenha **perda qualidade**. O que não acontece com o SVG por sua natureza, por isso ele é **escalonável**.
+
+### Como carregar em aplicações React?
+
+Existem várias maneiras:
+
+- Você pode abrir o arquivo .svg e **copiar e colar** as tags no HTML
+- Você pode **carregar como imagem**
+- Você pode usar um [loader](https://www.npmjs.com/package/@svgr/webpack 'npm svgr') para converter para um componente
+- Ou você pode converter seu **SVG para JSON** que um formato nativo do JavaScript, usando a [CLI svj](https://www.npmjs.com/package/svj 'npm svj')
+
+#### Prós e Contras
+
+Vamos **analisar** cada um desses métodos levando em consideração os **seguintes pontos**:
+
+- **Esforço unitário** - Esforço para executar uma única vez
+- **Escalabilidade** - Esforço para executar múltiplas vezes
+- **Otimização** - Eliminação de tags inúteis
+- **Desempenho** - Velocidade de carregamento no navegador
+- **Tamanho** - Custo de carregamento no navegador
+
+##### Método: Copiar o conteúdo do arquivo SVG
+
+- Prós
+  - **Esforço unitário**: É simples e direto
+  - **Desempenho**: Por estar embedado no HTML é bom
+- Contras
+  - **Escalabilidade**: É complicado, pois é um processo manual
+  - **Otimização**: Exige conhecimento do desenvolvedor sobre SVGs, para fazer manualmente
+  - **Tamanho**: Pode ser que seja grande, dependendo do da otimização feita
+
+##### Método: Carregar como imagem
+
+- Prós
+  - **Esforço unitário**: Inexistente pois usa a plataforma
+  - **Escalabilidade**: Tão escalável quanto qualquer imagem
+- Contras
+  - **Otimização**: Exige conhecimento do desenvolvedor sobre SVGs, para fazer manualmente
+  - **Desempenho**: Desempenho comprometido por exigir a requisição do arquivo .svg
+  - **Tamanho**: Pode ser que seja grande, dependendo do da otimização feita
+
+##### Método: Usar um loader de componente
+
+- Prós
+  - **Esforço unitário**: Inexistente pois é feito pelo loader
+  - **Escalabilidade**: Tão escalável quanto qualquer componente
+  - **Otimização**: É otimizado pelo loader
+- Contras
+  - **Desempenho**: Desempenho comprometido pela quantidade de JavaScript
+  - **Tamanho**: Muito JavaScript pra algo não interativo
+
+##### Método: Converter o SVG para JSON com a CLI do [svj](https://www.npmjs.com/package/svj 'npm svj')
+
+- Prós
+  - **Esforço unitário**: Inexistente pois é feito pela CLI
+  - **Escalabilidade**: Inexistente pois é feito pela CLI
+  - **Otimização**: É otimizado pela CLI
+  - **Desempenho**: Por estar embedado no HTML é bom
+  - **Tamanho**: É Three Shakeable e potencialmente lazy loaded
+
+### Como usar a CLI e o adaptador para React
+
+Reserve uma **pasta para seus SVGs** e outra para o **destino dos arquivos** (ambas podem ser as mesmas) e execute a CLI com o seguinte comando:
+
+```shell
+npx svj -i <svg-folder-path> -d <dist-folder> -r
+```
+
+Depois **instale** o adaptador para React:
+
+```shell
+npm i @svjson/react
+```
+
+Agora você pode **importar** no seu componente, ambos o JSON do SVG e o adaptador para **renderizar** o SVG. Passando o svg na prop **src** e um texto alternativo na prop **alt** para acessibilidade:
+
+```tsx
+import { icon } from '<dist-folder>';
+import { Svg } from '@svjson/react';
+
+export function IconText() {
+  return (
+    <span>
+      <span>text</span>
+      <Svg alt="icon" src={icon} />
+    </span>
+  );
+}
+```

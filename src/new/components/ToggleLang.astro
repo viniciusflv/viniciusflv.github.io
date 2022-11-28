@@ -1,0 +1,43 @@
+---
+import { br, usa } from '@/assets/svg';
+
+import MenuItem from './MenuItem.astro';
+
+const { lang, knownLanguages } = Astro.props;
+---
+
+<script>
+  const toggleLangBtn = document.getElementById('toggle-lang');
+  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
+  const knownLanguages =
+    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
+
+  toggleLangBtn?.addEventListener('click', () => {
+    window.location.pathname = window.location.pathname.replace(
+      lang,
+      knownLanguages.find((l) => l !== lang) || lang,
+    );
+  });
+</script>
+
+{
+  lang === 'en' ? (
+    <MenuItem
+      as="button"
+      id="toggle-lang"
+      label="en"
+      icon={usa}
+      data-lang={lang}
+      data-languages={knownLanguages}
+    />
+  ) : (
+    <MenuItem
+      as="button"
+      id="toggle-lang"
+      label="pt-BR"
+      icon={br}
+      data-lang={lang}
+      data-languages={knownLanguages}
+    />
+  )
+}

@@ -3,26 +3,28 @@
     <header class="hero__header">
       <slot />
     </header>
+    <slot name="image" />
   </div>
 </section>
 
 <style is:global>
   .enabled {
     .hero {
-      @apply mb-32
-      p-8
-      py-32
-      shadow-lg
+      @apply shadow-lg
       text-gray-400
       bg-gray-200
       dark:bg-dark-background
-      glow-b-dark-purple
+      glow-b-dark-comment
       dark:glow-b-dark-green;
 
       .hero__content {
         @apply container
+        p-8
+        xl:p-32
         mx-auto
         grid
+        items-center
+        grid-rows-[300px]
         md:grid-cols-2;
 
         .hero__header {
@@ -40,8 +42,8 @@
             @apply text-transparent
             bg-clip-text
             bg-gradient-to-r
-            from-dark-comment
-            to-dark-purple
+            from-dark-currentLine
+            to-dark-comment
             dark:from-dark-cyan 
             dark:to-dark-green;
           }

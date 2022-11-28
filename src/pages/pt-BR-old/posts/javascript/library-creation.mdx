@@ -1,0 +1,321 @@
+---
+layout: '@/layouts/Post.astro'
+categories: JavaScript
+date: 2022-11-02
+title: Como criar uma biblioteca JavaScript?
+description: Com o registro de software npm, você também pode contribuir para a comunidade open source.
+summary: Usando tsup, turborepo e changesets, nunca foi tão fácil criar sua própria biblioteca
+---
+
+import { Image } from '@astrojs/image/components';
+
+import changesetChangeScope from '@/assets/changeset-change-scope.png';
+import changesetChangeSummary from '@/assets/changeset-change-summary.png';
+import changesetChange from '@/assets/changeset-change.png';
+import npmAddOrg from '@/assets/npm-add-org.png';
+import npmAvatar from '@/assets/npm-avatar.png';
+import npmLogin from '@/assets/npm-login.png';
+import npmOrgName from '@/assets/npm-org-name.png';
+
+# Como criar uma biblioteca JavaScript?
+
+## Com o registro de software npm, você também pode contribuir para a comunidade open source.
+
+---
+
+### Crie uma conta no npm registry
+
+1. Acesse o [cadastro do npm](https://www.npmjs.com/signup 'cadastro do npm') e crie uma nova conta
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm login"
+  format="webp"
+  src={npmLogin.src}
+  aspectRatio="5:8"
+  width={300}
+/>
+
+2. Depois de realizar o login va até o avatar e clique em **"Packages"**, como sua conta foi recentemente criada é esperado que não exista nenhum pacote
+
+<Image
+  class="rounded shadow-2xl"
+  alt="npm avatar"
+  format="webp"
+  src={npmAvatar.src}
+  aspectRatio="5:8"
+  width={300}
+/>
+
+3. Para criar um pacote, clique no ícone de **"+"** ao lado de **"Organizations"**
+
+<Image
+  class="rounded shadow-2xl"
+  alt="adicionar organização"
+  format="webp"
+  src={npmAddOrg.src}
+  aspectRatio="5:5"
+  width={300}
+/>
+
+4. Em seguida escolha um **nome único** referente a sua organização ou conjunto de bibliotecas, o ideal é que seja pequeno, sem caracteres especiais e caixa baixa, já que será o prefixo das suas libs (Ex: Se a organização for **myorg** e a biblioteca **mylib** ficaria assim **@myorg/mylib**)
+
+<Image
+  class="rounded shadow-2xl"
+  alt="nome da organização"
+  format="webp"
+  src={npmOrgName.src}
+  aspectRatio="6:7"
+  width={300}
+/>
+
+5. Ao clicar em **"Create"**, o npm vai validar se esse nome está disponível, e se tiver criará a organização
+
+### Criando o projeto
+
+Comece criando um arquivo package.json na raiz do projeto com o seguinte comando:
+
+```shell
+npm init -y
+```
+
+#### Configurando o monorepo
+
+Como a proposta é trabalhar com múltiplos pacotes, vamos começar instalando o [turborepo](https://turbo.build/repo/docs 'Documentação do turborepo'), que é um gerenciador de monorepos:
+
+```shell
+npm i -D turborepo@latest
+```
+
+Após a instalação crie uma arquivo **turbo.json** com o seguinte conteúdo:
+
+```json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "bundle": {
+      "dependsOn": ["^bundle"],
+      "outputs": ["dist/**"]
+    }
+  }
+}
+```
+
+Agora crie uma pasta **/libs** no seu projeto. E em seguida atualize o **package.json** declarando no atributo workspaces essa pasta.
+
+```json
+{
+  ...
+  "workspaces": [
+    "libs/*"
+  ],
+  "scripts" : {
+    "bundle": "turbo run bundle"
+  }
+  ...
+}
+```
+
+### Criando uma biblioteca
+
+#### Configurando o package.json da biblioteca
+
+Crie uma pasta da biblioteca (Ex: libs/mylib) e dentro dela crie um arquivo package.json de acordo com as definições abaixo.
+
+Para que a lib seja corretamente publicada é necessário a adição de algumas informações de referência:
+
+- **name** - Nome da lib (iniciando com o nome da organização)
+- **version** - Versão da lib (Não alterar manualmente)
+- **description** - Descrição da função da lib
+- **private** - Se esse projeto é publicável ou não (Sempre true)
+- **licence** - Licença de uso
+- **main** - Nome do arquivo principal da lib
+- **types** - Nome do arquivo de tipos
+- **module** - Nome do arquivo de módulos ECMAScript
+- **files** - Array de arquivo a serem adicionados além dos descritos acima
+- **publishConfig** - Configurações de publicação (registry de publicação)
+- **repository** - Endereço do repositório de código
+- **keywords** - Palavras chave da lib
+
+```json
+{
+  "name": "@<org>/<name>",
+  "version": "0.0.0",
+  "description": "<description>",
+  "private": false,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "files": ["dist/"],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<http-url>.git"
+  },
+  "keywords": ["<keywords>"]
+}
+```
+
+#### Configurando o empacotador de bibliotecas
+
+No terminal vá até o caminho da sua lib e instale o **tsup**, que um empacotador que vai compilar seu código para uma estrutura publicável:
+
+```shell
+npm i -D tsup esbuild-node-externals
+```
+
+O **turborepo** possivelmente irá adicionar essas libs no **/node_modules** da **raiz do projeto**, então não se espante caso não tenha sido criado. Após a instalação, vá até o **package.json da sua biblioteca** e adicione o comando:
+
+```json
+{
+  ...
+  "scripts" : {
+    "bundle": "tsup"
+  }
+  ...
+}
+```
+
+Esse comando será referenciado pelo **`turbo run bundle`** definido no package.json raiz e no turbo.json, assim sempre que exista um comando igual nas bibliotecas, ele **também será executado** em paralelo.
+
+Por fim crie um arquivo na biblioteca chamado **tsup.config.ts** e coloque o seguinte conteúdo:
+
+```ts
+import { defineConfig } from 'tsup';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
+
+defineConfig({
+  entry = ['src/index.ts'],
+  platform: 'node',
+  format: ['cjs', 'esm'],
+  splitting: false,
+  sourcemap: true,
+  clean: true,
+  dts: true,
+  esbuildPlugins: [nodeExternalsPlugin()],
+});
+```
+
+Agora na biblioteca podemos criar um arquivo **`src/index.ts`** que vai ser o ponto de entrada para a compilação, que será executada na raiz do projeto com o comando:
+
+```shell
+npm run bundle
+```
+
+### Configurando o controle de versão para a publicação
+
+Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o [changeset](https://github.com/changesets/changesets 'github do changeset'). Então execute o seguinte comando na raiz do projeto:
+
+```shell
+npm install @changesets/cli && npx changeset init
+```
+
+Esse comando irá instalar a CLI e criar a pasta **.changeset/**, que servirá como configuração e centralização de arquivos de mudanças declaradas a serem aplicadas.
+
+A seguir no package.json da raiz do projeto adicione os seguintes comandos:
+
+```json
+{
+  ...
+  "scripts" : {
+    "bundle": "turbo run bundle",
+    "change": "changeset",
+    "promote": "changeset version",
+    "publish": "changeset publish",
+  }
+  ...
+}
+```
+
+#### Change
+
+Esse comando usa a pasta criada pelo `npx changeset init` para declarar uma nova versão, mas não atualizando a versão, apenas cria uma arquivo markdown com o que for descrito. Esses arquivos são gerados com nomes aleatórios para que possam ser megiados por diferentes pessoas.
+
+- Primeiro ele pede para selecionar as bibliotecas que serão atualizadas:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src={changesetChange.src}
+    aspectRatio="4:2"
+    width={400}
+  />
+  <br />
+
+- Em seguida ele pede para definir se a mudança é major ou minor e seleciona patch automaticamente caso alguma não entre nessas categorias:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src={changesetChangeScope.src}
+    aspectRatio="12:2"
+    width={400}
+  />
+  <br />
+
+- O ultimo passo é adicionar a descrição da mudança:
+
+  <br />
+  <Image
+    class="rounded shadow-2xl"
+    alt="npm login"
+    format="webp"
+    src={changesetChangeSummary.src}
+    aspectRatio="20:4"
+    width={400}
+  />
+  <br />
+
+- Agora será criado o arquivo mencionado anteriormente:
+
+  <br />
+
+  ```markdown
+  ---
+  'svj': patch
+  ---
+
+  change description
+  ```
+
+#### Promote
+
+Esse comando usa o arquivo de declaração de versão, gerado anteriormente, para promover a versão e criar ou atualizar o CHANGELOG.md:
+
+```markdown
+## 2.2.4
+
+### Patch Changes
+
+- change description
+
+## 2.2.3
+
+...
+```
+
+#### Publish
+
+Após a declaração das mudanças e da promoção da versão das libs, estamos prontos para publicar a lib. O primeiro passo é realizar a autenticação no npm registry. Para isso execute o seguinte comando:
+
+```shell
+npm login
+```
+
+Ele irá pedir nome de **usuário senha e email**. E provavelmente vai mandar um email com uma **senha temporária (OTP)** para confirmar a autenticação.
+
+Assim que estiver autenticado, se certifique que o código está compilado e, execute o comando de publicação:
+
+```shell
+npm run publish
+```
+
+E é isso, tudo pronto!!!

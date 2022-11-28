@@ -1,0 +1,71 @@
+---
+import fs from 'fs';
+
+import { hero } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import Hero from '@/components/Hero.astro';
+import PostPreview from '@/components/PostPreview.astro';
+import Tag from '@/components/Tag.astro';
+import Layout from '@/layouts/Layout.astro';
+
+const files = await Astro.glob('./posts/**/*.mdx');
+
+const categories = files
+  .filter(({ frontmatter }) => frontmatter.category)
+  .map(({ frontmatter, url }) => ({
+    label: frontmatter.category,
+    value: url,
+  }));
+
+const posts = files
+  .filter(({ frontmatter }) => frontmatter.categories)
+  .sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date).setHours(24);
+    const dateB = new Date(b.frontmatter.date).setHours(24);
+
+    return dateB - dateA;
+  });
+
+const meta = {
+  title: 'Bem vindo ao meu site pessoal!',
+  keywords: 'programming,front-end,javascript,typescript,react,technologies',
+  description: `Aqui eu falo sobre minhas experiências e as tecnologias que sou apaixonado`,
+};
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+>
+  <Hero clip={hero}>
+    <h1>{meta.title}</h1>
+    <h2>
+      {meta.description}
+    </h2>
+    <div class="flex flex-wrap gap-4 w-full">
+      <Button href="posts">Minhas postagens</Button>
+      <Button href="about">Sobre mim</Button>
+    </div>
+  </Hero>
+  <div class="flex flex-wrap gap-8 container p-8 mx-auto">
+    <main class="flex flex-col grow gap-8">
+      <h3>Posts publicados recentemente</h3>
+      {
+        posts.map(({ frontmatter, url }) => (
+          <PostPreview {...frontmatter} url={url} />
+        ))
+      }
+    </main>
+    <aside class="flex flex-col gap-8">
+      <h3>Por categoria</h3>
+      <div class="flex items-start self-start flex-wrap gap-4 w-52 text-xs">
+        {
+          categories.map(({ label, value }) => (
+            <Tag value={value} label={label} />
+          ))
+        }
+      </div>
+    </aside>
+  </div>
+</Layout>

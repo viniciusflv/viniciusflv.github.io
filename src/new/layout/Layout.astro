@@ -1,18 +1,39 @@
 ---
+import SEO from '@/layouts/SEO.astro';
+import { getLanguageFromURL } from '@/util';
+
 import Header from '../components/Header.astro';
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+const knownLanguages = ['en', 'pt-BR'];
+const formatAlternateHref = (hreflang: string) =>
+  new URL(
+    Astro.url.pathname.replace(/^\/(.*)\//g, `/${hreflang}/`),
+    Astro.site,
+  );
+console.log({ lang });
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta content={lang} property="og:locale" />
+    {
+      knownLanguages.map((hreflang) => (
+        <link
+          rel="alternate"
+          href={formatAlternateHref(hreflang)}
+          hreflang={hreflang}
+        />
+      ))
+    }
+    <SEO lang={lang} {...Astro.props} />
   </head>
   <body class="enabled">
     <section class="page">
-      <Header />
+      <Header lang={lang} knownLanguages={knownLanguages} {...Astro.props} />
       <slot />
     </section>
     <style is:global>
@@ -22,16 +43,15 @@ import Header from '../components/Header.astro';
       html,
       body {
         &.enabled {
+          @apply dark:bg-dark-darkest;
           width: 100%;
           height: 100vh;
           display: flex;
 
           .page {
-            @apply flex
-            flex-col
+            @apply grid
             w-full
-            pb-32
-            dark:bg-dark-darkest;
+            h-full;
           }
         }
       }
@@ -40,6 +60,18 @@ import Header from '../components/Header.astro';
         @apply scroll-smooth
         transition-colors
         duration-75;
+      }
+
+      @media (orientation: landscape) {
+        ::-webkit-scrollbar {
+          @apply w-3;
+        }
+        ::-webkit-scrollbar-track {
+          @apply bg-dark-foreground dark:bg-[color:#0005] rounded-full;
+        }
+        ::-webkit-scrollbar-thumb {
+          @apply rounded-full bg-dark-comment dark:bg-dark-green;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {

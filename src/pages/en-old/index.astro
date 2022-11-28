@@ -1,0 +1,72 @@
+---
+import { hero } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import Hero from '@/components/Hero.astro';
+import PostPreview from '@/components/PostPreview.astro';
+import Tag from '@/components/Tag.astro';
+import Layout from '@/layouts/Layout.astro';
+
+const files = await Astro.glob('./posts/**/*.mdx');
+
+const categories = files
+  .filter(({ frontmatter }) => frontmatter.category)
+  .map(({ frontmatter, url }) => ({
+    label: frontmatter.category,
+    value: url,
+  }));
+
+const posts = files
+  .filter(({ frontmatter }) => frontmatter.categories)
+  .sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date).setHours(24);
+    const dateB = new Date(b.frontmatter.date).setHours(24);
+
+    return dateB - dateA;
+  });
+
+const meta = {
+  title: 'Welcome to my personal website!',
+  keywords: 'programming,front-end,javascript,typescript,react,technologies',
+  description: `
+    Here I talk about my experiences and technologies,
+    that I'm passionate about.
+  `,
+};
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+>
+  <Hero clip={hero}>
+    <h1>{meta.title}</h1>
+    <h2>
+      {meta.description}
+    </h2>
+    <div class="flex flex-wrap gap-4 w-full">
+      <Button href="posts">My Posts</Button>
+      <Button href="about">About Me</Button>
+    </div>
+  </Hero>
+  <div class="flex flex-wrap gap-8 container p-8 mx-auto">
+    <main class="flex flex-col grow gap-8">
+      <h3>Last Published Posts</h3>
+      {
+        posts.map(({ frontmatter, url }) => (
+          <PostPreview {...frontmatter} url={url} />
+        ))
+      }
+    </main>
+    <aside class="flex flex-col gap-8">
+      <h3>By Category</h3>
+      <div class="flex items-start self-start flex-wrap gap-4 w-52 text-xs">
+        {
+          categories.map(({ label, value }) => (
+            <Tag value={value} label={label} />
+          ))
+        }
+      </div>
+    </aside>
+  </div>
+</Layout>

@@ -11,6 +11,7 @@ import {
 } from '@/assets/svg';
 
 import MenuItem from './MenuItem.astro';
+import ToggleLang from './ToggleLang.astro';
 import ToggleTheme from './ToggleTheme.astro';
 
 const { lang } = Astro.props;
@@ -19,11 +20,21 @@ console.log({ lang });
 
 <header class="header">
   <nav class="header__nav">
-    <MenuItem label="Home" href="/" icon={home} isCurrentColor />
-    <MenuItem label="Posts" href="/posts" icon={write} isCurrentColor />
-    <MenuItem label="About" href="/about" icon={person} isCurrentColor />
+    <MenuItem label="Home" href={`/${lang}`} icon={home} isCurrentColor />
+    <MenuItem
+      label="Posts"
+      href={`/${lang}/posts`}
+      icon={write}
+      isCurrentColor
+    />
+    <MenuItem
+      label="About"
+      href={`/${lang}/about`}
+      icon={person}
+      isCurrentColor
+    />
     <div class="divider"></div>
-    <MenuItem as="button" label="pt-BR" icon={br} />
+    <ToggleLang {...Astro.props} />
     <ToggleTheme />
     <div class="divider"></div>
     <MenuItem
