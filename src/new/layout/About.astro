@@ -2,22 +2,15 @@
 import { Svg } from '@svjson/react';
 
 import { meRicknmorty } from '@/assets/svg';
-import Button from '@/components/Button.astro';
 import Page from '@/new/layout/Page.astro';
-import { getLanguageFromURL } from '@/util';
-
-const lang = getLanguageFromURL(Astro.url.pathname);
 ---
 
-<!-- <main class="flex flex-col gap-16 w-full">
-  <slot />
-</main> -->
-<Page meta={Astro.props.frontmatter}>
+<Page {...Astro.props}>
   <picture slot="image" class="hero__figure">
     <Svg alt="Me as a Rick and Morty Character" src={meRicknmorty as any} />
   </picture>
   <Fragment slot="section">
-    <main class="flex flex-col gap-16 w-full">
+    <main class="section__main">
       <slot />
     </main>
   </Fragment>
@@ -45,6 +38,10 @@ const lang = getLanguageFromURL(Astro.url.pathname);
         transition-opacity
         duration-500;
       }
+    }
+
+    .section__main {
+      @apply flex flex-col gap-16 w-full;
     }
   }
 </style>

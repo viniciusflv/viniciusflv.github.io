@@ -6,8 +6,6 @@ import { meRicknmorty } from '@/assets/svg';
 import Button from '@/components/Button.astro';
 import PostPreview from '@/components/PostPreview.astro';
 import Tag from '@/components/Tag.astro';
-import Hero from '@/new/components/Hero.astro';
-import Layout from '@/new/layout/Layout.astro';
 import Page from '@/new/layout/Page.astro';
 import { getLanguageFromURL } from '@/util';
 
@@ -24,7 +22,7 @@ const lang = getLanguageFromURL(Astro.url.pathname);
 const { posts, categories } = Astro.props;
 ---
 
-<Page {...Astro.props}>
+<Page {...Astro.props} {...Astro.props.meta}>
   <div class="hero__buttons">
     <Button href="posts"
       >{lang === 'en' ? 'My Posts' : 'Minhas postagens'}</Button

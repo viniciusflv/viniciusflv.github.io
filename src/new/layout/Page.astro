@@ -2,14 +2,14 @@
 import Hero from '@/new/components/Hero.astro';
 import Layout from '@/new/layout/Layout.astro';
 
-const { meta } = Astro.props;
+const { meta, frontmatter } = Astro.props;
 ---
 
 <Layout {...Astro.props} {...meta}>
   <Hero>
-    <h1>{meta.title}</h1>
+    <h1>{meta?.title || frontmatter?.title}</h1>
     <h2>
-      {meta.description}
+      {meta?.description || frontmatter?.description}
     </h2>
     <slot />
     <figure slot="image">
