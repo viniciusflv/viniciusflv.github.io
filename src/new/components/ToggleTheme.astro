@@ -1,7 +1,11 @@
 ---
+import { Svg } from '@svjson/react';
+
 import { moon, sun } from '@/assets/svg';
 
 import MenuItem from './MenuItem.astro';
+
+const { lang } = Astro.props;
 ---
 
 <script>
@@ -31,30 +35,40 @@ import MenuItem from './MenuItem.astro';
 
   toggleTheme(initialTheme);
 
-  const toggleThemeBtns = document.querySelectorAll('.theme__toggle');
+  const toggleThemeBtn = document.getElementById('theme__toggle');
 
-  Array.from(toggleThemeBtns).map((toggleThemeBtn) => {
-    toggleThemeBtn?.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      toggleTheme(isDark ? 'light' : 'dark');
-    });
+  toggleThemeBtn?.addEventListener('click', function () {
+    const isDark = document.documentElement.classList.contains('dark');
+    toggleTheme(isDark ? 'light' : 'dark');
+
+    toggleThemeBtn?.setAttribute(
+      'aria-pressed',
+      toggleThemeBtn?.getAttribute('aria-pressed') === 'false'
+        ? 'true'
+        : 'false',
+    );
   });
 </script>
 
 <MenuItem
-  className="theme__toggle theme__toggle--dark"
   as="button"
-  label="Dark"
-  icon={moon}
-  isCurrentColor
-/>
-<MenuItem
-  className="theme__toggle theme__toggle--light"
-  as="button"
-  label="Light"
-  icon={sun}
-  isCurrentColor
-/>
+  id="theme__toggle"
+  aria-pressed="false"
+  label={lang === 'en' ? 'Theme' : 'Tema'}
+>
+  <Svg
+    className="w-7 sm:w-8 theme__toggle theme__toggle--dark"
+    alt={lang === 'en' ? 'Dark' : 'Escuro'}
+    src={moon}
+    isCurrentColor
+  />
+  <Svg
+    className="w-7 sm:w-8 theme__toggle theme__toggle--light"
+    alt={lang === 'en' ? 'Light' : 'Claro'}
+    src={sun}
+    isCurrentColor
+  />
+</MenuItem>
 
 <style is:global>
   .enabled {

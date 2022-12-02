@@ -12,12 +12,18 @@ const {
 ---
 
 <Tag class:list={['menu__item', className]} title={label} {...props}>
-  <Svg
-    className="w-7 sm:w-8"
-    alt={label}
-    src={icon}
-    isCurrentColor={isCurrentColor}
-  />
+  {
+    Astro.slots.default ? (
+      <slot />
+    ) : (
+      <Svg
+        className="w-7 sm:w-8"
+        alt={label}
+        src={icon}
+        isCurrentColor={isCurrentColor}
+      />
+    )
+  }
 </Tag>
 
 <style is:global>

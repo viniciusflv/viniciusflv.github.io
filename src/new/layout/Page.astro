@@ -1,0 +1,39 @@
+---
+import Hero from '@/new/components/Hero.astro';
+import Layout from '@/new/layout/Layout.astro';
+
+const { meta } = Astro.props;
+---
+
+<Layout {...Astro.props} {...meta}>
+  <Hero>
+    <h1>{meta.title}</h1>
+    <h2>
+      {meta.description}
+    </h2>
+    <slot />
+    <figure slot="image">
+      <slot name="image" />
+    </figure>
+  </Hero>
+  <section class="section">
+    <slot name="section" />
+  </section>
+</Layout>
+
+<style is:global>
+  .enabled {
+    .section {
+      /* TODO:Gambs */
+      max-width: calc(100vw - 16px);
+      @apply flex
+      flex-wrap
+      gap-8
+      container
+      p-8
+      py-32
+      xl:p-32
+      mx-auto;
+    }
+  }
+</style>

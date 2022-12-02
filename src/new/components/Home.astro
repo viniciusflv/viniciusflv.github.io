@@ -1,0 +1,104 @@
+---
+import { Svg } from '@svjson/react';
+import type { MDXInstance } from 'astro';
+
+import { meRicknmorty } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import PostPreview from '@/components/PostPreview.astro';
+import Tag from '@/components/Tag.astro';
+import Hero from '@/new/components/Hero.astro';
+import Layout from '@/new/layout/Layout.astro';
+import Page from '@/new/layout/Page.astro';
+import { getLanguageFromURL } from '@/util';
+
+export type Props = {
+  meta: Record<string, any>;
+  posts: MDXInstance<Record<string, any>>[];
+  categories: {
+    label: any;
+    value: string | undefined;
+  }[];
+};
+const lang = getLanguageFromURL(Astro.url.pathname);
+
+const { posts, categories } = Astro.props;
+---
+
+<Page {...Astro.props}>
+  <div class="hero__buttons">
+    <Button href="posts"
+      >{lang === 'en' ? 'My Posts' : 'Minhas postagens'}</Button
+    >
+    <Button href="about">{lang === 'en' ? 'About Me' : 'Sobre mim'}</Button>
+  </div>
+  <picture slot="image" class="hero__figure">
+    <Svg alt="Me as a Rick and Morty Character" src={meRicknmorty as any} />
+  </picture>
+  <Fragment slot="section">
+    <main class="section__main">
+      <h3>
+        {
+          lang === 'en'
+            ? 'Last Published Posts'
+            : 'Posts publicados recentemente'
+        }
+      </h3>
+      {
+        posts.map(({ frontmatter, url }) => (
+          <PostPreview {...frontmatter} url={url} />
+        ))
+      }
+    </main>
+    <aside class="section__aside">
+      <h3>{lang === 'en' ? 'By Category' : 'Por categoria'}</h3>
+      <div class="categories">
+        {
+          categories.map(({ label, value }) => (
+            <Tag value={value} label={label} />
+          ))
+        }
+      </div>
+    </aside>
+  </Fragment>
+</Page>
+
+<style is:global>
+  .enabled {
+    .hero__buttons {
+      @apply flex
+      flex-wrap
+      gap-4
+      w-full;
+    }
+
+    .hero__figure {
+      @apply flex
+      justify-end
+      overflow-hidden
+      -mb-48
+      dark:text-dark-darkest
+      text-dark-comment;
+    }
+
+    .section__main {
+      @apply flex
+      flex-col
+      grow
+      gap-8;
+    }
+
+    .section__aside {
+      @apply flex
+      flex-col
+      gap-8;
+
+      .categories {
+        @apply grid
+        grid-cols-auto-fit-[90px]
+        gap-4
+        w-52
+        text-xs;
+      }
+    }
+  }
+</style>

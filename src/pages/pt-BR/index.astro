@@ -1,12 +1,5 @@
 ---
-import { Svg } from '@svjson/react';
-
-import { meRicknmorty } from '@/assets/svg';
-import Button from '@/components/Button.astro';
-import PostPreview from '@/components/PostPreview.astro';
-import Tag from '@/components/Tag.astro';
-import Hero from '@/new/components/Hero.astro';
-import Layout from '@/new/layout/Layout.astro';
+import Home from '@/new/components/Home.astro';
 
 const files = await Astro.glob('./posts/**/*.mdx');
 
@@ -33,45 +26,4 @@ const meta = {
 };
 ---
 
-<Layout {...meta}>
-  <Hero>
-    <h1>{meta.title}</h1>
-    <h2>
-      {meta.description}
-    </h2>
-    <div class="flex flex-wrap gap-4 w-full">
-      <Button href="posts">Minhas postagens</Button>
-      <Button href="about">Sobre mim</Button>
-    </div>
-
-    <div
-      slot="image"
-      class="flex justify-end dark:text-dark-darkest text-dark-comment overflow-hidden -mb-48"
-    >
-      <Svg
-        alt="Eu como um personagem de Rick and Morty"
-        src={meRicknmorty as any}
-      />
-    </div>
-  </Hero>
-  <div class="flex flex-wrap gap-8 container p-8 py-32 xl:p-32 mx-auto">
-    <main class="flex flex-col grow gap-8">
-      <h3>Posts publicados recentemente</h3>
-      {
-        posts.map(({ frontmatter, url }) => (
-          <PostPreview {...frontmatter} url={url} />
-        ))
-      }
-    </main>
-    <aside class="flex flex-col gap-8">
-      <h3>Por categoria</h3>
-      <div class="grid grid-cols-auto-fit-[90px] gap-4 w-52 text-xs">
-        {
-          categories.map(({ label, value }) => (
-            <Tag value={value} label={label} />
-          ))
-        }
-      </div>
-    </aside>
-  </div>
-</Layout>
+<Home meta={meta} categories={categories} posts={posts} />

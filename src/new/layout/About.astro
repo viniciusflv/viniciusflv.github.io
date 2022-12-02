@@ -1,0 +1,44 @@
+---
+import { Svg } from '@svjson/react';
+
+import { meRicknmorty } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import Page from '@/new/layout/Page.astro';
+import { getLanguageFromURL } from '@/util';
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<!-- <main class="flex flex-col gap-16 w-full">
+  <slot />
+</main> -->
+<Page meta={Astro.props.frontmatter}>
+  <picture slot="image" class="hero__figure">
+    <Svg alt="Me as a Rick and Morty Character" src={meRicknmorty as any} />
+  </picture>
+  <Fragment slot="section">
+    <main class="flex flex-col gap-16 w-full">
+      <slot />
+    </main>
+  </Fragment>
+</Page>
+
+<style is:global>
+  .enabled {
+    .hero__buttons {
+      @apply flex
+      flex-wrap
+      gap-4
+      w-full;
+    }
+
+    .hero__figure {
+      @apply flex
+      justify-end
+      overflow-hidden
+      -mb-48
+      dark:text-dark-darkest
+      text-dark-comment;
+    }
+  }
+</style>
