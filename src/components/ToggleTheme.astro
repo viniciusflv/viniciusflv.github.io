@@ -6,6 +6,10 @@ import { moon, sun } from '@/assets/svg';
 import MenuItem from './MenuItem.astro';
 
 const { lang } = Astro.props;
+
+export type Props = {
+  lang: string;
+};
 ---
 
 <script>
@@ -71,10 +75,8 @@ const { lang } = Astro.props;
 </MenuItem>
 
 <style is:global>
-  .enabled {
-    .theme__toggle {
-      display: none;
-    }
+  .theme__toggle {
+    display: none;
   }
 
   .dark .theme__toggle--dark {

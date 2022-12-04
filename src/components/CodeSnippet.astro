@@ -1,0 +1,105 @@
+<script>
+  Array.from(document.querySelectorAll('.copy-button')).forEach((copyBtn) => {
+    copyBtn.addEventListener('click', async () => {
+      copyBtn.setAttribute('aria-pressed', 'true');
+      const parent = copyBtn.parentElement;
+      const textContent = parent?.querySelector('pre')?.textContent ?? '';
+      await navigator.clipboard.writeText(textContent);
+      setTimeout(() => {
+        copyBtn.setAttribute('aria-pressed', 'false');
+      }, 1000);
+    });
+    copyBtn.removeAttribute('disabled');
+    copyBtn.setAttribute('aria-label', 'Copy to clipboard');
+    copyBtn.setAttribute('title', 'Copy to clipboard');
+  });
+</script>
+
+<style is:global>
+  .code-snippet {
+    @apply relative
+    mt-4;
+
+    .light & {
+      .astro-code {
+        @apply !bg-white;
+        code {
+          @apply invert;
+        }
+      }
+    }
+
+    .language-id {
+      @apply absolute
+      left-8
+      -top-4
+      z-10
+      px-1
+      rounded
+      font-bold
+      shadow-xl
+      truncate
+      text-dracula-background
+      bg-dracula-cyan
+      dark:bg-dracula-green;
+    }
+
+    .astro-code {
+      @apply overflow-y-auto
+      p-8
+      rounded-xl
+      shadow-2xl
+      border
+      border-gray-200
+      dark:border-dracula-currentLine;
+
+      &::-webkit-scrollbar {
+        @apply w-3;
+      }
+      &::-webkit-scrollbar-track {
+        @apply bg-dracula-foreground dark:bg-[color:#0005] rounded-full;
+      }
+      &::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-dracula-comment dark:bg-dracula-green;
+      }
+    }
+
+    .copy-button {
+      @apply absolute
+      right-8
+      -top-4
+      z-10
+      w-10 h-10 rounded
+      shadow-xl
+      outline-none
+      border
+      border-dracula-comment
+      bg-white
+      text-dracula-comment
+      dark:border-dracula-green
+      dark:bg-dracula-currentLine
+      dark:text-dracula-green;
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        @apply glow-dracula-comment
+        dark:glow-dracula-green;
+      }
+
+      &[aria-pressed='false'] .check {
+        @apply hidden;
+      }
+
+      &[aria-pressed='true'] {
+        @apply bg-dracula-cyan
+         dark:bg-dracula-green
+        dark:text-dracula-background;
+
+        .copy {
+          @apply hidden;
+        }
+      }
+    }
+  }
+</style>

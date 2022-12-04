@@ -1,32 +1,9 @@
 ---
-layout: '@/layouts/Layout.astro'
-title: Sobre
+layout: '@/layouts/About.astro'
+title: Olá mundo, eu sou Vinícius Victorino, um Arquiteto Frontend
 keywords: vinícius,victorino,programmer,react
 description: Eu faço a vida dos desenvolvedores menos complicada, através de decisões bem pensadas e introduzindo bons padrões.
 ---
-
-import { Svg } from '@svjson/react';
-
-import { hero } from '@/assets/svg';
-import { meRicknmorty } from '@/assets/svg';
-import Hero from '@/components/Hero.astro';
-
-<Hero clip={hero}>
-
-# Olá mundo, eu sou Vinícius Victorino, um Arquiteto Frontend
-
-## Eu faço a vida dos desenvolvedores menos complicada, através de decisões bem pensadas e introduzindo bons padrões.
-
-<Svg
-  slot="image"
-  className="relative mb-[-70%]"
-  alt="Eu como um personagem de Rick and Morty"
-  src={meRicknmorty}
-/>
-
-</Hero>
-
-<div className="container max-w-5xl flex flex-col gap-16 p-8 py-32 mx-auto">
 
 ### Visão geral profissional
 
@@ -63,5 +40,3 @@ Quando me senti pronto para ser um **desenvolvedor pleno** eu entrei numa outra 
 Novamente por **indicação**, dessa vez do meu **ex chefe** que me contratou para essa última empresa, eu vim para dentro de uma das maiores **seguradoras** do país como **Arquiteto de Soluções Frontend**.
 
 ### E é aqui que estamos agora
-
-</div>

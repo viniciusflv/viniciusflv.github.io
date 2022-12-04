@@ -9,23 +9,22 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        code: 'Fira Code',
-        paragraph: ['RocknRoll One', 'sans-serif'],
+        base: ['RocknRoll One', 'sans-serif'],
       },
       colors: {
-        dark: {
-          darkest: '#21222c',
-          background: '#282a36',
-          currentLine: '#44475a',
-          foreground: '#f8f8f2',
-          comment: '#6272a4',
-          cyan: '#8be9fd',
-          green: '#50fa7b',
-          orange: '#ffb86c',
-          pink: '#ff79c6',
-          purple: '#bd93f9',
-          red: '#ff5555',
-          yellow: '#f1fa8c',
+        dracula: {
+          darkest: 'hsl(235, 14%, 15%)',
+          background: 'hsl(231, 15%, 18%)',
+          currentLine: 'hsl(232, 14%, 31%)',
+          foreground: 'hsl(60, 30%, 96%)',
+          comment: 'hsl(225, 27%, 51%)',
+          cyan: 'hsl(191, 97%, 77%)',
+          green: 'hsl(135 94% 65%)',
+          orange: 'hsl(31, 100%, 71%)',
+          pink: 'hsl(326, 100%, 74%)',
+          purple: 'hsl(265, 89%, 78%)',
+          red: 'hsl(0, 100%, 67%)',
+          yellow: 'hsl(65, 92%, 76%)',
         },
       },
       strokeWidth: ({ theme }) => theme('width'),
@@ -67,6 +66,9 @@ module.exports = {
         },
       ),
         matchUtilities({
+          'grid-rows-auto-fit': (value) => ({
+            gridTemplateRows: `repeat(auto-fit,${value})`,
+          }),
           'grid-cols-auto-fit': (value) => ({
             gridTemplateColumns: `repeat(auto-fit,${value})`,
           }),

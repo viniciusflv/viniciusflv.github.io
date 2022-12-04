@@ -33,45 +33,45 @@ try {
     @apply flex w-full overflow-y-auto;
 
     .edgePaths * {
-      @apply dark:!stroke-dark-green;
+      @apply dark:!stroke-dracula-green;
     }
 
     .edgeLabel {
-      @apply dark:!bg-dark-background;
+      @apply dark:!bg-dracula-background;
     }
 
     .marker,
     marker * {
       :not(#ZERO_OR_MORE_START, #ZERO_OR_MORE_END) {
-        @apply dark:!fill-dark-green;
+        @apply dark:!fill-dracula-green;
       }
 
-      @apply dark:!stroke-dark-green;
+      @apply dark:!stroke-dracula-green;
     }
 
     circle:not([class^='actor']):not(.commit) {
-      @apply dark:!fill-dark-darkest;
-      @apply dark:!stroke-dark-cyan;
+      @apply dark:!fill-dracula-darkest;
+      @apply dark:!stroke-dracula-cyan;
 
       &.face {
-        @apply dark:!stroke-dark-cyan;
+        @apply dark:!stroke-dracula-cyan;
       }
     }
 
     .mouth {
-      @apply dark:!stroke-dark-cyan;
+      @apply dark:!stroke-dracula-cyan;
     }
 
     #crosshead * {
-      @apply dark:!stroke-dark-green;
+      @apply dark:!stroke-dracula-green;
     }
 
     line,
     .relationshipLine {
-      @apply dark:!stroke-dark-green;
+      @apply dark:!stroke-dracula-green;
 
       &[id^='actor'] {
-        @apply dark:!stroke-dark-cyan;
+        @apply dark:!stroke-dracula-cyan;
       }
     }
 
@@ -79,14 +79,14 @@ try {
       a {
         &:hover {
           .node * {
-            @apply dark:!stroke-dark-cyan !stroke-dark-red;
+            @apply dark:!stroke-dracula-cyan !stroke-dracula-red;
           }
         }
       }
       .state-start,
       .state-end,
       .fork-join {
-        @apply dark:!stroke-dark-orange;
+        @apply dark:!stroke-dracula-orange;
       }
     }
 
@@ -100,48 +100,48 @@ try {
     .reqBox,
     .reqLabelBox,
     .commit-label-bkg {
-      @apply dark:!fill-dark-background
-      dark:!stroke-dark-currentLine !opacity-100;
+      @apply dark:!fill-dracula-background
+      dark:!stroke-dracula-currentLine !opacity-100;
 
       &[class^='task crit'] {
-        @apply !fill-dark-red;
+        @apply !fill-dracula-red;
       }
 
       &[class^='task active'] {
-        @apply !fill-dark-cyan;
+        @apply !fill-dracula-cyan;
       }
 
       &[class^='task activeCrit'] {
-        @apply !fill-dark-orange;
+        @apply !fill-dracula-orange;
       }
     }
 
     .today {
-      @apply !stroke-dark-orange;
+      @apply !stroke-dracula-orange;
     }
 
     .cluster *,
     .statediagram-cluster *,
     .journey-section {
-      @apply dark:!fill-dark-darkest
-      dark:!stroke-dark-currentLine;
+      @apply dark:!fill-dracula-darkest
+      dark:!stroke-dracula-currentLine;
     }
 
     .actor *,
     .messageText,
     .entityLabel,
     .relationshipLabel {
-      @apply dark:!fill-dark-cyan;
+      @apply dark:!fill-dracula-cyan;
     }
 
     [class^='activation'] {
-      @apply dark:!fill-dark-orange;
+      @apply dark:!fill-dracula-orange;
     }
 
     text:not(.taskText),
     .legend {
       &:not(.slice):not(.commit-label) {
-        @apply dark:!fill-dark-cyan;
+        @apply dark:!fill-dracula-cyan;
       }
 
       .row {
@@ -150,7 +150,7 @@ try {
     }
 
     * {
-      @apply dark:!text-dark-cyan;
+      @apply dark:!text-dracula-cyan;
     }
   }
 </style>

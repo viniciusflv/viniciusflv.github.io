@@ -1,5 +1,6 @@
 ---
-import Home from '@/new/components/Home.astro';
+import Home from '@/layouts/Home.astro';
+import { getLanguageFromURL } from '@/util';
 
 const files = await Astro.glob('./posts/**/*.mdx');
 
@@ -7,7 +8,7 @@ const categories = files
   .filter(({ frontmatter }) => frontmatter.category)
   .map(({ frontmatter, url }) => ({
     label: frontmatter.category,
-    value: url,
+    value: url ?? '',
   }));
 
 const posts = files
@@ -19,14 +20,14 @@ const posts = files
     return dateB - dateA;
   });
 
-const meta = {
+const props = {
+  lang: getLanguageFromURL(Astro.url.pathname),
   title: 'Welcome to my personal website!',
   keywords: 'programming,front-end,javascript,typescript,react,technologies',
-  description: `
-    Here I talk about my experiences and technologies,
-    that I'm passionate about.
-  `,
+  description: `Here I talk about my experiences and technologies, that I'm passionate about.`,
+  categories,
+  posts,
 };
 ---
 
-<Home meta={meta} categories={categories} posts={posts} />
+<Home {...props} />

@@ -2,75 +2,89 @@
 import type { MarkdownHeading } from 'astro';
 
 import AstroList from '@/components/List.astro';
+import Layout from '@/layouts/Layout.astro';
 import { getLanguageFromURL } from '@/util';
-
-import Layout from './Layout.astro';
 
 export type Props = {
   headings: MarkdownHeading[];
 };
 
-const date = new Date(Astro.props.frontmatter.date).setHours(24);
 const headings = Astro?.props?.headings ?? [];
 const lang = getLanguageFromURL(Astro.url.pathname);
+const date = new Date(Astro.props.frontmatter.date).setHours(24);
 const dateFormatter = new Intl.DateTimeFormat(lang);
 const created = dateFormatter.format(date);
 ---
 
 <Layout {...Astro.props} type="article">
-  <main class="main">
-    <article class="article">
+  <section class="section">
+    <article class="section__article">
       <header>
-        <p class="text-dark-comment">{created}</p>
-        <strong>Vinícius Victorino</strong>
+        <p>{created}</p>
+        <a title="Vinícius Victorino" href={`/${lang}/about`}>
+          Vinícius Victorino
+        </a>
       </header>
       <slot />
     </article>
     {
       headings.length ? (
-        <aside class="aside">
-          <nav class="nav">
+        <aside class="section__aside">
+          <nav class="section__aside__nav">
             <AstroList headings={headings} />
           </nav>
         </aside>
       ) : null
     }
-  </main>
+  </section>
 </Layout>
 
-<style>
-  .main {
-    @apply flex
-    w-full
+<style is:global>
+  .section {
+    @apply grid
+    md:grid-cols-[1fr,auto]
     gap-8
     container
-    mx-auto
     p-8
-    py-16;
-  }
+    py-32
+    xl:p-32
+    mx-auto;
 
-  .article {
-    @apply flex
-    flex-col
-    grow
-    gap-8
-    w-full;
-  }
+    .section__article {
+      @apply max-w-[calc(100vw-4rem)]
+      lg:max-w-[calc(100vw-24rem)];
 
-  .aside {
-    @apply relative
-    hidden lg:block
-    max-w-64;
+      @apply flex
+      flex-col
+      grow
+      gap-8
+      w-full;
+    }
 
-    .nav {
-      @apply sticky
-      top-8
-      px-4
-      border-l-2
-      border-gray-400
-      dark:border-dark-currentLine
-      overflow-y-auto
-      max-h-[80vh];
+    .section__aside {
+      @apply relative
+      hidden lg:flex
+      max-w-64;
+
+      .section__aside__nav {
+        @apply sticky
+        top-24
+        px-4
+        border-l-2
+        border-gray-400
+        dark:border-dracula-currentLine
+        overflow-y-auto
+        max-h-[80vh];
+
+        /* &:before {
+          content: '';
+          @apply absolute
+          left-0
+          h-full
+          glow-dracula-cyan
+          dark:glow-dracula-green;
+        } */
+      }
     }
   }
 </style>

@@ -1,101 +1,211 @@
 ---
-import { Svg } from '@svjson/react';
-
-import { github, glasses, linkedin, twitterLogo } from '@/assets/svg';
-
-import Drawer from './Drawer.astro';
-import ToggleLang from './ToggleLang.astro';
+import {
+  github,
+  home,
+  linkedin,
+  mastodon,
+  person,
+  twitterLogo,
+  write,
+} from '@/assets/svg';
+import MenuItem from '@/components/MenuItem.astro';
+import ToggleLang from '@/components/ToggleLang.astro';
+import ToggleTheme from '@/components/ToggleTheme.astro';
 
 const { lang } = Astro.props;
+
+export type Props = {
+  lang: string;
+  knownLanguages: string[];
+};
 ---
 
+<script>
+  const toggleMenu = document.getElementById('toggle-menu');
+
+  toggleMenu?.addEventListener('click', () => {
+    toggleMenu?.setAttribute(
+      'aria-pressed',
+      toggleMenu?.getAttribute('aria-pressed') === 'false' ? 'true' : 'false',
+    );
+  });
+</script>
+
 <header class="header">
-  <nav class="nav">
-    <a class="action" href={`/${lang}`}>
-      <Svg alt="logo" src={glasses} width="75px" height="30px" />
-    </a>
-    <div class="internal">
-      <a class="action" href={`/${lang}`}>
-        {lang === 'en' ? 'Home' : 'Início'}
-      </a>
-      <a class="action" href={`/${lang}/posts`}>
-        {lang === 'en' ? 'Posts' : 'Postagens'}
-      </a>
-      <a class="action" href={`/${lang}/about`}>
-        {lang === 'en' ? 'About' : 'Sobre'}
-      </a>
-    </div>
-    <div class="external">
+  <nav class="header__nav">
+    <button aria-pressed="false" id="toggle-menu" class="header__toggle__menu">
+      <i class="trigger-line"></i>
+      <i class="trigger-line"></i>
+      <i class="trigger-line"></i>
+    </button>
+    <div class="header__nav__menu">
+      <div class="sm:hidden"></div>
+      <MenuItem
+        label={lang === 'en' ? 'Home' : 'Início'}
+        href={`/${lang}`}
+        icon={home}
+        isCurrentColor
+      />
+      <MenuItem
+        label={lang === 'en' ? 'Posts' : 'Postagens'}
+        href={`/${lang}/posts`}
+        icon={write}
+        isCurrentColor
+      />
+      <MenuItem
+        label={lang === 'en' ? 'About' : 'Sobre'}
+        href={`/${lang}/about`}
+        icon={person}
+        isCurrentColor
+      />
+      <hr class="divider" />
       <ToggleLang {...Astro.props} />
-      <a class="action" target="_blank" href="https://github.com/viniciusflv/">
-        <Svg alt="github" src={github} width="30px" height="30px" />
-      </a>
-      <a
-        class="action"
+      <ToggleTheme {...Astro.props} />
+      <hr class="divider" />
+      <MenuItem
+        label="Github"
+        target="_blank"
+        href="https://github.com/viniciusflv/"
+        icon={github}
+        isCurrentColor
+      />
+      <MenuItem
+        label="Linkedin"
         target="_blank"
         href="https://www.linkedin.com/in/viniciusflv/"
-      >
-        <Svg alt="linkedin" src={linkedin} width="30px" height="30px" />
-      </a>
-      <a
-        class="action"
+        icon={linkedin}
+        isCurrentColor
+      />
+      <MenuItem
+        label="Twitter"
         target="_blank"
         href="https://twitter.com/viniciusflv1/"
-      >
-        <Svg
-          alt="twitter"
-          src={twitterLogo}
-          isCurrentColor
-          width="30px"
-          height="30px"
-        />
-      </a>
+        icon={twitterLogo}
+        isCurrentColor
+      />
+      <MenuItem
+        label="Mastodon"
+        target="_blank"
+        href="https://mas.to/@viniciusflv/"
+        icon={mastodon}
+        isCurrentColor
+      />
     </div>
-    <Drawer {...Astro.props} />
   </nav>
 </header>
 
-<style>
+<style is:global>
   .header {
-    @apply grid-area-[HEADER]
-    flex
-    h-[10vh]
+    @apply flex
+    justify-end
+    sm:justify-center
     w-full
-    bg-gray-200
-    dark:bg-dark-background;
+    z-20;
 
-    .nav {
+    .header__nav {
       @apply flex
-      justify-between
       items-center
-      gap-8
-      container
-      mx-auto
-      px-8;
+      flex-col
+      sm:flex-row
+      fixed
+      z-10
+      top-4
+      p-4
+      sm:px-8
+      shadow-2xl
+      rounded-lg
+      text-gray-400
+      border
+      border-gray-300
+      dark:border-dracula-currentLine
+      bg-white
+      dark:bg-dracula-background
+      bg-opacity-90
+      dark:bg-opacity-90;
 
-      .internal {
-        @apply hidden lg:flex
-        justify-center
+      @keyframes popup {
+        0% {
+          @apply -top-full;
+        }
+
+        50% {
+          @apply top-10;
+        }
+      }
+
+      @screen sm {
+        animation: popup 500ms 1;
+      }
+
+      .divider {
+        @apply bg-current
+          border
+          w-full
+          sm:h-6
+          border-gray-300
+          dark:bg-dracula-currentLine;
+      }
+
+      .header__toggle__menu {
+        @apply relative
+        flex
+        flex-col
+        justify-between
+        sm:hidden
+        font-bold
+        rounded-full
+        w-7
+        h-6
+        text-inherit;
+
+        .trigger-line {
+          @apply h-1
+          w-full
+          rounded
+          bg-current
+          transition-transform
+          duration-300;
+        }
+
+        &[aria-pressed='false'] {
+          & + .header__nav__menu {
+            @apply scale-y-0
+            h-0
+            sm:scale-100
+            sm:h-auto;
+          }
+        }
+
+        &[aria-pressed='true'] {
+          & + .header__nav__menu {
+            @apply scale-100;
+          }
+
+          .trigger-line {
+            @apply absolute
+            top-3
+            dark:bg-dracula-green
+            bg-dracula-comment;
+
+            &:nth-child(odd) {
+              @apply rotate-45;
+            }
+
+            &:nth-child(even) {
+              @apply -rotate-45;
+            }
+          }
+        }
+      }
+
+      .header__nav__menu {
+        @apply flex
         items-center
-        grow
-        gap-8;
-      }
+        flex-col
+        sm:flex-row
+        gap-6;
 
-      .external {
-        @apply hidden lg:flex
-        gap-8;
-      }
-
-      .action {
-        @apply tracking-widest;
-        @apply outline-none
-        cursor-pointer
-        active:text-inherit
-        focus:text-dark-comment
-        hover:text-dark-comment
-        transition-colors
-        delay-75
-        ease-in-out;
+        @apply transition-transform duration-75 origin-top;
       }
     }
   }
