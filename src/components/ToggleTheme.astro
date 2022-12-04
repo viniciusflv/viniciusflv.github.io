@@ -1,0 +1,89 @@
+---
+import { Svg } from '@svjson/react';
+
+import { moon, sun } from '@/assets/svg';
+
+import MenuItem from './MenuItem.astro';
+
+const { lang } = Astro.props;
+
+export type Props = {
+  lang: string;
+};
+---
+
+<script>
+  const initialTheme = (() => {
+    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      theme = localStorage.getItem('theme') ?? '';
+    }
+
+    return theme;
+  })();
+
+  function toggleTheme(theme: string) {
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+
+    window.localStorage.setItem('theme', theme);
+  }
+
+  toggleTheme(initialTheme);
+
+  const toggleThemeBtn = document.getElementById('theme__toggle');
+
+  toggleThemeBtn?.addEventListener('click', function () {
+    const isDark = document.documentElement.classList.contains('dark');
+    toggleTheme(isDark ? 'light' : 'dark');
+
+    toggleThemeBtn?.setAttribute(
+      'aria-pressed',
+      toggleThemeBtn?.getAttribute('aria-pressed') === 'false'
+        ? 'true'
+        : 'false',
+    );
+  });
+</script>
+
+<MenuItem
+  as="button"
+  id="theme__toggle"
+  aria-pressed="false"
+  label={lang === 'en' ? 'Theme' : 'Tema'}
+>
+  <Svg
+    className="w-7 sm:w-8 theme__toggle theme__toggle--dark"
+    alt={lang === 'en' ? 'Dark' : 'Escuro'}
+    src={moon}
+    isCurrentColor
+  />
+  <Svg
+    className="w-7 sm:w-8 theme__toggle theme__toggle--light"
+    alt={lang === 'en' ? 'Light' : 'Claro'}
+    src={sun}
+    isCurrentColor
+  />
+</MenuItem>
+
+<style is:global>
+  .theme__toggle {
+    display: none;
+  }
+
+  .dark .theme__toggle--dark {
+    display: flex;
+  }
+
+  .light .theme__toggle--light {
+    display: flex;
+  }
+</style>

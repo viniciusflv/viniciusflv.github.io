@@ -16,7 +16,7 @@ export const DemoButton = () => {
       rounded
       truncate
       text-white
-      ${active ? 'bg-dark-comment' : 'bg-dark-currentLine'}
+      ${active ? 'bg-dracula-comment' : 'bg-dracula-currentLine'}
       `}
       onClick={toggleActive}
     >

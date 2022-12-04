@@ -1,12 +1,17 @@
 ---
 import { getLanguageFromURL } from '@/util';
 
-const { title, description, summary, url } = Astro.props;
+const { title, description, summary, url, date } = Astro.props;
 const lang = getLanguageFromURL(Astro.url.pathname);
+
+const dateNew = new Date(date).setHours(24);
+const dateFormatter = new Intl.DateTimeFormat(lang);
+const created = dateFormatter.format(dateNew);
 ---
 
 <section class="post-preview">
   <header>
+    <p>{created}</p>
     <strong>{title}</strong>
     <p>{description}</p>
   </header>
@@ -20,7 +25,7 @@ const lang = getLanguageFromURL(Astro.url.pathname);
   </footer>
 </section>
 
-<style>
+<style is:global>
   .post-preview {
     @apply flex flex-col gap-2 max-w-96;
 
@@ -39,7 +44,7 @@ const lang = getLanguageFromURL(Astro.url.pathname);
       gap-2
       underline
       text-blue-400
-      dark:text-dark-cyan;
+      dark:text-dracula-cyan;
     }
   }
 </style>

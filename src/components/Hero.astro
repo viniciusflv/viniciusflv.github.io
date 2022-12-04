@@ -1,43 +1,47 @@
 ---
-import { Svg } from '@svjson/react';
+const { title, description } = { ...Astro.props, ...Astro.props.frontmatter };
 
-const { clip } = Astro.props;
+export type Props = {
+  title?: string;
+  description?: string;
+  frontmatter?: Record<string, any>;
+};
 ---
 
-<div class="hero">
-  <Svg className="absolute" alt="clip" src={clip} clipPathId="hero-clip-path" />
-  <div class="content">
-    <header class="header"><slot /></header>
+<section class="hero">
+  <div class="hero__content">
+    <header class="hero__header">
+      <h1>{title}</h1>
+      <h2>{description}</h2>
+      <slot />
+    </header>
     <slot name="image" />
   </div>
-</div>
+</section>
 
-<style>
+<style is:global>
   .hero {
-    @apply flex relative
-    w-full
+    @apply grid shadow-lg
     bg-gray-200
-    dark:bg-dark-background;
+    dark:bg-dracula-background
+    glow-b-dracula-comment
+    dark:glow-b-dracula-green;
 
-    clip-path: url(#hero-clip-path);
-
-    .content {
+    .hero__content {
       @apply container
-      grid
-      md:grid-cols-2
-      items-center
-      mx-auto
-      p-8
-      pt-16
-      pb-32
-      gap-16;
-    }
+        p-8
+        py-32
+        xl:p-32
+        mx-auto
+        grid
+        items-center
+        md:grid-cols-2;
 
-    .header {
-      @apply flex
-      flex-col
-      gap-8
-      items-start;
+      .hero__header {
+        @apply flex
+          flex-col
+          gap-8;
+      }
     }
   }
 </style>

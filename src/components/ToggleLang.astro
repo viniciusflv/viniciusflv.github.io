@@ -1,41 +1,48 @@
 ---
+import { br, usa } from '@/assets/svg';
+
+import MenuItem from './MenuItem.astro';
+
 const { lang, knownLanguages } = Astro.props;
+
+export type Props = {
+  lang: string;
+  knownLanguages: string[];
+};
 ---
 
 <script>
-  const toggleLangBtns = document.querySelectorAll('.toggle-lang');
-  Array.from(toggleLangBtns).map((toggleLangBtn) => {
-    const lang = toggleLangBtn?.getAttribute('data-lang') || '';
-    const knownLanguages =
-      toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
+  const toggleLangBtn = document.getElementById('toggle-lang');
+  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
+  const knownLanguages =
+    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
 
-    toggleLangBtn?.addEventListener('click', () => {
-      window.location.pathname = window.location.pathname.replace(
-        lang,
-        knownLanguages.find((l) => l !== lang) || lang,
-      );
-    });
+  toggleLangBtn?.addEventListener('click', () => {
+    window.location.pathname = window.location.pathname.replace(
+      lang,
+      knownLanguages.find((l) => l !== lang) || lang,
+    );
   });
 </script>
 
-<button
-  class="toggle-lang"
-  data-lang={lang}
-  data-languages={knownLanguages}
-  title={lang}
->
-  {lang}
-</button>
-
-<style>
-  .toggle-lang {
-    @apply tracking-widest uppercase;
-    @apply outline-none cursor-pointer
-    active:text-inherit
-    focus:text-dark-comment
-    hover:text-dark-comment
-    transition-colors
-    delay-75
-    ease-in-out;
-  }
-</style>
+{
+  lang === 'en' ? (
+    <MenuItem
+      as="button"
+      id="toggle-lang"
+      label="en"
+      icon={usa}
+      data-lang={lang}
+      data-languages={knownLanguages}
+    />
+  ) : (
+    <MenuItem
+      as="button"
+      id="toggle-lang"
+      label="pt-BR"
+      icon={br}
+      data-lang={lang}
+      data-languages={knownLanguages}
+    />
+  )
+}
