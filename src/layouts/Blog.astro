@@ -51,7 +51,7 @@ const props = {
           return (
             <div class="flex flex-col gap-8">
               <h3>{key}</h3>
-              <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="grid sm:grid-cols-auto-fit-[450px] gap-8">
                 {articles[key].map(({ frontmatter, ...article }) => (
                   <Card lang={lang} {...article} {...frontmatter} />
                 ))}
@@ -80,7 +80,6 @@ const props = {
     }
   }
   .section {
-    max-width: calc(100vw - 4rem);
     @apply grid
     md:grid-cols-[1fr,auto]
     gap-8
