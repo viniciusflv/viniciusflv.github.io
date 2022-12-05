@@ -6,7 +6,7 @@ import { resolve } from 'path';
 const { lang, knownLanguages, frontmatter } = Astro.props;
 
 const fallbackOgImage = new URL(`${lang}/og-image.png`, Astro.site);
-const scopedOgImage = new URL(`${Astro.url.pathname}/og-image.png`, Astro.site);
+const scopedOgImage = new URL(`${Astro.url.pathname}og-image.png`, Astro.site);
 const localPath = resolve('public') + scopedOgImage.pathname;
 const existsOgImage = existsSync(localPath);
 

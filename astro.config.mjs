@@ -15,7 +15,7 @@ const __dirname = dirname(new URL('', import.meta.url).pathname);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://red-nails-admire-200-158-128-203.loca.lt', //'https://viniciusflv.github.io',
+  site: 'https://viniciusflv.github.io',
   markdown: {
     shikiConfig: {
       theme: 'dracula',
