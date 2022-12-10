@@ -1,0 +1,128 @@
+---
+import { Svg } from '@svjson/react';
+import type { MDXInstance } from 'astro';
+
+import { meRicknmorty } from '@/assets/svg';
+import Button from '@/components/Button.astro';
+import Hero from '@/components/Hero.astro';
+import PostPreview from '@/components/PostPreview.astro';
+import Tag from '@/components/Tag.astro';
+import Layout from '@/layouts/Layout.astro';
+
+const { lang, categories, posts } = Astro.props;
+
+export type Props = {
+  lang: string;
+  posts: MDXInstance<Record<string, any>>[];
+  categories: {
+    label: string;
+    value: string;
+  }[];
+};
+---
+
+<Layout {...Astro.props}>
+  <Hero {...Astro.props}>
+    <picture slot="image" class="hero__figure">
+      <Svg
+        alt={lang === 'en'
+          ? 'Me as a Rick and Morty Character'
+          : 'Eu como um personagem de Rick and Morty'}
+        src={meRicknmorty as any}
+      />
+    </picture>
+    <div class="flex flex-wrap gap-4 w-full">
+      <Button
+        title={lang === 'en' ? 'My posts' : 'Minhas postagens'}
+        href="posts"
+      >
+        {lang === 'en' ? 'My posts' : 'Minhas postagens'}
+      </Button>
+      <Button title={lang === 'en' ? 'About me' : 'Sobre mim'} href="about">
+        {lang === 'en' ? 'About me' : 'Sobre mim'}
+      </Button>
+    </div>
+  </Hero>
+  <section class="section">
+    <main class="section__main">
+      <h3>
+        {
+          lang === 'en'
+            ? 'Last Published Posts'
+            : 'Posts publicados recentemente'
+        }
+      </h3>
+      <div class="section__main_posts">
+        {
+          posts.map(({ frontmatter, url }) => (
+            <PostPreview {...frontmatter} url={url} />
+          ))
+        }
+      </div>
+    </main>
+    <aside class="section__aside">
+      <h3>{lang === 'en' ? 'By Category' : 'Por categoria'}</h3>
+      <div class="categories">
+        {
+          categories?.map(({ label, value }) => (
+            <Tag value={value} label={label} />
+          ))
+        }
+      </div>
+    </aside>
+  </section>
+</Layout>
+
+<style is:global>
+  .hero__figure {
+    @apply flex
+    justify-end
+    overflow-hidden
+    -mb-48
+    dark:text-dracula-darkest
+    text-dracula-comment;
+    .lenses {
+      @apply opacity-90
+      dark:opacity-20
+      transition-opacity
+      duration-500;
+    }
+  }
+  .section {
+    @apply grid
+    md:grid-cols-[1fr,auto]
+    gap-8
+    container
+    p-8
+    py-32
+    xl:p-32
+    mx-auto;
+
+    .section__main {
+      @apply flex
+      flex-col
+      w-full
+      gap-8;
+
+      .section__main_posts {
+        @apply grid
+        sm:grid-cols-auto-fit-[300px]
+        gap-4;
+      }
+    }
+
+    .section__aside {
+      @apply flex
+      flex-col
+      gap-8;
+
+      .categories {
+        @apply grid
+        grid-cols-auto-fit-[90px]
+        gap-4
+        w-52
+        text-xs;
+      }
+    }
+  }
+</style>

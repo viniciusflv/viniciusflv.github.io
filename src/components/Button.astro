@@ -2,10 +2,10 @@
 import { getLanguageFromURL } from '@/util';
 
 const lang = getLanguageFromURL(Astro.url.pathname);
-const { href } = Astro.props;
+const { href, title } = Astro.props;
 ---
 
-<a class="button" href={`/${lang}/${href}`}>
+<a class="button" title={title} href={`/${lang}/${href}`}>
   <slot />
 </a>
 
@@ -14,15 +14,15 @@ const { href } = Astro.props;
     @apply flex
     justify-center
     outline-none
-    first-of-type:bg-dark-currentLine
+    first-of-type:bg-dracula-currentLine
     first-of-type:text-white
-    dark:last-of-type:border-dark-cyan
-    dark:last-of-type:text-dark-cyan
-    last-of-type:border-dark-comment
-    last-of-type:text-dark-comment
-    hover:bg-dark-comment
+    dark:last-of-type:border-dracula-cyan
+    dark:last-of-type:text-dracula-cyan
+    last-of-type:border-dracula-comment
+    last-of-type:text-dracula-comment
+    hover:bg-dracula-comment
     hover:text-white
-    focus:bg-dark-comment
+    focus:bg-dracula-comment
     focus:text-white
     last-of-type:border
     rounded-full

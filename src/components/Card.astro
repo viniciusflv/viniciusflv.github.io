@@ -31,25 +31,25 @@ const { src: fallbackSrc } = await getImage({
   </section>
 </a>
 
-<style>
+<style is:global>
   .card {
     @apply p-4
     rounded
     shadow-2xl
     border
     border-gray-200
-    dark:border-dark-currentLine
-    dark:bg-dark-darkest;
+    dark:border-dracula-currentLine
+    dark:bg-dracula-darkest;
 
     transition-property: box-shadow color;
     transition-duration: 500ms;
 
     @apply hover:shadow-md
     focus:shadow-md
-    hover:text-dark-comment
-    focus:text-dark-comment
-    hover:border-dark-comment
-    focus:border-dark-comment;
+    hover:text-dracula-comment
+    focus:text-dracula-comment
+    hover:border-dracula-comment
+    focus:border-dracula-comment;
 
     .preview {
       @apply rounded;

@@ -1,14 +1,16 @@
 ---
-import { hero } from '@/assets/svg';
+import { Svg } from '@svjson/react';
+
+import { meRicknmorty } from '@/assets/svg';
 import Card from '@/components/Card.astro';
 import Hero from '@/components/Hero.astro';
+import Layout from '@/layouts/Layout.astro';
 import { getLanguageFromURL } from '@/util';
-
-import Layout from './Layout.astro';
 
 const { category } = Astro.props.frontmatter;
 const lang = getLanguageFromURL(Astro.url.pathname);
 const posts = await Astro.glob('@/pages/**/posts/**/*.mdx');
+
 const articles = posts
   .filter(({ url }) => (url ?? '').startsWith(`/${lang}`))
   .filter(({ frontmatter }) => frontmatter.categories)
@@ -20,49 +22,78 @@ const articles = posts
     const category = acc[key] || [];
     return { ...acc, [key]: [...category, article] };
   }, {});
+
+const subjects = Object.keys(articles)
+  .map((key) => key)
+  .join(', ');
+
+const props = {
+  ...Astro.props.frontmatter,
+  description: `${Astro.props.frontmatter.description} ${subjects}.`,
+};
 ---
 
-<Layout {...Astro.props}>
-  <Hero clip={hero}>
-    <h1>{Astro.props.frontmatter.title}</h1>
-    <h2>{Astro.props.frontmatter.description}</h2>
+<Layout {...props}>
+  <Hero {...props}>
+    <picture slot="image" class="hero__figure">
+      <Svg
+        alt={lang === 'en'
+          ? 'Me as a Rick and Morty Character'
+          : 'Eu como um personagem de Rick and Morty'}
+        src={meRicknmorty as any}
+      />
+    </picture>
   </Hero>
-  <main class="main">
-    <div class="article">
-      <div class="flex flex-col gap-8">
-        {
-          Object.keys(articles).map((key) => {
-            return (
-              <div class="flex flex-col gap-8">
-                <h3>{key}</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {articles[key].map(({ frontmatter, ...article }) => (
-                    <Card lang={lang} {...article} {...frontmatter} />
-                  ))}
-                </div>
+  <section class="section">
+    <main class="section__main">
+      {
+        Object.keys(articles).map((key) => {
+          return (
+            <div class="flex flex-col gap-8">
+              <h3>{key}</h3>
+              <div class="grid sm:grid-cols-auto-fit-[450px] gap-8">
+                {articles[key].map(({ frontmatter, ...article }) => (
+                  <Card lang={lang} {...article} {...frontmatter} />
+                ))}
               </div>
-            );
-          })
-        }
-      </div>
-    </div>
-  </main>
+            </div>
+          );
+        })
+      }
+    </main>
+  </section>
 </Layout>
 
-<style>
-  .main {
+<style is:global>
+  .hero__figure {
     @apply flex
+    justify-end
+    overflow-hidden
+    -mb-48
+    dark:text-dracula-darkest
+    text-dracula-comment;
+    .lenses {
+      @apply opacity-90
+      dark:opacity-20
+      transition-opacity
+      duration-500;
+    }
+  }
+  .section {
+    @apply grid
+    md:grid-cols-[1fr,auto]
     gap-8
     container
-    mx-auto
     p-8
-    py-16;
-  }
+    py-32
+    xl:p-32
+    mx-auto;
 
-  .article {
-    @apply flex
-    flex-col
-    grow
-    gap-8;
+    .section__main {
+      @apply flex
+      flex-col
+      w-full
+      gap-8;
+    }
   }
 </style>

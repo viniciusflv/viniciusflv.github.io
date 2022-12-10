@@ -1,19 +1,43 @@
 ---
-const { value, label } = Astro.props;
+const { label, value } = Astro.props;
+
+export type Props = {
+  label: string;
+  value: string;
+};
 ---
 
-<a href={value} title={label} class="tag">
-  {label}
-</a>
+<a class="tag" title={label} href={value}>{label}</a>
 
-<style>
+<style is:global>
   .tag {
     @apply flex
     justify-center
     rounded-full
     py-2
     px-4
-    text-white
-    bg-dark-comment;
+    font-bold
+    tracking-widest
+    text-xs
+    outline-none
+    transition-all
+    delay-75
+    duration-300
+    ease-in-out
+    text-dracula-comment
+    dark:text-dracula-green
+    border
+    border-dracula-comment
+    dark:border-dracula-green;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      @apply text-white
+      bg-dracula-comment
+      dark:text-dracula-darkest
+      dark:bg-dracula-green;
+    }
   }
 </style>
