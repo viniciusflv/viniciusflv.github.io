@@ -5,8 +5,8 @@ import Meta from '@/layouts/Meta.astro';
 import { getLanguageFromURL } from '@/util';
 
 const props = {
-  ...Astro.props,
   lang: getLanguageFromURL(Astro.url.pathname),
+  ...Astro.props,
   knownLanguages: ['en', 'pt-BR'],
 };
 ---
