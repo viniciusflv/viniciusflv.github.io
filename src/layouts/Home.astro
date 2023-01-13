@@ -5,6 +5,7 @@ import type { MDXInstance } from 'astro';
 import { meRicknmorty } from '@/assets/svg';
 import Button from '@/components/Button.astro';
 import Hero from '@/components/Hero.astro';
+import Link from '@/components/Link.astro';
 import PostPreview from '@/components/PostPreview.astro';
 import Tag from '@/components/Tag.astro';
 import Layout from '@/layouts/Layout.astro';
@@ -32,15 +33,19 @@ export type Props = {
       />
     </picture>
     <div class="flex flex-wrap gap-4 w-full">
-      <Button
+      <Link
         title={lang === 'en' ? 'My posts' : 'Minhas postagens'}
         href="posts"
       >
         {lang === 'en' ? 'My posts' : 'Minhas postagens'}
-      </Button>
-      <Button title={lang === 'en' ? 'About me' : 'Sobre mim'} href="about">
+      </Link>
+      <Link
+        title={lang === 'en' ? 'About me' : 'Sobre mim'}
+        href="posts"
+        isOutlined
+      >
         {lang === 'en' ? 'About me' : 'Sobre mim'}
-      </Button>
+      </Link>
     </div>
   </Hero>
   <section class="section">
