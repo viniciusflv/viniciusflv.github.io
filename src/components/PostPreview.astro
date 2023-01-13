@@ -19,8 +19,8 @@ const created = dateFormatter.format(dateNew);
     <p class="summary">{summary}</p>
   </main>
   <footer>
-    <a href={url} class="link"
-      >{lang === 'pt-BR' ? 'Leia Mais' : 'Read More'}
+    <a href={url} class="link" title={title}>
+      {lang === 'pt-BR' ? 'Continue lendo' : 'Continue reading'}
     </a>
   </footer>
 </section>
