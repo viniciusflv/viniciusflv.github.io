@@ -1,0 +1,57 @@
+---
+import { getLanguageFromURL } from '@/util';
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+const { href, title, isOutlined } = Astro.props;
+---
+
+<a
+  class:list={['link', 'link--button', isOutlined ? 'link--outlined' : null]}
+  title={title}
+  href={`/${lang}/${href}`}
+>
+  <slot />
+</a>
+
+<style is:global>
+  .link {
+    @apply flex
+    justify-center
+    items-center;
+
+    &.link--button {
+      @apply rounded-full
+      p-4
+      w-full
+      md:max-w-64
+      cursor-pointer
+      duration-500
+      transition-colors;
+
+      &:not(.link--outlined),
+      &.link--outlined {
+        &:is(:hover, :focus) {
+          @apply text-white
+          bg-dracula-comment
+          dark:text-dracula-background
+          dark:bg-dracula-cyan;
+        }
+      }
+
+      &.link--outlined {
+        @apply text-dracula-comment
+        dark:text-dracula-cyan
+        border
+        border-dracula-comment
+        dark:border-dracula-cyan;
+      }
+
+      &:not(.link--outlined) {
+        @apply text-white
+        bg-dracula-currentLine
+        dark:text-dracula-background
+        dark:bg-dracula-green;
+      }
+    }
+  }
+</style>
