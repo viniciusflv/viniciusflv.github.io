@@ -34,15 +34,16 @@ const { href, title, isOutlined } = Astro.props;
           @apply text-white
           bg-dracula-comment
           dark:text-dracula-background
-          dark:bg-dracula-cyan;
+          dark:bg-dracula-cyan
+          border-dracula-comment;
         }
       }
 
       &.link--outlined {
-        @apply text-dracula-comment
+        @apply text-dracula-currentLine
         dark:text-dracula-cyan
         border
-        border-dracula-comment
+        border-dracula-currentLine
         dark:border-dracula-cyan;
       }
 
