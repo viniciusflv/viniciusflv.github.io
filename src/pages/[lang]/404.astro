@@ -1,0 +1,39 @@
+---
+import { Svg } from '@svjson/react';
+
+import { notFound } from '@/assets/svg';
+import Layout from '@/layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'pt-BR' } }, { params: { lang: 'en' } }];
+}
+const { lang = 'en' } = Astro.params;
+---
+
+<Layout lang={lang} title="Page not Found">
+  <section class="not-found">
+    <div class="not-found__content">
+      <Svg
+        className="not-found__image"
+        isCurrentColor
+        slot="image"
+        alt="John Travolta Meme"
+        src={notFound}
+      />
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .not-found {
+    @apply flex w-full h-[100dvh] dark:bg-dracula-comment;
+
+    .not-found__content {
+      @apply flex container mx-auto justify-center items-end w-full h-full;
+
+      .not-found__image {
+        @apply dark:text-dracula-background w-full;
+      }
+    }
+  }
+</style>

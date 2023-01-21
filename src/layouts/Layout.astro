@@ -5,8 +5,8 @@ import Meta from '@/layouts/Meta.astro';
 import { getLanguageFromURL } from '@/util';
 
 const props = {
-  ...Astro.props,
   lang: getLanguageFromURL(Astro.url.pathname),
+  ...Astro.props,
   knownLanguages: ['en', 'pt-BR'],
 };
 ---
@@ -102,7 +102,7 @@ const props = {
         a {
           @apply font-bold
           underline
-          text-blue-400
+          text-blue-600
           dark:text-dracula-cyan;
         }
 
@@ -127,7 +127,7 @@ const props = {
         flex
         flex-col
         w-full
-        min-h-screen
+        min-h-[100dvh]
         dark:bg-dracula-darkest;
       }
 

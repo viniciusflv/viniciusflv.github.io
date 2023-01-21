@@ -13,14 +13,13 @@ const created = dateFormatter.format(dateNew);
   <header>
     <p>{created}</p>
     <strong>{title}</strong>
-    <p>{description}</p>
   </header>
   <main>
     <p class="summary">{summary}</p>
   </main>
   <footer>
-    <a href={url} class="link"
-      >{lang === 'pt-BR' ? 'Leia Mais' : 'Read More'}
+    <a href={url} class="link" title={title}>
+      {lang === 'pt-BR' ? 'Continue lendo' : 'Continue reading'}
     </a>
   </footer>
 </section>
@@ -33,17 +32,13 @@ const created = dateFormatter.format(dateNew);
       @apply !text-sm;
     }
 
-    .summary {
-      @apply !text-gray-400;
-    }
-
     .link {
       @apply flex
       justify-start
       items-center
       gap-2
       underline
-      text-blue-400
+      text-blue-600
       dark:text-dracula-cyan;
     }
   }

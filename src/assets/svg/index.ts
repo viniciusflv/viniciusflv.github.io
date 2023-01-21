@@ -9,6 +9,7 @@ export * from './mastodon';
 export * from './meRicknmortyFace';
 export * from './meRicknmorty';
 export * from './moon';
+export * from './notFound';
 export * from './person';
 export * from './smile';
 export * from './sun';
