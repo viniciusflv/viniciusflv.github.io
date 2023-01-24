@@ -86,16 +86,18 @@ const props = {
       }
 
       strong {
-        @apply text-black dark:text-dracula-green;
+        @apply text-dracula-comment dark:text-dracula-green;
       }
 
       blockquote {
         @apply italic
         p-4
         border-l-4
-        border-l-dracula-green
+        dark:border-l-dracula-green
+        border-l-dracula-comment
         bg-black
-        bg-opacity-5;
+        bg-opacity-5
+        rounded;
       }
 
       article {

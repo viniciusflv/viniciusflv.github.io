@@ -2,18 +2,27 @@
 layout: '@/layouts/Post.astro'
 categories: Cloud
 date: 2023-01-23
-title: Desmistificando os componentes da AWS
-description: AWS
-summary: AWS
+title: Componentes da AWS (Amazon Web Services)
+description: AWS é uma das maiores provedoras de serviços para computação em nuvem.
+summary: Vamos desmistificar alguns dos componentes principais da AWS, com intuito de facilitar o entendimento.
 ---
 
 import { Svg } from '@svjson/react';
 
-import { cognitoAws, iamAws } from '@/assets/svg';
+import {
+  cloudFrontAws,
+  cognitoAws,
+  dynamoDbAws,
+  iamAws,
+  rdsAws,
+  route53Aws,
+  s3Aws,
+  s3GlacierAws,
+} from '@/assets/svg';
 
 # Componentes da AWS (Amazon Web Services)
 
-## AWS é a maior provedora de serviços para computação em nuvem
+## AWS é uma das maiores provedoras de serviços para computação em nuvem.
 
 ---
 
@@ -26,24 +35,60 @@ import { cognitoAws, iamAws } from '@/assets/svg';
   src={iamAws}
 />
 
-#### IAM (Identity and Access Management)
+#### IAM (Identity and Access Management) <br /> **Gestor de acessos**
 
-Componente responsável por
+Componente responsável por **gerenciar usuários** e acessos na aws. Através dele você **cria usuários** da aws e define **permissões** e **políticas de acesso** a recursos.
+
+> O AWS Identity and Access Management (IAM) é um serviço da Web que ajuda você a controlar o acesso aos recursos da AWS de forma segura. Você usa o IAM para controlar quem é autenticado (fez login) e autorizado (tem permissões) a usar os recursos.
 
 <Svg className="-mb-6" width="50" alt="Cognito" src={cognitoAws} />
 
-#### Cognito
+#### Cognito <br /> **Serviço de autenticação**
 
-Componente responsável por
+Componente responsável por prover **criação**, **autenticação**, e **autorização** de usuários finais. Com ele você pode organizar e listar seus usuários, com suporte a **login social** com as principais redes.
+
+> O Amazon Cognito fornece autenticação, autorização e gerenciamento de usuários para suas aplicações Web e móveis. Seus usuários podem fazer login diretamente com um nome de usuário e uma senha ou por meio de terceiros, como o Facebook, a Amazon, o Google ou a Apple.
+
+---
 
 ### Armazenamento
 
-#### S3 (Simple Storage Service)
+<Svg className="-mb-6" width="50" alt="S3" src={s3Aws} />
 
-#### RDS (Relational Database Service)
+#### S3 (Simple Storage Service) <br /> **Sistema de arquivos**
 
-#### DynamoDB
+Componente responsável por prover um **servidor de arquivos**, auto-escalável e de alta disponibilidade, para **armazenamento** em nuvem.
 
-### Cloudfront
+> O Amazon Simple Storage Service (Amazon S3) é um serviço de armazenamento de objetos que oferece escalabilidade líder do setor, disponibilidade de dados, segurança e performance. Clientes de todos os tamanhos e setores podem usar o Amazon S3 para armazenar e proteger qualquer volume de dados para uma variedade de casos de uso, como data lakes, sites, aplicações móveis, backup e restauração, arquivamento, aplicações corporativas, dispositivos IoT e análises de big data.
 
-### Route53
+<Svg className="-mb-6" width="50" alt="S3" src={s3GlacierAws} />
+
+#### S3 Glacier (Simple Storage Service Glacier) <br /> **Depósito de arquivos**
+
+Componente responsável por prover **armazenamento** em nuvem, **duradouro** e **barato**, mas com baixa disponibilidade.
+
+> O Amazon S3 Glacier (S3 Glacier) é um serviço seguro e durável para arquivamento de dados de baixo custo e backup de longo prazo.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={rdsAws} />
+
+#### RDS (Relational Database Service) <br /> **Bancos SQL**
+
+Componente responsável por prover diversos tipos de **bancos de dados SQL**. Dentre eles estão Microsoft SQL server, PostgresSQL, MySQL, Oracle e MariaDB.
+
+> O Amazon Relational Database Service (Amazon RDS) é um serviço da Web que facilita a configuração, a operação e escalabilidade de um banco de dados relacional na Nuvem AWS. Ele fornece capacidade econômica e redimensionável para um banco de dados relacional padrão do setor e gerencia tarefas comuns de administração de banco de dados.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={dynamoDbAws} />
+
+#### DynamoDB <br /> **NoSQL**
+
+---
+
+### Host
+
+<Svg className="-mb-6" width="50" alt="RDS" src={cloudFrontAws} />
+
+#### Cloudfront <br /> **CDN**
+
+<Svg className="-mb-6" width="50" alt="RDS" src={route53Aws} />
+
+#### Route53 <br /> **DNS e domínios**
