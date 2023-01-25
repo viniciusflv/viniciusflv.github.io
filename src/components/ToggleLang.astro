@@ -17,6 +17,8 @@ export type Props = {
   const knownLanguages =
     toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
 
+  window.localStorage.setItem('lang', lang);
+
   toggleLangBtn?.addEventListener('click', () => {
     window.location.pathname = window.location.pathname.replace(
       lang,

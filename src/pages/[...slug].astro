@@ -1,0 +1,28 @@
+---
+import type { MarkdownInstance } from 'astro';
+
+export async function getStaticPaths() {
+  // get english pages that moved from `/` to `/en/`
+  const englishPages = await Astro.glob<MarkdownInstance<{}>>(
+    './en/**/*.{md,mdx}',
+  );
+
+  return englishPages.map((page) => ({
+    params: {
+      slug: page.url!.slice(4),
+    },
+    props: {
+      englishSlug: page.url,
+    },
+  }));
+}
+---
+
+<html>
+  <head>
+    <script>
+      const lang = window.localStorage.getItem(`lang`) || `en`;
+      window.location.pathname = `/${lang}${window.location.pathname}`;
+    </script>
+  </head>
+</html>
