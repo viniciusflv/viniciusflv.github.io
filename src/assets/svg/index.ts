@@ -7,7 +7,7 @@ export * from './dynamoDbAws';
 export * from './ec2Aws';
 export * from './ecrAws';
 export * from './ecsAws';
-export * from './elasticLoadBalancingAws';
+export * from './elbAws';
 export * from './gatewayAws';
 export * from './glueAws';
 export * from './iamAws';

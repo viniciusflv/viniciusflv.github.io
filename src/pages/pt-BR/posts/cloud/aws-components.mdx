@@ -11,13 +11,29 @@ import { Svg } from '@svjson/react';
 
 import {
   cloudFrontAws,
+  cloudWatchAws,
   cognitoAws,
+  dmsAws,
   dynamoDbAws,
+  ec2Aws,
+  ecrAws,
+  ecsAws,
+  elbAws,
+  gatewayAws,
+  glueAws,
   iamAws,
+  lambdaAws,
   rdsAws,
+  redisAws,
+  redshiftAws,
   route53Aws,
   s3Aws,
   s3GlacierAws,
+  secretsManagerAws,
+  sesAws,
+  snsAws,
+  sqsAws,
+  stepFunctionsAws,
 } from '@/assets/svg';
 
 # Componentes da AWS (Amazon Web Services)
@@ -35,7 +51,7 @@ import {
   src={iamAws}
 />
 
-#### IAM (Identity and Access Management) <br /> **Gestor de acessos**
+#### **Gestor de acessos** <br /> IAM (Identity and Access Management)
 
 Componente responsável por **gerenciar usuários** e acessos na aws. Através dele você **cria usuários** da aws e define **permissões** e **políticas de acesso** a recursos.
 
@@ -43,7 +59,7 @@ Componente responsável por **gerenciar usuários** e acessos na aws. Através d
 
 <Svg className="-mb-6" width="50" alt="Cognito" src={cognitoAws} />
 
-#### Cognito <br /> **Serviço de autenticação**
+#### **Serviço de autenticação** <br /> Cognito
 
 Componente responsável por prover **criação**, **autenticação**, e **autorização** de usuários finais. Com ele você pode organizar e listar seus usuários, com suporte a **login social** com as principais redes.
 
@@ -55,7 +71,7 @@ Componente responsável por prover **criação**, **autenticação**, e **autori
 
 <Svg className="-mb-6" width="50" alt="S3" src={s3Aws} />
 
-#### S3 (Simple Storage Service) <br /> **Sistema de arquivos**
+#### **Sistema de arquivos** <br /> S3 (Simple Storage Service)
 
 Componente responsável por prover um **servidor de arquivos**, auto-escalável e de alta disponibilidade, para **armazenamento** em nuvem.
 
@@ -63,7 +79,7 @@ Componente responsável por prover um **servidor de arquivos**, auto-escalável 
 
 <Svg className="-mb-6" width="50" alt="S3" src={s3GlacierAws} />
 
-#### S3 Glacier (Simple Storage Service Glacier) <br /> **Depósito de arquivos**
+#### **Depósito de arquivos** <br /> S3 Glacier (Simple Storage Service Glacier)
 
 Componente responsável por prover **armazenamento** em nuvem, **duradouro** e **barato**, mas com baixa disponibilidade.
 
@@ -71,7 +87,7 @@ Componente responsável por prover **armazenamento** em nuvem, **duradouro** e *
 
 <Svg className="-mb-6" width="50" alt="RDS" src={rdsAws} />
 
-#### RDS (Relational Database Service) <br /> **Bancos SQL**
+#### **Bancos SQL** <br /> RDS (Relational Database Service)
 
 Componente responsável por prover diversos tipos de **bancos de dados SQL**. Dentre eles estão Microsoft SQL server, PostgresSQL, MySQL, Oracle e MariaDB.
 
@@ -79,7 +95,27 @@ Componente responsável por prover diversos tipos de **bancos de dados SQL**. De
 
 <Svg className="-mb-6" width="50" alt="RDS" src={dynamoDbAws} />
 
-#### DynamoDB <br /> **NoSQL**
+#### **NoSQL** <br /> DynamoDB
+
+Componente responsável por oferecer uma **opção NoSQL** para bancos de dados. Com ele você pode usufruir das vantagens e facilidades desse tipo de banco de dados, com o adicional de **escalabilidade** e **disponibilidade** da nuvem.
+
+> Com o DynamoDB, você pode criar tabelas de banco de dados que armazenam e recuperam qualquer quantidade de dados e atendem a todos os níveis de tráfego solicitados. Você pode aumentar ou diminuir a escala verticalmente da capacidade de throughput da tabela sem tempo de inatividade ou degradação da performance. Você pode usar o AWS Management Console para monitorar a utilização de recursos e as métricas de performance.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={redisAws} />
+
+#### **Cache** <br /> Redis (**Re**mote **Di**ctionary **S**erver)
+
+Componente responsável por oferecer um banco de dados **em memória** rápido e confiável para **cache** de serviços.
+
+> O Redis, que significa Remote Dictionary Server, é um datastore de chave-valor rápido e de código aberto na memória. O projeto começou quando Salvatore Sanfilippo, o desenvolvedor original do Redis, quis melhorar a escalabilidade de sua startup italiana. A partir daí, ele desenvolveu o Redis, que agora é usado como banco de dados, cache, agente de mensagens e fila.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={redshiftAws} />
+
+#### **Data Warehouse** <br /> Redshift
+
+Componente responsável por prover uma solução de **data warehouse** para suplantar as necessidades analíticas de **BI (Business Intelligence)**.
+
+> O Amazon Redshift é um serviço de data warehouse em escala de petabytes totalmente gerenciado na Nuvem AWS. Um data warehouse do Amazon Redshift é um conjunto de recursos de computação chamados nós, que são organizados em um grupo chamado cluster. Cada cluster executa um mecanismo do Amazon Redshift e contém um ou mais bancos de dados.
 
 ---
 
@@ -87,8 +123,32 @@ Componente responsável por prover diversos tipos de **bancos de dados SQL**. De
 
 <Svg className="-mb-6" width="50" alt="RDS" src={cloudFrontAws} />
 
-#### Cloudfront <br /> **CDN**
+#### **CDN** <br /> Cloudfront
 
 <Svg className="-mb-6" width="50" alt="RDS" src={route53Aws} />
 
-#### Route53 <br /> **DNS e domínios**
+#### **DNS e domínios** <br /> Route53
+
+### Governança
+
+<Svg className="-mb-6" width="50" alt="RDS" src={cloudWatchAws} />
+
+#### **Logs** <br /> Cloudwatch
+
+### Computação
+
+<Svg className="-mb-6" width="50" alt="RDS" src={ec2Aws} />
+
+#### **Máquinas** <br /> EC2 (Elastic Compute Cloud)
+
+Componente responsável por prover **máquinas para computação em nuvem**. Com ele você pode fazer tudo o que faria na sua máquina física.
+
+> O Amazon Elastic Compute Cloud (Amazon EC2) oferece uma capacidade de computação escalável na Nuvem da Amazon Web Services (AWS). O uso do Amazon EC2 elimina a necessidade de investir em hardware inicialmente, portanto, você pode desenvolver e implantar aplicativos com mais rapidez. É possível usar o Amazon EC2 para executar quantos servidores virtuais forem necessários, configurar a segurança e as redes e gerenciar o armazenamento. O Amazon EC2 permite aumentar ou reduzir a escala para lidar com alterações nos requisitos ou com picos em popularidade, reduzindo sua necessidade de prever o tráfego.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={ec2Aws} />
+
+#### **Máquinas** <br /> ECR (Elastic Container Registry)
+
+Componente responsável por registar [imagens de um container](http://localhost:3000/pt-BR/posts/devops/docker#container-vs-imagem Container e imagens)
+
+> O Amazon Elastic Container Registry (Amazon ECR) é um serviço de registro de imagem de contêiner, seguro, escalável e confiável, gerenciado pela AWS. O Amazon ECR oferece suporte a repositórios privados com permissões baseadas em recursos usando o AWS IAM. Isso é para que usuários ou instâncias do Amazon EC2 especificados possam acessar seus repositórios e imagens de contêiner. É possível usar a CLI preferida para enviar, extrair e gerenciar imagens do Docker, imagens da Open Container Initiative (OCI)e artefatos compatíveis com OCI.
