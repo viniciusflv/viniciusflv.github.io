@@ -1,0 +1,34 @@
+---
+import type { MarkdownInstance } from 'astro';
+
+import { groupPagesByLang } from '@/util';
+
+export async function getStaticPaths() {
+  const allPages = await Astro.glob<MarkdownInstance<{}>>('../**/*.{md,mdx}');
+  const pagesByLang = groupPagesByLang(allPages);
+
+  const paths = [];
+  for (const { url } of pagesByLang.en) {
+    const slug = url!.slice(4);
+    for (const lang of [`en`, `pt-BR`]) {
+      if (lang === 'en') continue;
+      const doesNotNeedFallback = pagesByLang[lang]?.some((p) =>
+        p.url!.endsWith(slug),
+      );
+      if (doesNotNeedFallback) continue;
+      paths.push({ params: { lang, fallback: slug } });
+    }
+  }
+
+  return paths;
+}
+
+const englishPages = await Astro.glob<MarkdownInstance<{}>>(
+  '../en/**/*.{md,mdx}',
+);
+const { Content } = englishPages.find((p) =>
+  p.url!.endsWith(Astro.params.fallback as string),
+)!;
+---
+
+<Content />
