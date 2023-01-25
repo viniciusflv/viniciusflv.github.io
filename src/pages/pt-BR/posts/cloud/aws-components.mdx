@@ -129,6 +129,14 @@ Componente responsável por prover uma solução de **data warehouse** para supl
 
 #### **DNS e domínios** <br /> Route53
 
+<Svg className="-mb-6" width="50" alt="RDS" src={elbAws} />
+
+#### **Balanço de carga** <br /> ELB (Elastic Load Balancer)
+
+Componente responsável por aliviar os servidores do número **requisições**. Com ele é possível distribuir o tráfego entre múltiplos destinos.
+
+> O Elastic Load Balancing distribui automaticamente seu tráfego de entrada entre vários destinos, como instâncias do EC2, contêineres e endereços IP, em uma ou mais zonas de disponibilidade. Ele monitora a integridade dos destinos registrados e roteia o tráfego apenas para os destinos íntegros. O Elastic Load Balancing escala automaticamente a capacidade do balanceador de carga em resposta a mudanças no tráfego de entrada.
+
 ### Governança
 
 <Svg className="-mb-6" width="50" alt="RDS" src={cloudWatchAws} />
@@ -147,8 +155,34 @@ Componente responsável por prover **máquinas para computação em nuvem**. Com
 
 <Svg className="-mb-6" width="50" alt="RDS" src={ec2Aws} />
 
-#### **Máquinas** <br /> ECR (Elastic Container Registry)
+#### **Registro de Imagens** <br /> ECR (Elastic Container Registry)
 
-Componente responsável por registar [imagens de um container](/posts/devops/docker#container-vs-imagem 'Container e imagens')
+Componente responsável por registar [imagens de um container](/posts/devops/docker#container-vs-imagem 'Container vs imagens') de maneira escalável e segura.
 
 > O Amazon Elastic Container Registry (Amazon ECR) é um serviço de registro de imagem de contêiner, seguro, escalável e confiável, gerenciado pela AWS. O Amazon ECR oferece suporte a repositórios privados com permissões baseadas em recursos usando o AWS IAM. Isso é para que usuários ou instâncias do Amazon EC2 especificados possam acessar seus repositórios e imagens de contêiner. É possível usar a CLI preferida para enviar, extrair e gerenciar imagens do Docker, imagens da Open Container Initiative (OCI)e artefatos compatíveis com OCI.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={ecsAws} />
+
+#### **Gerenciador de Containers** <br /> ECS (Elastic Container Service)
+
+Componente responsável por gerenciar a **execução de containers** em um cluster.
+
+> O Amazon Elastic Container Service (Amazon ECS) é um serviço de gerenciamento de contêineres altamente rápido e escalável. Você pode usá-lo para executar, interromper e gerenciar contêineres em um cluster. No Amazon ECS, seus contêineres são definidos em uma definição de tarefa que você usa para executar uma tarefa individual ou tarefa em um serviço. Nesse contexto, um serviço é uma configuração que você pode usar para executar e manter simultaneamente um número especificado de tarefas em um cluster. Você pode executar tarefas e serviços em uma infraestrutura sem servidor gerenciada pelo AWS Fargate. Como alternativa, para ter mais controle da infraestrutura, é possível executar tarefas e serviços em um cluster de instâncias do Amazon EC2 que você gerencia.
+
+### Serviço
+
+<Svg className="-mb-6" width="50" alt="RDS" src={sesAws} />
+
+#### **Emails** <br /> SES (Simple Email Service)
+
+Componente responsável por prover uma maneira simples de **envio de emails**. Com ele é possível criar **templates de email** customizados para suas comunicações, vinculados com seus domínios.
+
+> Amazon SES é uma plataforma de e-mail que oferece uma forma fácil e econômica para você enviar e receber e-mail usando seus próprios endereços de e-mail e domínios.
+
+<Svg className="-mb-6" width="50" alt="RDS" src={snsAws} />
+
+#### **SMS e Notificações** <br /> SNS (Simple Notification Service)
+
+Componente responsável
+
+> O Amazon Simple Notification Service (Amazon SNS) é um serviço gerenciado que fornece entrega de mensagens de editores para assinantes (também conhecido comoProdutoreseConsumidores). Os editores se comunicam de maneira assíncrona com os assinantes produzindo e enviando mensagens para um tópico, que é um canal de comunicação e um ponto de acesso lógico. Os clientes podem se inscrever no tópico SNS e receber mensagens publicadas usando um tipo de endpoint compatível, como Amazon Kinesis Data Firehose, Amazon SQS,AWS Lambda, HTTP, e-mail, notificações push móveis e mensagens de texto móveis (SMS).
