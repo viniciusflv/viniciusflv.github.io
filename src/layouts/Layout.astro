@@ -25,9 +25,9 @@ const props = {
     <style is:global>
       * {
         /* @apply outline outline-1 outline-red-500; */
-        @apply scroll-smooth
-        transition-colors
-        duration-75;
+        @apply scroll-smooth;
+        /* transition-colors
+        duration-[10ms]; */
 
         @media (orientation: landscape) {
           &::-webkit-scrollbar {
@@ -93,7 +93,7 @@ const props = {
         @apply italic
         p-4
         border-l-4
-        dark:border-l-dracula-green
+        dark:border-l-dracula-cyan
         border-l-dracula-comment
         bg-black
         bg-opacity-5
@@ -106,6 +106,10 @@ const props = {
           underline
           text-blue-600
           dark:text-dracula-cyan;
+        }
+
+        hr {
+          @apply glow-dracula-comment dark:glow-dracula-cyan;
         }
 
         ul {

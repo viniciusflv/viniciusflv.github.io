@@ -17,7 +17,7 @@ const created = dateFormatter.format(date);
 ---
 
 <Layout {...Astro.props} type="article">
-  <section class="section">
+  <section class="post section">
     <article class="section__article">
       <header>
         <p>{created}</p>
@@ -40,7 +40,7 @@ const created = dateFormatter.format(date);
 </Layout>
 
 <style is:global>
-  .section {
+  .post.section {
     @apply grid
     md:grid-cols-[1fr,auto]
     gap-8
@@ -66,24 +66,21 @@ const created = dateFormatter.format(date);
       hidden lg:flex
       max-w-64;
 
+      &:before {
+        content: '';
+        @apply sticky
+        top-24
+        h-full
+        max-h-[80vh]
+        glow-dracula-comment
+        dark:glow-dracula-green;
+      }
       .section__aside__nav {
         @apply sticky
         top-24
         px-4
-        border-l-2
-        border-gray-400
-        dark:border-dracula-currentLine
         overflow-y-auto
         max-h-[80vh];
-
-        /* &:before {
-          content: '';
-          @apply absolute
-          left-0
-          h-full
-          glow-dracula-cyan
-          dark:glow-dracula-green;
-        } */
       }
     }
   }

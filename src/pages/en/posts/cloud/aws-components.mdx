@@ -2,9 +2,9 @@
 layout: '@/layouts/Post.astro'
 categories: Cloud
 date: 2023-01-23
-title: Componentes da AWS (Amazon Web Services)
-description: AWS é uma das maiores provedoras de serviços para computação em nuvem.
-summary: Vamos desmistificar alguns dos componentes principais da AWS, com intuito de facilitar o entendimento.
+title: Components from AWS (Amazon Web Services)
+description: AWS is one of the largest providers for cloud computing services.
+summary: Let's demystify some of the main components of AWS, in order to simplify its concepts.
 ---
 
 import { Svg } from '@svjson/react';
@@ -36,99 +36,101 @@ import {
   stepFunctionsAws,
 } from '@/assets/svg';
 
-# Componentes da AWS (Amazon Web Services)
+# Components from AWS (Amazon Web Services)
 
-## AWS é uma das maiores provedoras de serviços para computação em nuvem.
+## AWS is one of the largest providers for cloud computing services.
 
 ---
 
-### Armazenamento
+### Storage
 
 <Svg className="-mb-6" width="50" alt="S3" src={s3Aws} />
 
-#### **Sistema de arquivos** <br /> S3 (Simple Storage Service)
+#### **File System** <br /> S3 (Simple Storage Service)
 
-Componente responsável por prover um **servidor de arquivos**, auto-escalável e de alta disponibilidade, para **armazenamento** em nuvem.
+Component responsible for providing a, auto-scalable and highly available, **file server**, for cloud **storage**.
 
-> O Amazon Simple Storage Service (Amazon S3) é um serviço de armazenamento de objetos que oferece escalabilidade líder do setor, disponibilidade de dados, segurança e performance. Clientes de todos os tamanhos e setores podem usar o Amazon S3 para armazenar e proteger qualquer volume de dados para uma variedade de casos de uso, como data lakes, sites, aplicações móveis, backup e restauração, arquivamento, aplicações corporativas, dispositivos IoT e análises de big data.
+> Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a range of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.
 
 <Svg className="-mb-6" width="50" alt="S3 Glacier" src={s3GlacierAws} />
 
-#### **Depósito de arquivos** <br /> S3 Glacier (Simple Storage Service Glacier)
+#### **File Deposit** <br /> S3 Glacier (Simple Storage Service Glacier)
 
-Componente responsável por prover **armazenamento** em nuvem, **duradouro** e **barato**, mas com baixa disponibilidade.
+Component responsible for providing, **long-lasting** and **cheap**, **storage** on the cloud, but with low availability.
 
-> O Amazon S3 Glacier (S3 Glacier) é um serviço seguro e durável para arquivamento de dados de baixo custo e backup de longo prazo.
+> Amazon S3 Glacier (S3 Glacier) is a secure and durable service for low-cost data archiving and long-term backup.
 
 ---
 
-### Banco de Dados
+### Database
 
 <Svg className="-mb-6" width="50" alt="RDS" src={rdsAws} />
 
-#### **Bancos SQL** <br /> RDS (Relational Database Service)
+#### **SQL Databases** <br /> RDS (Relational Database Service)
 
-Componente responsável por prover diversos tipos de **bancos de dados SQL**. Dentre eles estão Microsoft SQL server, PostgresSQL, MySQL, Oracle e MariaDB.
+Component responsible for providing several types of **SQL databases**. Among them are Microsoft SQL server, PostgresSQL, MySQL, Oracle and MariaDB.
 
-> O Amazon Relational Database Service (Amazon RDS) é um serviço da Web que facilita a configuração, a operação e escalabilidade de um banco de dados relacional na Nuvem AWS. Ele fornece capacidade econômica e redimensionável para um banco de dados relacional padrão do setor e gerencia tarefas comuns de administração de banco de dados.
+> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 
 <Svg className="-mb-6" width="50" alt="DynamoDB" src={dynamoDbAws} />
 
 #### **NoSQL** <br /> DynamoDB
 
-Componente responsável por oferecer uma **opção NoSQL** para bancos de dados. Com ele você pode usufruir das vantagens e facilidades desse tipo de banco de dados, com o adicional de **escalabilidade** e **disponibilidade** da nuvem.
+Component responsible for providing a **NoSQL option** for databases. With it you can enjoy the advantages and facilities of this kind of database, with the additional **scalability** and **availability** of the cloud.
 
-> Com o DynamoDB, você pode criar tabelas de banco de dados que armazenam e recuperam qualquer quantidade de dados e atendem a todos os níveis de tráfego solicitados. Você pode aumentar ou diminuir a escala verticalmente da capacidade de throughput da tabela sem tempo de inatividade ou degradação da performance. Você pode usar o AWS Management Console para monitorar a utilização de recursos e as métricas de performance.
+> With DynamoDB, you can create database tables that can store and retrieve any amount of data and serve any level of request traffic. You can scale up or scale down your tables' throughput capacity without downtime or performance degradation. You can use the AWS Management Console to monitor resource utilization and performance metrics.
 
 <Svg className="-mb-6" width="50" alt="Redis" src={redisAws} />
 
 #### **Cache** <br /> Redis (**Re**mote **Di**ctionary **S**erver)
 
-Componente responsável por oferecer um banco de dados **em memória** rápido e confiável para **cache** de serviços.
+Component responsible for providing a fast and reliable **in-memory** database for **caching** services.
 
-> O Redis, que significa Remote Dictionary Server, é um datastore de chave-valor rápido e de código aberto na memória. O projeto começou quando Salvatore Sanfilippo, o desenvolvedor original do Redis, quis melhorar a escalabilidade de sua startup italiana. A partir daí, ele desenvolveu o Redis, que agora é usado como banco de dados, cache, agente de mensagens e fila.
+> Redis, which stands for Remote Dictionary Server, is a fast, open source, in-memory, key-value data store. The project started when Salvatore Sanfilippo, the original developer of Redis, wanted to improve the scalability of his Italian startup. From there, he developed Redis, which is now used as a database, cache, message broker, and queue.
 
 <Svg className="-mb-6" width="50" alt="Redshift" src={redshiftAws} />
 
 #### **Data Warehouse** <br /> Redshift
 
-Componente responsável por prover uma solução de **data warehouse** para suprir as necessidades analíticas de **BI (Business Intelligence)**.
+Component responsible for providing a **data warehouse** solution to meet the analytical needs of **BI (Business Intelligence)**.
 
-> O Amazon Redshift é um serviço de data warehouse em escala de petabytes totalmente gerenciado na nuvem. Você pode começar com apenas algumas centenas de gigabytes de dados e escalar para um petabyte ou mais. Isso permite que você use seus dados para adquirir novos insights para seus negócios e clientes.
+> Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. You can start with just a few hundred gigabytes of data and scale to a petabyte or more. This allows you to use your data to gain new insights for your business and customers.
 
 ---
 
 <Svg className="-mb-6" width="50" alt="Redshift" src={dmsAws} />
 
-### Migração e transferência
+### Migration & Transfer
 
-#### **Migração de Bancos Relacionais** <br /> DMS (Database Migration Service)
+#### **Migration of Relational Databases** <br /> DMS (Database Migration Service)
 
-Componente responsável por realizar **migrações de Bancos de dados relacionais** para a nuvem da AWS.
+Component responsible for carrying out **relational database migrations** to the AWS cloud.
 
-> AWS Database Migration Service(AWS DMS) é um serviço em nuvem que possibilita a migração de bancos de dados relacionais, data warehouses, bancos de dados NoSQL e outros tipos de armazenamento de dados. Você pode usarAWS DMS para migrar seus dados paraNuvem AWS ou entre combinações de configurações na nuvem e no local.
+> AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data into the AWS Cloud or between combinations of cloud and on-premises setups.
 
 ---
 
-### Computação
+### Compute
 
 <Svg className="-mb-6" width="50" alt="Lambda" src={lambdaAws} />
 
-#### **Função Serverless** <br /> Lambda
+#### **Serverless Function** <br /> Lambda
 
-Componente responsável por **executar trechos de independentes de código**, com uma única função. Podemos usar para automatização de funções específicas.
+Component responsible for **executing independent code snippets**, with a single function. We can use it to automate specific functionalities.
 
-> O Lambda é um serviço de computação que permite que você execute o código sem provisionar ou gerenciar servidores. O Lambda executa seu código em uma infraestrutura de computação de alta disponibilidade e executa toda a administração dos recursos computacionais, incluindo manutenção do servidor e do sistema operacional, provisionamento e escalabilidade automática da capacidade e registro em log do código. Com o Lambda, você pode executar código para praticamente qualquer tipo de aplicação ou serviço de backend. Tudo o que você precisa fazer é fornecer o código em uma das linguagens compatíveis com o Lambda.
+> AWS Lambda is a compute service that lets you run code without provisioning or managing servers. Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, and logging. With Lambda, you can run code for virtually any type of application or backend service. All you need to do is supply your code in one of the languages that Lambda supports.
 
 <Svg className="-mb-6" width="50" alt="Elastic Compute Cloud" src={ec2Aws} />
 
-#### **Máquinas** <br /> EC2 (Elastic Compute Cloud)
+#### **Computer** <br /> EC2 (Elastic Compute Cloud)
 
-Componente responsável por prover **máquinas para computação em nuvem**. Com ele você pode fazer tudo o que faria na sua máquina física.
+Component responsible for providing **cloud computing**. With it you can do everything you would do on your physical computer.
 
-> O Amazon Elastic Compute Cloud (Amazon EC2) oferece uma capacidade de computação escalável na Nuvem da Amazon Web Services (AWS). O uso do Amazon EC2 elimina a necessidade de investir em hardware inicialmente, portanto, você pode desenvolver e implantar aplicativos com mais rapidez. É possível usar o Amazon EC2 para executar quantos servidores virtuais forem necessários, configurar a segurança e as redes e gerenciar o armazenamento. O Amazon EC2 permite aumentar ou reduzir a escala para lidar com alterações nos requisitos ou com picos em popularidade, reduzindo sua necessidade de prever o tráfego.
+> Amazon Elastic Compute Cloud (Amazon EC2) provides scalable computing capacity in the Amazon Web Services (AWS) Cloud. Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster. You can use Amazon EC2 to launch as many or as few virtual servers as you need, configure security and networking, and manage storage. Amazon EC2 enables you to scale up or down to handle changes in requirements or spikes in popularity, reducing your need to forecast traffic.
 
 ---
+
+# TODO
 
 <Svg
   className="-mb-6"
