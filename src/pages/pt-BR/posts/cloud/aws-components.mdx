@@ -42,6 +42,126 @@ import {
 
 ---
 
+### Armazenamento
+
+<Svg className="-mb-6" width="50" alt="S3" src={s3Aws} />
+
+#### **Sistema de arquivos** <br /> S3 (Simple Storage Service)
+
+Componente responsável por prover um **servidor de arquivos**, auto-escalável e de alta disponibilidade, para **armazenamento** em nuvem.
+
+> O Amazon Simple Storage Service (Amazon S3) é um serviço de armazenamento de objetos que oferece escalabilidade líder do setor, disponibilidade de dados, segurança e performance. Clientes de todos os tamanhos e setores podem usar o Amazon S3 para armazenar e proteger qualquer volume de dados para uma variedade de casos de uso, como data lakes, sites, aplicações móveis, backup e restauração, arquivamento, aplicações corporativas, dispositivos IoT e análises de big data.
+
+<Svg className="-mb-6" width="50" alt="S3 Glacier" src={s3GlacierAws} />
+
+#### **Depósito de arquivos** <br /> S3 Glacier (Simple Storage Service Glacier)
+
+Componente responsável por prover **armazenamento** em nuvem, **duradouro** e **barato**, mas com baixa disponibilidade.
+
+> O Amazon S3 Glacier (S3 Glacier) é um serviço seguro e durável para arquivamento de dados de baixo custo e backup de longo prazo.
+
+---
+
+### Banco de Dados
+
+<Svg className="-mb-6" width="50" alt="RDS" src={rdsAws} />
+
+#### **Bancos SQL** <br /> RDS (Relational Database Service)
+
+Componente responsável por prover diversos tipos de **bancos de dados SQL**. Dentre eles estão Microsoft SQL server, PostgresSQL, MySQL, Oracle e MariaDB.
+
+> O Amazon Relational Database Service (Amazon RDS) é um serviço da Web que facilita a configuração, a operação e escalabilidade de um banco de dados relacional na Nuvem AWS. Ele fornece capacidade econômica e redimensionável para um banco de dados relacional padrão do setor e gerencia tarefas comuns de administração de banco de dados.
+
+<Svg className="-mb-6" width="50" alt="DynamoDB" src={dynamoDbAws} />
+
+#### **NoSQL** <br /> DynamoDB
+
+Componente responsável por oferecer uma **opção NoSQL** para bancos de dados. Com ele você pode usufruir das vantagens e facilidades desse tipo de banco de dados, com o adicional de **escalabilidade** e **disponibilidade** da nuvem.
+
+> Com o DynamoDB, você pode criar tabelas de banco de dados que armazenam e recuperam qualquer quantidade de dados e atendem a todos os níveis de tráfego solicitados. Você pode aumentar ou diminuir a escala verticalmente da capacidade de throughput da tabela sem tempo de inatividade ou degradação da performance. Você pode usar o AWS Management Console para monitorar a utilização de recursos e as métricas de performance.
+
+<Svg className="-mb-6" width="50" alt="Redis" src={redisAws} />
+
+#### **Cache** <br /> Redis (**Re**mote **Di**ctionary **S**erver)
+
+Componente responsável por oferecer um banco de dados **em memória** rápido e confiável para **cache** de serviços.
+
+> O Redis, que significa Remote Dictionary Server, é um datastore de chave-valor rápido e de código aberto na memória. O projeto começou quando Salvatore Sanfilippo, o desenvolvedor original do Redis, quis melhorar a escalabilidade de sua startup italiana. A partir daí, ele desenvolveu o Redis, que agora é usado como banco de dados, cache, agente de mensagens e fila.
+
+<Svg className="-mb-6" width="50" alt="Redshift" src={redshiftAws} />
+
+#### **Data Warehouse** <br /> Redshift
+
+Componente responsável por prover uma solução de **data warehouse** para suplantar as necessidades analíticas de **BI (Business Intelligence)**.
+
+> O Amazon Redshift é um serviço de data warehouse em escala de petabytes totalmente gerenciado na Nuvem AWS. Um data warehouse do Amazon Redshift é um conjunto de recursos de computação chamados nós, que são organizados em um grupo chamado cluster. Cada cluster executa um mecanismo do Amazon Redshift e contém um ou mais bancos de dados.
+
+---
+
+<Svg className="-mb-6" width="50" alt="Redshift" src={dmsAws} />
+
+### Migração e transferência
+
+#### **Migração de Bancos Relacionais** <br /> DMS (Database Migration Service)
+
+Componente responsável por realizar **migrações de Bancos de dados relacionais** para a nuvem da AWS.
+
+> AWS Database Migration Service(AWS DMS) é um serviço em nuvem que possibilita a migração de bancos de dados relacionais, data warehouses, bancos de dados NoSQL e outros tipos de armazenamento de dados. Você pode usarAWS DMS para migrar seus dados paraNuvem AWS ou entre combinações de configurações na nuvem e no local.
+
+---
+
+### Computação
+
+<Svg className="-mb-6" width="50" alt="Lambda" src={lambdaAws} />
+
+#### **Função Serverless** <br /> Lambda
+
+Componente responsável por **executar trechos de independentes de código**, com uma única função. Podemos usar para automatização de funções específicas.
+
+> O Lambda é um serviço de computação que permite que você execute o código sem provisionar ou gerenciar servidores. O Lambda executa seu código em uma infraestrutura de computação de alta disponibilidade e executa toda a administração dos recursos computacionais, incluindo manutenção do servidor e do sistema operacional, provisionamento e escalabilidade automática da capacidade e registro em log do código. Com o Lambda, você pode executar código para praticamente qualquer tipo de aplicação ou serviço de backend. Tudo o que você precisa fazer é fornecer o código em uma das linguagens compatíveis com o Lambda.
+
+<Svg className="-mb-6" width="50" alt="Elastic Compute Cloud" src={ec2Aws} />
+
+#### **Máquinas** <br /> EC2 (Elastic Compute Cloud)
+
+Componente responsável por prover **máquinas para computação em nuvem**. Com ele você pode fazer tudo o que faria na sua máquina física.
+
+> O Amazon Elastic Compute Cloud (Amazon EC2) oferece uma capacidade de computação escalável na Nuvem da Amazon Web Services (AWS). O uso do Amazon EC2 elimina a necessidade de investir em hardware inicialmente, portanto, você pode desenvolver e implantar aplicativos com mais rapidez. É possível usar o Amazon EC2 para executar quantos servidores virtuais forem necessários, configurar a segurança e as redes e gerenciar o armazenamento. O Amazon EC2 permite aumentar ou reduzir a escala para lidar com alterações nos requisitos ou com picos em popularidade, reduzindo sua necessidade de prever o tráfego.
+
+---
+
+<Svg
+  className="-mb-6"
+  width="50"
+  alt="Elastic Container Registry"
+  src={ec2Aws}
+/>
+
+### Containers
+
+#### **Registro de Imagens** <br /> ECR (Elastic Container Registry)
+
+Componente responsável por registar [imagens de um container](/posts/devops/docker#container-vs-imagem 'Container vs imagens') de maneira escalável e segura.
+
+> O Amazon Elastic Container Registry (Amazon ECR) é um serviço de registro de imagem de contêiner, seguro, escalável e confiável, gerenciado pela AWS. O Amazon ECR oferece suporte a repositórios privados com permissões baseadas em recursos usando o AWS IAM. Isso é para que usuários ou instâncias do Amazon EC2 especificados possam acessar seus repositórios e imagens de contêiner. É possível usar a CLI preferida para enviar, extrair e gerenciar imagens do Docker, imagens da Open Container Initiative (OCI)e artefatos compatíveis com OCI.
+
+<Svg
+  className="-mb-6"
+  width="50"
+  alt="Elastic Container Service"
+  src={ecsAws}
+/>
+
+#### **Gerenciador de Containers** <br /> ECS (Elastic Container Service)
+
+Componente responsável por gerenciar a **execução de containers** em um cluster.
+
+> O Amazon Elastic Container Service (Amazon ECS) é um serviço de gerenciamento de contêineres altamente rápido e escalável. Você pode usá-lo para executar, interromper e gerenciar contêineres em um cluster. No Amazon ECS, seus contêineres são definidos em uma definição de tarefa que você usa para executar uma tarefa individual ou tarefa em um serviço. Nesse contexto, um serviço é uma configuração que você pode usar para executar e manter simultaneamente um número especificado de tarefas em um cluster. Você pode executar tarefas e serviços em uma infraestrutura sem servidor gerenciada pelo AWS Fargate. Como alternativa, para ter mais controle da infraestrutura, é possível executar tarefas e serviços em um cluster de instâncias do Amazon EC2 que você gerencia.
+
+---
+
+### Segurança, Identidade e Conformidade
+
 <Svg
   className="-mb-6"
   width="50"
@@ -76,61 +196,9 @@ Componente responsável por prover **criação**, **autenticação**, e **autori
 
 > O Amazon Cognito fornece autenticação, autorização e gerenciamento de usuários para suas aplicações Web e móveis. Seus usuários podem fazer login diretamente com um nome de usuário e uma senha ou por meio de terceiros, como o Facebook, a Amazon, o Google ou a Apple.
 
-<Svg className="-mb-6" width="50" alt="S3" src={s3Aws} />
+---
 
-#### **Sistema de arquivos** <br /> S3 (Simple Storage Service)
-
-Componente responsável por prover um **servidor de arquivos**, auto-escalável e de alta disponibilidade, para **armazenamento** em nuvem.
-
-> O Amazon Simple Storage Service (Amazon S3) é um serviço de armazenamento de objetos que oferece escalabilidade líder do setor, disponibilidade de dados, segurança e performance. Clientes de todos os tamanhos e setores podem usar o Amazon S3 para armazenar e proteger qualquer volume de dados para uma variedade de casos de uso, como data lakes, sites, aplicações móveis, backup e restauração, arquivamento, aplicações corporativas, dispositivos IoT e análises de big data.
-
-<Svg className="-mb-6" width="50" alt="S3 Glacier" src={s3GlacierAws} />
-
-#### **Depósito de arquivos** <br /> S3 Glacier (Simple Storage Service Glacier)
-
-Componente responsável por prover **armazenamento** em nuvem, **duradouro** e **barato**, mas com baixa disponibilidade.
-
-> O Amazon S3 Glacier (S3 Glacier) é um serviço seguro e durável para arquivamento de dados de baixo custo e backup de longo prazo.
-
-<Svg className="-mb-6" width="50" alt="RDS" src={rdsAws} />
-
-#### **Bancos SQL** <br /> RDS (Relational Database Service)
-
-Componente responsável por prover diversos tipos de **bancos de dados SQL**. Dentre eles estão Microsoft SQL server, PostgresSQL, MySQL, Oracle e MariaDB.
-
-> O Amazon Relational Database Service (Amazon RDS) é um serviço da Web que facilita a configuração, a operação e escalabilidade de um banco de dados relacional na Nuvem AWS. Ele fornece capacidade econômica e redimensionável para um banco de dados relacional padrão do setor e gerencia tarefas comuns de administração de banco de dados.
-
-<Svg className="-mb-6" width="50" alt="DynamoDB" src={dynamoDbAws} />
-
-#### **NoSQL** <br /> DynamoDB
-
-Componente responsável por oferecer uma **opção NoSQL** para bancos de dados. Com ele você pode usufruir das vantagens e facilidades desse tipo de banco de dados, com o adicional de **escalabilidade** e **disponibilidade** da nuvem.
-
-> Com o DynamoDB, você pode criar tabelas de banco de dados que armazenam e recuperam qualquer quantidade de dados e atendem a todos os níveis de tráfego solicitados. Você pode aumentar ou diminuir a escala verticalmente da capacidade de throughput da tabela sem tempo de inatividade ou degradação da performance. Você pode usar o AWS Management Console para monitorar a utilização de recursos e as métricas de performance.
-
-<Svg className="-mb-6" width="50" alt="Redis" src={redisAws} />
-
-#### **Cache** <br /> Redis (**Re**mote **Di**ctionary **S**erver)
-
-Componente responsável por oferecer um banco de dados **em memória** rápido e confiável para **cache** de serviços.
-
-> O Redis, que significa Remote Dictionary Server, é um datastore de chave-valor rápido e de código aberto na memória. O projeto começou quando Salvatore Sanfilippo, o desenvolvedor original do Redis, quis melhorar a escalabilidade de sua startup italiana. A partir daí, ele desenvolveu o Redis, que agora é usado como banco de dados, cache, agente de mensagens e fila.
-
-<Svg className="-mb-6" width="50" alt="Redshift" src={redshiftAws} />
-
-#### **Data Warehouse** <br /> Redshift
-
-Componente responsável por prover uma solução de **data warehouse** para suplantar as necessidades analíticas de **BI (Business Intelligence)**.
-
-> O Amazon Redshift é um serviço de data warehouse em escala de petabytes totalmente gerenciado na Nuvem AWS. Um data warehouse do Amazon Redshift é um conjunto de recursos de computação chamados nós, que são organizados em um grupo chamado cluster. Cada cluster executa um mecanismo do Amazon Redshift e contém um ou mais bancos de dados.
-
-<Svg className="-mb-6" width="50" alt="Redshift" src={dmsAws} />
-
-#### **Migração de Bancos Relacionais** <br /> DMS (Database Migration Service)
-
-Componente responsável por realizar **migrações de Bancos de dados relacionais** para a nuvem da AWS.
-
-> AWS Database Migration Service(AWS DMS) é um serviço em nuvem que possibilita a migração de bancos de dados relacionais, data warehouses, bancos de dados NoSQL e outros tipos de armazenamento de dados. Você pode usarAWS DMS para migrar seus dados paraNuvem AWS ou entre combinações de configurações na nuvem e no local.
+### Redes e entrega de conteúdo
 
 <Svg className="-mb-6" width="50" alt="Cloudfront" src={cloudFrontAws} />
 
@@ -156,6 +224,10 @@ Componente responsável por aliviar os servidores do número **requisições**. 
 
 > O Elastic Load Balancing distribui automaticamente seu tráfego de entrada entre vários destinos, como instâncias do EC2, contêineres e endereços IP, em uma ou mais zonas de disponibilidade. Ele monitora a integridade dos destinos registrados e roteia o tráfego apenas para os destinos íntegros. O Elastic Load Balancing escala automaticamente a capacidade do balanceador de carga em resposta a mudanças no tráfego de entrada.
 
+---
+
+### Gerenciamento e Governança
+
 <Svg className="-mb-6" width="50" alt="Cloudwatch" src={cloudWatchAws} />
 
 #### **Logs** <br /> Cloudwatch
@@ -164,47 +236,9 @@ Componente responsável por **monitorar os recursos**, provendo uma maneira de v
 
 > O Amazon CloudWatch monitora os recursos da Amazon Web Services (AWS) e as aplicações executadas na AWS em tempo real. Você pode usar o CloudWatch para coletar e monitorar métricas, que são as variáveis que é possível medir para avaliar seus recursos e suas aplicações.
 
-<Svg className="-mb-6" width="50" alt="Elastic Compute Cloud" src={ec2Aws} />
+---
 
-#### **Máquinas** <br /> EC2 (Elastic Compute Cloud)
-
-Componente responsável por prover **máquinas para computação em nuvem**. Com ele você pode fazer tudo o que faria na sua máquina física.
-
-> O Amazon Elastic Compute Cloud (Amazon EC2) oferece uma capacidade de computação escalável na Nuvem da Amazon Web Services (AWS). O uso do Amazon EC2 elimina a necessidade de investir em hardware inicialmente, portanto, você pode desenvolver e implantar aplicativos com mais rapidez. É possível usar o Amazon EC2 para executar quantos servidores virtuais forem necessários, configurar a segurança e as redes e gerenciar o armazenamento. O Amazon EC2 permite aumentar ou reduzir a escala para lidar com alterações nos requisitos ou com picos em popularidade, reduzindo sua necessidade de prever o tráfego.
-
-<Svg
-  className="-mb-6"
-  width="50"
-  alt="Elastic Container Registry"
-  src={ec2Aws}
-/>
-
-#### **Registro de Imagens** <br /> ECR (Elastic Container Registry)
-
-Componente responsável por registar [imagens de um container](/posts/devops/docker#container-vs-imagem 'Container vs imagens') de maneira escalável e segura.
-
-> O Amazon Elastic Container Registry (Amazon ECR) é um serviço de registro de imagem de contêiner, seguro, escalável e confiável, gerenciado pela AWS. O Amazon ECR oferece suporte a repositórios privados com permissões baseadas em recursos usando o AWS IAM. Isso é para que usuários ou instâncias do Amazon EC2 especificados possam acessar seus repositórios e imagens de contêiner. É possível usar a CLI preferida para enviar, extrair e gerenciar imagens do Docker, imagens da Open Container Initiative (OCI)e artefatos compatíveis com OCI.
-
-<Svg
-  className="-mb-6"
-  width="50"
-  alt="Elastic Container Service"
-  src={ecsAws}
-/>
-
-#### **Gerenciador de Containers** <br /> ECS (Elastic Container Service)
-
-Componente responsável por gerenciar a **execução de containers** em um cluster.
-
-> O Amazon Elastic Container Service (Amazon ECS) é um serviço de gerenciamento de contêineres altamente rápido e escalável. Você pode usá-lo para executar, interromper e gerenciar contêineres em um cluster. No Amazon ECS, seus contêineres são definidos em uma definição de tarefa que você usa para executar uma tarefa individual ou tarefa em um serviço. Nesse contexto, um serviço é uma configuração que você pode usar para executar e manter simultaneamente um número especificado de tarefas em um cluster. Você pode executar tarefas e serviços em uma infraestrutura sem servidor gerenciada pelo AWS Fargate. Como alternativa, para ter mais controle da infraestrutura, é possível executar tarefas e serviços em um cluster de instâncias do Amazon EC2 que você gerencia.
-
-<Svg className="-mb-6" width="50" alt="Simple Email Service" src={sesAws} />
-
-#### **Emails** <br /> SES (Simple Email Service)
-
-Componente responsável por prover uma maneira simples de **envio de emails**. Com ele é possível criar **templates de email** customizados para suas comunicações, vinculados com seus domínios.
-
-> Amazon SES é uma plataforma de e-mail que oferece uma forma fácil e econômica para você enviar e receber e-mail usando seus próprios endereços de e-mail e domínios.
+### Integração de aplicações
 
 <Svg
   className="-mb-6"
@@ -227,13 +261,9 @@ Componente responsável por oferecer uma solução de **fila** para integrar com
 
 > O Amazon Simple Queue Service (Amazon SQS) oferece uma fila hospedada segura, durável e disponível que permite integrar e desacoplar sistemas de software e componentes distribuídos. O Amazon SQS oferece constructos comuns, como filas de mensagens mortas e tags de alocação de custos. Ele fornece uma API de serviço da Web genérica e pode ser acessado por qualquer linguagem de programação compatível com o AWS SDK.
 
-<Svg className="-mb-6" width="50" alt="API Gateway" src={gatewayAws} />
+---
 
-#### **Proxy** <br /> API Gateway
-
-Componente responsável por oferecer um **proxy** para controlar o tráfico e acesso as APIs.
-
-> O Amazon API Gateway é um serviço da AWS para criação, publicação, manutenção, monitoramento e proteção de APIs REST e WebSocket em qualquer escala. Os desenvolvedores de API podem criar APIs que acessem a AWS ou outros web services, bem como dados armazenados na Nuvem AWS. Como um desenvolvedor de APIs do API Gateway, é possível criar APIs para uso em suas próprias aplicações cliente. Ou você pode disponibilizar suas APIs para desenvolvedores de aplicativos de terceiros. Para obter mais informações, consulte Quem usa o API Gateway?.
+### Análise
 
 <Svg className="-mb-6" width="50" alt="AWS Glue" src={glueAws} />
 
@@ -243,10 +273,22 @@ Componente responsável por oferecer uma maneira de **extrair transformar e carr
 
 > O AWS Glue é um serviço de integração de dados com tecnologia sem servidor que facilita aos usuários de análise a descoberta, preparação, transferência e integração de dados de várias fontes. Você pode usá-lo para análise, machine learning e desenvolvimento de aplicações. Também inclui outras ferramentas de produtividade e operações de dados para criação, execução de trabalhos e implementação de fluxos de trabalho de negócios.
 
-<Svg className="-mb-6" width="50" alt="Lambda" src={lambdaAws} />
+---
 
-#### **Função Serverless** <br /> Lambda
+### Front-End para plataformas móveis e web
 
-Componente responsável por **executar trechos de independentes de código**, com uma única função. Podemos usar para automatização de funções específicas.
+<Svg className="-mb-6" width="50" alt="API Gateway" src={gatewayAws} />
 
-> O Lambda é um serviço de computação que permite que você execute o código sem provisionar ou gerenciar servidores. O Lambda executa seu código em uma infraestrutura de computação de alta disponibilidade e executa toda a administração dos recursos computacionais, incluindo manutenção do servidor e do sistema operacional, provisionamento e escalabilidade automática da capacidade e registro em log do código. Com o Lambda, você pode executar código para praticamente qualquer tipo de aplicação ou serviço de backend. Tudo o que você precisa fazer é fornecer o código em uma das linguagens compatíveis com o Lambda.
+#### **Proxy** <br /> API Gateway
+
+Componente responsável por oferecer um **proxy** para controlar o tráfico e acesso as APIs.
+
+> O Amazon API Gateway é um serviço da AWS para criação, publicação, manutenção, monitoramento e proteção de APIs REST e WebSocket em qualquer escala. Os desenvolvedores de API podem criar APIs que acessem a AWS ou outros web services, bem como dados armazenados na Nuvem AWS. Como um desenvolvedor de APIs do API Gateway, é possível criar APIs para uso em suas próprias aplicações cliente. Ou você pode disponibilizar suas APIs para desenvolvedores de aplicativos de terceiros. Para obter mais informações, consulte Quem usa o API Gateway?.
+
+<Svg className="-mb-6" width="50" alt="Simple Email Service" src={sesAws} />
+
+#### **Emails** <br /> SES (Simple Email Service)
+
+Componente responsável por prover uma maneira simples de **envio de emails**. Com ele é possível criar **templates de email** customizados para suas comunicações, vinculados com seus domínios.
+
+> Amazon SES é uma plataforma de e-mail que oferece uma forma fácil e econômica para você enviar e receber e-mail usando seus próprios endereços de e-mail e domínios.
