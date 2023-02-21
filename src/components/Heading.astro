@@ -1,0 +1,56 @@
+---
+import type { HTMLAttributes } from 'react';
+
+const { as: Tag = 'strong', isHighlighted } = Astro.props;
+
+export type Props = {
+  as?: string;
+  isHighlighted?: boolean;
+};
+---
+
+<Tag class:list={['heading', isHighlighted ? '--highlighted' : null]}>
+  <slot />
+</Tag>
+
+<style>
+  .heading {
+    @apply text-center md:text-start;
+
+    &.--highlighted {
+      @apply text-transparent
+      bg-clip-text
+      bg-gradient-to-r
+      from-dracula-currentLine
+      to-dracula-comment
+      dark:from-dracula-cyan 
+      dark:to-dracula-green;
+    }
+
+    &:is(h1) {
+      @apply text-2xl
+      md:text-3xl
+      md:leading-11
+      lg:text-5xl
+      lg:leading-16
+      font-bold;
+    }
+
+    &:is(h2, h3) {
+      @apply lg:text-xl md:text-lg;
+    }
+
+    &:is(h2) {
+      @apply italic;
+    }
+
+    &:is(h3) {
+      @apply font-bold;
+    }
+
+    &:is(strong) {
+      @apply text-dracula-comment
+      dark:text-dracula-green;
+    }
+  }
+</style>

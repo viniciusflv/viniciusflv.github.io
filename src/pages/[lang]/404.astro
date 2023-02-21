@@ -2,7 +2,7 @@
 import { Svg } from '@svjson/react';
 
 import { notFound } from '@/assets/svg';
-import Layout from '@/layouts/Layout.astro';
+import Root from '@/layouts/Root.astro';
 
 export function getStaticPaths() {
   return [{ params: { lang: 'pt-BR' } }, { params: { lang: 'en' } }];
@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { lang = 'en' } = Astro.params;
 ---
 
-<Layout lang={lang} title="Page not Found">
+<Root lang={lang} title="Page not Found">
   <section class="not-found">
     <div class="not-found__content">
       <Svg
@@ -22,7 +22,7 @@ const { lang = 'en' } = Astro.params;
       />
     </div>
   </section>
-</Layout>
+</Root>
 
 <style is:global>
   .not-found {

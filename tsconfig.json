@@ -4,6 +4,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "types": ["@astrojs/image/client"],
+    "strictNullChecks": true,
     "paths": {
       "@/*": ["./src/*"]
     }

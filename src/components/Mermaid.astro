@@ -24,133 +24,132 @@ try {
 <style is:global>
   .mermaid-container {
     @apply flex flex-wrap lg:flex-nowrap gap-4 w-full;
-    .shiki {
-      @apply w-full;
-    }
   }
 
   .mermaid {
     @apply flex w-full overflow-y-auto;
 
-    .edgePaths * {
-      @apply dark:!stroke-dracula-green;
-    }
-
-    .edgeLabel {
-      @apply dark:!bg-dracula-background;
-    }
-
-    .marker,
-    marker * {
-      :not(#ZERO_OR_MORE_START, #ZERO_OR_MORE_END) {
-        @apply dark:!fill-dracula-green;
+    .dark & {
+      .edgePaths * {
+        @apply !stroke-dracula-green;
       }
 
-      @apply dark:!stroke-dracula-green;
-    }
-
-    circle:not([class^='actor']):not(.commit) {
-      @apply dark:!fill-dracula-darkest;
-      @apply dark:!stroke-dracula-cyan;
-
-      &.face {
-        @apply dark:!stroke-dracula-cyan;
+      .edgeLabel {
+        @apply !bg-dracula-background;
       }
-    }
 
-    .mouth {
-      @apply dark:!stroke-dracula-cyan;
-    }
+      .marker,
+      marker * {
+        :not(#ZERO_OR_MORE_START, #ZERO_OR_MORE_END) {
+          @apply !fill-dracula-green;
+        }
 
-    #crosshead * {
-      @apply dark:!stroke-dracula-green;
-    }
-
-    line,
-    .relationshipLine {
-      @apply dark:!stroke-dracula-green;
-
-      &[id^='actor'] {
-        @apply dark:!stroke-dracula-cyan;
+        @apply !stroke-dracula-green;
       }
-    }
 
-    .nodes {
-      a {
-        &:hover {
-          .node * {
-            @apply dark:!stroke-dracula-cyan !stroke-dracula-red;
-          }
+      circle:not([class^='actor']):not(.commit) {
+        @apply !fill-dracula-darkest;
+        @apply !stroke-dracula-cyan;
+
+        &.face {
+          @apply !stroke-dracula-cyan;
         }
       }
-      .state-start,
-      .state-end,
-      .fork-join {
-        @apply dark:!stroke-dracula-orange;
-      }
-    }
 
-    .node *,
-    .actor,
-    .entityBox,
-    .relationshipLabelBox,
-    .attributeBoxEven,
-    .attributeBoxOdd,
-    .task,
-    .reqBox,
-    .reqLabelBox,
-    .commit-label-bkg {
-      @apply dark:!fill-dracula-background
-      dark:!stroke-dracula-currentLine !opacity-100;
-
-      &[class^='task crit'] {
-        @apply !fill-dracula-red;
+      .mouth {
+        @apply !stroke-dracula-cyan;
       }
 
-      &[class^='task active'] {
+      #crosshead * {
+        @apply !stroke-dracula-green;
+      }
+
+      line,
+      .relationshipLine {
+        @apply !stroke-dracula-green;
+
+        &[id^='actor'] {
+          @apply !stroke-dracula-cyan;
+        }
+      }
+
+      .nodes {
+        a {
+          &:hover {
+            .node * {
+              @apply !stroke-dracula-cyan !stroke-dracula-red;
+            }
+          }
+        }
+        .state-start,
+        .state-end,
+        .fork-join {
+          @apply !stroke-dracula-orange;
+        }
+      }
+
+      .node *,
+      .actor,
+      .entityBox,
+      .relationshipLabelBox,
+      .attributeBoxEven,
+      .attributeBoxOdd,
+      .task,
+      .reqBox,
+      .reqLabelBox,
+      .commit-label-bkg {
+        @apply !fill-dracula-background
+      !stroke-dracula-currentLine !opacity-100;
+
+        &[class^='task crit'] {
+          @apply !fill-dracula-red;
+        }
+
+        &[class^='task active'] {
+          @apply !fill-dracula-cyan;
+        }
+
+        &[class^='task activeCrit'] {
+          @apply !fill-dracula-orange;
+        }
+      }
+
+      .today {
+        @apply !stroke-dracula-orange;
+      }
+
+      .cluster *,
+      .statediagram-cluster *,
+      .journey-section {
+        @apply !fill-dracula-darkest
+      !stroke-dracula-currentLine;
+      }
+
+      .actor *,
+      .messageText,
+      .entityLabel,
+      .relationshipLabel {
         @apply !fill-dracula-cyan;
       }
 
-      &[class^='task activeCrit'] {
+      [class^='activation'] {
         @apply !fill-dracula-orange;
       }
-    }
 
-    .today {
-      @apply !stroke-dracula-orange;
-    }
+      text:not(.taskText),
+      .legend {
+        &:not(.slice):not(.commit-label) {
+          @apply !fill-dracula-cyan;
+        }
 
-    .cluster *,
-    .statediagram-cluster *,
-    .journey-section {
-      @apply dark:!fill-dracula-darkest
-      dark:!stroke-dracula-currentLine;
-    }
-
-    .actor *,
-    .messageText,
-    .entityLabel,
-    .relationshipLabel {
-      @apply dark:!fill-dracula-cyan;
-    }
-
-    [class^='activation'] {
-      @apply dark:!fill-dracula-orange;
-    }
-
-    text:not(.taskText),
-    .legend {
-      &:not(.slice):not(.commit-label) {
-        @apply dark:!fill-dracula-cyan;
+        .row {
+          @apply fill-white;
+        }
       }
 
-      .row {
-        @apply fill-white;
+      * {
+        @apply !text-dracula-cyan;
       }
-    }
-
-    * {
-      @apply dark:!text-dracula-cyan;
     }
   }
 </style>

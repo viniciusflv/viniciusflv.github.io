@@ -1,81 +1,88 @@
 ---
-import type { MarkdownHeading } from 'astro';
+import type { MarkdownLayoutProps } from 'astro';
+import { getCollection } from 'astro:content';
 
-import AstroList from '@/components/List.astro';
-import Layout from '@/layouts/Layout.astro';
-import { getLanguageFromURL } from '@/util';
+import Container from '@/components/Container.astro';
+import Tag from '@/components/Tag.astro';
+import Tree from '@/components/Tree.astro';
+import Root from '@/layouts/Root.astro';
+import { getLanguageFromURL, unflattenHeading } from '@/util';
 
-export type Props = {
-  headings: MarkdownHeading[];
-};
-
-const headings = Astro?.props?.headings ?? [];
+const nestedHeadings = unflattenHeading(Astro.props.headings);
 const lang = getLanguageFromURL(Astro.url.pathname);
 const date = new Date(Astro.props.frontmatter.date).setHours(24);
 const dateFormatter = new Intl.DateTimeFormat(lang);
 const created = dateFormatter.format(date);
+
+const files = await getCollection('posts', ({ slug }) => {
+  return slug.startsWith(lang.toLocaleLowerCase());
+});
+
+const categories = files
+  .filter(({ data }) => data.category === Astro.props.frontmatter.categories)
+  .map(({ data, slug }) => ({
+    label: data.category,
+    value: `/${slug}`.replace('pt-br', 'pt-BR') ?? '',
+  }));
+
+export type Props = MarkdownLayoutProps<any>;
 ---
 
-<Layout {...Astro.props} type="article">
-  <section class="post section">
-    <article class="section__article">
+<Root {...Astro.props}>
+  <Container class="post">
+    <aside>
+      <nav>
+        <Tree nestedHeadings={nestedHeadings} />
+      </nav>
+    </aside>
+    <article class="markdown">
       <header>
         <p>{created}</p>
         <a title="Vinícius Victorino" href={`/${lang}/about`}>
           Vinícius Victorino
         </a>
+        <nav>
+          {
+            categories?.map(({ label, value }) => (
+              <Tag value={value} label={label} />
+            ))
+          }
+        </nav>
       </header>
       <slot />
     </article>
-    {
-      headings.length ? (
-        <aside class="section__aside">
-          <nav class="section__aside__nav">
-            <AstroList headings={headings} />
-          </nav>
-        </aside>
-      ) : null
-    }
-  </section>
-</Layout>
+  </Container>
+</Root>
 
-<style is:global>
-  .post.section {
+<style>
+  .post {
     @apply grid
-    md:grid-cols-[1fr,auto]
-    gap-8
-    container
-    p-8
-    py-32
-    xl:p-32
-    mx-auto;
+    grid-cols-[minmax(0,1fr)]
+    lg:grid-cols-[minmax(0,3.5fr)_minmax(250px,1fr)];
 
-    .section__article {
-      @apply max-w-[calc(100vw-4rem)]
-      lg:max-w-[calc(100vw-24rem)];
-
-      @apply flex
-      flex-col
-      grow
-      gap-8
-      w-full;
+    &.contain {
+      @apply pt-16 sm:pt-32;
     }
 
-    .section__aside {
+    article {
+      order: -1;
+      @apply flex flex-col gap-8;
+
+      header {
+        @apply flex flex-col items-start gap-2;
+
+        nav {
+          @apply flex flex-wrap gap-4;
+        }
+      }
+    }
+
+    aside {
       @apply relative
       hidden lg:flex
       max-w-64;
 
-      &:before {
-        content: '';
-        @apply sticky
-        top-24
-        h-full
-        max-h-[80vh]
-        glow-dracula-comment
-        dark:glow-dracula-green;
-      }
-      .section__aside__nav {
+      nav {
         @apply sticky
         top-24
         px-4

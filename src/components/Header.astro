@@ -3,7 +3,6 @@ import {
   github,
   home,
   linkedin,
-  mastodon,
   person,
   twitterLogo,
   write,
@@ -11,6 +10,7 @@ import {
 import MenuItem from '@/components/MenuItem.astro';
 import ToggleLang from '@/components/ToggleLang.astro';
 import ToggleTheme from '@/components/ToggleTheme.astro';
+import { getTranslation } from '@/util';
 
 const { lang } = Astro.props;
 
@@ -31,8 +31,8 @@ export type Props = {
   });
 </script>
 
-<header class="header">
-  <nav class="header__nav">
+<header>
+  <nav>
     <button
       title="Hamburger Menu"
       aria-pressed="false"
@@ -44,29 +44,28 @@ export type Props = {
       <i class="trigger-line"></i>
     </button>
     <div class="header__nav__menu">
-      <div class="sm:hidden"></div>
       <MenuItem
-        label={lang === 'en' ? 'Home' : 'Início'}
+        label={getTranslation(lang, 'HEADER_MENU_ITEM_HOME')}
         href={`/${lang}`}
         icon={home}
         isCurrentColor
       />
       <MenuItem
-        label={lang === 'en' ? 'Posts' : 'Postagens'}
+        label={getTranslation(lang, 'HEADER_MENU_ITEM_POSTS')}
         href={`/${lang}/posts`}
         icon={write}
         isCurrentColor
       />
       <MenuItem
-        label={lang === 'en' ? 'About' : 'Sobre'}
+        label={getTranslation(lang, 'HEADER_MENU_ITEM_ABOUT')}
         href={`/${lang}/about`}
         icon={person}
         isCurrentColor
       />
-      <hr class="divider" />
+      <hr />
       <ToggleLang {...Astro.props} />
       <ToggleTheme {...Astro.props} />
-      <hr class="divider" />
+      <hr />
       <MenuItem
         label="Github"
         target="_blank"
@@ -88,26 +87,30 @@ export type Props = {
         icon={twitterLogo}
         isCurrentColor
       />
+      <div class="sm:hidden"></div>
     </div>
   </nav>
 </header>
 
-<style is:global>
-  .header {
+<style>
+  header {
     @apply flex
     justify-end
     sm:justify-center
     w-full
     z-20;
 
-    .header__nav {
+    nav {
       @apply flex
+      origin-top
       items-center
-      flex-col
+      flex-col-reverse
       sm:flex-row
       fixed
       z-10
-      top-4
+      sm:top-4
+      sm:bottom-auto
+      bottom-4
       p-4
       sm:px-8
       shadow-2xl
@@ -135,13 +138,13 @@ export type Props = {
         animation: popup 500ms 1;
       }
 
-      .divider {
+      hr {
         @apply bg-current
-          border
-          w-full
-          sm:h-6
-          border-gray-300
-          dark:bg-dracula-currentLine;
+        border-r
+        w-full
+        sm:h-6
+        border-gray-300
+        dark:border-dracula-currentLine;
       }
 
       .header__toggle__menu {
@@ -203,7 +206,7 @@ export type Props = {
         sm:flex-row
         gap-6;
 
-        @apply transition-transform duration-75 origin-top;
+        @apply origin-bottom transition-transform duration-75;
       }
     }
   }

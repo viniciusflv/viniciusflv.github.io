@@ -1,33 +1,5 @@
 ---
 import Home from '@/layouts/Home.astro';
-import { getLanguageFromURL } from '@/util';
-
-const files = await Astro.glob('./posts/**/*.mdx');
-
-const categories = files
-  .filter(({ frontmatter }) => frontmatter.category)
-  .map(({ frontmatter, url }) => ({
-    label: frontmatter.category,
-    value: url ?? '',
-  }));
-
-const posts = files
-  .filter(({ frontmatter }) => frontmatter.categories)
-  .sort((a, b) => {
-    const dateA = new Date(a.frontmatter.date).setHours(24);
-    const dateB = new Date(b.frontmatter.date).setHours(24);
-
-    return dateB - dateA;
-  });
-
-const props = {
-  lang: getLanguageFromURL(Astro.url.pathname),
-  title: 'Welcome to my personal website!',
-  keywords: 'programming,front-end,javascript,typescript,react,technologies',
-  description: `Here I talk about my experiences and technologies, that I'm passionate about.`,
-  categories,
-  posts,
-};
 ---
 
-<Home {...props} />
+<Home />

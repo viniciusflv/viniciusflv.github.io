@@ -7,11 +7,12 @@ const {
   icon,
   isCurrentColor,
   className,
+  class: classes,
   ...props
 } = Astro.props;
 ---
 
-<Tag class:list={['menu__item', className]} title={label} {...props}>
+<Tag class:list={['menu__item', classes, className]} title={label} {...props}>
   {
     Astro.slots.default ? (
       <slot />
@@ -26,7 +27,7 @@ const {
   }
 </Tag>
 
-<style is:global>
+<style>
   .menu__item {
     @apply relative
     flex

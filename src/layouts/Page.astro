@@ -1,0 +1,17 @@
+---
+import CodeSnippet from '@/components/CodeSnippet.astro';
+import Header from '@/components/Header.astro';
+import GlobalStyle from '@/layouts/GlobalStyle.astro';
+
+export type Props = {
+  lang: string;
+  knownLanguages: string[];
+};
+---
+
+<section class="page">
+  <Header {...Astro.props} />
+  <slot />
+  <GlobalStyle />
+  <CodeSnippet />
+</section>
