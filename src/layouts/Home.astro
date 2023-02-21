@@ -34,7 +34,7 @@ const posts = files
   })
   .map(({ slug, ...rest }) => ({
     ...rest,
-    slug: slug.replace('pt-br', 'pt-BR'),
+    slug: `/${slug.replace('pt-br', 'pt-BR')}`,
   }));
 
 const props = {
