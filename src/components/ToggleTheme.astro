@@ -2,6 +2,7 @@
 import { Svg } from '@svjson/react';
 
 import { moon, sun } from '@/assets/svg';
+import { getTranslation } from '@/util';
 
 import MenuItem from './MenuItem.astro';
 
@@ -58,32 +59,29 @@ export type Props = {
   as="button"
   id="theme__toggle"
   aria-pressed="false"
-  label={lang === 'en' ? 'Theme' : 'Tema'}
+  label={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME')}
 >
   <Svg
     className="w-7 sm:w-8 theme__toggle theme__toggle--dark"
-    alt={lang === 'en' ? 'Dark' : 'Escuro'}
+    alt={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME_DARK_ALT')}
     src={moon}
     isCurrentColor
   />
   <Svg
     className="w-7 sm:w-8 theme__toggle theme__toggle--light"
-    alt={lang === 'en' ? 'Light' : 'Claro'}
+    alt={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME_LIGHT_ALT')}
     src={sun}
     isCurrentColor
   />
 </MenuItem>
 
-<style is:global>
+<style>
   .theme__toggle {
-    display: none;
+    @apply hidden;
   }
 
-  .dark .theme__toggle--dark {
-    display: flex;
-  }
-
-  .light .theme__toggle--light {
-    display: flex;
+  :global(.dark) .theme__toggle--dark,
+  :global(.light) .theme__toggle--light {
+    @apply flex;
   }
 </style>

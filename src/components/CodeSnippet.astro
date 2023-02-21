@@ -18,7 +18,9 @@
 <style is:global>
   .code-snippet {
     @apply relative
-    mt-4;
+    mt-4
+    -mx-8
+    sm:mx-0;
 
     .light & {
       .astro-code {
@@ -40,24 +42,34 @@
       shadow-xl
       truncate
       text-dracula-background
-      bg-dracula-cyan
-      dark:bg-dracula-green;
+      bg-dracula-cyan;
+
+      .dark & {
+        @apply bg-dracula-green;
+      }
     }
 
     .astro-code {
       @apply overflow-y-auto
       p-8
-      rounded-xl
+      sm:rounded-xl
       shadow-2xl
       border
-      border-gray-200
-      dark:border-dracula-currentLine;
+      border-gray-200;
+
+      .dark & {
+        @apply border-dracula-currentLine;
+      }
 
       &::-webkit-scrollbar {
         @apply w-3;
       }
       &::-webkit-scrollbar-track {
-        @apply bg-dracula-foreground dark:bg-[color:#0005] rounded-full;
+        @apply bg-dracula-foreground rounded-full;
+
+        .dark & {
+          @apply bg-[color:#0005];
+        }
       }
       &::-webkit-scrollbar-thumb {
         @apply rounded-full bg-dracula-comment dark:bg-dracula-green;
@@ -75,16 +87,22 @@
       border
       border-dracula-comment
       bg-white
-      text-dracula-comment
-      dark:border-dracula-green
-      dark:bg-dracula-currentLine
-      dark:text-dracula-green;
+      text-dracula-comment;
+
+      .dark & {
+        @apply border-dracula-green
+        bg-dracula-currentLine
+        text-dracula-green;
+      }
 
       &:hover,
       &:focus,
       &:focus-within {
-        @apply glow-dracula-comment
-        dark:glow-dracula-green;
+        @apply glow-dracula-comment;
+
+        .dark & {
+          @apply glow-dracula-green;
+        }
       }
 
       &[aria-pressed='false'] .check {
@@ -92,9 +110,12 @@
       }
 
       &[aria-pressed='true'] {
-        @apply bg-dracula-cyan
-         dark:bg-dracula-green
-        dark:text-dracula-background;
+        @apply bg-dracula-cyan;
+
+        .dark & {
+          @apply bg-dracula-green
+          text-dracula-background;
+        }
 
         .copy {
           @apply hidden;

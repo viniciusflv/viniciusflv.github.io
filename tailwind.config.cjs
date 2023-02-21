@@ -5,7 +5,7 @@ const flattenColorPalette =
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  darkMode: 'class',
+  darkMode: ['class', ':global(.dark)'],
   theme: {
     extend: {
       fontFamily: {
@@ -32,6 +32,7 @@ module.exports = {
       minWidth: ({ theme }) => theme('width'),
       maxHeight: ({ theme }) => theme('height'),
       minHeight: ({ theme }) => theme('height'),
+      lineHeight: ({ theme }) => theme('height'),
     },
   },
   plugins: [

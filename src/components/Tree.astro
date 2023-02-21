@@ -1,0 +1,97 @@
+---
+import Link from '@/components/Link.astro';
+import type { NestedHeading } from '@/util';
+
+const { nestedHeadings } = Astro.props;
+
+export type Props = {
+  nestedHeadings: NestedHeading[];
+};
+---
+
+<ul class="tree">
+  {
+    nestedHeadings?.map(({ depth, text, slug, children }) => {
+      return children.length ? (
+        <li>
+          <details open={depth < 3}>
+            <summary>{text}</summary>
+            <Astro.self nestedHeadings={children} />
+          </details>
+        </li>
+      ) : (
+        <li>
+          <Link title={text} href={`#${slug}`}>
+            {text}
+          </Link>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .tree {
+    @apply relative
+    max-w-full
+    text-xs
+    select-none;
+
+    summary {
+      @apply cursor-pointer
+      outline-none
+      truncate;
+
+      &:is(:hover, :focus, :active),
+      &::marker,
+      &::-webkit-details-marker {
+        @apply text-dracula-comment dark:text-dracula-green;
+      }
+    }
+
+    :global(a) {
+      @apply block pl-3 truncate;
+    }
+
+    li {
+      @apply pl-2 ml-[.3em];
+    }
+
+    ul li {
+      @apply dark:border-l-dracula-green;
+    }
+
+    ul li {
+      @apply relative;
+
+      &:last-child {
+        border-color: transparent;
+      }
+
+      & {
+        @apply border-l
+        border-l-dracula-comment;
+      }
+
+      &:before {
+        @apply glow-l-dracula-comment
+        glow-b-dracula-comment;
+
+        @apply dark:glow-l-dracula-green
+        dark:glow-b-dracula-green;
+      }
+
+      &:before {
+        content: '';
+        @apply block
+        absolute
+        w-3
+        h-5
+        -top-[10px]
+        -left-[1px]
+        border rounded-bl;
+        border-width: 0 0 0.1em 0.1em;
+      }
+    }
+  }
+</style>

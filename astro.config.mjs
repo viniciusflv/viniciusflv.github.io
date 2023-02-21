@@ -4,16 +4,12 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import compress from 'astro-compress';
-import fonts from 'astro-fonts-next';
-import robotstxt from 'astro-robots-txt';
+import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
 import { dirname, resolve } from 'path';
 
-import { astroOpenGraph } from './og.plugin.mjs';
-
 const __dirname = dirname(new URL('', import.meta.url).pathname);
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://viniciusflv.github.io',
   markdown: {
@@ -33,16 +29,8 @@ export default defineConfig({
     react(),
     tailwind(),
     sitemap(),
-    robotstxt(),
-    astroOpenGraph(),
-    image({
-      serviceEntryPoint: '@astrojs/image/sharp',
-    }),
-    fonts({
-      url: [
-        'https://fonts.googleapis.com/css2?family=RocknRoll+One:wght@400;700&display=swap',
-      ],
-    }),
+    robotsTxt(),
+    image(),
     mdx({
       remarkPlugins: [
         function codeSnippet() {

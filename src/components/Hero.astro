@@ -1,25 +1,24 @@
 ---
-const { title, description } = { ...Astro.props, ...Astro.props.frontmatter };
+import Container from '@/components/Container.astro';
+import Heading from '@/components/Heading.astro';
 
-export type Props = {
-  title?: string;
-  description?: string;
-  frontmatter?: Record<string, any>;
-};
+const { title, description } = Astro.props;
+
+export type Props = { title: string; description: string };
 ---
 
 <section class="hero">
-  <div class="hero__content">
-    <header class="hero__header">
-      <h1>{title}</h1>
-      <h2>{description}</h2>
+  <Container class="content">
+    <header>
+      <Heading as="h1" isHighlighted>{title}</Heading>
+      <Heading as="h2">{description}</Heading>
       <slot />
     </header>
     <slot name="image" />
-  </div>
+  </Container>
 </section>
 
-<style is:global>
+<style>
   .hero {
     @apply grid shadow-lg
     rounded-b-3xl
@@ -28,20 +27,17 @@ export type Props = {
     glow-b-dracula-comment
     dark:glow-b-dracula-green;
 
-    .hero__content {
-      @apply container
-        p-8
-        py-32
-        xl:p-32
-        mx-auto
-        grid
-        items-center
-        md:grid-cols-2;
+    .content {
+      @apply grid
+      items-center
+      pt-16
+      sm:pt-32
+      md:grid-cols-2;
 
-      .hero__header {
+      header {
         @apply flex
-          flex-col
-          gap-8;
+        flex-col
+        gap-8;
       }
     }
   }

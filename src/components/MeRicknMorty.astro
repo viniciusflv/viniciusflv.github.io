@@ -1,0 +1,37 @@
+---
+import { Svg } from '@svjson/react';
+
+import { meRicknmorty } from '@/assets/svg';
+import { getTranslation } from '@/util';
+
+const { lang } = Astro.props;
+
+export type Props = {
+  lang: string;
+};
+---
+
+<picture class="me-rick-n-morty" slot="image">
+  <Svg
+    src={meRicknmorty as any}
+    alt={getTranslation(lang, 'HOME_HERO_IMAGE_ALT')}
+  />
+</picture>
+
+<style>
+  .me-rick-n-morty {
+    @apply flex
+    justify-end
+    overflow-hidden
+    -mb-48
+    dark:text-dracula-darkest
+    text-dracula-comment;
+
+    :global(.lenses) {
+      @apply opacity-90
+      dark:opacity-20
+      transition-opacity
+      duration-500;
+    }
+  }
+</style>

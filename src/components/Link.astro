@@ -2,25 +2,42 @@
 import { getLanguageFromURL } from '@/util';
 
 const lang = getLanguageFromURL(Astro.url.pathname);
-const { href, title, isOutlined } = Astro.props;
+const { href, title, isOutlined, isButton } = Astro.props;
 ---
 
 <a
-  class:list={['link', 'link--button', isOutlined ? 'link--outlined' : null]}
+  class:list={[
+    'link',
+    isButton ? 'link--button' : null,
+    isOutlined ? 'link--outlined' : null,
+  ]}
   title={title}
-  href={`/${lang}/${href}`}
+  href={href}
 >
-  <slot />
+  {title}
 </a>
 
-<style is:global>
+<style>
   .link {
-    @apply flex
-    justify-center
-    items-center;
+    @apply outline-none text-center;
+
+    &:not(.link--button) {
+      @apply gap-2
+      text-blue-600
+      dark:text-dracula-cyan;
+
+      &:is(:hover, :focus, :active) {
+        @apply underline;
+      }
+    }
 
     &.link--button {
-      @apply rounded-full
+      @apply flex
+      justify-center
+      items-center;
+
+      @apply outline-none
+      rounded-full
       p-4
       w-full
       md:max-w-64

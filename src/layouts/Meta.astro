@@ -1,9 +1,10 @@
 ---
 import type { MDXInstance } from 'astro';
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
 
-const { lang, knownLanguages, frontmatter } = Astro.props;
+const { lang, knownLanguages } = Astro.props;
 
 const fallbackOgImage = new URL(`${lang}/og-image.png`, Astro.site);
 const scopedOgImage = new URL(`${Astro.url.pathname}og-image.png`, Astro.site);
@@ -12,7 +13,7 @@ const existsOgImage = existsSync(localPath);
 
 const props = {
   ...Astro.props,
-  ...frontmatter,
+  ...Astro.props.frontmatter,
 };
 
 const title = [props?.title, 'Vinícius Victorino'].join(' | ');
@@ -69,7 +70,6 @@ export type Props = Partial<MDXInstance<Meta>> & {
 };
 ---
 
-<!-- site -->
 <meta charset="UTF-8" />
 <meta
   content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"
@@ -126,3 +126,7 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <meta content={meta.image.src} name="twitter:image" />
 <meta content={meta.image.alt} name="twitter:image:alt" />
 <meta content="summary_large_image" name="twitter:card" />
+<!-- font -->
+<GoogleFontsOptimizer
+  url="https://fonts.googleapis.com/css2?family=RocknRoll+One:wght@400;700&display=swap"
+/>

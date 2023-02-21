@@ -1,66 +1,76 @@
 ---
-import { getImage } from '@astrojs/image';
 import { Image } from '@astrojs/image/components';
 
-const { title, description, url, lang } = Astro.props;
-
-const { src: fallbackSrc } = await getImage({
-  src: `/${lang}/og-image.png`,
-  aspectRatio: '87:46',
-  width: 435,
-});
+const { title, description, slug, lang } = Astro.props;
 ---
 
-<a class="card outline-none" title={title} href={url}>
-  <section>
-    <figure>
+<a class="card-link" title={title} href={`/${slug}`}>
+  <figure class="card">
+    <picture>
       <Image
         class="preview"
         aspectRatio="87:46"
-        width={435}
+        width={256}
+        height={135.34}
         format={'webp'}
         alt={title}
-        src={`${url}/og-image.png`}
-        onerror={`this.onerror=null;this.src='${fallbackSrc}'`}
+        src={`/${slug}/og-image.png`}
+        onerror={`this.onerror=null;this.src='/${lang}/og-image.png'`}
       />
-    </figure>
-    <header class="header">
-      <h4>{title}</h4>
-      <p>{description}</p>
-    </header>
-  </section>
+    </picture>
+    <figcaption>
+      <strong>{title}</strong>
+      <span>{description}</span>
+    </figcaption>
+  </figure>
 </a>
 
-<style is:global>
+<style>
+  .card-link {
+    @apply outline-none;
+
+    &:is(:hover, :focus, :active) {
+      .card {
+        @apply shadow-md
+        glow-dracula-comment
+        border-dracula-comment
+        bg-dracula-comment
+        text-dracula-foreground
+        dark:glow-dracula-green
+        dark:border-dracula-green
+        dark:bg-dracula-green
+        dark:text-dracula-background;
+      }
+    }
+  }
+
   .card {
-    @apply p-4
-    rounded
+    @apply grid
+    grid-cols-auto-fit-[16rem]
+    sm:grid-cols-[16rem,auto]
+    max-w-lg
+    rounded-lg
     shadow-2xl
     border
-    border-gray-200
+    border-gray-300
+    bg-gray-200
     dark:border-dracula-currentLine
-    dark:bg-dracula-darkest;
+    dark:bg-dracula-background;
 
-    transition-property: box-shadow color;
+    transition-property: all;
     transition-duration: 500ms;
 
-    @apply hover:shadow-md
-    focus:shadow-md
-    hover:text-dracula-comment
-    focus:text-dracula-comment
-    hover:border-dracula-comment
-    focus:border-dracula-comment;
-
-    .preview {
-      @apply rounded;
+    figcaption {
+      @apply flex
+      flex-col
+      gap-2
+      p-4
+      text-xs;
     }
 
-    .header {
-      @apply flex flex-col gap-4 py-4;
-    }
-
-    p {
-      @apply text-gray-400;
+    img {
+      @apply flex
+      rounded-md;
     }
   }
 </style>
