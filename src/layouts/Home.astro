@@ -21,7 +21,7 @@ const categories = files
   .filter(({ data }) => data.category)
   .map(({ data, slug }) => ({
     label: data.category,
-    value: slug.replace('pt-br', 'pt-BR') ?? '',
+    value: `/${slug.replace('pt-br', 'pt-BR')}` ?? '',
   }));
 
 const posts = files
@@ -34,7 +34,7 @@ const posts = files
   })
   .map(({ slug, ...rest }) => ({
     ...rest,
-    slug: `/${slug.replace('pt-br', 'pt-BR')}`,
+    slug: slug.replace('pt-br', 'pt-BR'),
   }));
 
 const props = {
