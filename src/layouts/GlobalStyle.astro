@@ -2,8 +2,6 @@
   * {
     @apply scroll-smooth;
 
-    transition: background-color 300ms ease;
-
     @media (orientation: landscape) {
       &::-webkit-scrollbar {
         @apply w-3;
@@ -62,13 +60,18 @@
     h3,
     h4,
     h5 {
-      @apply pt-8 -mt-8;
+      @apply pt-8
+      -mt-8
+      text-center
+      sm:text-left;
     }
 
     h1 {
       @apply text-2xl
       md:text-3xl
       lg:text-5xl
+      md:leading-11
+      lg:leading-16
       font-bold
       tracking-wider;
 
@@ -81,6 +84,29 @@
       .dark & {
         @apply from-dracula-cyan 
         to-dracula-green;
+      }
+    }
+
+    h3 {
+      @apply relative
+      flex
+      justify-center
+      text-center
+      sm:justify-start
+      sm:text-left;
+
+      &:before {
+        content: '';
+        @apply absolute
+        -bottom-4
+        h-2
+        w-8
+        rounded
+        bg-dracula-comment;
+
+        .dark & {
+          @apply bg-dracula-green;
+        }
       }
     }
 
@@ -136,10 +162,13 @@
 
     blockquote {
       @apply italic
+      text-xs
+      sm:text-sm
       p-4
       border-l-4
       border-l-dracula-comment
       bg-black
+      opacity-80
       bg-opacity-5
       rounded;
 

@@ -61,18 +61,26 @@
         @apply border-dracula-currentLine;
       }
 
+      code {
+        @apply text-xs sm:text-sm;
+      }
+
       &::-webkit-scrollbar {
-        @apply w-3;
+        @apply h-1 sm:h-3;
       }
       &::-webkit-scrollbar-track {
-        @apply bg-dracula-foreground rounded-full;
+        @apply bg-dracula-foreground rounded-xl;
 
         .dark & {
           @apply bg-[color:#0005];
         }
       }
       &::-webkit-scrollbar-thumb {
-        @apply rounded-full bg-dracula-comment dark:bg-dracula-green;
+        @apply rounded-xl bg-dracula-comment;
+
+        .dark & {
+          @apply bg-dracula-green;
+        }
       }
     }
 

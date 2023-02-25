@@ -19,7 +19,7 @@ const { href, title, isOutlined, isButton } = Astro.props;
 
 <style>
   .link {
-    @apply outline-none text-center;
+    @apply outline-none;
 
     &:not(.link--button) {
       @apply gap-2
@@ -34,7 +34,8 @@ const { href, title, isOutlined, isButton } = Astro.props;
     &.link--button {
       @apply flex
       justify-center
-      items-center;
+      items-center
+      text-center;
 
       @apply outline-none
       rounded-full
