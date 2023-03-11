@@ -112,14 +112,18 @@
 
     h2,
     h3 {
-      @apply lg:text-xl text-lg;
-
       &:is(h2) {
-        @apply italic;
+        @apply italic lg:text-xl md:text-lg;
       }
 
       &:is(h3) {
-        @apply font-bold;
+        @apply font-bold
+        lg:text-xl
+        text-lg;
+
+        .dark & {
+          @apply text-dracula-cyan;
+        }
       }
     }
 
