@@ -9,19 +9,23 @@ export type Props = {
 };
 ---
 
-<ul class="tree">
+<ul class:list={['tree', Astro.props.class]}>
   {
     nestedHeadings?.map(({ depth, text, slug, children }) => {
-      return children.length ? (
+      return children?.length ? (
         <li>
           <details open={depth < 3}>
-            <summary>{text}</summary>
+            <summary set:html={text} />
             <Astro.self nestedHeadings={children} />
           </details>
         </li>
       ) : (
         <li>
-          <Link title={text} href={`#${slug}`}>
+          <Link
+            title={text}
+            href={slug && (slug?.startsWith('http') ? slug : `#${slug}`)}
+            isExternal={slug?.startsWith('http')}
+          >
             {text}
           </Link>
         </li>
@@ -32,7 +36,10 @@ export type Props = {
 
 <style>
   .tree {
-    @apply relative
+    @apply flex
+    flex-col
+    items-start
+    relative
     max-w-full
     text-xs
     select-none;

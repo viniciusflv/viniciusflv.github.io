@@ -46,6 +46,24 @@ export type Props = {
 
     &:is(h3) {
       @apply font-bold;
+
+      @apply relative
+      flex
+      justify-center
+      text-center
+      sm:justify-start
+      sm:text-left;
+
+      &:before {
+        content: '';
+        @apply absolute
+        -bottom-4
+        h-2
+        w-8
+        rounded
+        bg-dracula-comment;
+        @apply dark:bg-dracula-green;
+      }
     }
 
     &:is(strong) {

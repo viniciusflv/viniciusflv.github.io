@@ -112,7 +112,7 @@
 
     h2,
     h3 {
-      @apply lg:text-xl md:text-lg;
+      @apply lg:text-xl text-lg;
 
       &:is(h2) {
         @apply italic;
@@ -124,7 +124,7 @@
     }
 
     h4 {
-      @apply text-lg font-bold;
+      @apply font-bold;
     }
 
     h5 {
@@ -177,14 +177,14 @@
       }
     }
 
-    ul {
+    ul:not(.tree) {
       @apply pl-8;
       li {
         @apply list-disc;
       }
     }
 
-    ol {
+    ol:not(.tree) {
       @apply pl-8;
       li {
         @apply list-decimal;

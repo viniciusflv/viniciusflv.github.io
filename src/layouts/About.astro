@@ -1,15 +1,208 @@
 ---
 import Container from '@/components/Container.astro';
+import Heading from '@/components/Heading.astro';
 import Hero from '@/components/Hero.astro';
 import MeRicknMorty from '@/components/MeRicknMorty.astro';
+import Tree from '@/components/Tree.astro';
 import Root from '@/layouts/Root.astro';
-import { getLanguageFromURL } from '@/util';
+import { getLanguageFromURL, relativeDate } from '@/util';
 
 const lang = getLanguageFromURL(Astro.url.pathname);
 const props = {
   lang,
   ...Astro.props.content,
 };
+
+const professionalOverview = [
+  {
+    depth: 1,
+    text: `Indra`,
+    children: [
+      {
+        text: `Front-End Solutions Architect <strong>03/2022</strong>`,
+        children: [
+          {
+            text: `Increased Experiences`,
+            children: [
+              { text: `NodeJS` },
+              { text: `HTML, CSS, JavaScript` },
+              { text: `ReactJS` },
+              { text: `Typescript` },
+              { text: `MermaidJS` },
+              { text: `Building Front-End architecture solutions` },
+              { text: `AWS Cognito` },
+              { text: `AWS Dynamo DB` },
+              { text: `AWS S3` },
+              { text: `AWS Lambda` },
+              { text: `AWS SES` },
+            ],
+          },
+          {
+            text: `Acquired Experiences`,
+            children: [
+              { text: `Building Full-stack architecture solutions` },
+              { text: `Lucid` },
+              { text: `AWS S3 Glacier` },
+              { text: `AWS RDS` },
+              { text: `AWS Redis` },
+              { text: `AWS EC2` },
+              { text: `AWS ECR` },
+              { text: `AWS ECS` },
+              { text: `AWS Secrets Manager` },
+              { text: `AWS IAM` },
+              { text: `AWS Cloudfront` },
+              { text: `AWS Route53` },
+              { text: `AWS ELB` },
+              { text: `AWS Cloudwatch` },
+              { text: `AWS SNS` },
+              { text: `AWS SQS` },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    depth: 1,
+    text: `Sinqia`,
+    children: [
+      {
+        text: `Front-End Squad Leader <strong>12/2021 - 03/2022</strong>`,
+        children: [
+          {
+            text: `Increased Experiences`,
+            children: [
+              { text: `Jira` },
+              { text: `Confluence` },
+              { text: `Agile` },
+              { text: `NodeJS` },
+              { text: `HTML, CSS, JavaScript` },
+              { text: `ReactJS` },
+              { text: `Typescript` },
+              { text: `MermaidJS` },
+            ],
+          },
+          {
+            text: `Acquired Experiences`,
+            children: [
+              { text: `Roadmap definition` },
+              { text: `Refinement of epics/stories` },
+              { text: `Building Front-End architecture solutions` },
+              { text: `Kibana queries` },
+            ],
+          },
+        ],
+      },
+      {
+        text: `Front-End Developer <strong>03/2020 - 12/2021</strong>`,
+        children: [
+          {
+            text: `Increased Experiences`,
+            children: [
+              { text: `NodeJS` },
+              { text: `HTML, CSS, JavaScript` },
+              { text: `ReactJS` },
+              { text: `Typescript` },
+              { text: `NextJS` },
+            ],
+          },
+          {
+            text: `Acquired Experiences`,
+            children: [
+              { text: `Gatsby` },
+              { text: `Contentful` },
+              { text: `NestJS` },
+              { text: `GraphQL` },
+              { text: `Cypress` },
+              { text: `Jest` },
+              { text: `XState` },
+              { text: `Emotion css` },
+              { text: `Tailwind css` },
+              { text: `CSS Modules` },
+              { text: `Storybook` },
+              { text: `Lerna` },
+              { text: `Jenkins` },
+              { text: `Jira` },
+              { text: `Confluence` },
+              { text: `Agile` },
+              { text: `MermaidJS` },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    depth: 1,
+    text: `Finchain`,
+    children: [
+      {
+        text: `Junior Front-end Developer <strong>04/2019 - 03/2020</strong>`,
+        children: [
+          {
+            text: `Increased Experiences`,
+            children: [
+              { text: `NodeJS` },
+              { text: `HTML, CSS, JavaScript` },
+              { text: `ReactJS` },
+              { text: `Styled-components` },
+            ],
+          },
+          {
+            text: `Acquired Experiences`,
+            children: [
+              { text: `Typescript` },
+              { text: `NextJS` },
+              { text: `Flutter` },
+              { text: `AWS Cognito` },
+              { text: `AWS Dynamo DB` },
+              { text: `AWS S3` },
+              { text: `AWS Lambda` },
+              { text: `AWS Simple Email Service` },
+              { text: `Redux/Redux Observables` },
+            ],
+          },
+        ],
+      },
+      {
+        text: `Development Intern <strong>08/2017 - 04/2019</strong>`,
+        children: [
+          {
+            text: `Acquired Experiences`,
+            children: [
+              { text: `NodeJS` },
+              { text: `HTML, CSS, JavaScript` },
+              { text: `ReactJS` },
+              { text: `Styled-components` },
+              { text: `JQuery` },
+              { text: `Blockchain` },
+              { text: `Smart Contracts` },
+              { text: `Ethereum` },
+              { text: `Solidity` },
+              { text: `R3 Corda` },
+              { text: `Hyperledger Fabric` },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    depth: 1,
+    text: `Banco do Brasil`,
+    children: [
+      {
+        text: `Management Intern <strong>03/2014 - 06/2015</strong>`,
+        children: [
+          {
+            depth: 1,
+            text: `Acquired Experiences`,
+          },
+        ],
+      },
+    ],
+  },
+];
 ---
 
 <Root {...props}>
@@ -17,6 +210,10 @@ const props = {
     <MeRicknMorty slot="image" {...props} />
   </Hero>
   <Container class="markdown">
+    <Heading as="h3">
+      {lang !== 'en' ? 'Visão geral profissional' : 'Professional Overview'}
+    </Heading>
+    <Tree nestedHeadings={professionalOverview} />
     <slot />
   </Container>
 </Root>

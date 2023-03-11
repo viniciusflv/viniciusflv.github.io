@@ -2,7 +2,7 @@
 import { getLanguageFromURL } from '@/util';
 
 const lang = getLanguageFromURL(Astro.url.pathname);
-const { href, title, isOutlined, isButton } = Astro.props;
+const { href, title, isOutlined, isButton, isExternal } = Astro.props;
 ---
 
 <a
@@ -13,6 +13,7 @@ const { href, title, isOutlined, isButton } = Astro.props;
   ]}
   title={title}
   href={href}
+  {...(isExternal ? { target: '_blank' } : {})}
 >
   {title}
 </a>
