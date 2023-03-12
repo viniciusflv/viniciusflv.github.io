@@ -2,6 +2,7 @@
 import type { MarkdownLayoutProps } from 'astro';
 import { getCollection } from 'astro:content';
 
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Container from '@/components/Container.astro';
 import Tag from '@/components/Tag.astro';
 import Tree from '@/components/Tree.astro';
@@ -37,6 +38,7 @@ export type Props = MarkdownLayoutProps<any>;
     </aside>
     <article class="markdown">
       <header>
+        <Breadcrumbs />
         <p>{created}</p>
         <a title="Vinícius Victorino" href={`/${lang}/about`}>
           Vinícius Victorino

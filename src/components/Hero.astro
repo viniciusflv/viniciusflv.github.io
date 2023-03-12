@@ -1,8 +1,9 @@
 ---
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Container from '@/components/Container.astro';
 import Heading from '@/components/Heading.astro';
 
-const { title, description } = Astro.props;
+const { title, description, url } = Astro.props;
 
 export type Props = { title: string; description: string };
 ---
@@ -10,6 +11,7 @@ export type Props = { title: string; description: string };
 <section class="hero">
   <Container class="content">
     <header>
+      <Breadcrumbs />
       <Heading as="h1" isHighlighted>{title}</Heading>
       <Heading as="h2">{description}</Heading>
       <slot />

@@ -1,0 +1,47 @@
+---
+import Link from '@/components/Link.astro';
+import { getLanguageFromURL, translateBreadcrumbs } from '@/util';
+
+const lang = getLanguageFromURL(Astro.url.pathname);
+
+const paths: string[] = Astro.url.pathname.split('/');
+
+paths?.shift();
+
+const x = paths
+  ?.map((_, i) => {
+    return {
+      label: translateBreadcrumbs(lang, i === paths.length - 1 ? 'home' : paths[paths.length - i - 1]).replace('-', ' '),
+      href: `/${paths.slice(0, paths.length - i).join('/')}`,
+    };
+  })
+  .reverse();
+---
+
+{x.length > 1 ? <ul class="breadcrumbs">
+  {
+    x?.map(({ label, href }) => (
+      <li>
+        <Link class="truncate" href={href} title={label} />
+      </li>
+    ))
+  }
+</ul> : <></>}
+
+<style>
+  .breadcrumbs {
+    @apply flex gap-4 !p-0 text-xs whitespace-nowrap overflow-x-auto w-full;
+
+    li {
+      @apply relative !list-none capitalize;
+
+      &:not(:is(:last-of-type)):before {
+        content: '/\00a0';
+        @apply absolute
+        -right-4
+        text-dracula-comment
+        dark:text-dracula-green;
+      }
+    }
+  }
+</style>

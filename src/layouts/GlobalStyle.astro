@@ -67,11 +67,11 @@
     }
 
     h1 {
-      @apply text-2xl
+      @apply text-xl
       md:text-3xl
-      lg:text-5xl
+      lg:text-4xl
       md:leading-11
-      lg:leading-16
+      lg:leading-14
       font-bold
       tracking-wider;
 
@@ -87,6 +87,10 @@
       }
     }
 
+    h2 {
+      @apply italic lg:text-xl md:text-lg opacity-80;
+    }
+
     h3 {
       @apply relative
       flex
@@ -94,6 +98,14 @@
       text-center
       sm:justify-start
       sm:text-left;
+
+      @apply font-bold
+        lg:text-xl
+        text-lg;
+
+      .dark & {
+        @apply text-dracula-cyan;
+      }
 
       &:before {
         content: '';
@@ -106,23 +118,6 @@
 
         .dark & {
           @apply bg-dracula-green;
-        }
-      }
-    }
-
-    h2,
-    h3 {
-      &:is(h2) {
-        @apply italic lg:text-xl md:text-lg;
-      }
-
-      &:is(h3) {
-        @apply font-bold
-        lg:text-xl
-        text-lg;
-
-        .dark & {
-          @apply text-dracula-cyan;
         }
       }
     }

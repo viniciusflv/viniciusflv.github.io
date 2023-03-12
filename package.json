@@ -14,25 +14,25 @@
   },
   "dependencies": {
     "@svjson/react": "^0.0.3",
-    "astro": "^2.0.14",
+    "astro": "^2.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@astrojs/image": "^0.15.0",
     "@astrojs/mdx": "0.12.0",
-    "@astrojs/react": "^2.0.2",
-    "@astrojs/sitemap": "^1.0.1",
-    "@astrojs/tailwind": "^3.0.1",
-    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
+    "@astrojs/react": "^2.1.0",
+    "@astrojs/sitemap": "^1.2.0",
+    "@astrojs/tailwind": "^3.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.10",
-    "astro-compress": "^1.1.32",
+    "@types/react-dom": "^18.0.11",
+    "astro-compress": "^1.1.35",
     "astro-google-fonts-optimizer": "^0.2.2",
-    "astro-robots-txt": "^0.3.12",
+    "astro-robots-txt": "^0.4.0",
     "mermaid-parse": "^2.1.0",
     "prettier": "^2.8.4",
     "svj": "^2.2.3",
-    "tailwindcss": "^3.2.6"
+    "tailwindcss": "^3.2.7"
   }
 }
