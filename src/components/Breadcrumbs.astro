@@ -6,9 +6,11 @@ const lang = getLanguageFromURL(Astro.url.pathname);
 
 const paths: string[] = Astro.url.pathname.split('/');
 
+
 paths?.shift();
 
 const x = paths
+  ?.filter(Boolean)
   ?.map((_, i) => {
     return {
       label: translateBreadcrumbs(lang, i === paths.length - 1 ? 'home' : paths[paths.length - i - 1]).replace('-', ' '),
