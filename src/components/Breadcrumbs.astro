@@ -4,25 +4,23 @@ import { getLanguageFromURL, translateBreadcrumbs } from '@/util';
 
 const lang = getLanguageFromURL(Astro.url.pathname);
 
-const paths: string[] = Astro.url.pathname.split('/');
+const paths: string[] = Astro.url.pathname.split('/').filter(Boolean);
 
-
-paths?.shift();
-
-const x = paths
-  ?.filter(Boolean)
-  ?.map((_, i) => {
-    return {
-      label: translateBreadcrumbs(lang, i === paths.length - 1 ? 'home' : paths[paths.length - i - 1]).replace('-', ' '),
+const breadcrumbs = paths
+    .map((_, i) => ({
+      label: translateBreadcrumbs(
+        lang,
+        i === paths.length - 1 ? 'home' : paths[paths.length - i - 1],
+      ).replace('-', ' '),
       href: `/${paths.slice(0, paths.length - i).join('/')}`,
-    };
-  })
-  .reverse();
+    }))
+    .reverse();
+
 ---
 
-{x.length > 1 ? <ul class="breadcrumbs">
+{breadcrumbs.length > 1 ? <ul class="breadcrumbs">
   {
-    x?.map(({ label, href }) => (
+    breadcrumbs?.map(({ label, href }) => (
       <li>
         <Link class="truncate" href={href} title={label} />
       </li>
