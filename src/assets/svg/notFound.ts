@@ -2,6 +2,7 @@ export const notFound = {
   "tag": "svg",
   "props": {
     "xmlns": "http://www.w3.org/2000/svg",
+    "fill": "currentColor",
     "version": "1.1",
     "viewBox": "0 0 1328.67 612.035"
   },

@@ -1,6 +1,7 @@
 export const moon = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "DarkModeIcon",
     "tabindex": "-1",

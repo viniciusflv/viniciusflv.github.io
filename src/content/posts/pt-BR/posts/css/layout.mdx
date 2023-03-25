@@ -1,0 +1,136 @@
+---
+layout: '@/layouts/Post.astro'
+categories: CSS
+date: 2023-03-25
+title: 'Construindo uma página do zero com css, do jeito certo'
+description: css.
+summary: Construindo uma página do zero com css, do jeito certo.
+---
+
+# Construindo uma página do zero com css, do jeito certo
+
+## Aprenda a construir
+
+### Box Model
+
+Os elementos HTML são divididos em 4 partes:
+
+- **Margin** - Espaço entre os elementos
+- **Border** - Borda na qual pode ser aplicado cores
+- **Padding** - Espaço interno do elemento
+- **Content** - Conteúdo do elemento
+
+Por padrão o Box Model aplica altura e largura no **Content Box**. Isso causa **inconsistências** na criação do layout. Isso porque quando você declara os tamanhos de um elemento, ele vai se **comportar diferente** para um elemento que possuí padding e border.
+
+<div class="bg-orange-300 p-4 text-black text-xs">
+  <span class="hidden sm:block">Margin</span>
+  <div class="bg-yellow-200 p-4 sm:m-4">
+    <span class="hidden sm:block">Border</span>
+    <div class="bg-green-300 p-4 sm:m-4">
+      <span class="hidden sm:block">Padding</span>
+      <div class="bg-blue-300 border-4 border-dashed border-red-500 p-4 sm:m-4">
+        <span class="hidden sm:block">Content</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+Para resolver isso a primeira coisa que temos que fazer é adicionar o seguinte estilo:
+
+```css
+* {
+  box-sizing: border-box;
+}
+```
+
+Nele nós usamos o seletor asterisco **" \* "** para declarar que todos os elementos do site devem respeitar o modelo de **dimensionamento na borda**. O que comparando com o modelo padrão fica assim:
+
+<div class="bg-orange-300 p-4 text-black text-xs">
+  <span class="hidden sm:block">Margin</span>
+  <div class="bg-yellow-200 p-4 sm:m-4 border-4 border-dashed border-red-500">
+    <span class="hidden sm:block">Border</span>
+    <div class="bg-green-300 p-4 sm:m-4">
+      <span class="hidden sm:block">Padding</span>
+      <div class="bg-blue-300  p-4 sm:m-4">
+        <span class="hidden sm:block">Content</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+### Flow Layout
+
+HTML é uma linguagem de marcação que foi pensada para documentos, por isso o posicionamento padrão dos elementos é vertical. Esse modelo é conhecido como **Flow Layout**, e nele os elementos flutuam para o **canto superior esquerdo** e se ajustam para ocupar o espaço do seu conteúdo.
+
+<div class="w-full h-32 border border-dashed border-gray-400">
+  <div class="w-8 h-8 bg-green-500 border border-green-700" />
+</div>
+
+Por causa desse modelo padrão tanto o elemento **html**, quanto o elemento **body**, não se ajustam **100% da altura** da tela, o que prejudica a estilização baseada em valores relativos a altura. Por isso temos que adicionar o seguinte estilo:
+
+```css
+html,
+body {
+  width: 100%;
+  height: 100dvh;
+}
+```
+
+Com isso garantimos a consistência da largura, através da **porcentagem**, e da altura, através da unidade medida **dvh (Altura Dinâmica da Viewport)**.
+
+A **viewport** é o termo técnico para a janela do seu navegador, ou seja, tudo que não for barra de ferramentas é a viewport. Ela está como dinâmica porque no mobile a **barra de navegação se altera** a medida que o usuário rola na página.
+
+### Flexbox
+
+Flexbox, ou para os íntimos flex, é um modelo **unidirecional** para a construção de layouts. Nele são definidos dois **eixos o principal e cruzado**.
+
+#### Eixos
+
+O **eixo principal** é aquele que **cruza todos os elementos** filhos de um contêiner. O **eixo cruzado** é aquele que **cruza os elementos de maneira individual**.
+
+<div class="w-full h-32 border border-dashed border-gray-400">
+  <div class="relative flex items-center">
+    <hr class="absolute w-full" />
+    <div class="flex items-center justify-center">
+      <hr class="absolute h-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+    <div class="flex items-center justify-center">
+      <hr class="absolute h-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+    <div class="flex items-center justify-center">
+      <hr class="absolute h-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+  </div>
+</div>
+
+Por padrão o eixo principal é horizontal, mas isso pode ser alterado com esse estilo estilo:
+
+```css
+.class {
+  display: flex;
+  flex-direction: row;
+}
+```
+
+<div class="w-full h-32 border border-dashed border-gray-400">
+  <div class="relative flex flex-col w-8 items-center">
+    <hr class="absolute h-[120%]" />
+    <div class="flex items-center justify-center">
+      <hr class="absolute w-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+    <div class="flex items-center justify-center">
+      <hr class="absolute w-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+    <div class="flex items-center justify-center">
+      <hr class="absolute w-[200%] !glow-dracula-red" />
+      <div class="w-8 h-8 bg-green-500 border border-green-700" />
+    </div>
+  </div>
+</div>
+
+#### Posicionamento

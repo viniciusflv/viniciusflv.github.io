@@ -1,6 +1,7 @@
 export const smile = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "TagFacesIcon",
     "tabindex": "-1",

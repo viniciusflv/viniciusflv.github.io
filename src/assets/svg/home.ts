@@ -1,6 +1,7 @@
 export const home = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "HomeIcon",
     "tabindex": "-1",

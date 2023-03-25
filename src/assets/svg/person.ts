@@ -1,6 +1,7 @@
 export const person = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "PersonIcon",
     "tabindex": "-1",

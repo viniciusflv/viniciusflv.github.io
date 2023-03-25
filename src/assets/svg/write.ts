@@ -1,6 +1,7 @@
 export const write = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "CreateIcon",
     "tabindex": "-1",

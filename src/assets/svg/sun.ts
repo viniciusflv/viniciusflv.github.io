@@ -1,6 +1,7 @@
 export const sun = {
   "tag": "svg",
   "props": {
+    "fill": "currentColor",
     "aria-hidden": "true",
     "data-testid": "LightModeIcon",
     "tabindex": "-1",
