@@ -172,25 +172,23 @@
       border-l-4
       border-l-dracula-comment
       bg-black
-      opacity-80
-      bg-opacity-5
+      bg-opacity-10
       rounded;
 
       .dark & {
-        @apply border-l-dracula-green;
+        @apply border-l-dracula-green bg-opacity-20;
       }
     }
 
-    ul:not(.tree) {
-      @apply pl-8;
-      li {
+    :not(.tree) {
+      &:is(ul, ol) {
+        @apply pl-8;
+      }
+      &:is(ul) li {
         @apply list-disc;
       }
-    }
 
-    ol:not(.tree) {
-      @apply pl-8;
-      li {
+      &:is(ol) li {
         @apply list-decimal;
       }
     }
