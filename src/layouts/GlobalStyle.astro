@@ -192,5 +192,19 @@
         @apply list-decimal;
       }
     }
+
+    :not(.code-snippet *) {
+      &:is(code) {
+        @apply font-bold
+        p-1
+        rounded
+        border
+        border-gray-200;
+
+        .dark & {
+          @apply border-dracula-currentLine;
+        }
+      }
+    }
   }
 </style>
