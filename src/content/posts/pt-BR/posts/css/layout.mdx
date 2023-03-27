@@ -377,6 +377,42 @@ Assim como uma tabela o grid também trabalha com **linhas e colunas**, mas a di
   <div class="bg-green-500 border border-green-700" />
 </div>
 
+#### Funções do Grid Layout
+
+Como o grid layout introduz novos conceitos, ele também provém algumas funções para sanar alguns cenários: `repeat()`, `minmax()` e `fit-content()`.
+
+- `repeat()` como o nome já diz é para **repetir os tamanhos** das linhas ou colunas.
+
+```css
+.class {
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+```
+
+Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
+
+```css
+.class {
+  grid-template-rows: repeat(6, 1fr);
+}
+```
+
+- `minmax()` define os tamanhos **máximos e mínimos** das linhas ou colunas.
+
+```css
+.class {
+  grid-template-rows: minmax(20px, auto);
+}
+```
+
+- `fit-content()` funciona como o `auto`, mas definindo um tamanho fixo que pode ser maior.
+
+```css
+.class {
+  grid-template-rows: fit-content(200px);
+}
+```
+
 #### Grid área
 
 Como dito acima, o grid trabalha com linhas e colunas **como uma tabela**. Você deve estar se perguntando: **"Tá, mas por que só não usar uma tabela?"**. Ai que vem o pulo do gato no Grid Layout um elemento pode ocupar **mais de uma célula**.
@@ -387,8 +423,8 @@ Para fazer isso existe mais de uma maneira, mas eu recomendo o uso da **grid ár
 .grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     'GRID_ITEM'
     'GRID_ITEM'
@@ -490,38 +526,26 @@ Nesse cenário eu **nem precisei** declarar o número de linhas e colunas, mas e
   </footer>
 </section>
 
-#### Funções do Grid Layout
+#### Grid span
 
-Como o grid layout introduz novos conceitos, ele também provém algumas funções para sanar alguns cenários: `repeat()`, `minmax()` e `fit-content()`.
-
-- `repeat()` como o nome já diz é para **repetir os tamanhos** das linhas ou colunas.
+Nem sempre nossos contêineres tem valor semântico para que o uso da grid área seja justificado. É ai que nós podemos declarar **quantas linhas e colunas** o nosso elemento irá **ocupar**, através das propriedades `grid-row` e `grid-column` juntamente com a palavra reservada `span`, com ela não precisamos definir qual o **ponto de início ou fim** do alcance do elemento, assumindo a **posição atual** como referência.
 
 ```css
-.class {
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid__item {
+  grid-column: span 2 / span 2;
+  grid-row: span 3 / span 3;
 }
 ```
 
-Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
-
-```css
-.class {
-  grid-template-rows: repeat(6, 1fr);
-}
-```
-
-- `minmax()` define os tamanhos **máximos e mínimos** das linhas ou colunas.
-
-```css
-.class {
-  grid-template-rows: minmax(20px, auto);
-}
-```
-
-- `fit-content()` funciona como o `auto`, mas definindo um tamanho fixo que pode ser maior.
-
-```css
-.class {
-  grid-template-rows: fit-content(200px);
-}
-```
+<div class="grid gap-4 grid-cols-3 grid-rows-3 w-full h-32 border border-dashed border-gray-400">
+  <div class="col-span-2 row-span-3 bg-red-500 border border-red-700" />
+  <div class="bg-green-500 border border-green-700" />
+  <div class="bg-green-500 border border-green-700" />
+</div>
