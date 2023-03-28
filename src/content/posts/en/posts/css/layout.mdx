@@ -135,11 +135,9 @@ By default the main axis is **horizontal**, but that can be changed with the fol
   </div>
 </div>
 
-# TODO
+#### Horizontal and vertical alignment
 
-#### Alinhamento horizontal e vertical
-
-Para alinhar os elementos do **eixo principal** use a propriedade `justify-items`.
+To align the **main axis** elements, use the `justify-items` property.
 
 ```css
 .class {
@@ -166,7 +164,7 @@ Para alinhar os elementos do **eixo principal** use a propriedade `justify-items
   </div>
 </div>
 
-Para alinhar os elementos do **eixo cruzado** use a propriedade `align-items`.
+To align the **cross axis** elements, use the `align-items` property.
 
 ```css
 .class {
@@ -193,9 +191,9 @@ Para alinhar os elementos do **eixo cruzado** use a propriedade `align-items`.
   </div>
 </div>
 
-> ATENÇÃO!! Quando se **muda a direção do eixo**, a referência do que é vertical e horizontal também muda.
+> ATTENTION!! When you **change the axis direction**, the reference to what is vertical and horizontal also changes.
 
-Para alinhar os elementos do **eixo cruzado** use a propriedade `align-items`.
+To align the **cross axis** elements, use the `align-items` property.
 
 ```css
 .class {
@@ -223,7 +221,7 @@ Para alinhar os elementos do **eixo cruzado** use a propriedade `align-items`.
   </div>
 </div>
 
-Para alinhar os elementos do **eixo principal** use a propriedade `justify-items`.
+To align the **main axis** elements, use the `justify-items` property.
 
 ```css
 .class {
@@ -251,9 +249,9 @@ Para alinhar os elementos do **eixo principal** use a propriedade `justify-items
   </div>
 </div>
 
-#### Quebra de posicionamento de elementos
+#### Element positioning wrap
 
-Outra funcionalidade do modelo flexbox é a possibilidade de **quebrar o posicionamento** de elementos, caso **não exista espaço suficiente** no contêiner pai.
+Another functionality of the flexbox model is the possibility of **wrapping position** of elements, in case **there is not enough space** in the parent container.
 
 ```css
 .class {
@@ -270,9 +268,9 @@ Outra funcionalidade do modelo flexbox é a possibilidade de **quebrar o posicio
   </div>
 </div>
 
-#### Espaço entre os elementos
+#### Space between elements
 
-Outra propriedade, não exclusiva do modelo flexbox, é o **gap** que é um **espaçamento** que pode ser adicionado entre os elementos.
+Another property, not exclusive to the flexbox model, is the **gap**, which is a **space** that can be added between elements.
 
 ```css
 .class {
@@ -287,7 +285,7 @@ Outra propriedade, não exclusiva do modelo flexbox, é o **gap** que é um **es
   <div class="w-8 h-8 bg-green-500 border border-green-700" />
 </div>
 
-Mas ai você pode se perguntar **"Por que não usar uma margem, para dar o espaço?"**. Isso é porque a margin não funcionaria corretamente com a quebra de posicionamento do `flex-wrap`.
+But then you might ask yourself, **"Why not use a margin, to add space?"**. This is because the margin would not work correctly with the `flex-wrap` positioning wrap.
 
 ```css
 .class {
@@ -305,11 +303,11 @@ Mas ai você pode se perguntar **"Por que não usar uma margem, para dar o espa�
   </div>
 </div>
 
-#### Fator de crescimento do elemento
+#### Element growth factor
 
-Nem sempre queremos que os elementos se dimensionem **baseado em seu conteúdo**, mas usar unidades de medida relativas, como porcentagens, para fazer isso pode ser uma dor de cabeça. Principalmente envolvendo quebras de elemento e alinhamento vertical e horizontal.
+We don't always want elements to scale **based on their content**, but using relative units of measurement, like percentages, to do this can be a headache. Even more involving element wrapping and vertical and horizontal alignment.
 
-Por isso temos a propriedade `flex-grow`, com ela podemos definir **pesos dos elementos** para eles se ajustarem e **crescerem** de acordo com nossa necessidade. Geralmente nós adicionamos essa propriedade **diretamente no elemento** que queremos que cresça e com o valor **"1"**.
+That's why we have the `flex-grow` property, with which we can define **element weights** so that they adjust and **grow** according to our needs. Usually we add this property **directly to the element** that we want to grow with the value **"1"**.
 
 ```css
 .flex {
