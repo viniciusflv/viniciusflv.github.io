@@ -327,7 +327,7 @@ That's why we have the `flex-grow` property, with which we can define **element 
 
 ### Grid
 
-Grid Layout é um modelo **bidirecional** para construção de layouts, ou seja, diferente do flex foca em mais de uma direção ao mesmo tempo. Com ele **regiões da tela** são definidas e os elementos podem sem manipuladas para ocuparem **uma ou mais** regiões.
+Grid Layout is a **bidirectional** model for building layouts, meaning, unlike flex it focuses on more than one direction at the same time. With it **screen regions** are defined and elements can be manipulated to occupy **one or more** of those regions.
 
 ```css
 .class {
@@ -341,9 +341,9 @@ Grid Layout é um modelo **bidirecional** para construção de layouts, ou seja,
   <div class="bg-green-500 border border-green-700" />
 </div>
 
-#### Espaço entre os elementos
+#### Space between elements
 
-Outra propriedade, não exclusiva do modelo grid layout, é o **gap** que é um **espaçamento** que pode ser adicionado entre os elementos.
+Another property, not exclusive to the flexbox model, is the **gap**, which is a **space** that can be added between elements.
 
 ```css
 .class {
@@ -358,9 +358,9 @@ Outra propriedade, não exclusiva do modelo grid layout, é o **gap** que é um 
   <div class="bg-green-500 border border-green-700" />
 </div>
 
-#### Linhas e colunas
+#### Rows and columns
 
-Assim como uma tabela o grid também trabalha com **linhas e colunas**, mas a diferença é que existe uma unidade de medida especial **fracionada (fr)**, que pode ser usada em conjunto com unidades.
+Like a table, the grid also works with **lines and columns**, but the difference is that there is a special measure unit **fractional (fr)**, which can be used together with other units.
 
 ```css
 .class {
@@ -377,11 +377,11 @@ Assim como uma tabela o grid também trabalha com **linhas e colunas**, mas a di
   <div class="bg-green-500 border border-green-700" />
 </div>
 
-#### Funções do Grid Layout
+#### Grid Layout Functions
 
-Como o grid layout introduz novos conceitos, ele também provém algumas funções para sanar alguns cenários: `repeat()`, `minmax()` e `fit-content()`.
+As the grid layout introduces new concepts, it also provides some functions to fit some scenarios: `repeat()`, `minmax()` and `fit-content()`.
 
-- `repeat()` como o nome já diz é para **repetir os tamanhos** das linhas ou colunas.
+- `repeat()` as the name says is for **repeating the sizes** of rows or columns.
 
 ```css
 .class {
@@ -389,7 +389,7 @@ Como o grid layout introduz novos conceitos, ele também provém algumas funçõ
 }
 ```
 
-Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
+Using the `repeat()` function this would be the **equivalent** of the code above:
 
 ```css
 .class {
@@ -397,7 +397,7 @@ Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
 }
 ```
 
-- `minmax()` define os tamanhos **máximos e mínimos** das linhas ou colunas.
+- `minmax()` defines the **maximum and minimum** sizes of rows or columns.
 
 ```css
 .class {
@@ -405,7 +405,7 @@ Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
 }
 ```
 
-- `fit-content()` funciona como o `auto`, mas definindo um tamanho fixo que pode ser maior.
+- `fit-content()` works like `auto`, but setting a fixed size, which can be bigger than the element size.
 
 ```css
 .class {
@@ -413,11 +413,11 @@ Utilizando a função `repeat()` esse seria o **equivalente** a código acima:
 }
 ```
 
-#### Grid área
+#### Grid area
 
-Como dito acima, o grid trabalha com linhas e colunas **como uma tabela**. Você deve estar se perguntando: **"Tá, mas por que só não usar uma tabela?"**. Ai que vem o pulo do gato no Grid Layout um elemento pode ocupar **mais de uma célula**.
+As stated above, the grid works with rows and columns **like a table**. You must be wondering: **"OK, but why not just use a table?"**. This is because in the Grid Layout an element can occupy **more than one cell**.
 
-Para fazer isso existe mais de uma maneira, mas eu recomendo o uso da **grid área**. Com ela podemos definir **apelidos** para os contêineres da nossa página, com a propriedade `grid-area`, e criar um paralelo um para um com o uso da propriedade `grid-template-areas`.
+There is more than one way to do this, but I recommend using **grid area**. With it we can define **nicknames** for our page's containers, with the `grid-area` property, and create a one-to-one parallel with your layout, using the `grid-template-areas` property.
 
 ```css
 .grid {
@@ -442,9 +442,9 @@ Para fazer isso existe mais de uma maneira, mas eu recomendo o uso da **grid ár
   <div class="bg-red-500 border border-red-700 grid-area-[A]" />
 </div>
 
-No exemplo acima podemos ver que na classe `.grid-item` é declarado o apelido, enquanto no contêiner principal os espaços onde `GRID_ITEM` deve ocupar. Os contêineres em que **não foi definida** a `grid-area` se encaixam com o **comportamento padrão** de uma célula.
+In the example above we can see that in the `.grid-item` class the nickname is declared, while in the main container the spaces where `GRID_ITEM` should occupy. Containers whose `grid-area` where **not defined**, fit the **default behavior** of a cell.
 
-Agora imagina que você tem uma **tela** com os seguintes elementos:
+Now picture that you have a **screen** with the following elements:
 
 <section class="grid w-full h-32 border border-dashed border-gray-400 text-dracula-darkest">
   <header class="bg-green-500 border border-green-700">{'<header />'}</header>
@@ -453,7 +453,7 @@ Agora imagina que você tem uma **tela** com os seguintes elementos:
   <footer class="bg-green-500 border border-green-700">{'<footer />'}</footer>
 </section>
 
-Agora vamos aplicar as **grid áreas** no formato que esperamos que nosso layout se ajuste:
+Now let's apply the **grid areas** in the format we want our layout will fit:
 
 ```css
 .header {
@@ -497,7 +497,7 @@ Agora vamos aplicar as **grid áreas** no formato que esperamos que nosso layout
   </footer>
 </section>
 
-Nesse cenário eu **nem precisei** declarar o número de linhas e colunas, mas eu poderia dizer que a coluna do `aside` é para se ajustar **automágicamente**.
+In this scenario I **didn't even need** to declare the number of rows and columns, but I could define that the `aside` column has to fit **automagically**.
 
 ```css
 .grid {
@@ -528,7 +528,7 @@ Nesse cenário eu **nem precisei** declarar o número de linhas e colunas, mas e
 
 #### Grid span
 
-Nem sempre nossos contêineres tem valor semântico para que o uso da grid área seja justificado. É ai que nós podemos declarar **quantas linhas e colunas** o nosso elemento irá **ocupar**, através das propriedades `grid-row` e `grid-column` juntamente com a palavra reservada `span`, com ela não precisamos definir qual o **ponto de início ou fim** do alcance do elemento, assumindo a **posição atual** como referência.
+Our containers do not always have semantic value to justify the use of the grid areas. So we can declare **how many rows and columns** our element will **occupy**, through the `grid-row` and `grid-column` properties, which together with the `span` keyword, we don't need to define the **starting or ending point** of the element's scope, taking the **current position** as a reference.
 
 ```css
 .grid {
