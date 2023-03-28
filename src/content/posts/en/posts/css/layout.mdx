@@ -2,27 +2,27 @@
 layout: '@/layouts/Post.astro'
 categories: CSS
 date: 2023-03-25
-title: Fundamentos da criação de layouts com CSS
-description: Aprenda CSS e seu funcionamento, para construir layouts complexos sem dificuldades.
+title: Fundamentals of layout creation with CSS
+description: Learn CSS and how it works, to build complex layouts without many difficulties.
 summary: CSS também pode ser divertido, vamos entender as nuances dos principais modelos de layout, para que você não passe tanto sufoco.
 ---
 
-# Fundamentos da criação de layouts com CSS
+# Fundamentals of layout creation with CSS
 
-## Aprenda CSS e seu funcionamento, para construir layouts complexos sem dificuldades.
+## Learn CSS and how it works, to build complex layouts without many difficulties.
 
 ---
 
 ### Box Model
 
-Os elementos HTML são divididos em 4 partes:
+HTML elements are divided into 4 parts:
 
-- **Margin** - Espaço entre os elementos
-- **Border** - Borda na qual pode ser aplicado cores
-- **Padding** - Espaço interno do elemento
-- **Content** - Conteúdo do elemento
+- **Margin** - Space between elements
+- **Border** - Border which colors can be applied
+- **Padding** - Internal space of the element
+- **Content** - Content of the element
 
-Por padrão o Box Model aplica altura e largura no **Content Box**. Isso causa **inconsistências** na criação do layout. Isso porque quando você declara os tamanhos de um elemento, ele vai se **comportar diferente** para um elemento que possuí padding e border.
+By default the Box Model applies height and width to the **Content Box**. This causes **inconsistencies** in layout creation. Because when you declare the sizes of an element, it will **behave differently** for an element that has padding and border.
 
 <div class="bg-orange-300 p-4 text-black text-xs">
   <span class="hidden sm:block">Margin</span>
@@ -37,7 +37,7 @@ Por padrão o Box Model aplica altura e largura no **Content Box**. Isso causa *
   </div>
 </div>
 
-Para resolver isso a primeira coisa que temos que fazer é adicionar o seguinte estilo:
+To fix this the first thing we have to do is add the following style:
 
 ```css
 * {
@@ -45,7 +45,7 @@ Para resolver isso a primeira coisa que temos que fazer é adicionar o seguinte 
 }
 ```
 
-Nele nós usamos o seletor asterisco **" \* "** para declarar que todos os elementos do site devem respeitar o modelo de **dimensionamento na borda**. O que comparando com o modelo padrão fica assim:
+In it we use the asterisk selector **" \* "** to declare that all site elements must respect the **border sizing** model. Which comparing with the standard model looks like this:
 
 <div class="bg-orange-300 p-4 text-black text-xs">
   <span class="hidden sm:block">Margin</span>
@@ -62,13 +62,13 @@ Nele nós usamos o seletor asterisco **" \* "** para declarar que todos os eleme
 
 ### Flow Layout
 
-HTML é uma linguagem de marcação que foi pensada para documentos, por isso o posicionamento padrão dos elementos é vertical. Esse modelo é conhecido como **Flow Layout**, e nele os elementos flutuam para o **canto superior esquerdo** e se ajustam para ocupar o espaço do seu conteúdo.
+HTML is a markup language that was designed for documents, so the default placement of elements is vertical. This model is known as a **Flow Layout**, and in it elements float to the **top left corner** and adjust to take up the space of your content.
 
 <div class="w-full h-32 border border-dashed border-gray-400">
   <div class="w-8 h-8 bg-green-500 border border-green-700" />
 </div>
 
-Por causa desse modelo padrão tanto o elemento **html**, quanto o elemento **body**, não se ajustam **100% da altura** da tela, o que prejudica a estilização baseada em valores relativos a altura. Por isso temos que adicionar o seguinte estilo:
+Because of this default model, both the **html** element and the **body** element do not fit **100% of the height** of the screen, which jeopardizes the styling based on relative height values. So we have to add the following style:
 
 ```css
 html,
@@ -78,17 +78,17 @@ body {
 }
 ```
 
-Com isso garantimos a consistência da largura, através da **porcentagem**, e da altura, através da unidade medida **dvh (Altura Dinâmica da Viewport)**.
+With this, we guarantee the consistency of the width, by **percentage**, and the height, by the measured unit **dvh (Dynamic Viewport Height)**.
 
-A **viewport** é o termo técnico para a janela do seu navegador, ou seja, tudo que não for barra de ferramentas é a viewport. Ela está como dinâmica porque no mobile a **barra de navegação se altera** a medida que o usuário rola na página.
+The **viewport** is the technical term for your browser window, meaning, everything that is not a toolbar is a viewport. It is dynamic because on mobile the **navigation bar changes** as the user scrolls on the page.
 
 ### Flexbox
 
-Flexbox, ou para os íntimos flex, é um modelo **unidirecional** para a construção de layouts. Nele são definidos dois **eixos o principal e cruzado**.
+Flexbox, or for the intimate flex, is a **unidirectional** model for building layouts. It defines two **axes, main and cross**.
 
-#### Eixos
+#### Axes
 
-O **eixo principal** é aquele que **cruza todos os elementos** filhos de um contêiner. O **eixo cruzado** é aquele que **cruza os elementos de maneira individual**.
+The **main axis** is the one that **crosses all child elements** of a container. The **cross axis** is the one that **crosses the elements individually**.
 
 <div class="w-full h-32 border border-dashed border-gray-400">
   <div class="relative flex items-center">
@@ -108,7 +108,7 @@ O **eixo principal** é aquele que **cruza todos os elementos** filhos de um con
   </div>
 </div>
 
-Por padrão o eixo principal é **horizontal**, mas isso pode ser alterado com esse estilo estilo:
+By default the main axis is **horizontal**, but that can be changed with the following style:
 
 ```css
 .class {
@@ -134,6 +134,8 @@ Por padrão o eixo principal é **horizontal**, mas isso pode ser alterado com e
     </div>
   </div>
 </div>
+
+# TODO
 
 #### Alinhamento horizontal e vertical
 
