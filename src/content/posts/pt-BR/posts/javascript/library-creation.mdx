@@ -1,37 +1,37 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: JavaScript
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/npm.svg"
+tag: JavaScript
 date: 2022-11-02
 title: Como criar uma biblioteca JavaScript?
 description: Com o registro de software npm, você também pode contribuir para a comunidade open source.
-summary: Usando tsup, turborepo e changesets, nunca foi tão fácil criar sua própria biblioteca
 ---
 
-import { Image } from '@astrojs/image/components';
+import { Image } from "astro:assets";
 
-import changesetChangeScope from '@/assets/changeset-change-scope.png';
-import changesetChangeSummary from '@/assets/changeset-change-summary.png';
-import changesetChange from '@/assets/changeset-change.png';
-import npmAddOrg from '@/assets/npm-add-org.png';
-import npmAvatar from '@/assets/npm-avatar.png';
-import npmLogin from '@/assets/npm-login.png';
-import npmOrgName from '@/assets/npm-org-name.png';
+import changesetChangeScope from "@/assets/img/changeset-change-scope.png";
+import changesetChangeSummary from "@/assets/img/changeset-change-summary.png";
+import changesetChange from "@/assets/img/changeset-change.png";
+import npmAddOrg from "@/assets/img/npm-add-org.png";
+import npmAvatar from "@/assets/img/npm-avatar.png";
+import npmLogin from "@/assets/img/npm-login.png";
+import npmOrgName from "@/assets/img/npm-org-name.png";
 
-# Como criar uma biblioteca JavaScript?
+# {frontmatter.title}
 
-## Com o registro de software npm, você também pode contribuir para a comunidade open source.
+## {frontmatter.description}
 
 ---
 
 ### Crie uma conta no npm registry
 
-1. Acesse o [cadastro do npm](https://www.npmjs.com/signup 'cadastro do npm') e crie uma nova conta
+1. Acesse o [cadastro do npm](https://www.npmjs.com/signup "cadastro do npm") e crie uma nova conta
 
 <Image
   class="rounded shadow-2xl"
   alt="npm login"
   format="webp"
-  src={npmLogin.src}
+  src={npmLogin}
   aspectRatio="5:8"
   width={300}
 />
@@ -42,7 +42,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="npm avatar"
   format="webp"
-  src={npmAvatar.src}
+  src={npmAvatar}
   aspectRatio="5:8"
   width={300}
 />
@@ -53,7 +53,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="adicionar organização"
   format="webp"
-  src={npmAddOrg.src}
+  src={npmAddOrg}
   aspectRatio="5:5"
   width={300}
 />
@@ -64,7 +64,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="nome da organização"
   format="webp"
-  src={npmOrgName.src}
+  src={npmOrgName}
   aspectRatio="6:7"
   width={300}
 />
@@ -81,7 +81,7 @@ npm init -y
 
 #### Configurando o monorepo
 
-Como a proposta é trabalhar com múltiplos pacotes, vamos começar instalando o [turborepo](https://turbo.build/repo/docs 'Documentação do turborepo'), que é um gerenciador de monorepos:
+Como a proposta é trabalhar com múltiplos pacotes, vamos começar instalando o [turborepo](https://turbo.build/repo/docs "Documentação do turborepo"), que é um gerenciador de monorepos:
 
 ```shell
 npm i -D turborepo@latest
@@ -185,13 +185,13 @@ Esse comando será referenciado pelo **`turbo run bundle`** definido no package.
 Por fim crie um arquivo na biblioteca chamado **tsup.config.ts** e coloque o seguinte conteúdo:
 
 ```ts
-import { defineConfig } from 'tsup';
-import { nodeExternalsPlugin } from 'esbuild-node-externals';
+import { defineConfig } from "tsup";
+import { nodeExternalsPlugin } from "esbuild-node-externals";
 
 defineConfig({
-  entry = ['src/index.ts'],
-  platform: 'node',
-  format: ['cjs', 'esm'],
+  entry = ["src/index.ts"],
+  platform: "node",
+  format: ["cjs", "esm"],
   splitting: false,
   sourcemap: true,
   clean: true,
@@ -208,7 +208,7 @@ npm run bundle
 
 ### Configurando o controle de versão para a publicação
 
-Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o [changeset](https://github.com/changesets/changesets 'github do changeset'). Então execute o seguinte comando na raiz do projeto:
+Para gerenciar o versionamento, publicação e criação/atualização dos arquivos CHANGELOG.md, vamos usar o [changeset](https://github.com/changesets/changesets "github do changeset"). Então execute o seguinte comando na raiz do projeto:
 
 ```shell
 npm install @changesets/cli && npx changeset init
@@ -242,7 +242,7 @@ Esse comando usa a pasta criada pelo `npx changeset init` para declarar uma nova
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChange.src}
+    src={changesetChange}
     aspectRatio="4:2"
     width={400}
   />
@@ -255,7 +255,7 @@ Esse comando usa a pasta criada pelo `npx changeset init` para declarar uma nova
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChangeScope.src}
+    src={changesetChangeScope}
     aspectRatio="12:2"
     width={400}
   />
@@ -268,7 +268,7 @@ Esse comando usa a pasta criada pelo `npx changeset init` para declarar uma nova
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChangeSummary.src}
+    src={changesetChangeSummary}
     aspectRatio="20:4"
     width={400}
   />
@@ -280,7 +280,7 @@ Esse comando usa a pasta criada pelo `npx changeset init` para declarar uma nova
 
   ```markdown
   ---
-  'svj': patch
+  "svj": patch
   ---
 
   change description

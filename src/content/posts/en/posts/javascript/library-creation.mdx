@@ -1,37 +1,37 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: JavaScript
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/npm.svg"
+tag: JavaScript
 date: 2022-11-02
 title: How can you create a JavaScript library?
 description: With the npm software registry, you can also contribute to the open source community.
-summary: Using tsup, turborepo and changesets, creating your own library has never been easier.
 ---
 
-import { Image } from '@astrojs/image/components';
+import { Image } from "astro:assets";
 
-import changesetChangeScope from '@/assets/changeset-change-scope.png';
-import changesetChangeSummary from '@/assets/changeset-change-summary.png';
-import changesetChange from '@/assets/changeset-change.png';
-import npmAddOrg from '@/assets/npm-add-org.png';
-import npmAvatar from '@/assets/npm-avatar.png';
-import npmLogin from '@/assets/npm-login.png';
-import npmOrgName from '@/assets/npm-org-name.png';
+import changesetChangeScope from "@/assets/img/changeset-change-scope.png";
+import changesetChangeSummary from "@/assets/img/changeset-change-summary.png";
+import changesetChange from "@/assets/img/changeset-change.png";
+import npmAddOrg from "@/assets/img/npm-add-org.png";
+import npmAvatar from "@/assets/img/npm-avatar.png";
+import npmLogin from "@/assets/img/npm-login.png";
+import npmOrgName from "@/assets/img/npm-org-name.png";
 
-# How can you create a JavaScript library?
+# {frontmatter.title}
 
-## With the npm software registry, you can also contribute to the open source community.
+## {frontmatter.description}
 
 ---
 
 ### Create an account at the npm registry
 
-1. Go to [npm signup](https://www.npmjs.com/signup 'npm signup') and create a new account
+1. Go to [npm signup](https://www.npmjs.com/signup "npm signup") and create a new account
 
 <Image
   class="rounded shadow-2xl"
   alt="npm login"
   format="webp"
-  src={npmLogin.src}
+  src={npmLogin}
   aspectRatio="5:8"
   width={300}
 />
@@ -42,7 +42,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="npm avatar"
   format="webp"
-  src={npmAvatar.src}
+  src={npmAvatar}
   aspectRatio="5:8"
   width={300}
 />
@@ -53,7 +53,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="adicionar organização"
   format="webp"
-  src={npmAddOrg.src}
+  src={npmAddOrg}
   aspectRatio="5:5"
   width={300}
 />
@@ -64,7 +64,7 @@ import npmOrgName from '@/assets/npm-org-name.png';
   class="rounded shadow-2xl"
   alt="nome da organização"
   format="webp"
-  src={npmOrgName.src}
+  src={npmOrgName}
   aspectRatio="6:7"
   width={300}
 />
@@ -81,7 +81,7 @@ npm init -y
 
 #### Setting up the monorepo
 
-Since the goal is to work with multiple packages, let's start by installing [turborepo](https://turbo.build/repo/docs 'Turborepo documentation'), which is a monorepos manager:
+Since the goal is to work with multiple packages, let's start by installing [turborepo](https://turbo.build/repo/docs "Turborepo documentation"), which is a monorepos manager:
 
 ```shell
 npm i -D turborepo@latest
@@ -185,13 +185,13 @@ This command will be referenced by the **`turbo run bundle`** defined at the roo
 Finally, create a file in the library called **tsup.config.ts** and place the following content:
 
 ```ts
-import { defineConfig } from 'tsup';
-import { nodeExternalsPlugin } from 'esbuild-node-externals';
+import { defineConfig } from "tsup";
+import { nodeExternalsPlugin } from "esbuild-node-externals";
 
 defineConfig({
-  entry = ['src/index.ts'],
-  platform: 'node',
-  format: ['cjs', 'esm'],
+  entry = ["src/index.ts"],
+  platform: "node",
+  format: ["cjs", "esm"],
   splitting: false,
   sourcemap: true,
   clean: true,
@@ -242,7 +242,7 @@ Uses the folder created by `npx changeset init` to declare a new version, but no
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChange.src}
+    src={changesetChange}
     aspectRatio="4:2"
     width={400}
   />
@@ -255,7 +255,7 @@ Uses the folder created by `npx changeset init` to declare a new version, but no
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChangeScope.src}
+    src={changesetChangeScope}
     aspectRatio="12:2"
     width={400}
   />
@@ -268,7 +268,7 @@ Uses the folder created by `npx changeset init` to declare a new version, but no
     class="rounded shadow-2xl"
     alt="npm login"
     format="webp"
-    src={changesetChangeSummary.src}
+    src={changesetChangeSummary}
     aspectRatio="20:4"
     width={400}
   />
@@ -280,7 +280,7 @@ Uses the folder created by `npx changeset init` to declare a new version, but no
 
   ```markdown
   ---
-  'svj': patch
+  "svj": patch
   ---
 
   change description

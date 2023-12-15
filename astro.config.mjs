@@ -1,22 +1,25 @@
-import image from '@astrojs/image';
-import mdx from '@astrojs/mdx';
-import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
-import compress from 'astro-compress';
-import robotsTxt from 'astro-robots-txt';
-import { defineConfig } from 'astro/config';
 import { dirname, resolve } from 'path';
-
+import { defineConfig } from 'astro/config';
+import pwa from '@vite-pwa/astro';
+import mdx from '@astrojs/mdx';
+import { astroExpressiveCode } from 'astro-expressive-code';
+import { astroOgImage } from './integrations/astroOgImage';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
+import robotsTxt from 'astro-robots-txt';
+import sitemap from '@astrojs/sitemap';
 const __dirname = dirname(new URL('', import.meta.url).pathname);
 
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://viniciusflv.github.io',
-  markdown: {
-    shikiConfig: {
-      theme: 'dracula',
-    },
+  site: 'https://tender-moons-post.loca.lt',
+  compressHTML: true,
+  devToolbar: {
+    enabled: false,
   },
+  server: ({ command }) => ({
+    port: command === 'dev' ? 3000 : 8000,
+  }),
   vite: {
     resolve: {
       alias: {
@@ -25,64 +28,83 @@ export default defineConfig({
     },
   },
   integrations: [
-    react(),
-    tailwind(),
-    sitemap(),
-    robotsTxt(),
-    image(),
-    mdx({
-      remarkPlugins: [
-        function codeSnippet() {
-          return function (tree) {
-            tree.children.map((child) => {
-              if (child.lang) {
-                child.value =
-                  `<div class="code-snippet">` +
-                  `<div class="language-id">${child.lang}</div>` +
-                  `<button disabled aria-pressed="false" class="copy-button">` +
-                  `<svg class="copy" fill="currentColor" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="100%">` +
-                  `<path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>` +
-                  `<path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>` +
-                  `</svg>` +
-                  `<svg class="check" fill="currentColor" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="100%">` +
-                  `<path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>` +
-                  `</svg>` +
-                  `</button>` +
-                  `${child.value}` +
-                  `</div>`;
-              }
-            });
-          };
+    astroOgImage({
+      __dirname,
+      brand: resolve(__dirname, './src/assets/svg/me-ricknmorty.svg'),
+      favicon: resolve(__dirname, './src/assets/svg/me-ricknmorty-face.svg'),
+      content: resolve(__dirname, './src/**/*.mdx'),
+      fonts: [
+        {
+          name: 'RocknRoll One',
+          src: resolve(
+            __dirname,
+            './src/assets/fonts/RocknRollOne-Regular.ttf',
+          ),
+          weight: 400,
+          style: 'normal',
         },
       ],
     }),
-    compress({
-      js: true,
-      css: true,
-      img: true,
-      svg: true,
-      html: {
-        html5: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-        caseSensitive: true,
-        decodeEntities: true,
-        removeComments: true,
-        useShortDoctype: true,
-        collapseWhitespace: true,
-        removeTagWhitespace: true,
-        trimCustomFragments: true,
-        continueOnParseError: true,
-        conservativeCollapse: true,
-        removeEmptyAttributes: true,
-        preventAttributesEscaping: true,
-        removeRedundantAttributes: true,
-        collapseBooleanAttributes: true,
-        removeScriptTypeAttributes: true,
-        collapseInlineTagWhitespace: true,
-        removeStyleLinkTypeAttributes: true,
+    astroExpressiveCode({
+      theme: 'dracula',
+      useThemedScrollbars: true,
+      useThemedSelectionColors: true,
+    }),
+    pwa({
+      mode: 'development',
+      base: '/',
+      scope: '/',
+      includeAssets: ['favicon.png'],
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'Astro PWA',
+        short_name: 'Astro PWA',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'favicon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'favicon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'favicon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
+      workbox: {
+        navigateFallback: '/404',
+      },
+      devOptions: {
+        // enabled: true,
+        suppressWarnings: true,
+        navigateFallbackAllowlist: [/^\//],
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true,
       },
     }),
+    mdx(),
+    tailwind(),
+    react(),
+    robotsTxt(),
+    sitemap(),
   ],
+  // experimental: {
+  //   i18n: {
+  //     routingStrategy: "prefix-always",
+  //     defaultLocale: "en",
+  //     locales: ["en", "pt-BR"],
+  //     fallback: {
+  //       "pt-BR": "en",
+  //     },
+  //   },
+  // },
 });

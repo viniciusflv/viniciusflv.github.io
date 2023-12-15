@@ -1,5 +1,29 @@
 ---
-import NotFound from '@/pages/[lang]/404.astro';
+import Container from "@/components/Container.astro";
+import Title from "@/components/Title.astro";
+import Page from "@/layouts/Page.astro";
+import { getLanguageFromURL, getTranslation } from "@/util";
+
+const lang = getLanguageFromURL(Astro.url.pathname);
 ---
 
-<NotFound />
+<Page title="Astro PWA">
+  <Container class="--404">
+    <Title as="h1" isHighlighted>404: {getTranslation(lang, 404)}</Title>
+    <Title as="h2">
+      {Astro.url.pathname}
+    </Title>
+  </Container>
+</Page>
+
+<style is:global>
+  .--404 {
+    @apply flex
+    flex-col
+    justify-center
+    items-center
+    gap-8
+    w-screen
+    h-screen;
+  }
+</style>

@@ -1,15 +1,15 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: CSS
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/css.svg"
+tag: CSS
 date: 2023-03-28
 title: Fundamentals of layout creation with CSS
 description: Learn CSS and how it works, to build complex layouts without many difficulties.
-summary: CSS can be fun too, let's understand the nuances of the main layout models, so you don't have struggle to much.
 ---
 
-# Fundamentals of layout creation with CSS
+# {frontmatter.title}
 
-## Learn CSS and how it works, to build complex layouts without many difficulties.
+## {frontmatter.description}
 
 ---
 
@@ -426,9 +426,9 @@ There is more than one way to do this, but I recommend using **grid area**. With
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
-    'GRID_ITEM'
-    'GRID_ITEM'
-    'GRID_ITEM';
+    "GRID_ITEM"
+    "GRID_ITEM"
+    "GRID_ITEM";
 }
 
 .grid__item {
@@ -447,10 +447,10 @@ In the example above we can see that in the `.grid-item` class the nickname is d
 Now picture that you have a **screen** with the following elements:
 
 <section class="grid w-full h-32 border border-dashed border-gray-400 text-dracula-darkest">
-  <header class="bg-green-500 border border-green-700">{'<header />'}</header>
-  <aside class="bg-green-500 border border-green-700">{'<aside />'}</aside>
-  <main class="bg-green-500 border border-green-700">{'<main />'}</main>
-  <footer class="bg-green-500 border border-green-700">{'<footer />'}</footer>
+  <header class="bg-green-500 border border-green-700">{"<header />"}</header>
+  <aside class="bg-green-500 border border-green-700">{"<aside />"}</aside>
+  <main class="bg-green-500 border border-green-700">{"<main />"}</main>
+  <footer class="bg-green-500 border border-green-700">{"<footer />"}</footer>
 </section>
 
 Now let's apply the **grid areas** in the format we want our layout will fit:
@@ -476,24 +476,24 @@ Now let's apply the **grid areas** in the format we want our layout will fit:
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    'HEADER HEADER'
-    'ASIDE MAIN'
-    'FOOTER FOOTER';
+    "HEADER HEADER"
+    "ASIDE MAIN"
+    "FOOTER FOOTER";
 }
 ```
 
 <section class="grid gap-4 grid-areas-['HEADER,HEADER''ASIDE,MAIN''FOOTER,FOOTER'] w-full h-32 border border-dashed border-gray-400 text-dracula-darkest">
   <header class="grid-area-[HEADER] bg-green-500 border border-green-700">
-    {'<header />'}
+    {"<header />"}
   </header>
   <aside class="grid-area-[ASIDE] bg-green-500 border border-green-700">
-    {'<aside />'}
+    {"<aside />"}
   </aside>
   <main class="grid-area-[MAIN] bg-green-500 border border-green-700">
-    {'<main />'}
+    {"<main />"}
   </main>
   <footer class="grid-area-[FOOTER] bg-green-500 border border-green-700">
-    {'<footer />'}
+    {"<footer />"}
   </footer>
 </section>
 
@@ -504,25 +504,25 @@ In this scenario I **didn't even need** to declare the number of rows and column
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    'HEADER HEADER'
-    'ASIDE MAIN'
-    'FOOTER FOOTER';
+    "HEADER HEADER"
+    "ASIDE MAIN"
+    "FOOTER FOOTER";
   grid-template-columns: auto 1fr;
 }
 ```
 
 <section class="grid gap-4 grid-cols-[auto_1fr] grid-areas-['HEADER,HEADER''ASIDE,MAIN''FOOTER,FOOTER'] w-full h-32 border border-dashed border-gray-400 text-dracula-darkest">
   <header class="grid-area-[HEADER] bg-green-500 border border-green-700">
-    {'<header />'}
+    {"<header />"}
   </header>
   <aside class="grid-area-[ASIDE] bg-red-500 border border-red-700 text-white">
-    {'<aside />'}
+    {"<aside />"}
   </aside>
   <main class="grid-area-[MAIN] bg-green-500 border border-green-700">
-    {'<main />'}
+    {"<main />"}
   </main>
   <footer class="grid-area-[FOOTER] bg-green-500 border border-green-700">
-    {'<footer />'}
+    {"<footer />"}
   </footer>
 </section>
 

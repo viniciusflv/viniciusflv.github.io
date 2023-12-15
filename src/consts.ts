@@ -14,6 +14,7 @@ export const TRANSLATIONS = {
     HOME_POSTS_TITLE: `Last Published Posts`,
     HOME_CATEGORY_TITLE: `By Category`,
     POST_PREVIEW_LINK: `Continue reading`,
+    404: `Page not found`,
   },
   'pt-BR': {
     HEADER_MENU_ITEM_HOME: `Início`,
@@ -30,7 +31,12 @@ export const TRANSLATIONS = {
     HOME_POSTS_TITLE: `Posts publicados recentemente`,
     HOME_CATEGORY_TITLE: `Por categoria`,
     POST_PREVIEW_LINK: `Continue lendo`,
+    404: `Página não encontrada`,
   },
 };
+
+type Translations = typeof TRANSLATIONS;
+type TranslationsKeys = keyof Translations;
+export type TranslationsOptions = keyof Translations[TranslationsKeys];
 
 export const KNOWN_LANGUAGES = Object.keys(TRANSLATIONS);

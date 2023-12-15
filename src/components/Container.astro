@@ -1,11 +1,15 @@
-<section class:list={['contain', Astro.props.class]}>
+---
+const { class: classes, className } = Astro.props;
+---
+
+<div class:list={["contain", classes, className]}>
   <slot />
-</section>
+</div>
 
 <style>
   .contain {
     @apply container
-    p-8
+    px-4
     py-32
     xl:p-32
     mx-auto;

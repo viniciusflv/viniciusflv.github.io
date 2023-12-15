@@ -1,13 +1,17 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "types": ["@astrojs/image/client"],
-    "strictNullChecks": true,
-    "baseUrl": ".",
+    "types": [
+      "vite-plugin-pwa/client",
+      "vite-plugin-pwa/info"
+    ],
+    "baseUrl": "/home/viniciusflv/Documents/codes/astro-v3",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

@@ -1,8 +1,8 @@
 ---
-import { Svg } from '@svjson/react';
+import { Svg } from "@svjson/react";
 
 const {
-  as: Tag = 'a',
+  as: Tag = "a",
   label,
   icon,
   isCurrentColor,
@@ -12,58 +12,140 @@ const {
 } = Astro.props;
 ---
 
-<Tag class:list={['menu__item', classes, className]} title={label} {...props}>
-  {
-    Astro.slots.default ? (
-      <slot />
-    ) : (
-      <Svg
-        className="w-6 sm:w-8"
-        alt={label}
-        src={icon}
-        isCurrentColor={isCurrentColor}
-      />
-    )
-  }
+<Tag
+  {...props}
+  class:list={["menu_action", classes, className]}
+  aria-label={label}
+  title={label}
+>
+  <div class:list={["menu__item"]}>
+    {
+      Astro.slots.default ? (
+        <slot />
+      ) : (
+        <Svg
+          className="w-4/5"
+          alt={label}
+          src={icon}
+          isCurrentColor={isCurrentColor}
+        />
+      )
+    }
+  </div>
+  {label ? <label class="menu__label">{label}</label> : null}
 </Tag>
 
 <style>
-  .menu__item {
-    @apply relative
-    flex
-    flex-col
-    gap-1
-    items-center
-    outline-none
-    transition-all
-    delay-75
-    duration-75
-    ease-in-out;
+  :root {
+    --lerp-0: 1;
+    --lerp-1: calc(sin(30deg));
+    --lerp-2: calc(sin(20deg));
+    --lerp-3: calc(sin(10deg));
+    --lerp-4: 0;
+    --transition: ease;
+  }
 
-    &:after {
-      content: attr(title);
-      @apply absolute
-      -bottom-4
-      opacity-0
-      rounded
-      text-xs
-      whitespace-nowrap
-      font-bold
-      transition-all
-      delay-75
-      duration-75
-      ease-in-out;
+  .menu_action {
+    :global(*) {
+      @apply outline-none;
     }
 
-    &:hover,
-    &:focus,
-    &:focus-within {
-      @apply -translate-y-2
-      text-dracula-comment
-      dark:text-dracula-green;
+    @apply relative
+    h-16
+    w-[10vh]
+    sm:w-16
+    max-w-32
+    min-w-12
+    grid
+    place-items-center
+    items-center
+    content-center
+    transition-all
+    outline-none
+    cursor-pointer;
+    flex: calc(0.2 + (var(--lerp, 0)));
 
-      &:after {
-        @apply opacity-100;
+    .menu__label {
+      @apply absolute
+      -z-10
+      text-current
+      invisible;
+    }
+
+    .menu__item {
+      @apply relative
+      w-full
+      p-2
+      flex
+      flex-col
+      justify-center
+      items-center
+      truncate
+      aspect-square
+      rounded
+      bg-white
+      dark:bg-dracula-background
+      dark:!shadow-dracula-darkest;
+      translate: 0 calc(var(--lerp) * -75%);
+    }
+
+    @screen sm {
+      :is(&:hover, &:focus-visible) {
+        --lerp: var(--lerp-0);
+        z-index: 5;
+
+        .menu__label {
+          @apply visible;
+        }
+
+        .menu__item {
+          @apply bg-dracula-comment
+          text-white
+          glow-dracula-comment
+          dark:bg-dracula-green
+          dark:text-dracula-darkest
+          dark:glow-dracula-green;
+
+          @apply shadow-xl;
+        }
+      }
+
+      @supports selector(:has(*)) {
+        &:has(+ :is(&:hover, &:focus-visible)),
+        :is(&:hover, &:focus-visible) + & {
+          --lerp: var(--lerp-1);
+          z-index: 4;
+          .menu__item {
+            @apply shadow-lg;
+          }
+        }
+
+        &:has(+ & + :is(&:hover, &:focus-visible)),
+        :is(&:hover, &:focus-visible) + & + & {
+          --lerp: var(--lerp-2);
+          z-index: 3;
+          .menu__item {
+            @apply shadow-lg;
+          }
+        }
+
+        &:has(+ & + & + :is(&:hover, &:focus-visible)),
+        :is(&:hover, &:focus-visible) + & + & + & {
+          --lerp: var(--lerp-3);
+          z-index: 2;
+          .menu__item {
+            @apply shadow-lg;
+          }
+        }
+
+        &:has(+ & + & + & + :is(&:hover, &:focus-visible)),
+        :is(&:hover, &:focus-visible) + & + & + & + & {
+          --lerp: var(--lerp-4);
+          z-index: 1;
+          .menu__item {
+            @apply shadow-lg;
+          }
+        }
       }
     }
   }

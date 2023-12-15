@@ -6,88 +6,99 @@ import {
   person,
   twitterLogo,
   write,
-} from '@/assets/svg';
-import MenuItem from '@/components/MenuItem.astro';
-import ToggleLang from '@/components/ToggleLang.astro';
-import ToggleTheme from '@/components/ToggleTheme.astro';
-import { getTranslation } from '@/util';
+} from "@/assets/svg";
+import MenuItem from "@/components/MenuItem.astro";
+import ToggleTheme from "@/components/ToggleTheme.astro";
+import ToggleLang from "@/components/ToggleLang.astro";
+import type { TranslationsOptions } from "@/consts";
 
-const { lang } = Astro.props;
+const { getRelativeLocaleUrl, getTranslations } = Astro.props;
 
 export type Props = {
   lang: string;
   knownLanguages: string[];
+  getRelativeLocaleUrl: (href: string) => string;
+  getTranslations: (keys: TranslationsOptions) => string;
 };
 ---
 
 <script>
-  const toggleMenu = document.getElementById('toggle-menu');
+  function registerEvent() {
+    const toggleMenuBtn = document.getElementById("toggle-menu");
 
-  toggleMenu?.addEventListener('click', () => {
-    toggleMenu?.setAttribute(
-      'aria-pressed',
-      toggleMenu?.getAttribute('aria-pressed') === 'false' ? 'true' : 'false',
-    );
-  });
+    function toggleMenu() {
+      toggleMenuBtn?.setAttribute(
+        "aria-pressed",
+        toggleMenuBtn?.getAttribute("aria-pressed") === "false"
+          ? "true"
+          : "false"
+      );
+    }
+
+    toggleMenuBtn?.addEventListener("click", toggleMenu);
+  }
+
+  registerEvent();
+  document.addEventListener("astro:after-swap", registerEvent);
 </script>
 
 <header>
   <nav>
-    <button
-      title="Hamburger Menu"
+    <MenuItem
+      as="button"
+      label="Hamburger Menu"
       aria-pressed="false"
       id="toggle-menu"
-      class="header__toggle__menu"
+      class="toggle__menu"
     >
-      <i class="trigger-line"></i>
-      <i class="trigger-line"></i>
-      <i class="trigger-line"></i>
-    </button>
+      <div class="toggle__menu__icon">
+        <hr class="trigger-line" />
+        <hr class="trigger-line" />
+        <hr class="trigger-line" />
+      </div>
+    </MenuItem>
     <div class="header__nav__menu">
       <MenuItem
-        label={getTranslation(lang, 'HEADER_MENU_ITEM_HOME')}
-        href={`/${lang}`}
+        label={getTranslations("HEADER_MENU_ITEM_HOME")}
         icon={home}
+        href={getRelativeLocaleUrl("/")}
         isCurrentColor
       />
       <MenuItem
-        label={getTranslation(lang, 'HEADER_MENU_ITEM_POSTS')}
-        href={`/${lang}/posts`}
+        label={getTranslations("HEADER_MENU_ITEM_POSTS")}
         icon={write}
+        href={getRelativeLocaleUrl("/posts")}
         isCurrentColor
       />
       <MenuItem
-        label={getTranslation(lang, 'HEADER_MENU_ITEM_ABOUT')}
-        href={`/${lang}/about`}
+        label={getTranslations("HEADER_MENU_ITEM_ABOUT")}
         icon={person}
+        href={getRelativeLocaleUrl("/about")}
         isCurrentColor
       />
-      <hr />
       <ToggleLang {...Astro.props} />
       <ToggleTheme {...Astro.props} />
-      <hr />
       <MenuItem
         label="Github"
+        icon={github}
         target="_blank"
         href="https://github.com/viniciusflv/"
-        icon={github}
         isCurrentColor
       />
       <MenuItem
         label="Linkedin"
+        icon={linkedin}
         target="_blank"
         href="https://www.linkedin.com/in/viniciusflv/"
-        icon={linkedin}
         isCurrentColor
       />
       <MenuItem
         label="Twitter"
+        icon={twitterLogo}
         target="_blank"
         href="https://twitter.com/viniciusflv1/"
-        icon={twitterLogo}
         isCurrentColor
       />
-      <div class="sm:hidden"></div>
     </div>
   </nav>
 </header>
@@ -97,78 +108,82 @@ export type Props = {
     @apply flex
     justify-end
     sm:justify-center
-    w-full
-    z-20;
+    w-full;
 
     nav {
-      @apply flex
+      @apply fixed
+      bottom-4
       origin-top
+      z-10
+      sm:p-1
+      flex
       items-center
       flex-col-reverse
       sm:flex-row
-      fixed
-      z-10
-      sm:top-4
-      sm:bottom-auto
-      bottom-4
-      p-4
-      sm:px-8
       shadow-2xl
       rounded-lg
-      text-gray-400
       border
       border-gray-300
       dark:border-dracula-currentLine
       bg-white
-      dark:bg-dracula-background
-      bg-opacity-90
-      dark:bg-opacity-90;
+      dark:bg-dracula-background;
 
       @keyframes popup {
         0% {
-          @apply -top-full;
+          @apply -bottom-full;
         }
 
         50% {
-          @apply top-10;
+          @apply bottom-10;
         }
       }
 
-      @screen sm {
-        animation: popup 500ms 1;
-      }
+      animation: popup 500ms 1;
 
-      hr {
-        @apply bg-current
-        border-r
-        w-full
-        sm:h-6
-        border-gray-300
-        dark:border-dracula-currentLine;
-      }
-
-      .header__toggle__menu {
-        @apply relative
-        flex
+      .header__nav__menu {
+        @apply flex
         flex-col
-        justify-between
-        sm:hidden
-        font-bold
-        rounded-full
-        w-7
-        h-6
-        text-inherit;
+        sm:flex-row;
 
-        .trigger-line {
-          @apply h-1
-          w-full
-          rounded
-          bg-current
-          transition-transform
-          duration-300;
+        @apply origin-bottom
+        transition-transform
+        duration-75;
+      }
+
+      .toggle__menu {
+        @apply sm:hidden;
+
+        .toggle__menu__icon {
+          @apply relative
+          w-4/5
+          h-3/5
+          flex
+          flex-col
+          justify-between;
+          .trigger-line {
+            @apply h-1/5
+            w-full
+            rounded
+            bg-current
+            transition-transform
+            duration-300
+            border-none;
+          }
         }
 
-        &[aria-pressed='false'] {
+        &[aria-pressed="false"] {
+          :global(:is(.dark .menu_action .menu__item)) {
+            @apply bg-dracula-green
+            glow-dracula-green
+            text-dracula-darkest;
+          }
+
+          :global(:is(.menu_action .menu__item)) {
+            @apply bg-dracula-comment
+            glow-dracula-comment
+            text-white;
+          }
+
           & + .header__nav__menu {
             @apply scale-y-0
             h-0
@@ -177,16 +192,20 @@ export type Props = {
           }
         }
 
-        &[aria-pressed='true'] {
+        &[aria-pressed="true"] {
+          :global(:is(.dark .menu_action .menu__item)) {
+            @apply text-dracula-green;
+          }
+
+          @apply text-dracula-comment;
+
           & + .header__nav__menu {
             @apply scale-100;
           }
 
           .trigger-line {
             @apply absolute
-            top-3
-            dark:bg-dracula-green
-            bg-dracula-comment;
+            top-3;
 
             &:nth-child(odd) {
               @apply rotate-45;
@@ -197,16 +216,6 @@ export type Props = {
             }
           }
         }
-      }
-
-      .header__nav__menu {
-        @apply flex
-        items-center
-        flex-col
-        sm:flex-row
-        gap-6;
-
-        @apply origin-bottom transition-transform duration-75;
       }
     }
   }

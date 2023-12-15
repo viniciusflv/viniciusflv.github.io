@@ -1,59 +1,55 @@
 ---
-import type { MDXInstance } from 'astro';
-import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
-import { existsSync } from 'fs';
-import { resolve } from 'path';
-
-const { lang, knownLanguages } = Astro.props;
-
-const fallbackOgImage = new URL(`${lang}/og-image.png`, Astro.site);
-const scopedOgImage = new URL(`${Astro.url.pathname}og-image.png`, Astro.site);
-const localPath = resolve('public') + scopedOgImage.pathname;
-const existsOgImage = existsSync(localPath);
+import { pwaInfo } from "virtual:pwa-info";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import type { MDXInstance } from "astro";
 
 const props = {
   ...Astro.props,
   ...Astro.props.frontmatter,
 };
 
-const title = [props?.title, 'Vinícius Victorino'].join(' | ');
+const title = [props?.title, "Vinícius Victorino"].join(" | ");
 
 const meta = {
-  type: 'website',
-  description: 'My personal website',
+  type: "website",
+  description: "My personal website",
   keywords:
     props?.keywords ||
     [
-      'programming',
-      'front-end',
-      'javascript',
-      'typescript',
-      'react',
-      'technologies',
-    ].join(','),
+      "programming",
+      "front-end",
+      "javascript",
+      "typescript",
+      "react",
+      "technologies",
+    ].join(","),
   ...props,
   title,
-  author: 'Vinícius Fabris Leite Victorino',
-  twitter: '@viniciusflv1',
-  siteName: 'Vinícius Victorino',
+  author: "Vinícius Fabris Leite Victorino",
+  twitter: "@viniciusflv1",
+  siteName: "Vinícius Victorino",
   canonical: Astro.url.href,
   themeColor: {
-    dark: '#282a36',
-    light: 'rgb(229 231 235)',
+    dark: "#282a36",
+    light: "rgb(229 231 235)",
+  },
+  favicon: {
+    type: "image/png",
+    href: "/favicon.png",
   },
   image: {
-    width: '1280',
-    height: '675',
-    type: 'image/png',
+    width: "1280",
+    height: "675",
+    type: "image/png",
     alt: title,
-    src: existsOgImage ? scopedOgImage : fallbackOgImage,
+    src: `${Astro.url.pathname}og-image.png`,
   },
 };
 
 function formatAlternateHref(hreflang: string) {
   return new URL(
     Astro.url.pathname.replace(/^\/(.*)\//g, `/${hreflang}/`),
-    Astro.site,
+    Astro.site
   );
 }
 
@@ -79,23 +75,12 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <link href={meta.canonical} rel="canonical" />
 <meta content={meta.canonical} property="og:url" />
 <meta content={meta.siteName} property="og:site_name" />
-<meta
-  content={meta.themeColor.dark}
-  name="theme-color"
-  media="(prefers-color-scheme: dark)"
-/>
-<meta
-  content={meta.themeColor.light}
-  name="theme-color"
-  media="(prefers-color-scheme: light)"
-/>
 <meta content={meta.keywords} name="keywords" />
 <meta content={meta.type} property="og:type" />
-
 <!-- locale -->
-<meta content={lang} property="og:locale" />
+<meta content={meta.lang} property="og:locale" />
 {
-  knownLanguages?.map((hreflang) => (
+  meta.knownLanguages?.map((hreflang) => (
     <link
       rel="alternate"
       href={formatAlternateHref(hreflang)}
@@ -117,7 +102,7 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <meta content={meta.twitter} name="twitter:creator" />
 <meta content={meta.twitter} name="twitter:site" />
 <!-- image -->
-<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type={meta.favicon.type} href={meta.favicon.href} />
 <meta content={meta.image.alt} property="og:image:alt" />
 <meta content={meta.image.src} property="og:image" />
 <meta content={meta.image.type} property="og:image:type" />
@@ -126,6 +111,21 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <meta content={meta.image.src} name="twitter:image" />
 <meta content={meta.image.alt} name="twitter:image:alt" />
 <meta content="summary_large_image" name="twitter:card" />
+<!-- pwa -->
+<link rel="apple-touch-icon" href="/favicon-192x192.png" />
+<link rel="mask-icon" href={meta.favicon.href} color={meta.themeColor.light} />
+<meta
+  content={meta.themeColor.dark}
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+/>
+<meta
+  content={meta.themeColor.light}
+  name="theme-color"
+  media="(prefers-color-scheme: light)"
+/>
+<script src="/src/scripts/pwa.ts"></script>
+{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 <!-- font -->
 <GoogleFontsOptimizer
   url="https://fonts.googleapis.com/css2?family=RocknRoll+One:wght@400;700&display=swap"

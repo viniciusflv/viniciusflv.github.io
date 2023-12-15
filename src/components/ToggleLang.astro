@@ -1,7 +1,7 @@
 ---
-import { br, usa } from '@/assets/svg';
+import { br, usa } from "@/assets/svg";
 
-import MenuItem from './MenuItem.astro';
+import MenuItem from "./MenuItem.astro";
 
 const { lang, knownLanguages } = Astro.props;
 
@@ -12,23 +12,30 @@ export type Props = {
 ---
 
 <script>
-  const toggleLangBtn = document.getElementById('toggle-lang');
-  const lang = toggleLangBtn?.getAttribute('data-lang') || '';
-  const knownLanguages =
-    toggleLangBtn?.getAttribute('data-languages')?.split(',') || [];
+  function registerEvent() {
+    const toggleLangBtn = document.getElementById("toggle-lang");
+    const lang = toggleLangBtn?.getAttribute("data-lang") || "";
+    const knownLanguages =
+      toggleLangBtn?.getAttribute("data-languages")?.split(",") || [];
 
-  window.localStorage.setItem('lang', lang);
+    window.localStorage.setItem("lang", lang);
 
-  toggleLangBtn?.addEventListener('click', () => {
-    window.location.pathname = window.location.pathname.replace(
-      lang,
-      knownLanguages.find((l) => l !== lang) || lang,
-    );
-  });
+    function toggleLang() {
+      window.location.pathname = window.location.pathname.replace(
+        lang,
+        knownLanguages.find((l) => l !== lang) || lang
+      );
+    }
+
+    toggleLangBtn?.addEventListener("click", toggleLang);
+  }
+
+  registerEvent();
+  document.addEventListener("astro:after-swap", registerEvent);
 </script>
 
 {
-  lang === 'en' ? (
+  lang === "en" ? (
     <MenuItem
       as="button"
       id="toggle-lang"

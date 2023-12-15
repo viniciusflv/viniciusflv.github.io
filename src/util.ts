@@ -28,7 +28,9 @@ type TranslationsLangs = keyof Translations;
 type TranslationsKeys = keyof Translations[TranslationsLangs];
 
 export function getTranslation(lang: string, key: TranslationsKeys) {
-  return TRANSLATIONS[lang as TranslationsLangs][key];
+  return (
+    TRANSLATIONS?.[lang as TranslationsLangs]?.[key] || TRANSLATIONS.en?.[key]
+  );
 }
 
 export type NestedHeading = Partial<
@@ -67,9 +69,27 @@ export const groupPagesByLang = <
 >(
   pages: T[],
 ) =>
-  pages.reduce((pages, page) => {
-    const lang = page.url.split('/')[1];
-    if (!pages[lang]) pages[lang] = [];
-    pages[lang].push(page);
-    return pages;
-  }, {} as { [lang: string]: T[] });
+  pages.reduce(
+    (pages, page) => {
+      const lang = page.url.split('/')[1];
+      if (!pages[lang]) pages[lang] = [];
+      pages[lang].push(page);
+      return pages;
+    },
+    {} as { [lang: string]: T[] },
+  );
+
+export function addAstroEventListener(
+  el: Element,
+  type: string,
+  cb: (...args: any) => any,
+) {
+  const registerEvent = () => {
+    el.removeEventListener(type, cb);
+    el.addEventListener(type, cb);
+  };
+
+  registerEvent();
+  document.addEventListener('astro:after-swap', registerEvent);
+  document.addEventListener('astro:page-load', registerEvent);
+}

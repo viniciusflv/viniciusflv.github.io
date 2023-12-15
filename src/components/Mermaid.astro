@@ -1,25 +1,16 @@
 ---
-import mermaidParse from 'mermaid-parse';
+import mermaidParse from "mermaid-parse";
 
 const { chart } = Astro.props;
-
-let htmlRes = chart;
-
+let svg = chart;
 try {
-  htmlRes = await mermaidParse(chart, { extension: 'svg' });
-} catch (error) {}
+  svg = await mermaidParse(chart, { extension: "svg" });
+} catch (error) {
+  svg = (error as Error).message;
+}
 ---
 
-{
-  Astro.slots.default ? (
-    <div class="mermaid-container">
-      <slot />
-      <div class="mermaid" set:html={htmlRes} />
-    </div>
-  ) : (
-    <div class="mermaid" set:html={htmlRes} />
-  )
-}
+<picture class="mermaid" set:html={svg} />
 
 <style is:global>
   .mermaid-container {
@@ -47,7 +38,7 @@ try {
         @apply !stroke-dracula-green;
       }
 
-      circle:not([class^='actor']):not(.commit) {
+      circle:not([class^="actor"]):not(.commit) {
         @apply !fill-dracula-darkest;
         @apply !stroke-dracula-cyan;
 
@@ -68,7 +59,7 @@ try {
       .relationshipLine {
         @apply !stroke-dracula-green;
 
-        &[id^='actor'] {
+        &[id^="actor"] {
           @apply !stroke-dracula-cyan;
         }
       }
@@ -101,15 +92,15 @@ try {
         @apply !fill-dracula-background
       !stroke-dracula-currentLine !opacity-100;
 
-        &[class^='task crit'] {
+        &[class^="task crit"] {
           @apply !fill-dracula-red;
         }
 
-        &[class^='task active'] {
+        &[class^="task active"] {
           @apply !fill-dracula-cyan;
         }
 
-        &[class^='task activeCrit'] {
+        &[class^="task activeCrit"] {
           @apply !fill-dracula-orange;
         }
       }
@@ -132,7 +123,7 @@ try {
         @apply !fill-dracula-cyan;
       }
 
-      [class^='activation'] {
+      [class^="activation"] {
         @apply !fill-dracula-orange;
       }
 

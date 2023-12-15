@@ -1,21 +1,22 @@
+<!doctype html>
 <html>
   <head>
     <script is:inline>
-      const KNOWN_LANGUAGES = ['en', 'pt-BR'];
+      const KNOWN_LANGUAGES = ["en", "pt-BR"];
       let newLangWithRegion = (
         window.navigator.userLanguage ||
         window.navigator.language ||
-        'en-US'
+        "en-US"
       )
         .substr(0, 5)
         .toLowerCase();
       let newLang = newLangWithRegion.substr(0, 2);
       if (KNOWN_LANGUAGES.includes(newLangWithRegion)) {
-        window.location.pathname = '/' + newLangWithRegion + '/';
+        window.location.pathname = "/" + newLangWithRegion + "/";
       } else if (KNOWN_LANGUAGES.includes(newLang)) {
-        window.location.pathname = '/' + newLang + '/';
+        window.location.pathname = "/" + newLang + "/";
       } else {
-        window.location.pathname = '/en/';
+        window.location.pathname = "/en/";
       }
     </script>
   </head>
