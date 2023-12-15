@@ -1,15 +1,16 @@
 ---
-import Link from '@/components/Link.astro';
-import type { NestedHeading } from '@/util';
+import Link from "@/components/Link.astro";
+import type { NestedHeading } from "@/util";
 
 const { nestedHeadings } = Astro.props;
 
 export type Props = {
+  class?: string;
   nestedHeadings: NestedHeading[];
 };
 ---
 
-<ul class:list={['tree', Astro.props.class]}>
+<ul class:list={["tree", Astro.props.class]}>
   {
     nestedHeadings?.map(({ depth, text, slug, children }) => {
       return children?.length ? (
@@ -23,8 +24,8 @@ export type Props = {
         <li>
           <Link
             title={text}
-            href={slug && (slug?.startsWith('http') ? slug : `#${slug}`)}
-            isExternal={slug?.startsWith('http')}
+            href={slug && (slug?.startsWith("http") ? slug : `#${slug}`)}
+            isExternal={slug?.startsWith("http")}
           >
             {text}
           </Link>
@@ -34,7 +35,7 @@ export type Props = {
   }
 </ul>
 
-<style>
+<style is:global>
   .tree {
     @apply relative
     max-w-full
@@ -53,7 +54,7 @@ export type Props = {
       }
     }
 
-    :global(a) {
+    a {
       @apply block pl-3 truncate !text-inherit;
 
       &:is(:hover, :focus, :active) {
@@ -90,7 +91,7 @@ export type Props = {
       }
 
       &:before {
-        content: '';
+        content: "";
         @apply block
         absolute
         w-3

@@ -1,15 +1,15 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: SVG
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/svg-logo.svg"
+tag: SVG
 date: 2022-10-22
 title: Como usar SVGs com React?
 description: SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
-summary: SVG (Gráficos Vetoriais Escalonáveis) é um formato de representação de imagens, que usa coordenadas vetoriais para desenhar a imagem
 ---
 
-# Como usar SVGs com React?
+# {frontmatter.title}
 
-## SVG é o formato de imagem mais performático para a web quando embedado em seu HTML
+## {frontmatter.description}
 
 ---
 
@@ -23,8 +23,8 @@ Existem várias maneiras:
 
 - Você pode abrir o arquivo .svg e **copiar e colar** as tags no HTML
 - Você pode **carregar como imagem**
-- Você pode usar um [loader](https://www.npmjs.com/package/@svgr/webpack 'npm svgr') para converter para um componente
-- Ou você pode converter seu **SVG para JSON** que um formato nativo do JavaScript, usando a [CLI svj](https://www.npmjs.com/package/svj 'npm svj')
+- Você pode usar um [loader](https://www.npmjs.com/package/@svgr/webpack "npm svgr") para converter para um componente
+- Ou você pode converter seu **SVG para JSON** que um formato nativo do JavaScript, usando a [CLI svj](https://www.npmjs.com/package/svj "npm svj")
 
 #### Prós e Contras
 
@@ -66,7 +66,7 @@ Vamos **analisar** cada um desses métodos levando em consideração os **seguin
   - **Desempenho**: Desempenho comprometido pela quantidade de JavaScript
   - **Tamanho**: Muito JavaScript pra algo não interativo
 
-##### Método: Converter o SVG para JSON com a CLI do [svj](https://www.npmjs.com/package/svj 'npm svj')
+##### Método: Converter o SVG para JSON com a CLI do [svj](https://www.npmjs.com/package/svj "npm svj")
 
 - Prós
   - **Esforço unitário**: Inexistente pois é feito pela CLI
@@ -92,8 +92,8 @@ npm i @svjson/react
 Agora você pode **importar** no seu componente, ambos o JSON do SVG e o adaptador para **renderizar** o SVG. Passando o svg na prop **src** e um texto alternativo na prop **alt** para acessibilidade:
 
 ```tsx
-import { icon } from '<dist-folder>';
-import { Svg } from '@svjson/react';
+import { icon } from "<dist-folder>";
+import { Svg } from "@svjson/react";
 
 export function IconText() {
   return (

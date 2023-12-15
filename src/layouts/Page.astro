@@ -1,17 +1,39 @@
 ---
-import CodeSnippet from '@/components/CodeSnippet.astro';
-import Header from '@/components/Header.astro';
-import GlobalStyle from '@/layouts/GlobalStyle.astro';
+import GlobalStyle from "@/layouts/GlobalStyle.astro";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import {
+  KNOWN_LANGUAGES,
+  TRANSLATIONS,
+  type TranslationsOptions,
+} from "@/consts";
+import { getLanguageFromURL } from "@/util";
+import { ViewTransitions } from "astro:transitions";
 
-export type Props = {
-  lang: string;
-  knownLanguages: string[];
+const lang = getLanguageFromURL(Astro.url.pathname);
+
+function getRelativeLocaleUrl(href: string) {
+  return `/${lang}${href}`;
+}
+
+function getTranslations(keys: TranslationsOptions) {
+  return TRANSLATIONS?.[lang]?.[keys];
+}
+
+const props = {
+  lang,
+  getRelativeLocaleUrl,
+  getTranslations,
+  knownLanguages: KNOWN_LANGUAGES,
+  ...Astro.props,
 };
 ---
 
-<section class="page">
-  <Header {...Astro.props} />
-  <slot />
-  <GlobalStyle />
-  <CodeSnippet />
-</section>
+<Layout {...props}>
+  <section class="page">
+    <Header {...props} />
+    <slot />
+    <GlobalStyle />
+    <ViewTransitions fallback="swap" />
+  </section>
+</Layout>

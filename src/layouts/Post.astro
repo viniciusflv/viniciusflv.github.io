@@ -1,80 +1,124 @@
 ---
-import type { MarkdownLayoutProps } from 'astro';
-import { getCollection } from 'astro:content';
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Container from "@/components/Container.astro";
+import Link from "@/components/Link.astro";
+import Title from "@/components/Title.astro";
+import Tree from "@/components/Tree.astro";
+import Page from "@/layouts/Page.astro";
+import { getLanguageFromURL, unflattenHeading } from "@/util";
+import type { MarkdownLayoutProps } from "astro";
+import { Picture } from "astro:assets";
 
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import Container from '@/components/Container.astro';
-import Tag from '@/components/Tag.astro';
-import Tree from '@/components/Tree.astro';
-import Root from '@/layouts/Root.astro';
-import { getLanguageFromURL, unflattenHeading } from '@/util';
-
+const { frontmatter } = Astro.props;
+const { title, description, date: dt, tag } = frontmatter;
+const date = new Date(dt);
 const nestedHeadings = unflattenHeading(Astro.props.headings);
+
+const images = import.meta.glob("@/assets/**/*.svg");
+const icon =
+  frontmatter?.icon?.replace("@", "/src") ||
+  "/src/assets/svg/me-ricknmorty-face.svg";
+let iconSrc;
+
+if (icon) {
+  const { default: src } = await images[icon]();
+  iconSrc = src;
+}
+
 const lang = getLanguageFromURL(Astro.url.pathname);
-const date = new Date(Astro.props.frontmatter.date).setHours(24);
-const dateFormatter = new Intl.DateTimeFormat(lang);
-const created = dateFormatter.format(date);
 
-const files = await getCollection('posts', ({ slug }) => {
-  return slug.startsWith(lang.toLocaleLowerCase());
-});
-
-const categories = files
-  .filter(({ data }) => data.category === Astro.props.frontmatter.categories)
-  .map(({ data, slug }) => ({
-    label: data.category,
-    value: `/${slug}`.replace('pt-br', 'pt-BR') ?? '',
-  }));
+function getRelativeLocaleUrl(href: string) {
+  return `/${lang}${href}`;
+}
 
 export type Props = MarkdownLayoutProps<any>;
 ---
 
-<Root {...Astro.props}>
+<Page {...Astro.props}>
   <Container class="post">
+    <Breadcrumbs />
+    <article class="markdown">
+      <header>
+        <div transition:name={`post-icon-${icon}-${title}`} class="icon">
+          {iconSrc && <Picture src={iconSrc} alt={title} />}
+        </div>
+        <div class="meta">
+          <time class="truncate" datetime={date?.toISOString()}>
+            {date?.toLocaleDateString(lang)}
+          </time>
+          <Link
+            title="Vinícius Victorino"
+            href={getRelativeLocaleUrl("/about")}
+          />
+          <Link
+            title={tag}
+            isTag
+            href={getRelativeLocaleUrl(`/posts/${tag?.toLowerCase()}`)}
+          />
+        </div>
+      </header>
+      <slot />
+    </article>
     <aside>
       <nav>
         <Tree nestedHeadings={nestedHeadings} />
       </nav>
     </aside>
-    <article class="markdown">
-      <header>
-        <Breadcrumbs />
-        <p>{created}</p>
-        <a title="Vinícius Victorino" href={`/${lang}/about`}>
-          Vinícius Victorino
-        </a>
-        <nav>
-          {
-            categories?.map(({ label, value }) => (
-              <Tag value={value} label={label} />
-            ))
-          }
-        </nav>
-      </header>
-      <slot />
-    </article>
   </Container>
-</Root>
+</Page>
 
 <style>
-  .post {
+  :global(.post) {
     @apply grid
     grid-cols-[minmax(0,1fr)]
-    lg:grid-cols-[minmax(0,3.5fr)_minmax(250px,1fr)];
+    lg:grid-cols-[minmax(0,3.5fr)_minmax(250px,1fr)]
+    gap-8;
+    header {
+      @apply flex
+      flex-wrap
+      justify-between
+      sm:gap-8
+      gap-4;
 
-    &.contain {
-      @apply pt-16 sm:pt-32;
-    }
+      .icon {
+        @apply flex
+        justify-center
+        items-center
+        sm:w-full
+        sm:h-64
+        sm:p-8
+        w-24
+        h-24
+        p-4
+        sm:rounded-lg
+        rounded
+        shadow-lg
+        bg-white
+        border
+        border-gray-300;
 
-    article {
-      order: -1;
-      @apply flex flex-col gap-8;
+        :global(picture),
+        img {
+          @apply w-full
+          h-full;
+        }
+      }
 
-      header {
-        @apply flex flex-col items-start gap-2;
+      .meta {
+        @apply flex
+        flex-col
+        justify-between
+        sm:items-start
+        items-end
+        sm:gap-4
+        gap-2;
 
-        nav {
-          @apply flex flex-wrap gap-4;
+        time {
+          @apply sm:text-lg;
+        }
+
+        :global(.--tag) {
+          @apply px-4;
         }
       }
     }
@@ -86,10 +130,156 @@ export type Props = MarkdownLayoutProps<any>;
 
       nav {
         @apply sticky
-        top-24
-        px-4
+        flex
+        flex-col
+        gap-4
+        top-16
         overflow-y-auto
         max-h-[80vh];
+      }
+    }
+  }
+</style>
+
+<style is:global>
+  .markdown {
+    @apply flex flex-col gap-8;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      @apply pt-8
+      -mt-8
+      text-center
+      sm:text-left;
+    }
+
+    h1 {
+      @apply text-xl
+      md:text-3xl
+      lg:text-4xl
+      md:leading-11
+      lg:leading-14
+      font-bold
+      tracking-wider;
+
+      @apply text-transparent
+      bg-clip-text
+      bg-gradient-to-r
+      from-dracula-currentLine
+      to-dracula-comment;
+
+      .dark & {
+        @apply from-dracula-cyan 
+        to-dracula-green;
+      }
+    }
+
+    h2 {
+      @apply italic lg:text-xl md:text-lg opacity-80;
+    }
+
+    h3 {
+      @apply relative
+      flex
+      justify-center
+      text-center
+      sm:justify-start
+      sm:text-left;
+
+      @apply font-bold
+        lg:text-xl
+        text-lg;
+
+      .dark & {
+        @apply text-dracula-cyan;
+      }
+
+      &:before {
+        content: "";
+        @apply absolute
+        -bottom-4
+        h-2
+        w-8
+        rounded
+        bg-dracula-comment;
+
+        .dark & {
+          @apply bg-dracula-green;
+        }
+      }
+    }
+
+    h4 {
+      @apply font-bold;
+    }
+
+    h5 {
+      @apply font-bold;
+    }
+
+    p,
+    li {
+      @apply text-sm;
+    }
+
+    hr {
+      @apply glow-dracula-comment;
+
+      .dark & {
+        @apply glow-dracula-cyan;
+      }
+    }
+
+    a:not(.--tag) {
+      @apply gap-2
+      text-blue-600;
+
+      .dark & {
+        @apply text-dracula-cyan;
+      }
+
+      &:is(:hover, :focus, :active) {
+        @apply underline;
+      }
+    }
+
+    strong {
+      @apply text-dracula-comment;
+
+      .dark & {
+        @apply text-dracula-green;
+      }
+    }
+
+    blockquote {
+      @apply italic
+      text-xs
+      sm:text-sm
+      p-4
+      border-l-4
+      border-l-dracula-comment
+      bg-black
+      bg-opacity-10
+      rounded;
+
+      .dark & {
+        @apply border-l-dracula-green bg-opacity-20;
+      }
+    }
+
+    :not(:is(.tree, .breadcrumbs)) {
+      &:is(ul, ol) {
+        @apply pl-8;
+      }
+      &:is(ul) li {
+        @apply list-disc;
+      }
+
+      &:is(ol) li {
+        @apply list-decimal;
       }
     }
   }

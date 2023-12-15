@@ -1,87 +1,98 @@
 ---
-import { Svg } from '@svjson/react';
+import { Svg } from "@svjson/react";
 
-import { moon, sun } from '@/assets/svg';
-import { getTranslation } from '@/util';
+import { moon, sun } from "@/assets/svg";
 
-import MenuItem from './MenuItem.astro';
+import MenuItem from "./MenuItem.astro";
+import type { TranslationsOptions } from "@/consts";
 
-const { lang } = Astro.props;
+const { getTranslations } = Astro.props;
 
 export type Props = {
   lang: string;
+  getTranslations: (keys: TranslationsOptions) => string;
 };
 ---
 
 <script>
-  const initialTheme = (() => {
-    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+  function registerEvent() {
+    const initialTheme = (() => {
+      let theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      theme = localStorage.getItem('theme') ?? '';
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        theme = localStorage.getItem("theme") ?? "";
+      }
+
+      return theme;
+    })();
+
+    function toggleThemeClass(theme: string) {
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+      } else {
+        document.documentElement.classList.remove("light");
+        document.documentElement.classList.add("dark");
+      }
+
+      window.localStorage.setItem("theme", theme);
     }
 
-    return theme;
-  })();
+    toggleThemeClass(initialTheme);
 
-  function toggleTheme(theme: string) {
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
+    const toggleThemeBtn = document.getElementById("theme__toggle");
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      toggleThemeClass(isDark ? "light" : "dark");
+
+      toggleThemeBtn?.setAttribute(
+        "aria-pressed",
+        toggleThemeBtn?.getAttribute("aria-pressed") === "false"
+          ? "true"
+          : "false"
+      );
     }
 
-    window.localStorage.setItem('theme', theme);
+    toggleThemeBtn?.addEventListener("click", toggleTheme);
   }
 
-  toggleTheme(initialTheme);
-
-  const toggleThemeBtn = document.getElementById('theme__toggle');
-
-  toggleThemeBtn?.addEventListener('click', function () {
-    const isDark = document.documentElement.classList.contains('dark');
-    toggleTheme(isDark ? 'light' : 'dark');
-
-    toggleThemeBtn?.setAttribute(
-      'aria-pressed',
-      toggleThemeBtn?.getAttribute('aria-pressed') === 'false'
-        ? 'true'
-        : 'false',
-    );
-  });
+  registerEvent();
+  document.addEventListener("astro:after-swap", registerEvent);
 </script>
 
 <MenuItem
   as="button"
   id="theme__toggle"
   aria-pressed="false"
-  label={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME')}
+  label={getTranslations("HEADER_MENU_ITEM_TOGGLE_THEME")}
 >
   <Svg
-    className="w-7 sm:w-8 theme__toggle theme__toggle--dark"
-    alt={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME_DARK_ALT')}
+    className="w-4/5 theme__toggle theme__toggle--dark"
+    alt={getTranslations("HEADER_MENU_ITEM_TOGGLE_THEME_DARK_ALT")}
     src={moon}
     isCurrentColor
   />
   <Svg
-    className="w-7 sm:w-8 theme__toggle theme__toggle--light"
-    alt={getTranslation(lang, 'HEADER_MENU_ITEM_TOGGLE_THEME_LIGHT_ALT')}
+    className="w-4/5 theme__toggle theme__toggle--light"
+    alt={getTranslations("HEADER_MENU_ITEM_TOGGLE_THEME_LIGHT_ALT")}
     src={sun}
     isCurrentColor
   />
 </MenuItem>
 
-<style>
+<style is:global>
   .theme__toggle {
     @apply hidden;
   }
 
-  :global(.dark) .theme__toggle--dark,
-  :global(.light) .theme__toggle--light {
+  .dark .theme__toggle--dark,
+  .light .theme__toggle--light {
     @apply flex;
   }
 </style>

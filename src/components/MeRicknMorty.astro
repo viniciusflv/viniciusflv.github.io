@@ -1,21 +1,16 @@
 ---
-import { Svg } from '@svjson/react';
+import { Svg } from "@svjson/react";
 
-import { meRicknmorty } from '@/assets/svg';
-import { getTranslation } from '@/util';
-
-const { lang } = Astro.props;
-
-export type Props = {
-  lang: string;
-};
+import { meRicknmorty } from "@/assets/svg";
 ---
 
-<picture class="me-rick-n-morty" slot="image">
-  <Svg
-    src={meRicknmorty as any}
-    alt={getTranslation(lang, 'HOME_HERO_IMAGE_ALT')}
-  />
+<picture
+  transition:name="me-rick-n-morty"
+  transition:animate="slide"
+  class="me-rick-n-morty"
+>
+  <Svg src={meRicknmorty as any} alt="rick and morty" />
+  <div class="glow-bg">a</div>
 </picture>
 
 <style>
@@ -24,14 +19,58 @@ export type Props = {
     justify-end
     overflow-hidden
     -mb-48
+    transition-all
     dark:text-dracula-darkest
     text-dracula-comment;
 
     :global(.lenses) {
+      :global(.dark) & {
+        @apply opacity-20;
+      }
       @apply opacity-90
-      dark:opacity-20
       transition-opacity
       duration-500;
+    }
+
+    .glow-bg {
+      @apply absolute
+      -z-10
+      sm:w-96
+      sm:h-96
+      w-64
+      h-64
+      blur-3xl
+      rounded-full;
+
+      @keyframes pulse {
+        0% {
+          transform: scale(0.8);
+        }
+
+        50% {
+          transform: scale(1);
+        }
+
+        100% {
+          transform: scale(0.8);
+        }
+      }
+
+      animation: pulse 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+
+      background-image: linear-gradient(
+        45deg,
+        theme("colors.dracula.cyan"),
+        theme("colors.dracula.pink")
+      );
+
+      :global(.dark) & {
+        background-image: linear-gradient(
+          45deg,
+          theme("colors.dracula.green"),
+          theme("colors.dracula.cyan")
+        );
+      }
     }
   }
 </style>

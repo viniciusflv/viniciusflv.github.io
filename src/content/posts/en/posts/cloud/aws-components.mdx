@@ -1,13 +1,13 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: Cloud
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/aws.svg"
+tag: Cloud
 date: 2023-01-29
 title: Components from AWS (Amazon Web Services)
 description: AWS is one of the largest providers for cloud computing services.
-summary: Let's demystify some of the main components of AWS, in order to simplify its concepts.
 ---
 
-import { Svg } from '@svjson/react';
+import { Svg } from "@svjson/react";
 
 import {
   cloudFrontAws,
@@ -34,11 +34,11 @@ import {
   snsAws,
   sqsAws,
   stepFunctionsAws,
-} from '@/assets/svg';
+} from "@/assets/svg";
 
-# Components from AWS (Amazon Web Services)
+# {frontmatter.title}
 
-## AWS is one of the largest providers for cloud computing services.
+## {frontmatter.description}
 
 ---
 
@@ -186,7 +186,7 @@ Component responsible for providing **cloud computing**. With it you can do ever
 
 #### **Image Registry** <br /> ECR (Elastic Container Registry)
 
-Component responsible for registering [container images](/posts/devops/docker#container-vs-image 'Container vs images') in a scalable and secure way.
+Component responsible for registering [container images](/posts/devops/docker#container-vs-image "Container vs images") in a scalable and secure way.
 
 > Amazon Elastic Container Registry (Amazon ECR) is an AWS managed container image registry service that is secure, scalable, and reliable. Amazon ECR supports private repositories with resource-based permissions using AWS IAM. This is so that specified users or Amazon EC2 instances can access your container repositories and images. You can use your preferred CLI to push, pull, and manage Docker images, Open Container Initiative (OCI) images, and OCI compatible artifacts.
 

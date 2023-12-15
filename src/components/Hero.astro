@@ -1,19 +1,15 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import Container from '@/components/Container.astro';
-import Heading from '@/components/Heading.astro';
-
-const { title, description, url } = Astro.props;
-
+import Container from "@/components/Container.astro";
+import Title from "@/components/Title.astro";
+const { title, description } = Astro.props;
 export type Props = { title: string; description: string };
 ---
 
-<section class="hero">
+<section>
   <Container class="content">
     <header>
-      <Breadcrumbs />
-      <Heading as="h1" isHighlighted>{title}</Heading>
-      <Heading as="h2">{description}</Heading>
+      <Title transition:name="h1" as="h1" isHighlighted>{title}</Title>
+      <Title transition:name="h2" as="h2">{description}</Title>
       <slot />
     </header>
     <slot name="image" />
@@ -21,16 +17,16 @@ export type Props = { title: string; description: string };
 </section>
 
 <style>
-  .hero {
-    @apply grid shadow-lg
-    rounded-b-3xl
-    bg-gray-200
+  section {
+    @apply grid
+    shadow-lg
+    bg-white
     dark:bg-dracula-background
     glow-b-dracula-comment
     dark:glow-b-dracula-green;
 
-    .content {
-      @apply grid
+    & > :global(.content) {
+      @apply !grid
       items-center
       pt-16
       sm:pt-32

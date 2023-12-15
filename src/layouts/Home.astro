@@ -1,123 +1,150 @@
 ---
-import { getCollection } from 'astro:content';
+import type { MarkdownLayoutProps } from "astro";
+import { getCollection } from "astro:content";
+import Page from "@/layouts/Page.astro";
+import Hero from "@/components/Hero.astro";
+import Container from "@/components/Container.astro";
+import Card from "@/components/Card.astro";
+import Link from "@/components/Link.astro";
 
-import Container from '@/components/Container.astro';
-import Heading from '@/components/Heading.astro';
-import Hero from '@/components/Hero.astro';
-import Link from '@/components/Link.astro';
-import MeRicknMorty from '@/components/MeRicknMorty.astro';
-import PostPreview from '@/components/PostPreview.astro';
-import Tag from '@/components/Tag.astro';
-import Root from '@/layouts/Root.astro';
-import { getLanguageFromURL, getTranslation } from '@/util';
+import {
+  KNOWN_LANGUAGES,
+  TRANSLATIONS,
+  type TranslationsOptions,
+} from "@/consts";
+
+import { getLanguageFromURL } from "@/util";
+import Title from "@/components/Title.astro";
+import MeRicknMorty from "@/components/MeRicknMorty.astro";
 
 const lang = getLanguageFromURL(Astro.url.pathname);
 
-const files = await getCollection('posts', ({ slug }) => {
+function getRelativeLocaleUrl(href: string) {
+  return `/${lang}${href}`;
+}
+
+function getTranslations(keys: TranslationsOptions) {
+  return TRANSLATIONS?.[lang]?.[keys];
+}
+
+const files = await getCollection("posts", ({ slug }) => {
   return slug.startsWith(lang.toLocaleLowerCase());
 });
 
-const categories = files
-  .filter(({ data }) => data.category)
-  .map(({ data, slug }) => ({
-    label: data.category,
-    value: `/${slug.replace('pt-br', 'pt-BR')}` ?? '',
-  }));
-
 const posts = files
-  .filter(({ data }) => data.categories)
+  .filter(({ data }) => data.tag)
   .sort((a, b) => {
-    const dateA = new Date(a.data.date).setHours(24);
-    const dateB = new Date(b.data.date).setHours(24);
+    const dateA = new Date(a?.data?.date || 0).setHours(24);
+    const dateB = new Date(b?.data?.date || 0).setHours(24);
 
     return dateB - dateA;
   })
-  .map(({ slug, ...rest }) => ({
-    ...rest,
-    slug: slug.replace('pt-br', 'pt-BR'),
-  }));
+  .map((file) => {
+    return {
+      ...file,
+      data: { ...file.data, icon: file.data.icon?.replace("@", "/src") },
+    };
+  })
+  .slice(0, 6);
+
+const categories = files
+  .filter(({ data }) => data.categories)
+  .map((file) => {
+    return {
+      label: file.data.categories,
+      value: `/${file.slug.replace("pt-br", "pt-BR")}`,
+    };
+  });
 
 const props = {
+  ...Astro.props,
+  ...Astro.props.frontmatter,
   lang,
-  title: getTranslation(lang, 'HOME_HERO_H1'),
-  description: getTranslation(lang, 'HOME_HERO_H2'),
-  keywords: categories.map(({ label }) => label.toLowerCase()).join(','),
-  categories,
+  getRelativeLocaleUrl,
+  getTranslations,
+  knownLanguages: KNOWN_LANGUAGES,
+};
+
+export type Props = MarkdownLayoutProps<any> & {
+  file: string;
 };
 ---
 
-<Root {...props}>
+<Page {...props}>
   <Hero {...props}>
-    <MeRicknMorty slot="image" {...props} />
-    <div class="flex flex-wrap gap-4 w-full">
+    <MeRicknMorty slot="image" />
+    <div class="flex flex-wrap justify-start items-start gap-4">
       <Link
-        title={getTranslation(lang, 'HOME_HERO_BUTTON_PRIMARY')}
-        href={`/${lang}/posts`}
+        title={getTranslations("HOME_HERO_BUTTON_PRIMARY")}
+        href={getRelativeLocaleUrl("/posts")}
         isButton
       />
       <Link
-        title={getTranslation(lang, 'HOME_HERO_BUTTON_SECONDARY')}
-        href={`/${lang}/about`}
-        isButton
+        title={getTranslations("HOME_HERO_BUTTON_SECONDARY")}
+        href={getRelativeLocaleUrl("/about")}
         isOutlined
       />
     </div>
   </Hero>
-  <Container class="content">
+  <Container class="home__highlights">
     <main>
-      <Heading as="h3">{getTranslation(lang, 'HOME_POSTS_TITLE')}</Heading>
+      <Title as="h3">{getTranslations("HOME_POSTS_TITLE")}</Title>
       <div class="posts">
-        {posts.map(({ data, slug }) => <PostPreview {...data} url={slug} />)}
+        {
+          posts.map((post) => (
+            <Card
+              lang={lang}
+              href={`/${post.slug.replace("pt-br", "pt-BR")}`}
+              {...post.data}
+            />
+          ))
+        }
       </div>
     </main>
     <aside>
-      <Heading as="h3">{getTranslation(lang, 'HOME_CATEGORY_TITLE')}</Heading>
+      <Title as="h3">{getTranslations("HOME_CATEGORY_TITLE")}</Title>
       <div class="categories">
         {
-          categories?.map(({ label, value }) => (
-            <Tag value={value} label={label} />
+          categories.map(({ label, value }) => (
+            <Link title={label} href={value} isTag />
           ))
         }
       </div>
     </aside>
   </Container>
-</Root>
+</Page>
 
 <style>
-  .content {
-    @apply grid
-    md:grid-cols-[1fr,auto]
+  :global(.home__highlights) {
+    @apply flex
+    flex-col-reverse
+    md:grid
+    md:grid-cols-[4fr,1fr]
     gap-8;
 
-    main {
+    main,
+    aside {
       @apply flex
       flex-col
-      sm:items-start
-      items-center
       gap-16;
+    }
 
+    main {
       .posts {
         @apply grid
-        w-full
-        sm:grid-cols-auto-fit-[20rem]
-        gap-8;
+        sm:grid-cols-auto-fit-[18rem]
+        gap-4;
       }
     }
 
     aside {
-      @apply flex
-      flex-col
-      sm:items-start
-      items-center
-      gap-16;
-
       .categories {
         @apply grid
-        grid-cols-auto-fit-[6rem]
         justify-center
-        md:min-w-52
-        w-full
-        gap-4;
+        sm:justify-start
+        grid-cols-auto-fit-[6rem]
+        gap-4
+        md:min-w-52;
       }
     }
   }

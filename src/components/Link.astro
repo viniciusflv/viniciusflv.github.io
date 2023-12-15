@@ -1,28 +1,23 @@
 ---
-import { getLanguageFromURL } from '@/util';
-
-const lang = getLanguageFromURL(Astro.url.pathname);
-const { href, title, isOutlined, isButton, isExternal } = Astro.props;
+const { href, title, isOutlined, isButton, isTag, isExternal } = Astro.props;
 ---
 
 <a
-  class:list={[
-    'link',
-    isButton ? 'link--button' : null,
-    isOutlined ? 'link--outlined' : null,
-  ]}
   title={title}
   href={href}
-  {...(isExternal ? { target: '_blank' } : {})}
+  class:list={[
+    isTag ? "--tag" : null,
+    isOutlined || isTag ? "--outlined" : null,
+    isButton || isOutlined || isTag ? "--button" : null,
+  ]}
+  {...isExternal ? { target: "_blank" } : {}}>{title}</a
 >
-  {title}
-</a>
 
 <style>
-  .link {
+  a {
     @apply outline-none;
 
-    &:not(.link--button) {
+    &:not(.--button) {
       @apply gap-2
       text-blue-600
       dark:text-dracula-cyan;
@@ -32,23 +27,19 @@ const { href, title, isOutlined, isButton, isExternal } = Astro.props;
       }
     }
 
-    &.link--button {
+    &.--button {
       @apply flex
       justify-center
       items-center
       text-center;
 
       @apply outline-none
-      rounded-full
-      p-4
-      w-full
-      md:max-w-64
       cursor-pointer
-      duration-500
+      duration-75
       transition-colors;
 
-      &:not(.link--outlined),
-      &.link--outlined {
+      &:not(.--outlined),
+      &.--outlined {
         &:is(:hover, :focus) {
           @apply text-white
           bg-dracula-comment
@@ -58,7 +49,20 @@ const { href, title, isOutlined, isButton, isExternal } = Astro.props;
         }
       }
 
-      &.link--outlined {
+      &.--tag {
+        @apply text-xs
+        p-2
+        rounded;
+      }
+
+      &:not(.--tag) {
+        @apply rounded-full
+        p-4
+        w-full
+        md:max-w-64;
+      }
+
+      &.--outlined {
         @apply text-dracula-currentLine
         dark:text-dracula-cyan
         border
@@ -66,7 +70,7 @@ const { href, title, isOutlined, isButton, isExternal } = Astro.props;
         dark:border-dracula-cyan;
       }
 
-      &:not(.link--outlined) {
+      &:not(.--outlined) {
         @apply text-white
         bg-dracula-currentLine
         dark:text-dracula-background

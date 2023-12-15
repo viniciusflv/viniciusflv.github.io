@@ -1,0 +1,19 @@
+---
+import Meta from "@/layouts/Meta.astro";
+
+export type Props = {
+  lang: "en" | "pt-BR";
+  getRelativeLocaleUrl: (href: string) => string;
+  knownLanguages: string[];
+};
+---
+
+<!doctype html>
+<html lang={Astro.props.lang} class="dark">
+  <head>
+    <Meta {...Astro.props} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

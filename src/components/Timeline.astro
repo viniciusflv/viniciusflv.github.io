@@ -1,0 +1,172 @@
+---
+import Title from "@/components/Title.astro";
+
+const { items } = Astro.props;
+---
+
+<section>
+  <div class="timeline">
+    {
+      items?.map(({ date, title, description }) => (
+        <div class="item">
+          <Title as="time" isHighlighted>
+            {new Date(date).getFullYear()}
+          </Title>
+          <div class="marker">
+            <hr />
+            <div class="trigger">
+              <div class="icon" />
+            </div>
+          </div>
+          <div class="info">
+            <Title as="h3">{title}</Title>
+            <p set:html={description} />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  @keyframes animate-in-and-out {
+    entry 0% {
+      opacity: 0;
+      transform: translateY(200%);
+    }
+    entry 100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    exit 0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    exit 100% {
+      opacity: 0;
+      transform: translateY(-200%);
+    }
+  }
+
+  @keyframes shrink {
+    0% {
+      @apply scale-y-0;
+    }
+  }
+
+  section {
+    @apply flex
+    justify-start
+    w-full;
+
+    .timeline {
+      @apply relative
+      flex
+      sm:flex-col
+      overflow-x-auto
+      gap-8;
+
+      @screen sm {
+        overflow: unset;
+      }
+
+      .item {
+        @apply flex
+        flex-col sm:flex-row
+        justify-start
+        items-start
+        gap-8;
+
+        :global(time) {
+          @apply flex
+          items-center
+          justify-center
+          sm:h-full
+          w-full sm:w-auto
+          text-2xl;
+
+          animation: linear animate-in-and-out;
+          animation-timeline: view();
+        }
+
+        &:first-of-type {
+          .marker hr {
+            content: "";
+            @apply absolute
+            invisible sm:visible
+            top-0
+            origin-top
+            flex
+            flex-grow
+            w-2
+            h-full
+            rounded
+            glow-dracula-comment
+            bg-dracula-comment;
+
+            animation: shrink 3s ease-in-out 1;
+
+            :global(.dark) & {
+              @apply glow-dracula-cyan
+              bg-dracula-cyan;
+            }
+          }
+        }
+
+        .marker {
+          @apply flex
+          flex-col
+          justify-center
+          items-center
+          sm:h-full
+          w-full sm:w-auto;
+
+          .trigger {
+            @apply flex
+            flex-col
+            justify-center
+            items-center
+            h-full;
+
+            animation: linear animate-in-and-out;
+            animation-timeline: view();
+
+            .icon {
+              @apply flex
+              justify-center
+              items-center
+              w-8
+              h-8
+              rounded-full
+              bg-dracula-currentLine
+              glow-dracula-currentLine;
+
+              :global(.dark) & {
+                @apply bg-dracula-green
+                glow-dracula-green;
+              }
+            }
+          }
+        }
+
+        .info {
+          @apply flex
+          flex-col
+          gap-8
+          w-full
+          p-4
+          min-w-72;
+
+          p {
+            @apply text-xs sm:text-base
+            text-center sm:text-start;
+          }
+
+          animation: linear animate-in-and-out;
+          animation-timeline: view();
+        }
+      }
+    }
+  }
+</style>

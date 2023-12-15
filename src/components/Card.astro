@@ -1,76 +1,136 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Picture } from "astro:assets";
+import Title from "@/components/Title.astro";
+const {
+  title,
+  description,
+  icon = "/src/assets/svg/me-ricknmorty-face.svg",
+  date,
+  href,
+  tag,
+  lang = "en",
+} = Astro.props;
+const images = import.meta.glob("@/assets/**/*.svg");
+let iconSrc;
 
-const { title, description, slug, lang } = Astro.props;
+if (icon) {
+  const { default: src } = await images[icon]();
+  iconSrc = { ...src, width: 46, height: 46 };
+}
+
+export type Props = {
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+  tag: string;
+  date: Date;
+  lang: string;
+};
 ---
 
-<a class="card-link" title={title} href={`/${slug}`}>
-  <figure class="card">
-    <picture>
-      <Image
-        class="preview"
-        aspectRatio="87:46"
-        width={256}
-        height={135.34}
-        format={'webp'}
-        alt={title}
-        src={`/${slug}/og-image.png`}
-        onerror={`this.onerror=null;this.src='/${lang}/og-image.png'`}
-      />
-    </picture>
-    <figcaption>
-      <strong>{title}</strong>
-      <span>{description}</span>
-    </figcaption>
-  </figure>
+<a href={href} title={title}>
+  <section>
+    <header>
+      <div transition:name={`post-icon-${icon}-${title}`} class="icon">
+        {
+          iconSrc && (
+            <Picture src={iconSrc} alt={title} width={46} height={46} />
+          )
+        }
+      </div>
+      <div class="meta">
+        <time class="truncate" datetime={date?.toISOString()}>
+          {date?.toLocaleDateString(lang)}
+        </time>
+        <span class="tag">{tag}</span>
+      </div>
+    </header>
+    <Title transition:name={title} isHighlighted>{title}</Title>
+    <p>{description}</p>
+  </section>
 </a>
 
 <style>
-  .card-link {
-    @apply outline-none;
-
-    &:is(:hover, :focus, :active) {
-      .card {
-        @apply shadow-md
-        glow-dracula-comment
-        border-dracula-comment
-        bg-dracula-comment
-        text-dracula-foreground
-        dark:glow-dracula-green
-        dark:border-dracula-green
-        dark:bg-dracula-green
-        dark:text-dracula-background;
+  a {
+    &:is(:hover, :focus, :focus-within) {
+      @apply outline-none;
+      section {
+        @apply glow-dracula-comment
+        dark:glow-dracula-green;
       }
     }
-  }
 
-  .card {
-    @apply grid
-    grid-cols-auto-fit-[16rem]
-    sm:grid-cols-[16rem,auto]
-    max-w-lg
-    rounded-lg
-    shadow-2xl
-    border
-    border-gray-300
-    bg-gray-200
-    dark:border-dracula-currentLine
-    dark:bg-dracula-background;
-
-    transition-property: all;
-    transition-duration: 500ms;
-
-    figcaption {
+    section {
       @apply flex
       flex-col
-      gap-2
-      p-4
-      text-xs;
-    }
+      items-start
+      gap-4
+      p-6
+      h-full
+      min-w-20
+      rounded-lg
+      bg-opacity-90
+      dark:bg-opacity-90
+      bg-white
+      dark:bg-dracula-darkest
+      border
+      border-gray-300
+      dark:border-dracula-currentLine;
 
-    img {
-      @apply flex
-      rounded-md;
+      @apply transition-colors
+      duration-100;
+
+      header {
+        @apply flex
+        justify-between
+        w-full;
+
+        .meta {
+          @apply flex
+          flex-col
+          justify-between
+          items-end;
+
+          .tag {
+            @apply p-1
+            px-3
+            text-xs
+            text-dracula-comment
+            border-dracula-comment
+            border
+            rounded-full;
+
+            :global(.dark) & {
+              @apply text-dracula-cyan
+            border-dracula-cyan;
+            }
+          }
+        }
+      }
+
+      .icon {
+        @apply flex
+        justify-center
+        items-center
+        w-14
+        h-14
+        p-1
+        rounded
+        shadow-lg
+        bg-white
+        border
+      border-gray-300;
+        :global(picture),
+        img {
+          @apply w-full
+          h-full;
+        }
+      }
+
+      p {
+        @apply text-xs;
+      }
     }
   }
 </style>

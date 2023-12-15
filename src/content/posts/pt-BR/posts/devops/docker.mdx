@@ -1,20 +1,20 @@
 ---
-layout: '@/layouts/Post.astro'
-categories: Devops
+layout: "@/layouts/Post.astro"
+icon: "@/assets/svg/docker.svg"
+tag: Devops
 date: 2022-11-26
 title: 'Docker: "funciona na minha máquina"'
 description: Containers são um dos maiores responsáveis por como servimos as aplicações hoje.
-summary: Containers são unidades padrão de software, que empacotam códigos e todas as suas dependências, para que a aplicação rode de maneira rápida e confiável de um ambiente para outro.
 ---
 
-import { Image } from '@astrojs/image/components';
+import { Picture } from "astro:assets";
 
-import dockerHubSignup from '@/assets/docker-hub-signup.png';
-import Mermaid from '@/components/Mermaid.astro';
+import dockerHubSignup from "@/assets/img/docker-hub-signup.png";
+import Mermaid from "@/components/Mermaid.astro";
 
-# Docker: "funciona na minha máquina"
+# {frontmatter.title}
 
-## Containers um dos maiores responsáveis por como servimos as aplicações hoje
+## {frontmatter.description}
 
 ---
 
@@ -97,7 +97,7 @@ O container funciona através da combinação de **namespaces**, que é uma func
 - **MNT** - Isolamento do Sistema de Arquivos / ponto de montagem
 - **UTS** - Isolamento do kernel (simula outro host)
 
-#### [Cgroups](https://android.googlesource.com/kernel/common/+/bcmdhd-3.10/Documentation/cgroups 'Documentação sobre grupos de controle')
+#### [Cgroups](https://android.googlesource.com/kernel/common/+/bcmdhd-3.10/Documentation/cgroups "Documentação sobre grupos de controle")
 
 - **blkio** - Implementa bloqueio de entrada e saída
 - **acct** - Agrupa tarefas usando cgroups e declara o uso de CPU desses grupos
@@ -245,7 +245,7 @@ sudo usermod -aG docker $USER
 
 ### Executando um container
 
-Para executar um container podemos acessar o [Docker Hub](https://hub.docker.com/ 'Docker Hub'), que é um repositório de imagens de código aberto publicadas, e procurar uma imagem. Vou começar escolhendo a imagem oficial do [Ubuntu](https://hub.docker.com/_/ubuntu 'Imagem Ubuntu').
+Para executar um container podemos acessar o [Docker Hub](https://hub.docker.com/ "Docker Hub"), que é um repositório de imagens de código aberto publicadas, e procurar uma imagem. Vou começar escolhendo a imagem oficial do [Ubuntu](https://hub.docker.com/_/ubuntu "Imagem Ubuntu").
 
 ```shell
 docker run ubuntu
@@ -468,13 +468,13 @@ SHELL ["powershell", "-command"]
 
 ### Subindo uma imagem no docker hub?
 
-1. Crie sua conta no [Docker Hub](https://hub.docker.com/signup 'Cadastro Docker Hub')
+1. Crie sua conta no [Docker Hub](https://hub.docker.com/signup "Cadastro Docker Hub")
 
-<Image
+<Picture
   class="rounded shadow-2xl"
   alt="npm login"
   format="webp"
-  src={dockerHubSignup.src}
+  src={dockerHubSignup}
   aspectRatio="5:7"
   width={400}
 />

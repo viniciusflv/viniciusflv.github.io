@@ -28,19 +28,31 @@ const breadcrumbs = paths
   }
 </ul> : <></>}
 
-<style>
-  .breadcrumbs {
-    @apply flex gap-4 !p-0 text-xs whitespace-nowrap overflow-x-auto w-full;
+<style is:global>
+  ul.breadcrumbs {
+    @apply z-10
+    absolute
+    top-8
+    left-4
+    sm:left-8
+    flex
+    gap-4
+    !p-0
+    text-xs
+    whitespace-nowrap
+    overflow-x-auto;
 
     li {
-      @apply relative !list-none capitalize;
+      @apply relative
+      !list-none
+      capitalize;
 
       &:not(:is(:last-of-type)):before {
         content: '/\00a0';
         @apply absolute
         -right-4
         text-dracula-comment
-        dark:text-dracula-green;
+        dark:!text-dracula-green;
       }
     }
   }
