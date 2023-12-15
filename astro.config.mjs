@@ -57,8 +57,8 @@ export default defineConfig({
       includeAssets: ['favicon.png'],
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Astro PWA',
-        short_name: 'Astro PWA',
+        name: 'Vinícius Victorino',
+        short_name: 'Vinícius Victorino',
         theme_color: '#ffffff',
         icons: [
           {
