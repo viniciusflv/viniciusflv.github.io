@@ -1,18 +1,18 @@
 ---
-import Container from "@/components/Container.astro";
-import Page from "./Page.astro";
-import Hero from "@/components/Hero.astro";
-import { getLanguageFromURL } from "@/util";
-import Breadcrumbs from "@/components/Breadcrumbs.astro";
-import { getCollection } from "astro:content";
-import Card from "@/components/Card.astro";
-import Link from "@/components/Link.astro";
+import Container from '@/components/Container.astro';
+import Page from './Page.astro';
+import Hero from '@/components/Hero.astro';
+import { getLanguageFromURL } from '@/util';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import Card from '@/components/Card.astro';
+import Link from '@/components/Link.astro';
 
 const { categories } = Astro.props.frontmatter;
 
 const lang = getLanguageFromURL(Astro.url.pathname);
 
-const files = await getCollection("posts", ({ slug }) => {
+const files = await getCollection('posts', ({ slug }) => {
   return slug.startsWith(lang.toLocaleLowerCase());
 });
 
@@ -27,7 +27,7 @@ const posts = files
   .map((file) => {
     return {
       ...file,
-      data: { ...file.data, icon: file.data.icon?.replace("@", "/src") },
+      data: { ...file.data, icon: file.data.icon?.replace('@', '/src') },
     };
   });
 
@@ -36,11 +36,11 @@ const tags = files
   .map((file) => {
     return {
       label: file.data.categories,
-      value: `/${file.slug.replace("pt-br", "pt-BR")}`,
+      value: `/${file.slug.replace('pt-br', 'pt-BR')}`,
     };
   });
 
-const subjects = tags.map(({ label }) => label).join(", ");
+const subjects = tags.map(({ label }) => label).join(', ');
 
 const props = {
   lang,
@@ -53,7 +53,7 @@ const props = {
 <Page {...props}>
   <Breadcrumbs />
   <Hero {...props}>
-    <div class="flex flex-wrap gap-4">
+    <div class="categories">
       {
         tags.map(({ label, value }) => (
           <Link title={label} href={value} isTag />
@@ -67,7 +67,7 @@ const props = {
         posts.map((post) => (
           <Card
             lang={lang}
-            href={`/${post.slug.replace("pt-br", "pt-BR")}`}
+            href={`/${post.slug.replace('pt-br', 'pt-BR')}`}
             {...post.data}
           />
         ))
@@ -77,6 +77,14 @@ const props = {
 </Page>
 
 <style>
+  .categories {
+    @apply grid
+    justify-center
+    sm:justify-start
+    grid-cols-auto-fit-[6rem]
+    gap-4
+    md:min-w-52;
+  }
   .posts {
     @apply grid
     sm:grid-cols-auto-fit-[18rem]
