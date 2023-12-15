@@ -1,12 +1,12 @@
-import { join, dirname } from "path";
-import satori, { type FontStyle, type FontWeight } from "satori";
-import { readFile } from "node:fs/promises";
-import { writeFileSync, existsSync } from "node:fs";
-import type { AstroIntegration } from "astro";
-import sharp from "sharp";
-import { html } from "satori-html";
-import frontmatter from "front-matter";
-import { glob } from "glob";
+import type { AstroIntegration } from 'astro';
+import frontmatter from 'front-matter';
+import { glob } from 'glob';
+import { existsSync, writeFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
+import { dirname, join } from 'path';
+import satori, { type FontStyle, type FontWeight } from 'satori';
+import { html } from 'satori-html';
+import sharp from 'sharp';
 
 export type AstroOgImageProps = {
   brand: string;
@@ -23,7 +23,7 @@ export function astroOgImage({
   fonts: customFonts = [],
 }: AstroOgImageProps) {
   return {
-    name: "astro-og-image",
+    name: 'astro-og-image',
     hooks: {
       // "astro:config:setup": console.log,
       // "astro:config:done": console.log,
@@ -34,11 +34,11 @@ export function astroOgImage({
       // "astro:build:setup": console.log,
       // "astro:build:generated": console.log,
       // "astro:build:ssr": console.log,
-      "astro:build:done": async (opt) => {
+      'astro:build:done': async (opt) => {
         async function toBase64(path: string) {
           const buffer = await readFile(path);
           const base64 = (await sharp(buffer).png().toBuffer()).toString(
-            "base64"
+            'base64',
           );
           return `data:image/png;base64,${base64}`;
         }
@@ -58,7 +58,7 @@ export function astroOgImage({
               const { attributes } = frontmatter<any>(file);
 
               const iconDir = attributes?.icon
-                ? attributes?.icon.replace("@", join(__dirname, "src"))
+                ? attributes?.icon.replace('@', join(__dirname, 'src'))
                 : null;
 
               return {
@@ -66,19 +66,19 @@ export function astroOgImage({
                 path,
                 icon: iconDir
                   ? await toBase64(iconDir)
-                  : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
+                  : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
               };
             } catch {
               return;
             }
-          })
+          }),
         );
 
         const fonts = await Promise.all(
           customFonts.map(async ({ src, ...rest }) => {
             const data = await readFile(src);
             return { data, ...rest };
-          })
+          }),
         );
 
         await Promise.all(
@@ -188,18 +188,18 @@ export function astroOgImage({
                     extend: {
                       colors: {
                         dracula: {
-                          darkest: "hsl(235, 14%, 15%)",
-                          background: "hsl(231, 15%, 18%)",
-                          currentLine: "hsl(232, 14%, 31%)",
-                          foreground: "hsl(60, 30%, 96%)",
-                          comment: "hsl(225, 27%, 51%)",
-                          cyan: "hsl(191, 97%, 77%)",
-                          green: "hsl(135 94% 65%)",
-                          orange: "hsl(31, 100%, 71%)",
-                          pink: "hsl(326, 100%, 74%)",
-                          purple: "hsl(265, 89%, 78%)",
-                          red: "hsl(0, 100%, 67%)",
-                          yellow: "hsl(65, 92%, 76%)",
+                          darkest: 'hsl(235, 14%, 15%)',
+                          background: 'hsl(231, 15%, 18%)',
+                          currentLine: 'hsl(232, 14%, 31%)',
+                          foreground: 'hsl(60, 30%, 96%)',
+                          comment: 'hsl(225, 27%, 51%)',
+                          cyan: 'hsl(191, 97%, 77%)',
+                          green: 'hsl(135 94% 65%)',
+                          orange: 'hsl(31, 100%, 71%)',
+                          pink: 'hsl(326, 100%, 74%)',
+                          purple: 'hsl(265, 89%, 78%)',
+                          red: 'hsl(0, 100%, 67%)',
+                          yellow: 'hsl(65, 92%, 76%)',
                         },
                       },
                     },
@@ -210,7 +210,7 @@ export function astroOgImage({
               const png = await sharp(Buffer.from(svg)).png().toBuffer();
               const fileName = join(path, `og-image.png`);
               if (existsSync(path)) writeFileSync(fileName, png);
-            })
+            }),
         );
 
         await Promise.all(
@@ -225,14 +225,14 @@ export function astroOgImage({
                 width: size,
                 height: size,
                 fonts,
-              }
+              },
             );
 
-            const suffix = size !== 48 ? `-${size}x${size}` : "";
+            const suffix = size !== 48 ? `-${size}x${size}` : '';
             const png = await sharp(Buffer.from(faviconSvg)).png().toBuffer();
             const fileName = join(opt.dir.pathname, `favicon${suffix}.png`);
             writeFileSync(fileName, png);
-          })
+          }),
         );
       },
     },

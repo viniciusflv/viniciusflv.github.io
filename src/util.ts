@@ -1,14 +1,14 @@
-import type { MarkdownHeading, MarkdownInstance } from "astro";
+import type { MarkdownHeading, MarkdownInstance } from 'astro';
 
-import { TRANSLATIONS } from "./consts";
+import { TRANSLATIONS } from './consts';
 
 export const translateBreadcrumbs = (lang: string, value: string) =>
-  lang !== "en"
+  lang !== 'en'
     ? {
         home: `Início`,
         posts: `Postagens`,
         about: `Sobre`,
-        "library-creation": `Criação de Biblioteca`,
+        'library-creation': `Criação de Biblioteca`,
       }[value] ?? value
     : value;
 
@@ -19,7 +19,7 @@ export function getLanguageFromURL(pathname: string) {
   };
 
   return (
-    lang || country ? (country ? `${lang}-${country}` : lang) : "en"
+    lang || country ? (country ? `${lang}-${country}` : lang) : 'en'
   ) as TranslationsLangs;
 }
 
@@ -40,7 +40,7 @@ export type NestedHeading = Partial<
 >;
 
 export function unflattenHeading(headings: MarkdownHeading[]): NestedHeading[] {
-  let root: NestedHeading = { depth: 0, slug: "", text: "", children: [] };
+  let root: NestedHeading = { depth: 0, slug: '', text: '', children: [] };
   let stack: NestedHeading[] = [root];
 
   for (let i = 0; i < headings.length; i++) {
@@ -65,21 +65,24 @@ export function unflattenHeading(headings: MarkdownHeading[]): NestedHeading[] {
 }
 
 export const groupPagesByLang = <
-  T extends MarkdownInstance<Record<string, unknown>>
+  T extends MarkdownInstance<Record<string, unknown>>,
 >(
-  pages: T[]
+  pages: T[],
 ) =>
-  pages.reduce((pages, page) => {
-    const lang = page.url.split("/")[1];
-    if (!pages[lang]) pages[lang] = [];
-    pages[lang].push(page);
-    return pages;
-  }, {} as { [lang: string]: T[] });
+  pages.reduce(
+    (pages, page) => {
+      const lang = page.url.split('/')[1];
+      if (!pages[lang]) pages[lang] = [];
+      pages[lang].push(page);
+      return pages;
+    },
+    {} as { [lang: string]: T[] },
+  );
 
 export function addAstroEventListener(
   el: Element,
   type: string,
-  cb: (...args: any) => any
+  cb: (...args: any) => any,
 ) {
   const registerEvent = () => {
     el.removeEventListener(type, cb);
@@ -87,6 +90,6 @@ export function addAstroEventListener(
   };
 
   registerEvent();
-  document.addEventListener("astro:after-swap", registerEvent);
-  document.addEventListener("astro:page-load", registerEvent);
+  document.addEventListener('astro:after-swap', registerEvent);
+  document.addEventListener('astro:page-load', registerEvent);
 }

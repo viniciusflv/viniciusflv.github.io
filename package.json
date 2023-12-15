@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "prd": "astro build && astro preview",
     "og": "npx localtunnel --port 8000",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "svj": "svj -i src/assets/svg -d src/assets/svg -r"
   },
   "dependencies": {

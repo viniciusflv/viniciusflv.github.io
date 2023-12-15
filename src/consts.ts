@@ -16,7 +16,7 @@ export const TRANSLATIONS = {
     POST_PREVIEW_LINK: `Continue reading`,
     404: `Page not found`,
   },
-  "pt-BR": {
+  'pt-BR': {
     HEADER_MENU_ITEM_HOME: `Início`,
     HEADER_MENU_ITEM_POSTS: `Postagens`,
     HEADER_MENU_ITEM_ABOUT: `Sobre`,
