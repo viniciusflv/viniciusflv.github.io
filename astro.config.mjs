@@ -1,18 +1,21 @@
-import { dirname, resolve } from 'path';
-import { defineConfig } from 'astro/config';
-import pwa from '@vite-pwa/astro';
 import mdx from '@astrojs/mdx';
-import { astroExpressiveCode } from 'astro-expressive-code';
-import { astroOgImage } from './integrations/astroOgImage';
-import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import pwa from '@vite-pwa/astro';
+import { astroExpressiveCode } from 'astro-expressive-code';
+import robotsTxt from 'astro-robots-txt';
+import { defineConfig } from 'astro/config';
+import { dirname, resolve } from 'path';
+
+import { astroOgImage } from './integrations/astroOgImage';
+
 const __dirname = dirname(new URL('', import.meta.url).pathname);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tender-moons-post.loca.lt',
+  // site: 'https://brown-baths-wash.loca.lt',
+  site: 'https://viniciusflv.github.io',
   compressHTML: true,
   devToolbar: {
     enabled: false,

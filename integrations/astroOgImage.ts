@@ -180,8 +180,8 @@ export function astroOgImage({
               `;
 
               const svg = await satori(markup, {
-                width: 1280,
-                height: 675,
+                width: 1200,
+                height: 600,
                 fonts,
                 tailwindConfig: {
                   theme: {

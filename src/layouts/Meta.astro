@@ -1,55 +1,63 @@
 ---
-import { pwaInfo } from "virtual:pwa-info";
-import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
-import type { MDXInstance } from "astro";
+import { pwaInfo } from 'virtual:pwa-info';
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
+import type { MDXInstance } from 'astro';
 
 const props = {
   ...Astro.props,
   ...Astro.props.frontmatter,
 };
 
-const title = [props?.title, "Vinícius Victorino"].join(" | ");
+const title = [props?.title, 'Vinícius Victorino'].join(' | ');
 
 const meta = {
-  type: "website",
-  description: "My personal website",
+  type: 'website',
+  description: 'My personal website',
   keywords:
     props?.keywords ||
     [
-      "programming",
-      "front-end",
-      "javascript",
-      "typescript",
-      "react",
-      "technologies",
-    ].join(","),
+      'programming',
+      'front-end',
+      'javascript',
+      'typescript',
+      'react',
+      'technologies',
+    ].join(','),
   ...props,
   title,
-  author: "Vinícius Fabris Leite Victorino",
-  twitter: "@viniciusflv1",
-  siteName: "Vinícius Victorino",
+  author: 'Vinícius Fabris Leite Victorino',
+  twitter: '@viniciusflv1',
+  siteName: 'Vinícius Victorino',
+  hostName: Astro.url.hostname,
   canonical: Astro.url.href,
   themeColor: {
-    dark: "#282a36",
-    light: "rgb(229 231 235)",
+    dark: '#282a36',
+    light: 'rgb(229 231 235)',
   },
   favicon: {
-    type: "image/png",
-    href: "/favicon.png",
+    type: 'image/png',
+    href: '/favicon.png',
   },
   image: {
-    width: "1280",
-    height: "675",
-    type: "image/png",
+    width: '1200',
+    height: '600',
+    type: 'image/png',
     alt: title,
     src: `${Astro.url.pathname}og-image.png`,
+    fallback: {
+      width: '192',
+      height: '192',
+      type: 'image/png',
+      alt: title,
+      src: `/favicon-192x192.png`,
+    },
   },
 };
 
 function formatAlternateHref(hreflang: string) {
   return new URL(
     Astro.url.pathname.replace(/^\/(.*)\//g, `/${hreflang}/`),
-    Astro.site
+    Astro.site,
   );
 }
 
@@ -74,6 +82,8 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <meta name="generator" content={Astro.generator} />
 <link href={meta.canonical} rel="canonical" />
 <meta content={meta.canonical} property="og:url" />
+<meta content={meta.canonical} property="twitter:url" />
+<meta content={meta.hostName} property="twitter:domain" />
 <meta content={meta.siteName} property="og:site_name" />
 <meta content={meta.keywords} name="keywords" />
 <meta content={meta.type} property="og:type" />
@@ -104,13 +114,20 @@ export type Props = Partial<MDXInstance<Meta>> & {
 <!-- image -->
 <link rel="icon" type={meta.favicon.type} href={meta.favicon.href} />
 <meta content={meta.image.alt} property="og:image:alt" />
-<meta content={meta.image.src} property="og:image" />
+<meta content={meta.image.src} property="og:image" itemprop="image" />
 <meta content={meta.image.type} property="og:image:type" />
 <meta content={meta.image.width} property="og:image:width" />
 <meta content={meta.image.height} property="og:image:height" />
 <meta content={meta.image.src} name="twitter:image" />
 <meta content={meta.image.alt} name="twitter:image:alt" />
 <meta content="summary_large_image" name="twitter:card" />
+<!-- image fallback -->
+<meta content={meta.image.fallback.src} name="twitter:image" />
+<meta content={meta.image.fallback.alt} name="twitter:image:alt" />
+<meta content={meta.image.fallback.src} property="og:image" itemprop="image" />
+<meta content={meta.image.fallback.type} property="og:image:type" />
+<meta content={meta.image.fallback.width} property="og:image:width" />
+<meta content={meta.image.fallback.height} property="og:image:height" />
 <!-- pwa -->
 <link rel="apple-touch-icon" href="/favicon-192x192.png" />
 <link rel="mask-icon" href={meta.favicon.href} color={meta.themeColor.light} />
